@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "a1336983-1255-4d49-92c5-bd4d4b9f76a3++7103",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "a1336983-1255-4d49-92c5-bd4d4b9f76a3++7103" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "a1336983-1255-4d49-92c5-bd4d4b9f76a3++7103" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CEDCDD46-9372-4EEF-8493-49ED85BB24B2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "a1336983-1255-4d49-92c5-bd4d4b9f76a3++7103" : "BPMAPP\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "app.home",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "IOS\/BpmApp\/Bundles\/app.home\/app.home.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/192.168.1.6\/svn\/eazytecApp",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "a1336983-1255-4d49-92c5-bd4d4b9f76a3++7103"
+    }
+  ]
+}
