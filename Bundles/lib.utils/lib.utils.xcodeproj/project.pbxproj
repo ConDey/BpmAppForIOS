@@ -272,6 +272,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 57979TE7HA;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -284,6 +285,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.eazytec.bpm.lib.utils;
 				PRODUCT_MODULE_NAME = com_eazytec_bpm_lib_utils;
 				PRODUCT_NAME = com_eazytec_bpm_lib_utils;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -293,6 +295,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 57979TE7HA;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -305,6 +308,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.eazytec.bpm.lib.utils;
 				PRODUCT_MODULE_NAME = com_eazytec_bpm_lib_utils;
 				PRODUCT_NAME = com_eazytec_bpm_lib_utils;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -7,6 +7,7 @@
 //
 
 #import "AuthenticationViewController.h"
+#import <Small/Small.h>
 
 @interface AuthenticationViewController ()
 

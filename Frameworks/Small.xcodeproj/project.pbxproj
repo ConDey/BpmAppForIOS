@@ -62,7 +62,6 @@
 		F8EE99311B66179000C26936 /* SMWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EE992F1B66179000C26936 /* SMWebView.m */; };
 		F8EF07C51A73D33F00A2DDE0 /* Small.h in Headers */ = {isa = PBXBuildFile; fileRef = F8EF07C41A73D33F00A2DDE0 /* Small.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8EF07CB1A73D33F00A2DDE0 /* Small.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF07BF1A73D33F00A2DDE0 /* Small.framework */; };
-		F8EF07D21A73D33F00A2DDE0 /* SmallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8EF07D11A73D33F00A2DDE0 /* SmallTests.swift */; };
 		F8F022A91C522778002B0A00 /* SMUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F022A71C522778002B0A00 /* SMUtils.h */; };
 		F8F022AA1C522778002B0A00 /* SMUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F022A81C522778002B0A00 /* SMUtils.m */; };
 		F8F022F31C562425002B0A00 /* SMAssetBundleLauncher.h in Headers */ = {isa = PBXBuildFile; fileRef = F8F022F11C562425002B0A00 /* SMAssetBundleLauncher.h */; };
@@ -123,8 +122,6 @@
 		F8EF07C31A73D33F00A2DDE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8EF07C41A73D33F00A2DDE0 /* Small.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Small.h; sourceTree = "<group>"; };
 		F8EF07CA1A73D33F00A2DDE0 /* SmallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8EF07D01A73D33F00A2DDE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8EF07D11A73D33F00A2DDE0 /* SmallTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallTests.swift; sourceTree = "<group>"; };
 		F8F022A71C522778002B0A00 /* SMUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUtils.h; sourceTree = "<group>"; };
 		F8F022A81C522778002B0A00 /* SMUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMUtils.m; sourceTree = "<group>"; };
 		F8F022F11C562425002B0A00 /* SMAssetBundleLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAssetBundleLauncher.h; sourceTree = "<group>"; };
@@ -199,7 +196,6 @@
 			children = (
 				F8C2576A1A7498D70040D93B /* UIKit.framework */,
 				F8EF07C11A73D33F00A2DDE0 /* Small */,
-				F8EF07CE1A73D33F00A2DDE0 /* SmallTests */,
 				F8EF07C01A73D33F00A2DDE0 /* Products */,
 				77DEA68E96BE182D8AFCB09A /* Frameworks */,
 			);
@@ -231,23 +227,6 @@
 			isa = PBXGroup;
 			children = (
 				F8EF07C31A73D33F00A2DDE0 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		F8EF07CE1A73D33F00A2DDE0 /* SmallTests */ = {
-			isa = PBXGroup;
-			children = (
-				F8EF07D11A73D33F00A2DDE0 /* SmallTests.swift */,
-				F8EF07CF1A73D33F00A2DDE0 /* Supporting Files */,
-			);
-			path = SmallTests;
-			sourceTree = "<group>";
-		};
-		F8EF07CF1A73D33F00A2DDE0 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F8EF07D01A73D33F00A2DDE0 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -365,7 +344,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = galen;
 				TargetAttributes = {
 					F8212DA81AC3DA2300CFD416 = {
@@ -464,7 +443,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8EF07D21A73D33F00A2DDE0 /* SmallTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,8 +484,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Guang Liang Lin (VAYGJ97YZ5)";
@@ -515,8 +495,10 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -554,8 +536,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Guang Liang Lin (VAYGJ97YZ5)";
@@ -565,6 +549,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -587,6 +572,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -594,9 +580,10 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Small/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.wequick.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -616,9 +603,10 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Small/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.wequick.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
@@ -638,6 +626,7 @@
 				);
 				INFOPLIST_FILE = SmallTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.273.framework.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -652,6 +641,7 @@
 				);
 				INFOPLIST_FILE = SmallTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.273.framework.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

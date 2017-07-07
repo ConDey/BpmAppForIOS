@@ -14,7 +14,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0686A87A1F0C875000697582 /* lib.utils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = lib.utils.framework; path = "../lib.utils/build/Debug-iphoneos/lib.utils.framework"; sourceTree = "<group>"; };
 		0686A88E1F0CAB0C00697582 /* com_eazytec_bpm_lib_utils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = com_eazytec_bpm_lib_utils.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/BpmApp-eufyfkcxftanxsbzvzzlyyfyzmkq/Build/Products/Debug-iphonesimulator/com_eazytec_bpm_lib_utils.framework"; sourceTree = "<group>"; };
 		06C3A45E1F0C7ADA00633543 /* com_eazytec_bpm_lib_common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = com_eazytec_bpm_lib_common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		06C3A4611F0C7ADA00633543 /* lib.common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lib.common.h; sourceTree = "<group>"; };
@@ -39,7 +38,6 @@
 			isa = PBXGroup;
 			children = (
 				0686A88E1F0CAB0C00697582 /* com_eazytec_bpm_lib_utils.framework */,
-				0686A87A1F0C875000697582 /* lib.utils.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -286,6 +284,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 57979TE7HA;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -298,6 +297,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.eazytec.bpm.lib.common;
 				PRODUCT_MODULE_NAME = com_eazytec_bpm_lib_common;
 				PRODUCT_NAME = com_eazytec_bpm_lib_common;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -307,6 +307,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 57979TE7HA;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -319,6 +320,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.eazytec.bpm.lib.common;
 				PRODUCT_MODULE_NAME = com_eazytec_bpm_lib_common;
 				PRODUCT_NAME = com_eazytec_bpm_lib_common;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
