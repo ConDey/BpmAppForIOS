@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0686A88F1F0CAB0C00697582 /* com_eazytec_bpm_lib_utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0686A88E1F0CAB0C00697582 /* com_eazytec_bpm_lib_utils.framework */; };
+		06361C4D1F13287000B1D545 /* UITableView+Factory.h in Headers */ = {isa = PBXBuildFile; fileRef = 06361C4B1F13287000B1D545 /* UITableView+Factory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		06361C4E1F13287000B1D545 /* UITableView+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361C4C1F13287000B1D545 /* UITableView+Factory.m */; };
 		06C3A4631F0C7ADA00633543 /* lib.common.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C3A4611F0C7ADA00633543 /* lib.common.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C3A47A1F0C7D8900633543 /* EAViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C3A4781F0C7D8900633543 /* EAViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C3A47B1F0C7D8900633543 /* EAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C3A4791F0C7D8900633543 /* EAViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0686A88E1F0CAB0C00697582 /* com_eazytec_bpm_lib_utils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = com_eazytec_bpm_lib_utils.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/BpmApp-eufyfkcxftanxsbzvzzlyyfyzmkq/Build/Products/Debug-iphonesimulator/com_eazytec_bpm_lib_utils.framework"; sourceTree = "<group>"; };
+		06361C4B1F13287000B1D545 /* UITableView+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Factory.h"; sourceTree = "<group>"; };
+		06361C4C1F13287000B1D545 /* UITableView+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Factory.m"; sourceTree = "<group>"; };
 		06C3A45E1F0C7ADA00633543 /* com_eazytec_bpm_lib_common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = com_eazytec_bpm_lib_common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		06C3A4611F0C7ADA00633543 /* lib.common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lib.common.h; sourceTree = "<group>"; };
 		06C3A4621F0C7ADA00633543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -27,17 +29,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0686A88F1F0CAB0C00697582 /* com_eazytec_bpm_lib_utils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06361C4A1F13286900B1D545 /* UITableView */ = {
+			isa = PBXGroup;
+			children = (
+				06361C4B1F13287000B1D545 /* UITableView+Factory.h */,
+				06361C4C1F13287000B1D545 /* UITableView+Factory.m */,
+			);
+			name = UITableView;
+			sourceTree = "<group>";
+		};
 		0686A8791F0C875000697582 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0686A88E1F0CAB0C00697582 /* com_eazytec_bpm_lib_utils.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -80,18 +89,19 @@
 		06C3A4761F0C7D4400633543 /* Src */ = {
 			isa = PBXGroup;
 			children = (
-				06C3A4771F0C7D7800633543 /* Controller */,
+				06361C4A1F13286900B1D545 /* UITableView */,
+				06C3A4771F0C7D7800633543 /* ViewController */,
 			);
 			name = Src;
 			sourceTree = "<group>";
 		};
-		06C3A4771F0C7D7800633543 /* Controller */ = {
+		06C3A4771F0C7D7800633543 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				06C3A4781F0C7D8900633543 /* EAViewController.h */,
 				06C3A4791F0C7D8900633543 /* EAViewController.m */,
 			);
-			name = Controller;
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,6 +112,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C3A4631F0C7ADA00633543 /* lib.common.h in Headers */,
+				06361C4D1F13287000B1D545 /* UITableView+Factory.h in Headers */,
 				06C3A47A1F0C7D8900633543 /* EAViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06361C4E1F13287000B1D545 /* UITableView+Factory.m in Sources */,
 				06C3A47B1F0C7D8900633543 /* EAViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,7 +295,7 @@
 		06C3A4671F0C7ADA00633543 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Sun (2CMVFJS84Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 57979TE7HA;
@@ -306,7 +318,7 @@
 		06C3A4681F0C7ADA00633543 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Sun (2CMVFJS84Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 57979TE7HA;

@@ -7,7 +7,7 @@
 //
 
 #import "EAViewController.h"
-#import "com_eazytec_bpm_lib_utils/lib.utils.h"
+#import "UITableView+Factory.h"
 
 @interface EAViewController ()
 
@@ -131,7 +131,7 @@
  *   配置默认的返回ButtonItem
  */
 -(void)setCommonBackLeftButtonItem {
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"Common_Back"] style:UIBarButtonItemStylePlain target:self action:@selector(doNavigationLeftBarButtonItemAction:)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"Common_Back"] style:UIBarButtonItemStylePlain target:self action:@selector(doNavigationLeftBarButtonItemAction:)];
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
 }
 

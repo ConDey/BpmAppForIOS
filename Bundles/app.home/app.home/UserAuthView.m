@@ -6,9 +6,9 @@
 //  Copyright © 2017年 Eazytec. All rights reserved.
 //
 
-#import "AuthenticationView.h"
+#import "UserAuthView.h"
 
-@implementation AuthenticationView
+@implementation UserAuthView
 
 /*
 // Only override drawRect: if you perform custom drawing.

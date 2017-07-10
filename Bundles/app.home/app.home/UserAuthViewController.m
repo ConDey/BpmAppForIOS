@@ -6,18 +6,18 @@
 //  Copyright © 2017年 Eazytec. All rights reserved.
 //
 
-#import "AuthenticationViewController.h"
-#import <Small/Small.h>
+#import "UserAuthViewController.h"
 
-@interface AuthenticationViewController ()
+@interface UserAuthViewController ()
 
 @end
 
-@implementation AuthenticationViewController
+@implementation UserAuthViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.view.backgroundColor  = [UIColor redColor];
 }
 
 - (void)didReceiveMemoryWarning {

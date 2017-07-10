@@ -8,6 +8,6 @@
 
 #import "com_eazytec_bpm_lib_common/lib.common.h"
 
-@interface AuthenticationViewController : EAViewController
+@interface UserAuthViewController : EAViewController
 
 @end

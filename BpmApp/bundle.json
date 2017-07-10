@@ -6,10 +6,6 @@
          "pkg": "com.eazytec.bpm.app.home"
        },
        {
-         "uri": "lib.utils",
-         "pkg": "com.eazytec.bpm.lib.utils"
-       },
-       {
          "uri": "lib.common",
          "pkg": "com.eazytec.bpm.lib.common"
        }]

@@ -18,5 +18,6 @@ FOUNDATION_EXPORT const unsigned char lib_commonVersionString[];
 
 
 #import "EAViewController.h"
+#import "UITableView+Factory.h"
 
 

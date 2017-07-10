@@ -9,15 +9,14 @@
 /* Begin PBXBuildFile section */
 		06361BFB1F0F5D6100B1D545 /* Small.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06361BF81F0F5D4400B1D545 /* Small.framework */; };
 		06361BFC1F0F5D6100B1D545 /* Small.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06361BF81F0F5D4400B1D545 /* Small.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0686A87C1F0C878700697582 /* com_eazytec_bpm_lib_utils.framework in Resources */ = {isa = PBXBuildFile; fileRef = 0686A8701F0C86E100697582 /* com_eazytec_bpm_lib_utils.framework */; };
+		06361C3D1F13216700B1D545 /* com_eazytec_bpm_lib_common.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C3A4701F0C7B2000633543 /* com_eazytec_bpm_lib_common.framework */; };
+		06361C3E1F13217100B1D545 /* com_eazytec_bpm_app_home.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C3A4191F0B632300633543 /* com_eazytec_bpm_app_home.framework */; };
 		0686A8921F0CAE0100697582 /* bundle.json in Resources */ = {isa = PBXBuildFile; fileRef = 06C3A3F81F0B263D00633543 /* bundle.json */; };
 		069763701EFA4C760012D367 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0697636F1EFA4C760012D367 /* main.m */; };
 		069763731EFA4C760012D367 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 069763721EFA4C760012D367 /* AppDelegate.m */; };
 		069763761EFA4C760012D367 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069763751EFA4C760012D367 /* ViewController.m */; };
 		0697637B1EFA4C760012D367 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0697637A1EFA4C760012D367 /* Assets.xcassets */; };
 		0697637E1EFA4C760012D367 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0697637C1EFA4C760012D367 /* LaunchScreen.storyboard */; };
-		06C3A42E1F0B644D00633543 /* com_eazytec_bpm_app_home.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C3A4191F0B632300633543 /* com_eazytec_bpm_app_home.framework */; };
-		06C3A4711F0C7B3D00633543 /* com_eazytec_bpm_lib_common.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C3A4701F0C7B2000633543 /* com_eazytec_bpm_lib_common.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,19 +41,12 @@
 			remoteGlobalIDString = F8EF07BE1A73D33F00A2DDE0;
 			remoteInfo = Small;
 		};
-		0686A86F1F0C86E100697582 /* PBXContainerItemProxy */ = {
+		06361C4F1F13294D00B1D545 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 0686A86A1F0C86E100697582 /* lib.utils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0686A85F1F0C86BE00697582;
-			remoteInfo = lib.utils;
-		};
-		0686A8731F0C870000697582 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0686A86A1F0C86E100697582 /* lib.utils.xcodeproj */;
+			containerPortal = 06C3A4141F0B632300633543 /* app.home.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 0686A85E1F0C86BE00697582;
-			remoteInfo = lib.utils;
+			remoteGlobalIDString = 06C3A4081F0B630100633543;
+			remoteInfo = app.home;
 		};
 		0686A8751F0C870500697582 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -68,13 +60,6 @@
 			containerPortal = 06C3A4141F0B632300633543 /* app.home.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 06C3A4091F0B630100633543;
-			remoteInfo = app.home;
-		};
-		06C3A4691F0C7AF600633543 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 06C3A4141F0B632300633543 /* app.home.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 06C3A4081F0B630100633543;
 			remoteInfo = app.home;
 		};
 		06C3A46F1F0C7B2000633543 /* PBXContainerItemProxy */ = {
@@ -102,7 +87,6 @@
 
 /* Begin PBXFileReference section */
 		06361BF11F0F5D4400B1D545 /* Small.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Small.xcodeproj; path = Frameworks/Small.xcodeproj; sourceTree = "<group>"; };
-		0686A86A1F0C86E100697582 /* lib.utils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lib.utils.xcodeproj; path = Bundles/lib.utils/lib.utils.xcodeproj; sourceTree = "<group>"; };
 		0697636B1EFA4C760012D367 /* BpmApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BpmApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0697636F1EFA4C760012D367 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		069763711EFA4C760012D367 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -132,7 +116,6 @@
 		062618881EFA52D200F1EF72 /* Bundles */ = {
 			isa = PBXGroup;
 			children = (
-				0686A86A1F0C86E100697582 /* lib.utils.xcodeproj */,
 				06C3A46B1F0C7B2000633543 /* lib.common.xcodeproj */,
 				06C3A4141F0B632300633543 /* app.home.xcodeproj */,
 			);
@@ -180,14 +163,6 @@
 			children = (
 				06361BF81F0F5D4400B1D545 /* Small.framework */,
 				06361BFA1F0F5D4400B1D545 /* SmallTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		0686A86B1F0C86E100697582 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0686A8701F0C86E100697582 /* com_eazytec_bpm_lib_utils.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -269,10 +244,9 @@
 			buildRules = (
 			);
 			dependencies = (
-				0686A8761F0C870500697582 /* PBXTargetDependency */,
-				0686A8741F0C870000697582 /* PBXTargetDependency */,
-				06C3A46A1F0C7AF600633543 /* PBXTargetDependency */,
 				06361BFE1F0F5D6100B1D545 /* PBXTargetDependency */,
+				0686A8761F0C870500697582 /* PBXTargetDependency */,
+				06361C501F13294D00B1D545 /* PBXTargetDependency */,
 			);
 			name = BpmApp;
 			productName = BpmApp;
@@ -316,10 +290,6 @@
 					ProjectRef = 06C3A46B1F0C7B2000633543 /* lib.common.xcodeproj */;
 				},
 				{
-					ProductGroup = 0686A86B1F0C86E100697582 /* Products */;
-					ProjectRef = 0686A86A1F0C86E100697582 /* lib.utils.xcodeproj */;
-				},
-				{
 					ProductGroup = 06361BF21F0F5D4400B1D545 /* Products */;
 					ProjectRef = 06361BF11F0F5D4400B1D545 /* Small.xcodeproj */;
 				},
@@ -346,13 +316,6 @@
 			remoteRef = 06361BF91F0F5D4400B1D545 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		0686A8701F0C86E100697582 /* com_eazytec_bpm_lib_utils.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = com_eazytec_bpm_lib_utils.framework;
-			remoteRef = 0686A86F1F0C86E100697582 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		06C3A4191F0B632300633543 /* com_eazytec_bpm_app_home.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -377,9 +340,8 @@
 				0686A8921F0CAE0100697582 /* bundle.json in Resources */,
 				0697637E1EFA4C760012D367 /* LaunchScreen.storyboard in Resources */,
 				0697637B1EFA4C760012D367 /* Assets.xcassets in Resources */,
-				06C3A4711F0C7B3D00633543 /* com_eazytec_bpm_lib_common.framework in Resources */,
-				06C3A42E1F0B644D00633543 /* com_eazytec_bpm_app_home.framework in Resources */,
-				0686A87C1F0C878700697582 /* com_eazytec_bpm_lib_utils.framework in Resources */,
+				06361C3D1F13216700B1D545 /* com_eazytec_bpm_lib_common.framework in Resources */,
+				06361C3E1F13217100B1D545 /* com_eazytec_bpm_app_home.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,20 +366,15 @@
 			name = Small;
 			targetProxy = 06361BFD1F0F5D6100B1D545 /* PBXContainerItemProxy */;
 		};
-		0686A8741F0C870000697582 /* PBXTargetDependency */ = {
+		06361C501F13294D00B1D545 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = lib.utils;
-			targetProxy = 0686A8731F0C870000697582 /* PBXContainerItemProxy */;
+			name = app.home;
+			targetProxy = 06361C4F1F13294D00B1D545 /* PBXContainerItemProxy */;
 		};
 		0686A8761F0C870500697582 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = lib.common;
 			targetProxy = 0686A8751F0C870500697582 /* PBXContainerItemProxy */;
-		};
-		06C3A46A1F0C7AF600633543 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = app.home;
-			targetProxy = 06C3A4691F0C7AF600633543 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -527,6 +484,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Sun (2CMVFJS84Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 57979TE7HA;
 				INFOPLIST_FILE = BpmApp/Info.plist;
@@ -542,6 +500,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Sun (2CMVFJS84Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 57979TE7HA;
 				INFOPLIST_FILE = BpmApp/Info.plist;

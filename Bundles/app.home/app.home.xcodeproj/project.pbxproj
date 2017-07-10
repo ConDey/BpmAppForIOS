@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06361BD41F0F4CBC00B1D545 /* AuthenticationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 06361BD21F0F4CBC00B1D545 /* AuthenticationView.h */; };
-		06361BD51F0F4CBC00B1D545 /* AuthenticationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361BD31F0F4CBC00B1D545 /* AuthenticationView.m */; };
-		06361BD71F0F53E600B1D545 /* AuthenticationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06361BD61F0F53E600B1D545 /* AuthenticationView.xib */; };
+		06361BD41F0F4CBC00B1D545 /* UserAuthView.h in Headers */ = {isa = PBXBuildFile; fileRef = 06361BD21F0F4CBC00B1D545 /* UserAuthView.h */; };
+		06361BD51F0F4CBC00B1D545 /* UserAuthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06361BD31F0F4CBC00B1D545 /* UserAuthView.m */; };
+		06361BD71F0F53E600B1D545 /* UserAuthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06361BD61F0F53E600B1D545 /* UserAuthView.xib */; };
 		06361BD91F0F54BF00B1D545 /* bg_authentication.png in Resources */ = {isa = PBXBuildFile; fileRef = 06361BD81F0F54BF00B1D545 /* bg_authentication.png */; };
-		0686A8901F0CADA300697582 /* com_eazytec_bpm_lib_common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0686A8861F0CAAD900697582 /* com_eazytec_bpm_lib_common.framework */; };
-		0686A8911F0CADA300697582 /* com_eazytec_bpm_lib_utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0686A8841F0CAAD300697582 /* com_eazytec_bpm_lib_utils.framework */; };
-		0686A8961F0CB23D00697582 /* AuthenticationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0686A8931F0CB23D00697582 /* AuthenticationViewController.h */; };
-		0686A8971F0CB23D00697582 /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0686A8941F0CB23D00697582 /* AuthenticationViewController.m */; };
+		06361C491F1327C300B1D545 /* com_eazytec_bpm_lib_common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06361C481F1327C300B1D545 /* com_eazytec_bpm_lib_common.framework */; };
+		0686A8961F0CB23D00697582 /* UserAuthViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0686A8931F0CB23D00697582 /* UserAuthViewController.h */; };
+		0686A8971F0CB23D00697582 /* UserAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0686A8941F0CB23D00697582 /* UserAuthViewController.m */; };
 		06C3A40E1F0B630200633543 /* app.home.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C3A40C1F0B630100633543 /* app.home.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C3A43C1F0C78C900633543 /* UserHomeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C3A4391F0C78C900633543 /* UserHomeViewController.h */; };
 		06C3A43D1F0C78C900633543 /* UserHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C3A43A1F0C78C900633543 /* UserHomeViewController.m */; };
@@ -22,14 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		06361BD21F0F4CBC00B1D545 /* AuthenticationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationView.h; sourceTree = "<group>"; };
-		06361BD31F0F4CBC00B1D545 /* AuthenticationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationView.m; sourceTree = "<group>"; };
-		06361BD61F0F53E600B1D545 /* AuthenticationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthenticationView.xib; sourceTree = "<group>"; };
+		06361BD21F0F4CBC00B1D545 /* UserAuthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAuthView.h; sourceTree = "<group>"; };
+		06361BD31F0F4CBC00B1D545 /* UserAuthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAuthView.m; sourceTree = "<group>"; };
+		06361BD61F0F53E600B1D545 /* UserAuthView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserAuthView.xib; sourceTree = "<group>"; };
 		06361BD81F0F54BF00B1D545 /* bg_authentication.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_authentication.png; sourceTree = "<group>"; };
-		0686A8841F0CAAD300697582 /* com_eazytec_bpm_lib_utils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = com_eazytec_bpm_lib_utils.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/BpmApp-eufyfkcxftanxsbzvzzlyyfyzmkq/Build/Products/Debug-iphonesimulator/com_eazytec_bpm_lib_utils.framework"; sourceTree = "<group>"; };
-		0686A8861F0CAAD900697582 /* com_eazytec_bpm_lib_common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = com_eazytec_bpm_lib_common.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/BpmApp-eufyfkcxftanxsbzvzzlyyfyzmkq/Build/Products/Debug-iphonesimulator/com_eazytec_bpm_lib_common.framework"; sourceTree = "<group>"; };
-		0686A8931F0CB23D00697582 /* AuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
-		0686A8941F0CB23D00697582 /* AuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
+		06361C481F1327C300B1D545 /* com_eazytec_bpm_lib_common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = com_eazytec_bpm_lib_common.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/BpmApp-eufyfkcxftanxsbzvzzlyyfyzmkq/Build/Products/Debug-iphoneos/com_eazytec_bpm_lib_common.framework"; sourceTree = "<group>"; };
+		0686A8931F0CB23D00697582 /* UserAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAuthViewController.h; sourceTree = "<group>"; };
+		0686A8941F0CB23D00697582 /* UserAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAuthViewController.m; sourceTree = "<group>"; };
 		06C3A4091F0B630100633543 /* com_eazytec_bpm_app_home.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = com_eazytec_bpm_app_home.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		06C3A40C1F0B630100633543 /* app.home.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app.home.h; sourceTree = "<group>"; };
 		06C3A40D1F0B630200633543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -43,8 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0686A8901F0CADA300697582 /* com_eazytec_bpm_lib_common.framework in Frameworks */,
-				0686A8911F0CADA300697582 /* com_eazytec_bpm_lib_utils.framework in Frameworks */,
+				06361C491F1327C300B1D545 /* com_eazytec_bpm_lib_common.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,8 +51,8 @@
 		06361BCF1F0F2D9900B1D545 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0686A8931F0CB23D00697582 /* AuthenticationViewController.h */,
-				0686A8941F0CB23D00697582 /* AuthenticationViewController.m */,
+				0686A8931F0CB23D00697582 /* UserAuthViewController.h */,
+				0686A8941F0CB23D00697582 /* UserAuthViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -63,9 +60,9 @@
 		06361BD01F0F2DA400B1D545 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				06361BD21F0F4CBC00B1D545 /* AuthenticationView.h */,
-				06361BD31F0F4CBC00B1D545 /* AuthenticationView.m */,
-				06361BD61F0F53E600B1D545 /* AuthenticationView.xib */,
+				06361BD21F0F4CBC00B1D545 /* UserAuthView.h */,
+				06361BD31F0F4CBC00B1D545 /* UserAuthView.m */,
+				06361BD61F0F53E600B1D545 /* UserAuthView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -145,8 +142,7 @@
 		06C3A4721F0C7BA400633543 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0686A8861F0CAAD900697582 /* com_eazytec_bpm_lib_common.framework */,
-				0686A8841F0CAAD300697582 /* com_eazytec_bpm_lib_utils.framework */,
+				06361C481F1327C300B1D545 /* com_eazytec_bpm_lib_common.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -158,8 +154,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0686A8961F0CB23D00697582 /* AuthenticationViewController.h in Headers */,
-				06361BD41F0F4CBC00B1D545 /* AuthenticationView.h in Headers */,
+				0686A8961F0CB23D00697582 /* UserAuthViewController.h in Headers */,
+				06361BD41F0F4CBC00B1D545 /* UserAuthView.h in Headers */,
 				06C3A40E1F0B630200633543 /* app.home.h in Headers */,
 				06C3A43C1F0C78C900633543 /* UserHomeViewController.h in Headers */,
 			);
@@ -224,7 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06361BD71F0F53E600B1D545 /* AuthenticationView.xib in Resources */,
+				06361BD71F0F53E600B1D545 /* UserAuthView.xib in Resources */,
 				06361BD91F0F54BF00B1D545 /* bg_authentication.png in Resources */,
 				06C3A43E1F0C78C900633543 /* UserHomeViewController.xib in Resources */,
 			);
@@ -237,9 +233,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0686A8971F0CB23D00697582 /* AuthenticationViewController.m in Sources */,
+				0686A8971F0CB23D00697582 /* UserAuthViewController.m in Sources */,
 				06C3A43D1F0C78C900633543 /* UserHomeViewController.m in Sources */,
-				06361BD51F0F4CBC00B1D545 /* AuthenticationView.m in Sources */,
+				06361BD51F0F4CBC00B1D545 /* UserAuthView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +343,9 @@
 		06C3A4121F0B630200633543 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CLANG_ANALYZER_OBJC_DEALLOC = YES;
+				CLANG_ANALYZER_OBJC_INCOMP_METHOD_TYPES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Sun (2CMVFJS84Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 57979TE7HA;
@@ -370,7 +368,9 @@
 		06C3A4131F0B630200633543 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CLANG_ANALYZER_OBJC_DEALLOC = YES;
+				CLANG_ANALYZER_OBJC_INCOMP_METHOD_TYPES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Sun (2CMVFJS84Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 57979TE7HA;

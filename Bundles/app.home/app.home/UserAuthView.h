@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AuthenticationView : UIView
+@interface UserAuthView : UIView
 
 @end
