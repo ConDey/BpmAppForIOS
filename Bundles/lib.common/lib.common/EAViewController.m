@@ -9,6 +9,12 @@
 #import "EAViewController.h"
 #import "UITableView+Factory.h"
 
+#import "AFNetworking.h"
+#import "SVProgressHUD.h"
+#import "EAProtocol.h"
+#import "UIColor+EAFoundation.h"
+#import "UIConstant.h"
+
 @interface EAViewController ()
 
 @end
@@ -27,7 +33,15 @@
     if (self.hasTabBarController) {
         self.tabBarController.edgesForExtendedLayout = UIRectEdgeNone;
     }
-    //self.view.backgroundColor = [UIColor bkColor];
+    self.view.backgroundColor = UI_BK_COLOR;
+    
+    // 全局设置
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+        [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+    });
 }
 
 /**
@@ -62,7 +76,7 @@
  *  如果存在NavController,这个值是无效的
  */
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 /**
@@ -131,7 +145,7 @@
  *   配置默认的返回ButtonItem
  */
 -(void)setCommonBackLeftButtonItem {
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"Common_Back"] style:UIBarButtonItemStylePlain target:self action:@selector(doNavigationLeftBarButtonItemAction:)];
+    //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"Common_Back"] style:UIBarButtonItemStylePlain target:self action:@selector(doNavigationLeftBarButtonItemAction:)];
     self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
 }
 
@@ -156,6 +170,81 @@
         _tableview = [UITableView groupTableView];
     }
     return _tableview;
+}
+
+
+- (NSBundle *)bundle {
+    if(_bundle == nil) {
+        _bundle = [NSBundle bundleForClass:[self class]];
+    }
+    return _bundle;
+}
+
+- (void)httpPostRequestWithUrl:(NSString *)url params:(NSDictionary *)params progress:(BOOL)progress {
+    
+    AFHTTPSessionManager *manager = [EAProtocol createAFHTTPSessionManager:url];
+    
+    if (progress) {
+        [SVProgressHUD showWithStatus:@"正在努力加载..."];
+    }
+    [manager POST:[EAProtocol loadRequestServiceUrlWithName:url] parameters:params progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+              NSDictionary *result  = [EAProtocol doRequestJSONSerializationdDecode:responseObject];
+              if ([EAProtocol isRequestJSONSerializationSuccess:result]) {
+                  [self didAnalysisRequestResultWithData:result andService:url];
+                  if (progress)  [SVProgressHUD dismiss];
+              }
+              else {
+                  if (progress) {
+                      [SVProgressHUD showErrorWithStatus:[result objectForKey:@"errorMsg"]];
+                      
+                  }
+              }
+              [self didFinishHttpRequest:url];
+          }
+          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+              NSLog(@"%@",error);  //这里打印错误信息
+              [SVProgressHUD showErrorWithStatus:@"系统繁忙,请稍后再试"];
+              [self didFinishHttpRequest:url];
+          }];
+}
+
+
+- (void)httpGetRequestWithUrl:(NSString *)url params:(NSDictionary *)params progress:(BOOL)progress {
+    
+    AFHTTPSessionManager *manager = [EAProtocol createAFHTTPSessionManager:url];
+    
+    if (progress) {
+        [SVProgressHUD showWithStatus:@"正在努力加载..."];
+    }
+    [manager GET:[EAProtocol loadRequestServiceUrlWithName:url] parameters:params progress:nil
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             NSDictionary *result  = [EAProtocol doRequestJSONSerializationdDecode:responseObject];
+             if ([EAProtocol isRequestJSONSerializationSuccess:result]) {
+                 [self didAnalysisRequestResultWithData:result andService:url];
+                 if (progress)  [SVProgressHUD dismiss];
+             }
+             else {
+                 if (progress) {
+                     [SVProgressHUD showErrorWithStatus:[result objectForKey:@"errorMsg"]];
+                     
+                 }
+             }
+             [self didFinishHttpRequest:url];
+         }
+         failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
+             NSLog(@"%@",error);  //这里打印错误信息
+             [SVProgressHUD showErrorWithStatus:@"系统繁忙,请稍后再试"];
+             [self didFinishHttpRequest:url];
+         }];
+}
+
+- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name {
+    
+}
+
+- (void)didFinishHttpRequest:(NSString *)name {
+    
 }
 
 @end

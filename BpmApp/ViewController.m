@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [Small setBaseUri:@"http://www.eazytec.com/"];
+    [Small setBaseUri:@"http://"];
     [Small setUpWithComplection:^{
         UIViewController *mainController = [Small controllerForUri:@"app.home"];
         [self presentViewController:mainController animated:NO completion:nil];

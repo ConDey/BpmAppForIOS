@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[EAApp installed]:EAApp.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[UserHomeAppController collectionView:layout:sizeForItemAtIndexPath:]:UserHomeAppController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[UIScreen mainScreen].bounds.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[SMBundle bundleForName:]:SMBundle.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "kLaunchableBundles">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "+[Small openUri:fromController:]:Small.m">
+      </ContextState>
+      <ContextState
+         contextName = "__29-[ViewController viewDidLoad]_block_invoke:ViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[UserHomeTabController appController]:UserHomeTabController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[EAApp getInfoApp:]:EAApp.m">
+      </ContextState>
+      <ContextState
+         contextName = "__59-[EAViewController httpPostRequestWithUrl:params:progress:]_block_invoke:EAViewController.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -13,6 +13,10 @@
 @property (nonatomic,retain) UITableView *tableview;
 @property (nonatomic,retain) UITableView *grouptableview;
 
+@property (nonatomic,retain) NSBundle *bundle;
+
+
+
 // NavigationItem是否显示，默认为YES,此属性只有在存在navigationController的时候才有意义.
 @property (nonatomic,assign,readonly) BOOL navDisplay;
 
@@ -21,5 +25,10 @@
 - (void)setTitleOfNav:(NSString *)titleOfNav;  // 配置NavItem的title
 - (void)setTitleViewOfNav:(UIView *)viewOfNav; // 配置NavItem的titleView
 - (void)setCommonBackLeftButtonItem; // 配置默认的返回ButtonItem
+
+- (void)httpGetRequestWithUrl:(NSString *)url params:(NSDictionary *)params progress:(BOOL)progress;
+- (void)httpPostRequestWithUrl:(NSString *)url params:(NSDictionary *)params progress:(BOOL)progress;
+- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name;
+- (void)didFinishHttpRequest:(NSString *)name;
 
 @end
