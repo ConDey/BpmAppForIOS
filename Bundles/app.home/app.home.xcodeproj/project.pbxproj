@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		061A90961F1E2E5800B7C227 /* UserHomeSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061A90951F1E2E5800B7C227 /* UserHomeSettingController.xib */; };
+		061A909A1F1F4F1100B7C227 /* ic_setting_default_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A90991F1F4F1100B7C227 /* ic_setting_default_photo.png */; };
 		0686A8961F0CB23D00697582 /* UserAuthViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0686A8931F0CB23D00697582 /* UserAuthViewController.h */; };
 		0686A8971F0CB23D00697582 /* UserAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0686A8941F0CB23D00697582 /* UserAuthViewController.m */; };
 		06C3A40E1F0B630200633543 /* app.home.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C3A40C1F0B630100633543 /* app.home.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		06C5A2DA1F26D32A00A189FB /* app.json in Resources */ = {isa = PBXBuildFile; fileRef = 06C5A2D91F26D32A00A189FB /* app.json */; };
 		06C6B96A1F145D3700D444E6 /* UserAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06C6B9691F145D3700D444E6 /* UserAuthViewController.xib */; };
 		06C6B9871F149D6D00D444E6 /* Assert.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06C6B9861F149D6D00D444E6 /* Assert.xcassets */; };
 		06C6BA311F14C06100D444E6 /* com_eazytec_bpm_lib_common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C6BA301F14C06100D444E6 /* com_eazytec_bpm_lib_common.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -31,17 +34,20 @@
 		06C6BAF81F16F93100D444E6 /* UserHomeAppViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BAF51F16F93100D444E6 /* UserHomeAppViewCell.xib */; };
 		06C6BAFE1F17160F00D444E6 /* ic_homeapp_contact.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BAFD1F17160F00D444E6 /* ic_homeapp_contact.png */; };
 		06C6BB001F17164000D444E6 /* ic_homeapp_notice.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BAFF1F17164000D444E6 /* ic_homeapp_notice.png */; };
-		06C6BB021F17164500D444E6 /* ic_homeapp_jsweb.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB011F17164500D444E6 /* ic_homeapp_jsweb.png */; };
-		06C6BB0A1F1743A500D444E6 /* ic_homeapp_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB091F1743A500D444E6 /* ic_homeapp_photo.png */; };
-		06C6BB0C1F1743E300D444E6 /* ic_homeapp_file.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB0B1F1743E300D444E6 /* ic_homeapp_file.png */; };
+		06C6BB021F17164500D444E6 /* ic_homeapp_process.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB011F17164500D444E6 /* ic_homeapp_process.png */; };
+		06C6BB0A1F1743A500D444E6 /* ic_homeapp_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB091F1743A500D444E6 /* ic_homeapp_image.png */; };
+		06C6BB0C1F1743E300D444E6 /* ic_homeapp_filepicker.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB0B1F1743E300D444E6 /* ic_homeapp_filepicker.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		061A90951F1E2E5800B7C227 /* UserHomeSettingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserHomeSettingController.xib; sourceTree = "<group>"; };
+		061A90991F1F4F1100B7C227 /* ic_setting_default_photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_default_photo.png; sourceTree = "<group>"; };
 		0686A8931F0CB23D00697582 /* UserAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAuthViewController.h; sourceTree = "<group>"; };
 		0686A8941F0CB23D00697582 /* UserAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAuthViewController.m; sourceTree = "<group>"; };
 		06C3A4091F0B630100633543 /* com_eazytec_bpm_app_home.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = com_eazytec_bpm_app_home.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		06C3A40C1F0B630100633543 /* app.home.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app.home.h; sourceTree = "<group>"; };
 		06C3A40D1F0B630200633543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06C5A2D91F26D32A00A189FB /* app.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app.json; sourceTree = "<group>"; };
 		06C6B9691F145D3700D444E6 /* UserAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserAuthViewController.xib; sourceTree = "<group>"; };
 		06C6B9861F149D6D00D444E6 /* Assert.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assert.xcassets; sourceTree = "<group>"; };
 		06C6BA301F14C06100D444E6 /* com_eazytec_bpm_lib_common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = com_eazytec_bpm_lib_common.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/BpmApp-eufyfkcxftanxsbzvzzlyyfyzmkq/Build/Products/Debug-iphoneos/com_eazytec_bpm_lib_common.framework"; sourceTree = "<group>"; };
@@ -63,9 +69,10 @@
 		06C6BAF51F16F93100D444E6 /* UserHomeAppViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserHomeAppViewCell.xib; sourceTree = "<group>"; };
 		06C6BAFD1F17160F00D444E6 /* ic_homeapp_contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_contact.png; sourceTree = "<group>"; };
 		06C6BAFF1F17164000D444E6 /* ic_homeapp_notice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_notice.png; sourceTree = "<group>"; };
-		06C6BB011F17164500D444E6 /* ic_homeapp_jsweb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_jsweb.png; sourceTree = "<group>"; };
-		06C6BB091F1743A500D444E6 /* ic_homeapp_photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_photo.png; sourceTree = "<group>"; };
-		06C6BB0B1F1743E300D444E6 /* ic_homeapp_file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_file.png; sourceTree = "<group>"; };
+		06C6BB011F17164500D444E6 /* ic_homeapp_process.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_process.png; sourceTree = "<group>"; };
+		06C6BB091F1743A500D444E6 /* ic_homeapp_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_image.png; sourceTree = "<group>"; };
+		06C6BB0B1F1743E300D444E6 /* ic_homeapp_filepicker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_filepicker.png; sourceTree = "<group>"; };
+		06F809C41F263593000872C4 /* Small.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Small.framework; path = "../../Frameworks/build/Debug-iphoneos/Small.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,9 +142,11 @@
 		06C3A4351F0C72EB00633543 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				06C6BB0B1F1743E300D444E6 /* ic_homeapp_file.png */,
-				06C6BB091F1743A500D444E6 /* ic_homeapp_photo.png */,
-				06C6BB011F17164500D444E6 /* ic_homeapp_jsweb.png */,
+				06C5A2D91F26D32A00A189FB /* app.json */,
+				061A90991F1F4F1100B7C227 /* ic_setting_default_photo.png */,
+				06C6BB0B1F1743E300D444E6 /* ic_homeapp_filepicker.png */,
+				06C6BB091F1743A500D444E6 /* ic_homeapp_image.png */,
+				06C6BB011F17164500D444E6 /* ic_homeapp_process.png */,
 				06C6BAFF1F17164000D444E6 /* ic_homeapp_notice.png */,
 				06C6BAFD1F17160F00D444E6 /* ic_homeapp_contact.png */,
 				06C6B9861F149D6D00D444E6 /* Assert.xcassets */,
@@ -172,6 +181,7 @@
 		06C3A4721F0C7BA400633543 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06F809C41F263593000872C4 /* Small.framework */,
 				06C6BA301F14C06100D444E6 /* com_eazytec_bpm_lib_common.framework */,
 			);
 			name = Frameworks;
@@ -220,6 +230,7 @@
 			children = (
 				06C6BADA1F15CB3600D444E6 /* UserHomeSettingController.h */,
 				06C6BADB1F15CB3600D444E6 /* UserHomeSettingController.m */,
+				061A90951F1E2E5800B7C227 /* UserHomeSettingController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -321,15 +332,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06C6BB021F17164500D444E6 /* ic_homeapp_jsweb.png in Resources */,
+				06C6BB021F17164500D444E6 /* ic_homeapp_process.png in Resources */,
 				06C6BAF81F16F93100D444E6 /* UserHomeAppViewCell.xib in Resources */,
-				06C6BB0A1F1743A500D444E6 /* ic_homeapp_photo.png in Resources */,
-				06C6BB0C1F1743E300D444E6 /* ic_homeapp_file.png in Resources */,
+				061A90961F1E2E5800B7C227 /* UserHomeSettingController.xib in Resources */,
+				06C6BB0A1F1743A500D444E6 /* ic_homeapp_image.png in Resources */,
+				06C6BB0C1F1743E300D444E6 /* ic_homeapp_filepicker.png in Resources */,
+				06C5A2DA1F26D32A00A189FB /* app.json in Resources */,
 				06C6BAE81F1601F300D444E6 /* UserHomeAppController.xib in Resources */,
 				06C6B96A1F145D3700D444E6 /* UserAuthViewController.xib in Resources */,
 				06C6B9871F149D6D00D444E6 /* Assert.xcassets in Resources */,
 				06C6BB001F17164000D444E6 /* ic_homeapp_notice.png in Resources */,
 				06C6BAFE1F17160F00D444E6 /* ic_homeapp_contact.png in Resources */,
+				061A909A1F1F4F1100B7C227 /* ic_setting_default_photo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

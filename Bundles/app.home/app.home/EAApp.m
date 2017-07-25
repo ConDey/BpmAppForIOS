@@ -15,6 +15,39 @@
 
 @implementation EAApp
 
+- (instancetype)initWithDict:(NSDictionary *)dict {
+    if ([self init]) {
+        
+        self.id = [dict objectForKey:@"id"];
+        self.packageName = [dict objectForKey:@"packagename"];
+        self.name = [dict objectForKey:@"name"];
+        self.displayName = [dict objectForKey:@"diplayname"];
+        
+        self.imageUrl = [dict objectForKey:@"imageurl"];
+        self.bundleName = [dict objectForKey:@"bundlename"];
+        
+        
+        NSString *imageurlType = [dict objectForKey:@"imageurltype"];
+        
+        if ([NSString isEqualToString:imageurlType origin:@"ImageUrlTypeInner"]) {
+            self.imageUrlType = ImageUrlTypeInner;
+        } else {
+            self.imageUrlType = ImageUrlTypeRemote;
+        }
+        
+        NSString *appType = [dict objectForKey:@"type"];
+        if ([NSString isEqualToString:appType origin:@"AppTypeInner"]) {
+            self.appType = AppTypeInner;
+        } else if([NSString isEqualToString:appType origin:@"AppTypeRemote"]){
+            self.appType = AppTypeRemote;
+        } else {
+            self.appType = AppTypeWeb;
+        }
+    }
+    return self;
+}
+
+
 - (BOOL)installed {
     
     if (self.appType == AppTypeWeb) {
@@ -52,14 +85,21 @@
             [Small openUri:[NSString stringWithFormat:@"app.webkit?urltitle=%@",self.displayName] fromController:controller];
             return;
         }
-        NSString *url = [NSString encodeToPercentEscapeString:[NSString stringWithFormat:@"%@%@",REQUEST_SERVICE_URL ,self.
-                                                               bundleName]];
+        
+        NSString *url = nil;
+        if ([self.bundleName hasPrefix:@"http:"] || [self.bundleName hasPrefix:@"https:"] ) {
+            url = [NSString encodeToPercentEscapeString:self.bundleName];
+        } else {
+            url = [NSString encodeToPercentEscapeString:[NSString stringWithFormat:@"%@%@",REQUEST_SERVICE_URL ,self.bundleName]];
+        }
+        
         NSString *allurl = [NSString stringWithFormat:@"app.webkit?url=%@&urltitle=%@", url, [NSString encodeString:self.displayName]] ;
         [Small openUri:allurl fromController:controller];
         return;
     }
     [Small openUri:self.bundleName fromController:controller];
 }
+
 
 
 @end

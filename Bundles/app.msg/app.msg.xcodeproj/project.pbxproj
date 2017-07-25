@@ -20,6 +20,7 @@
 		06C6BAA01F15C1BF00D444E6 /* com_eazytec_bpm_lib_common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = com_eazytec_bpm_lib_common.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/BpmApp-eufyfkcxftanxsbzvzzlyyfyzmkq/Build/Products/Debug-iphonesimulator/com_eazytec_bpm_lib_common.framework"; sourceTree = "<group>"; };
 		06C6BACB1F15C39000D444E6 /* MsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgViewController.h; sourceTree = "<group>"; };
 		06C6BACC1F15C39000D444E6 /* MsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgViewController.m; sourceTree = "<group>"; };
+		06F809C21F26358C000872C4 /* Small.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Small.framework; path = "../../Frameworks/build/Debug-iphoneos/Small.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +65,7 @@
 		06C6BA9F1F15C1BF00D444E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06F809C21F26358C000872C4 /* Small.framework */,
 				06C6BAA01F15C1BF00D444E6 /* com_eazytec_bpm_lib_common.framework */,
 			);
 			name = Frameworks;

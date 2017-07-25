@@ -43,4 +43,7 @@ typedef NS_ENUM(NSInteger, APPType) {
 - (void)getInfoApp:(UIViewController *)controller;
 
 
+- (instancetype)initWithDict:(NSDictionary *)dict;
+
+
 @end

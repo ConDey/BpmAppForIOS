@@ -7,24 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		061468901F2641B3004CC8B9 /* com_eazytec_bpm_lib_common.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06F809B71F263532000872C4 /* com_eazytec_bpm_lib_common.framework */; };
+		061468911F2641B7004CC8B9 /* com_eazytec_bpm_app_webkit.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06F809B11F26352C000872C4 /* com_eazytec_bpm_app_webkit.framework */; };
+		061468921F2641BB004CC8B9 /* com_eazytec_bpm_app_msg.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06F809AB1F263526000872C4 /* com_eazytec_bpm_app_msg.framework */; };
+		061468931F2641BF004CC8B9 /* com_eazytec_bpm_app_home.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06F809971F263512000872C4 /* com_eazytec_bpm_app_home.framework */; };
+		061468941F2641C1004CC8B9 /* com_eazytec_bpm_app_contact.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06F809541F2634FC000872C4 /* com_eazytec_bpm_app_contact.framework */; };
 		06361BFB1F0F5D6100B1D545 /* Small.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06361BF81F0F5D4400B1D545 /* Small.framework */; };
-		06361C3D1F13216700B1D545 /* com_eazytec_bpm_lib_common.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C3A4701F0C7B2000633543 /* com_eazytec_bpm_lib_common.framework */; };
 		0686A8921F0CAE0100697582 /* bundle.json in Resources */ = {isa = PBXBuildFile; fileRef = 06C3A3F81F0B263D00633543 /* bundle.json */; };
 		069763701EFA4C760012D367 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0697636F1EFA4C760012D367 /* main.m */; };
 		069763731EFA4C760012D367 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 069763721EFA4C760012D367 /* AppDelegate.m */; };
 		069763761EFA4C760012D367 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069763751EFA4C760012D367 /* ViewController.m */; };
 		0697637B1EFA4C760012D367 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0697637A1EFA4C760012D367 /* Assets.xcassets */; };
 		0697637E1EFA4C760012D367 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0697637C1EFA4C760012D367 /* LaunchScreen.storyboard */; };
+		06C5A2D61F26CFD800A189FB /* app.notice.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C5A2D01F26CF4E00A189FB /* app.notice.framework */; };
 		06C6BAC51F15C26A00D444E6 /* Small.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06361BF81F0F5D4400B1D545 /* Small.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		06C6BADE1F15CEE700D444E6 /* com_eazytec_bpm_app_msg.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BAB81F15C22700D444E6 /* com_eazytec_bpm_app_msg.framework */; };
-		06C6BADF1F15CEEB00D444E6 /* app.contact.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BA9E1F15C0D900D444E6 /* app.contact.framework */; };
-		06C6BAE01F15CEF200D444E6 /* com_eazytec_bpm_app_home.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BABF1F15C22D00D444E6 /* com_eazytec_bpm_app_home.framework */; };
-		06C6BB311F185CD900D444E6 /* com_eazytec_bpm_lib_common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06C3A4701F0C7B2000633543 /* com_eazytec_bpm_lib_common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		06C6BB321F185CDB00D444E6 /* com_eazytec_bpm_app_msg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06C6BAB81F15C22700D444E6 /* com_eazytec_bpm_app_msg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		06C6BB331F185CDE00D444E6 /* app.contact.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06C6BA9E1F15C0D900D444E6 /* app.contact.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		06C6BB341F185CE600D444E6 /* com_eazytec_bpm_app_home.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06C6BABF1F15C22D00D444E6 /* com_eazytec_bpm_app_home.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		06C6BB351F185CE900D444E6 /* app.webkit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06C6BB281F18593300D444E6 /* app.webkit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		06C6BB971F188B0E00D444E6 /* app.webkit.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB281F18593300D444E6 /* app.webkit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,82 +45,89 @@
 			remoteGlobalIDString = F8EF07BE1A73D33F00A2DDE0;
 			remoteInfo = Small;
 		};
-		0686A8751F0C870500697582 /* PBXContainerItemProxy */ = {
+		06C5A2CF1F26CF4E00A189FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 06C3A46B1F0C7B2000633543 /* lib.common.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 06C3A45D1F0C7ADA00633543;
-			remoteInfo = lib.common;
-		};
-		06C3A46F1F0C7B2000633543 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 06C3A46B1F0C7B2000633543 /* lib.common.xcodeproj */;
+			containerPortal = 06C5A2CB1F26CF4D00A189FB /* app.notice.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 06C3A45E1F0C7ADA00633543;
-			remoteInfo = lib.common;
+			remoteGlobalIDString = 06C5A2C01F26CF4D00A189FB;
+			remoteInfo = app.notice;
 		};
-		06C6BA551F159AE100D444E6 /* PBXContainerItemProxy */ = {
+		06C5A2D41F26CFBD00A189FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 06C3A46B1F0C7B2000633543 /* lib.common.xcodeproj */;
+			containerPortal = 06C5A2CB1F26CF4D00A189FB /* app.notice.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 06C3A45D1F0C7ADA00633543;
-			remoteInfo = lib.common;
+			remoteGlobalIDString = 06C5A2BF1F26CF4D00A189FB;
+			remoteInfo = app.notice;
 		};
-		06C6BA9D1F15C0D900D444E6 /* PBXContainerItemProxy */ = {
+		06F809531F2634FC000872C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 06C6BA991F15C0D900D444E6 /* app.contact.xcodeproj */;
+			containerPortal = 06F8094F1F2634FC000872C4 /* app.contact.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 06C6BA8E1F15C0D200D444E6;
 			remoteInfo = app.contact;
 		};
-		06C6BAA51F15C1DF00D444E6 /* PBXContainerItemProxy */ = {
+		06F809961F263512000872C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 06C6BA991F15C0D900D444E6 /* app.contact.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 06C6BA8D1F15C0D200D444E6;
-			remoteInfo = app.contact;
-		};
-		06C6BAB71F15C22700D444E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 06C6BAB31F15C22700D444E6 /* app.msg.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 06C6BA681F15C09300D444E6;
-			remoteInfo = app.msg;
-		};
-		06C6BABE1F15C22D00D444E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 06C6BAB91F15C22D00D444E6 /* app.home.xcodeproj */;
+			containerPortal = 06F809921F263511000872C4 /* app.home.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 06C3A4091F0B630100633543;
 			remoteInfo = app.home;
 		};
-		06C6BAC01F15C23200D444E6 /* PBXContainerItemProxy */ = {
+		06F809AA1F263526000872C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 06C6BAB31F15C22700D444E6 /* app.msg.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 06C6BA671F15C09300D444E6;
+			containerPortal = 06F809A61F263526000872C4 /* app.msg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06C6BA681F15C09300D444E6;
 			remoteInfo = app.msg;
 		};
-		06C6BAC21F15C23400D444E6 /* PBXContainerItemProxy */ = {
+		06F809B01F26352C000872C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 06C6BAB91F15C22D00D444E6 /* app.home.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 06C3A4081F0B630100633543;
-			remoteInfo = app.home;
-		};
-		06C6BB271F18593300D444E6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 06C6BB231F18593300D444E6 /* app.webkit.xcodeproj */;
+			containerPortal = 06F809AC1F26352C000872C4 /* app.webkit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 06C6BB181F18592200D444E6;
 			remoteInfo = app.webkit;
 		};
-		06C6BB2C1F18598F00D444E6 /* PBXContainerItemProxy */ = {
+		06F809B61F263532000872C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 06C6BB231F18593300D444E6 /* app.webkit.xcodeproj */;
+			containerPortal = 06F809B21F263532000872C4 /* lib.common.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06C3A45E1F0C7ADA00633543;
+			remoteInfo = lib.common;
+		};
+		06F809B81F263549000872C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 06F809B21F263532000872C4 /* lib.common.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 06C3A45D1F0C7ADA00633543;
+			remoteInfo = lib.common;
+		};
+		06F809BA1F263550000872C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 06F809AC1F26352C000872C4 /* app.webkit.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 06C6BB171F18592200D444E6;
 			remoteInfo = app.webkit;
+		};
+		06F809BC1F263553000872C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 06F809A61F263526000872C4 /* app.msg.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 06C6BA671F15C09300D444E6;
+			remoteInfo = app.msg;
+		};
+		06F809BE1F263556000872C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 06F809921F263511000872C4 /* app.home.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 06C3A4081F0B630100633543;
+			remoteInfo = app.home;
+		};
+		06F809C01F263558000872C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 06F8094F1F2634FC000872C4 /* app.contact.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 06C6BA8D1F15C0D200D444E6;
+			remoteInfo = app.contact;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -135,11 +138,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				06C6BB351F185CE900D444E6 /* app.webkit.framework in Embed Frameworks */,
-				06C6BB341F185CE600D444E6 /* com_eazytec_bpm_app_home.framework in Embed Frameworks */,
-				06C6BB331F185CDE00D444E6 /* app.contact.framework in Embed Frameworks */,
-				06C6BB321F185CDB00D444E6 /* com_eazytec_bpm_app_msg.framework in Embed Frameworks */,
-				06C6BB311F185CD900D444E6 /* com_eazytec_bpm_lib_common.framework in Embed Frameworks */,
 				06C6BAC51F15C26A00D444E6 /* Small.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -159,11 +157,12 @@
 		0697637D1EFA4C760012D367 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0697637F1EFA4C760012D367 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06C3A3F81F0B263D00633543 /* bundle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = bundle.json; sourceTree = "<group>"; };
-		06C3A46B1F0C7B2000633543 /* lib.common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lib.common.xcodeproj; path = Bundles/lib.common/lib.common.xcodeproj; sourceTree = "<group>"; };
-		06C6BA991F15C0D900D444E6 /* app.contact.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.contact.xcodeproj; path = Bundles/app.contact/app.contact.xcodeproj; sourceTree = "<group>"; };
-		06C6BAB31F15C22700D444E6 /* app.msg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.msg.xcodeproj; path = Bundles/app.msg/app.msg.xcodeproj; sourceTree = "<group>"; };
-		06C6BAB91F15C22D00D444E6 /* app.home.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.home.xcodeproj; path = Bundles/app.home/app.home.xcodeproj; sourceTree = "<group>"; };
-		06C6BB231F18593300D444E6 /* app.webkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.webkit.xcodeproj; path = Bundles/app.webkit/app.webkit.xcodeproj; sourceTree = "<group>"; };
+		06C5A2CB1F26CF4D00A189FB /* app.notice.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.notice.xcodeproj; path = Bundles/app.notice/app.notice.xcodeproj; sourceTree = "<group>"; };
+		06F8094F1F2634FC000872C4 /* app.contact.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.contact.xcodeproj; path = Bundles/app.contact/app.contact.xcodeproj; sourceTree = "<group>"; };
+		06F809921F263511000872C4 /* app.home.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.home.xcodeproj; path = Bundles/app.home/app.home.xcodeproj; sourceTree = "<group>"; };
+		06F809A61F263526000872C4 /* app.msg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.msg.xcodeproj; path = Bundles/app.msg/app.msg.xcodeproj; sourceTree = "<group>"; };
+		06F809AC1F26352C000872C4 /* app.webkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.webkit.xcodeproj; path = Bundles/app.webkit/app.webkit.xcodeproj; sourceTree = "<group>"; };
+		06F809B21F263532000872C4 /* lib.common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lib.common.xcodeproj; path = Bundles/lib.common/lib.common.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,11 +180,12 @@
 		062618881EFA52D200F1EF72 /* Bundles */ = {
 			isa = PBXGroup;
 			children = (
-				06C3A46B1F0C7B2000633543 /* lib.common.xcodeproj */,
-				06C6BAB31F15C22700D444E6 /* app.msg.xcodeproj */,
-				06C6BA991F15C0D900D444E6 /* app.contact.xcodeproj */,
-				06C6BAB91F15C22D00D444E6 /* app.home.xcodeproj */,
-				06C6BB231F18593300D444E6 /* app.webkit.xcodeproj */,
+				06F809B21F263532000872C4 /* lib.common.xcodeproj */,
+				06C5A2CB1F26CF4D00A189FB /* app.notice.xcodeproj */,
+				06F809AC1F26352C000872C4 /* app.webkit.xcodeproj */,
+				06F809A61F263526000872C4 /* app.msg.xcodeproj */,
+				06F809921F263511000872C4 /* app.home.xcodeproj */,
+				06F8094F1F2634FC000872C4 /* app.contact.xcodeproj */,
 			);
 			name = Bundles;
 			sourceTree = "<group>";
@@ -281,42 +281,50 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		06C3A46C1F0C7B2000633543 /* Products */ = {
+		06C5A2CC1F26CF4D00A189FB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06C3A4701F0C7B2000633543 /* com_eazytec_bpm_lib_common.framework */,
+				06C5A2D01F26CF4E00A189FB /* app.notice.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		06C6BA9A1F15C0D900D444E6 /* Products */ = {
+		06F809501F2634FC000872C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06C6BA9E1F15C0D900D444E6 /* app.contact.framework */,
+				06F809541F2634FC000872C4 /* com_eazytec_bpm_app_contact.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		06C6BAB41F15C22700D444E6 /* Products */ = {
+		06F809931F263511000872C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06C6BAB81F15C22700D444E6 /* com_eazytec_bpm_app_msg.framework */,
+				06F809971F263512000872C4 /* com_eazytec_bpm_app_home.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		06C6BABA1F15C22D00D444E6 /* Products */ = {
+		06F809A71F263526000872C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06C6BABF1F15C22D00D444E6 /* com_eazytec_bpm_app_home.framework */,
+				06F809AB1F263526000872C4 /* com_eazytec_bpm_app_msg.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		06C6BB241F18593300D444E6 /* Products */ = {
+		06F809AD1F26352C000872C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06C6BB281F18593300D444E6 /* app.webkit.framework */,
+				06F809B11F26352C000872C4 /* com_eazytec_bpm_app_webkit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		06F809B31F263532000872C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				06F809B71F263532000872C4 /* com_eazytec_bpm_lib_common.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -337,12 +345,12 @@
 			);
 			dependencies = (
 				06361BFE1F0F5D6100B1D545 /* PBXTargetDependency */,
-				0686A8761F0C870500697582 /* PBXTargetDependency */,
-				06C6BB2D1F18598F00D444E6 /* PBXTargetDependency */,
-				06C6BAC31F15C23400D444E6 /* PBXTargetDependency */,
-				06C6BAC11F15C23200D444E6 /* PBXTargetDependency */,
-				06C6BAA61F15C1DF00D444E6 /* PBXTargetDependency */,
-				06C6BA561F159AE100D444E6 /* PBXTargetDependency */,
+				06F809B91F263549000872C4 /* PBXTargetDependency */,
+				06C5A2D51F26CFBD00A189FB /* PBXTargetDependency */,
+				06F809C11F263558000872C4 /* PBXTargetDependency */,
+				06F809BB1F263550000872C4 /* PBXTargetDependency */,
+				06F809BD1F263553000872C4 /* PBXTargetDependency */,
+				06F809BF1F263556000872C4 /* PBXTargetDependency */,
 			);
 			name = BpmApp;
 			productName = BpmApp;
@@ -378,24 +386,28 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 06C6BA9A1F15C0D900D444E6 /* Products */;
-					ProjectRef = 06C6BA991F15C0D900D444E6 /* app.contact.xcodeproj */;
+					ProductGroup = 06F809501F2634FC000872C4 /* Products */;
+					ProjectRef = 06F8094F1F2634FC000872C4 /* app.contact.xcodeproj */;
 				},
 				{
-					ProductGroup = 06C6BABA1F15C22D00D444E6 /* Products */;
-					ProjectRef = 06C6BAB91F15C22D00D444E6 /* app.home.xcodeproj */;
+					ProductGroup = 06F809931F263511000872C4 /* Products */;
+					ProjectRef = 06F809921F263511000872C4 /* app.home.xcodeproj */;
 				},
 				{
-					ProductGroup = 06C6BAB41F15C22700D444E6 /* Products */;
-					ProjectRef = 06C6BAB31F15C22700D444E6 /* app.msg.xcodeproj */;
+					ProductGroup = 06F809A71F263526000872C4 /* Products */;
+					ProjectRef = 06F809A61F263526000872C4 /* app.msg.xcodeproj */;
 				},
 				{
-					ProductGroup = 06C6BB241F18593300D444E6 /* Products */;
-					ProjectRef = 06C6BB231F18593300D444E6 /* app.webkit.xcodeproj */;
+					ProductGroup = 06C5A2CC1F26CF4D00A189FB /* Products */;
+					ProjectRef = 06C5A2CB1F26CF4D00A189FB /* app.notice.xcodeproj */;
 				},
 				{
-					ProductGroup = 06C3A46C1F0C7B2000633543 /* Products */;
-					ProjectRef = 06C3A46B1F0C7B2000633543 /* lib.common.xcodeproj */;
+					ProductGroup = 06F809AD1F26352C000872C4 /* Products */;
+					ProjectRef = 06F809AC1F26352C000872C4 /* app.webkit.xcodeproj */;
+				},
+				{
+					ProductGroup = 06F809B31F263532000872C4 /* Products */;
+					ProjectRef = 06F809B21F263532000872C4 /* lib.common.xcodeproj */;
 				},
 				{
 					ProductGroup = 06361BF21F0F5D4400B1D545 /* Products */;
@@ -424,39 +436,46 @@
 			remoteRef = 06361BF91F0F5D4400B1D545 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		06C3A4701F0C7B2000633543 /* com_eazytec_bpm_lib_common.framework */ = {
+		06C5A2D01F26CF4E00A189FB /* app.notice.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = com_eazytec_bpm_lib_common.framework;
-			remoteRef = 06C3A46F1F0C7B2000633543 /* PBXContainerItemProxy */;
+			path = app.notice.framework;
+			remoteRef = 06C5A2CF1F26CF4E00A189FB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		06C6BA9E1F15C0D900D444E6 /* app.contact.framework */ = {
+		06F809541F2634FC000872C4 /* com_eazytec_bpm_app_contact.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = app.contact.framework;
-			remoteRef = 06C6BA9D1F15C0D900D444E6 /* PBXContainerItemProxy */;
+			path = com_eazytec_bpm_app_contact.framework;
+			remoteRef = 06F809531F2634FC000872C4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		06C6BAB81F15C22700D444E6 /* com_eazytec_bpm_app_msg.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = com_eazytec_bpm_app_msg.framework;
-			remoteRef = 06C6BAB71F15C22700D444E6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		06C6BABF1F15C22D00D444E6 /* com_eazytec_bpm_app_home.framework */ = {
+		06F809971F263512000872C4 /* com_eazytec_bpm_app_home.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = com_eazytec_bpm_app_home.framework;
-			remoteRef = 06C6BABE1F15C22D00D444E6 /* PBXContainerItemProxy */;
+			remoteRef = 06F809961F263512000872C4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		06C6BB281F18593300D444E6 /* app.webkit.framework */ = {
+		06F809AB1F263526000872C4 /* com_eazytec_bpm_app_msg.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = app.webkit.framework;
-			remoteRef = 06C6BB271F18593300D444E6 /* PBXContainerItemProxy */;
+			path = com_eazytec_bpm_app_msg.framework;
+			remoteRef = 06F809AA1F263526000872C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		06F809B11F26352C000872C4 /* com_eazytec_bpm_app_webkit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = com_eazytec_bpm_app_webkit.framework;
+			remoteRef = 06F809B01F26352C000872C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		06F809B71F263532000872C4 /* com_eazytec_bpm_lib_common.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = com_eazytec_bpm_lib_common.framework;
+			remoteRef = 06F809B61F263532000872C4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -469,11 +488,12 @@
 				0686A8921F0CAE0100697582 /* bundle.json in Resources */,
 				0697637E1EFA4C760012D367 /* LaunchScreen.storyboard in Resources */,
 				0697637B1EFA4C760012D367 /* Assets.xcassets in Resources */,
-				06361C3D1F13216700B1D545 /* com_eazytec_bpm_lib_common.framework in Resources */,
-				06C6BADE1F15CEE700D444E6 /* com_eazytec_bpm_app_msg.framework in Resources */,
-				06C6BADF1F15CEEB00D444E6 /* app.contact.framework in Resources */,
-				06C6BB971F188B0E00D444E6 /* app.webkit.framework in Resources */,
-				06C6BAE01F15CEF200D444E6 /* com_eazytec_bpm_app_home.framework in Resources */,
+				061468901F2641B3004CC8B9 /* com_eazytec_bpm_lib_common.framework in Resources */,
+				061468921F2641BB004CC8B9 /* com_eazytec_bpm_app_msg.framework in Resources */,
+				061468931F2641BF004CC8B9 /* com_eazytec_bpm_app_home.framework in Resources */,
+				061468941F2641C1004CC8B9 /* com_eazytec_bpm_app_contact.framework in Resources */,
+				06C5A2D61F26CFD800A189FB /* app.notice.framework in Resources */,
+				061468911F2641B7004CC8B9 /* com_eazytec_bpm_app_webkit.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,35 +518,35 @@
 			name = Small;
 			targetProxy = 06361BFD1F0F5D6100B1D545 /* PBXContainerItemProxy */;
 		};
-		0686A8761F0C870500697582 /* PBXTargetDependency */ = {
+		06C5A2D51F26CFBD00A189FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = app.notice;
+			targetProxy = 06C5A2D41F26CFBD00A189FB /* PBXContainerItemProxy */;
+		};
+		06F809B91F263549000872C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = lib.common;
-			targetProxy = 0686A8751F0C870500697582 /* PBXContainerItemProxy */;
+			targetProxy = 06F809B81F263549000872C4 /* PBXContainerItemProxy */;
 		};
-		06C6BA561F159AE100D444E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = lib.common;
-			targetProxy = 06C6BA551F159AE100D444E6 /* PBXContainerItemProxy */;
-		};
-		06C6BAA61F15C1DF00D444E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = app.contact;
-			targetProxy = 06C6BAA51F15C1DF00D444E6 /* PBXContainerItemProxy */;
-		};
-		06C6BAC11F15C23200D444E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = app.msg;
-			targetProxy = 06C6BAC01F15C23200D444E6 /* PBXContainerItemProxy */;
-		};
-		06C6BAC31F15C23400D444E6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = app.home;
-			targetProxy = 06C6BAC21F15C23400D444E6 /* PBXContainerItemProxy */;
-		};
-		06C6BB2D1F18598F00D444E6 /* PBXTargetDependency */ = {
+		06F809BB1F263550000872C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = app.webkit;
-			targetProxy = 06C6BB2C1F18598F00D444E6 /* PBXContainerItemProxy */;
+			targetProxy = 06F809BA1F263550000872C4 /* PBXContainerItemProxy */;
+		};
+		06F809BD1F263553000872C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = app.msg;
+			targetProxy = 06F809BC1F263553000872C4 /* PBXContainerItemProxy */;
+		};
+		06F809BF1F263556000872C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = app.home;
+			targetProxy = 06F809BE1F263556000872C4 /* PBXContainerItemProxy */;
+		};
+		06F809C11F263558000872C4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = app.contact;
+			targetProxy = 06F809C01F263558000872C4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

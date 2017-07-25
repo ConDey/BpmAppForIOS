@@ -11,9 +11,9 @@
 #define SCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
-#define STATUS_BAR_HEIGHT 22
-#define NAV_HEIGHT 44
-#define TAB_HEIGHT 49
+#define STATUS_BAR_HEIGHT [[UIApplication sharedApplication] statusBarFrame].size.height
+#define NAV_HEIGHT self.navigationController.navigationBar.frame.size.height
+#define TAB_HEIGHT self.tabBarController.tabBar.frame.size.height
 
 #define ONE_PX  (1 / [UIScreen mainScreen].scale)
 

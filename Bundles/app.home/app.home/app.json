@@ -1,0 +1,89 @@
+{
+    "version" : "1.0.0",
+    "platform": "ios",
+    "apps": [
+             {
+             "id": "com.eazytec.bpm.app.contact",
+             "packagename": "com.eazytec.bpm.app.contact",
+             "name": "通讯录",
+             "diplayname":"通讯录",
+             "imageurl":"ic_homeapp_contact",
+             "imageurltype":"ImageUrlTypeInner",
+             "type":"AppTypeInner",
+             "bundlename":"app.contact"
+             },
+             {
+             "id": "com.eazytec.bpm.app.notice",
+             "packagename": "com.eazytec.bpm.app.notice",
+             "name": "通知公告",
+             "diplayname":"公告",
+             "imageurl":"ic_homeapp_notice",
+             "imageurltype":"ImageUrlTypeInner",
+             "type":"AppTypeInner",
+             "bundlename":"app.notice"
+             },
+             {
+             "id": "com.eazytec.bpm.app.photo",
+             "packagename": "com.eazytec.bpm.app.photo",
+             "name": "多媒体选择器",
+             "diplayname":"媒体",
+             "imageurl":"ic_homeapp_image",
+             "imageurltype":"ImageUrlTypeInner",
+             "type":"AppTypeInner",
+             "bundlename":"app.photo"
+             },
+             {
+             "id":"com.eazytec.bpm.app.filepicker",
+             "packagename": "com.eazytec.bpm.app.filepicker",
+             "name": "文件选择器",
+             "diplayname":"文件",
+             "imageurl":"ic_homeapp_filepicker",
+             "imageurltype":"ImageUrlTypeInner",
+             "type":"AppTypeInner",
+             "bundlename":"app.filepicker"
+             
+             },
+             {
+             "id": "com.eazytec.bpm.app.webkit",
+             "packagename": "com.eazytec.bpm.app.webkit",
+             "name": "JSWEB演示应用",
+             "diplayname":"JSWEB",
+             "imageurl":"ic_homeapp_process",
+             "imageurltype":"ImageUrlTypeInner",
+             "type":"AppTypeWeb",
+             "bundlename":""
+             },
+             {
+             "id":"com.eazytec.bpm.app.webkit.todo",
+             "packagename": "com.eazytec.bpm.app.webkit.todo",
+             "name": "待办事项",
+             "diplayname":"待办",
+             "imageurl":"ic_homeapp_process",
+             "imageurltype":"ImageUrlTypeInner",
+             "type":"AppTypeWeb",
+             "bundlename":"h5/mybucket"
+             
+             },
+             {
+             "id":"com.eazytec.bpm.app.webkit.start",
+             "packagename": "com.eazytec.bpm.app.webkit.start",
+             "name": "发起流程",
+             "diplayname":"发起",
+             "imageurl":"ic_homeapp_process",
+             "imageurltype":"ImageUrlTypeInner",
+             "type":"AppTypeWeb",
+             "bundlename":"h5/viewProcess"
+             
+             },
+             {
+             "id":"com.eazytec.bpm.app.webkit.search",
+             "packagename": "com.eazytec.bpm.app.webkit.search",
+             "name": "查询流程",
+             "diplayname":"查询",
+             "imageurl":"ic_homeapp_process",
+             "imageurltype":"ImageUrlTypeInner",
+             "type":"AppTypeWeb",
+             "bundlename":"h5/doneList"
+             }
+             ]
+}

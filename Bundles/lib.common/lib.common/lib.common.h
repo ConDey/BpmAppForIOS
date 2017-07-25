@@ -19,6 +19,7 @@ FOUNDATION_EXPORT const unsigned char lib_commonVersionString[];
 // 第三方的pods
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
+#import "MJExtension.h"
 
 #import "EAViewController.h"
 #import "UITableView+Factory.h"
@@ -26,6 +27,7 @@ FOUNDATION_EXPORT const unsigned char lib_commonVersionString[];
 #import "NSNumber+EAFoundation.h"
 #import "UIColor+EAFoundation.h"
 #import "UIView+Layout.h"
+#import "UIImage+LGExtension.h"
 
 #import "CurrentUser.h"
 #import "UserDetails.h"

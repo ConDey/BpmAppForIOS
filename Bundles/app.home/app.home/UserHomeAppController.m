@@ -32,7 +32,16 @@
     
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     [self.appsCollectionView registerNib:[UINib nibWithNibName:@"UserHomeAppViewCell" bundle:bundle]forCellWithReuseIdentifier:@"UserHomeAppViewCell"];
+    
+    // 初始化数据
+    self.apps = [[NSMutableArray alloc]init];
+    
+    [self.apps addObjectsFromArray:[self createAppsFromJson]];
+    [self.appsCollectionView reloadData];
+    
+    self.collectionViewHeigthConstraint.constant = [self appscountdisplay] / 4  *  (100 + ONE_PX);
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
@@ -40,71 +49,30 @@
     self.navDisplay = YES;
     [self setTitleOfNav:@"应用"];
     
-    // 初始化数据
-    self.apps = [[NSMutableArray alloc]init];
-    
-    EAApp *contactApp = [[EAApp alloc]init];
-    contactApp.imageUrlType = ImageUrlTypeInner;
-    contactApp.imageUrl = @"ic_homeapp_contact";
-    contactApp.displayName = @"通讯录";
-    contactApp.appType = AppTypeInner;
-    contactApp.bundleName = @"app.contact";
-    contactApp.packageName = @"com.eazytec.bpm.app.contact";
-    [self.apps addObject:contactApp];
-    
-    EAApp *noticeApp = [[EAApp alloc]init];
-    noticeApp.imageUrlType = ImageUrlTypeInner;
-    noticeApp.imageUrl = @"ic_homeapp_notice";
-    noticeApp.displayName = @"公告";
-    noticeApp.appType = AppTypeInner;
-    noticeApp.bundleName = @"app.notice";
-    noticeApp.packageName = @"com.eazytec.bpm.app.notice";
-    [self.apps addObject:noticeApp];
-    
-    EAApp *photoApp = [[EAApp alloc]init];
-    photoApp.imageUrlType = ImageUrlTypeInner;
-    photoApp.imageUrl = @"ic_homeapp_photo";
-    photoApp.displayName = @"照片";
-    photoApp.appType = AppTypeInner;
-    photoApp.bundleName = @"app.photo";
-    photoApp.packageName = @"com.eazytec.bpm.app.photo";
-    [self.apps addObject:photoApp];
-    
-    EAApp *fileApp = [[EAApp alloc]init];
-    fileApp.imageUrlType = ImageUrlTypeInner;
-    fileApp.imageUrl = @"ic_homeapp_file";
-    fileApp.displayName = @"文件";
-    fileApp.appType = AppTypeInner;
-    fileApp.bundleName = @"app.file";
-    fileApp.packageName = @"com.eazytec.bpm.app.file";
-    [self.apps addObject:fileApp];
-    
-    EAApp *jswebApp = [[EAApp alloc]init];
-    jswebApp.imageUrlType = ImageUrlTypeInner;
-    jswebApp.imageUrl = @"ic_homeapp_jsweb";
-    jswebApp.displayName = @"JSWEB";
-    jswebApp.appType = AppTypeWeb;
-    jswebApp.bundleName = @"";
-    jswebApp.packageName = @"com.eazytec.bpm.app.webkit";
-    [self.apps addObject:jswebApp];
-    
-    EAApp *todoApp = [[EAApp alloc]init];
-    todoApp.imageUrlType = ImageUrlTypeInner;
-    todoApp.imageUrl = @"ic_homeapp_contact";
-    todoApp.displayName = @"待办流程";
-    todoApp.appType = AppTypeWeb;
-    todoApp.bundleName = @"h5/mybucket";
-    todoApp.packageName = @"com.eazytec.bpm.app.webkit";
-    [self.apps addObject:todoApp];
-    
-    [self.appsCollectionView reloadData];
-    self.collectionViewHeigthConstraint.constant = [self appscountdisplay] / 4  *  (100 + ONE_PX);
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (NSMutableArray *)createAppsFromJson {
+    
+    NSMutableArray *arrays = [[NSMutableArray alloc]init];
+    
+    NSData *JSONData = [NSData dataWithContentsOfFile:[self.bundle pathForResource:@"app" ofType:@"json"]];
+    NSMutableDictionary *dataArray = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+    
+    NSArray *apps = [dataArray objectForKey:@"apps"];
+    
+    if (apps != nil) {
+        for (int index = 0; index < [apps count] ; index ++) {
+            NSDictionary *appdict = [apps objectAtIndex:index];
+            [arrays addObject:[[EAApp alloc]initWithDict:appdict]];
+        }
+    }
+    return arrays;
 }
 
 #pragma mark - CollectionViewDelegate

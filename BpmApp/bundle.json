@@ -2,25 +2,28 @@
     "version": "1.0.0",
     "bundles": [  
                 {
-                "uri": "lib.common",
-                "pkg": "com.eazytec.bpm.lib.common"
-                },
-
-                {
-                  "uri": "app.home",
-                  "pkg": "com.eazytec.bpm.app.home"
+                 "uri": "lib.common",
+                 "pkg": "com.eazytec.bpm.lib.common"
                 },
                 {
-                "uri": "app.webkit",
-                "pkg": "com.eazytec.bpm.app.webkit"
+                 "uri": "app.notice",
+                 "pkg": "com.eazytec.bpm.app.notice"
                 },
                 {
-                  "uri": "app.contact",
-                  "pkg": "com.eazytec.bpm.app.contact"
+                 "uri": "app.home",
+                 "pkg": "com.eazytec.bpm.app.home"
+                },
+                {
+                 "uri": "app.webkit",
+                 "pkg": "com.eazytec.bpm.app.webkit"
+                },
+                {
+                 "uri": "app.contact",
+                 "pkg": "com.eazytec.bpm.app.contact"
                 },    
                 {
-                  "uri": "app.msg",
-                  "pkg": "com.eazytec.bpm.app.msg"
+                 "uri": "app.msg",
+                 "pkg": "com.eazytec.bpm.app.msg"
                 }
-        ]
+               ]
 }

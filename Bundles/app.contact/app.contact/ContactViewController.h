@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "com_eazytec_bpm_lib_common/lib.common.h"
 
-@interface ContactViewController : EAViewController
+@interface ContactViewController : EAViewController<UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic,retain) NSString *dep;
 
 @end

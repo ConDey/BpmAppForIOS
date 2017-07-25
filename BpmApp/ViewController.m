@@ -20,6 +20,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    UIImageView *bgimageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg"]];
+    bgimageview.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    [self.view addSubview:bgimageview];
+    
     [Small setBaseUri:@"http://"];
     [Small setUpWithComplection:^{
         UIViewController *mainController = [Small controllerForUri:@"app.home"];

@@ -85,7 +85,7 @@
 }
 
 - (UIViewController *)settingController {
-    UIViewController *controller = [[UserHomeSettingController alloc]init];
+    UIViewController *controller = [[UserHomeSettingController alloc]initWithNibName:@"UserHomeSettingController" bundle:self.bundle];
     UIImage *image = [UIImage imageNamed:@"ic_home_setting" inBundle:self.bundle compatibleWithTraitCollection:nil];
     UIImage *selected_image = [UIImage imageNamed:@"ic_home_setting_on" inBundle:self.bundle compatibleWithTraitCollection:nil];
     UITabBarItem *barItem = [[UITabBarItem alloc] initWithTitle:@"设置" image:image selectedImage:selected_image];
