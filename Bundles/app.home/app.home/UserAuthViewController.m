@@ -46,6 +46,7 @@
     self.passwordTextField.delegate = self;
     
     [self.authButton addTarget:self action:@selector(userWillLogin:) forControlEvents:UIControlEventTouchUpInside];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboadWillShow:)
                                                  name:UIKeyboardWillShowNotification

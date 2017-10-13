@@ -14,8 +14,9 @@
 
 @property (nonatomic,retain) NSMutableArray *apps;
 
-@property (weak, nonatomic) IBOutlet UICollectionView *appsCollectionView;
 
+
+@property (weak, nonatomic) IBOutlet UICollectionView *appsCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeigthConstraint;
 
 @end
