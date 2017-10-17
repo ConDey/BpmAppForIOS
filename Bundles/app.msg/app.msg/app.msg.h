@@ -15,5 +15,3 @@ FOUNDATION_EXPORT double app_msgVersionNumber;
 FOUNDATION_EXPORT const unsigned char app_msgVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <app_msg/PublicHeader.h>
-
-

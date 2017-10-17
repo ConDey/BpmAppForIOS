@@ -19,7 +19,7 @@
 		069763761EFA4C760012D367 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069763751EFA4C760012D367 /* ViewController.m */; };
 		0697637B1EFA4C760012D367 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0697637A1EFA4C760012D367 /* Assets.xcassets */; };
 		0697637E1EFA4C760012D367 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0697637C1EFA4C760012D367 /* LaunchScreen.storyboard */; };
-		06C5A2D61F26CFD800A189FB /* app.notice.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C5A2D01F26CF4E00A189FB /* app.notice.framework */; };
+		06C5A2D61F26CFD800A189FB /* com_eazytec_bpm_app_notice.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C5A2D01F26CF4E00A189FB /* com_eazytec_bpm_app_notice.framework */; };
 		06C6BAC51F15C26A00D444E6 /* Small.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06361BF81F0F5D4400B1D545 /* Small.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -284,7 +284,7 @@
 		06C5A2CC1F26CF4D00A189FB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06C5A2D01F26CF4E00A189FB /* app.notice.framework */,
+				06C5A2D01F26CF4E00A189FB /* com_eazytec_bpm_app_notice.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -436,10 +436,10 @@
 			remoteRef = 06361BF91F0F5D4400B1D545 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		06C5A2D01F26CF4E00A189FB /* app.notice.framework */ = {
+		06C5A2D01F26CF4E00A189FB /* com_eazytec_bpm_app_notice.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = app.notice.framework;
+			path = com_eazytec_bpm_app_notice.framework;
 			remoteRef = 06C5A2CF1F26CF4E00A189FB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -492,7 +492,7 @@
 				061468921F2641BB004CC8B9 /* com_eazytec_bpm_app_msg.framework in Resources */,
 				061468931F2641BF004CC8B9 /* com_eazytec_bpm_app_home.framework in Resources */,
 				061468941F2641C1004CC8B9 /* com_eazytec_bpm_app_contact.framework in Resources */,
-				06C5A2D61F26CFD800A189FB /* app.notice.framework in Resources */,
+				06C5A2D61F26CFD800A189FB /* com_eazytec_bpm_app_notice.framework in Resources */,
 				061468911F2641B7004CC8B9 /* com_eazytec_bpm_app_webkit.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

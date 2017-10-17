@@ -11,6 +11,12 @@
 		06C6BAA11F15C1BF00D444E6 /* com_eazytec_bpm_lib_common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C6BAA01F15C1BF00D444E6 /* com_eazytec_bpm_lib_common.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		06C6BACD1F15C39000D444E6 /* MsgViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C6BACB1F15C39000D444E6 /* MsgViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C6BACE1F15C39000D444E6 /* MsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C6BACC1F15C39000D444E6 /* MsgViewController.m */; };
+		84301AC01F95E0A800F01F8F /* MessageTopicModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301ABE1F95E0A800F01F8F /* MessageTopicModel.h */; };
+		84301AC11F95E0A800F01F8F /* MessageTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301ABF1F95E0A800F01F8F /* MessageTopicModel.m */; };
+		84301AC41F95E10B00F01F8F /* MessageModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301AC21F95E10B00F01F8F /* MessageModel.h */; };
+		84301AC51F95E10B00F01F8F /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301AC31F95E10B00F01F8F /* MessageModel.m */; };
+		84301AE91F95F98F00F01F8F /* MessageMainCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301AE71F95F98F00F01F8F /* MessageMainCell.h */; };
+		84301AEA1F95F98F00F01F8F /* MessageMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301AE81F95F98F00F01F8F /* MessageMainCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +27,15 @@
 		06C6BACB1F15C39000D444E6 /* MsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgViewController.h; sourceTree = "<group>"; };
 		06C6BACC1F15C39000D444E6 /* MsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgViewController.m; sourceTree = "<group>"; };
 		06F809C21F26358C000872C4 /* Small.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Small.framework; path = "../../Frameworks/build/Debug-iphoneos/Small.framework"; sourceTree = "<group>"; };
+		84301ABA1F95DDCB00F01F8F /* FMDBHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDBHelper.h; sourceTree = "<group>"; };
+		84301ABB1F95DDCB00F01F8F /* FMDBHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDBHelper.m; sourceTree = "<group>"; };
+		84301ABC1F95DE7D00F01F8F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		84301ABE1F95E0A800F01F8F /* MessageTopicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageTopicModel.h; sourceTree = "<group>"; };
+		84301ABF1F95E0A800F01F8F /* MessageTopicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageTopicModel.m; sourceTree = "<group>"; };
+		84301AC21F95E10B00F01F8F /* MessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
+		84301AC31F95E10B00F01F8F /* MessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
+		84301AE71F95F98F00F01F8F /* MessageMainCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageMainCell.h; sourceTree = "<group>"; };
+		84301AE81F95F98F00F01F8F /* MessageMainCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageMainCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +73,7 @@
 				06C6BAC91F15C35B00D444E6 /* Src */,
 				06C6BA6B1F15C09300D444E6 /* app.msg.h */,
 				06C6BA6C1F15C09300D444E6 /* Info.plist */,
+				84301ABC1F95DE7D00F01F8F /* PrefixHeader.pch */,
 			);
 			path = app.msg;
 			sourceTree = "<group>";
@@ -74,10 +90,58 @@
 		06C6BAC91F15C35B00D444E6 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				84301AD21F95E76500F01F8F /* Controller */,
+				84301AD11F95E75E00F01F8F /* ViewModel */,
+				84301AD01F95E75800F01F8F /* View */,
+				84301ABD1F95E01D00F01F8F /* Data */,
+				84301AB91F95DDB000F01F8F /* Db */,
+			);
+			name = Src;
+			sourceTree = "<group>";
+		};
+		84301AB91F95DDB000F01F8F /* Db */ = {
+			isa = PBXGroup;
+			children = (
+				84301ABA1F95DDCB00F01F8F /* FMDBHelper.h */,
+				84301ABB1F95DDCB00F01F8F /* FMDBHelper.m */,
+			);
+			name = Db;
+			sourceTree = "<group>";
+		};
+		84301ABD1F95E01D00F01F8F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				84301ABE1F95E0A800F01F8F /* MessageTopicModel.h */,
+				84301ABF1F95E0A800F01F8F /* MessageTopicModel.m */,
+				84301AC21F95E10B00F01F8F /* MessageModel.h */,
+				84301AC31F95E10B00F01F8F /* MessageModel.m */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		84301AD01F95E75800F01F8F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84301AE71F95F98F00F01F8F /* MessageMainCell.h */,
+				84301AE81F95F98F00F01F8F /* MessageMainCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		84301AD11F95E75E00F01F8F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		84301AD21F95E76500F01F8F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				06C6BACB1F15C39000D444E6 /* MsgViewController.h */,
 				06C6BACC1F15C39000D444E6 /* MsgViewController.m */,
 			);
-			name = Src;
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -87,7 +151,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84301AC01F95E0A800F01F8F /* MessageTopicModel.h in Headers */,
 				06C6BA6D1F15C09300D444E6 /* app.msg.h in Headers */,
+				84301AC41F95E10B00F01F8F /* MessageModel.h in Headers */,
+				84301AE91F95F98F00F01F8F /* MessageMainCell.h in Headers */,
 				06C6BACD1F15C39000D444E6 /* MsgViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,6 +229,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BACE1F15C39000D444E6 /* MsgViewController.m in Sources */,
+				84301AC11F95E0A800F01F8F /* MessageTopicModel.m in Sources */,
+				84301AEA1F95F98F00F01F8F /* MessageMainCell.m in Sources */,
+				84301AC51F95E10B00F01F8F /* MessageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +346,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/app.msg/PrefixHeader.pch";
 				INFOPLIST_FILE = app.msg/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -299,6 +370,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/app.msg/PrefixHeader.pch";
 				INFOPLIST_FILE = app.msg/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

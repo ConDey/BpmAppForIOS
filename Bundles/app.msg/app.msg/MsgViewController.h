@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "com_eazytec_bpm_lib_common/lib.common.h"
 
-@interface MsgViewController : EAViewController
+@interface MsgViewController : EAViewController <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate>
 
 @end
