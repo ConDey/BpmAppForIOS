@@ -54,7 +54,7 @@
         [params setObject:self.dep  forKey:@"parentId"];
     }
     
-    [self httpGetRequestWithUrl:@"department/listByParentId" params:params progress:YES];
+    [self httpGetRequestWithUrl:HttpProtocolServiceContactDepart params:params progress:YES];
     
 }
 

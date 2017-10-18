@@ -14,14 +14,16 @@
 @property (nonatomic, strong) NSString* msgId;
 @property (nonatomic, strong) NSString* content;
 @property (nonatomic, strong) NSString* clickUrl;
-@property (nonatomic, assign) long gmtCreate;
+@property (nonatomic, strong) NSString* createdTime;
 @property (nonatomic, strong) NSString* title;
-@property (nonatomic, assign) int topic;
 @property (nonatomic, assign) Boolean needPush ;
-@property (nonatomic, strong) NSString* toemp;
 @property (nonatomic, assign) Boolean pushed;
 @property (nonatomic, assign) Boolean canClick;
-@property (nonatomic, strong) MessageTopicModel* topicObject;
+
+@property (nonatomic, strong) NSString* topicIcon;
+@property (nonatomic, strong) NSString* topicId;
+@property (nonatomic, strong) NSString* internalMsgId;
+@property (nonatomic, strong) NSString* topicName;
 
 // 给数据库使用
 @property (nonatomic, assign) Boolean isRead;

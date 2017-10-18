@@ -13,6 +13,6 @@
 @property (nonatomic, strong) UIImageView* msgIcon;
 @property (nonatomic, strong) UILabel* msgTitle;
 @property (nonatomic, strong) UILabel* msgContent;
-//@property (nonatomic, strong) 
+@property (nonatomic, strong) UILabel* msgTime;
 
 @end

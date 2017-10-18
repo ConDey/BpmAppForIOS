@@ -40,7 +40,7 @@
     [params setObject:self.user.id forKey:@"userId"];
     
     // 更新数据
-    [self httpGetRequestWithUrl:@"user/detail" params:params progress:YES];
+    [self httpGetRequestWithUrl:HttpProtocolServiceContactUserDetail params:params progress:YES];
 }
 
 - (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name {

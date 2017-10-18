@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EAProtocol.h"
 
 @interface EAViewController : UIViewController
 
@@ -26,9 +27,9 @@
 - (void)setTitleViewOfNav:(UIView *)viewOfNav; // 配置NavItem的titleView
 - (void)setCommonBackLeftButtonItem; // 配置默认的返回ButtonItem
 
-- (void)httpGetRequestWithUrl:(NSString *)url params:(NSDictionary *)params progress:(BOOL)progress;
-- (void)httpPostRequestWithUrl:(NSString *)url params:(NSDictionary *)params progress:(BOOL)progress;
-- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name;
-- (void)didFinishHttpRequest:(NSString *)name;
+- (void)httpGetRequestWithUrl:(HttpProtocolServiceName)name params:(NSDictionary *)params progress:(BOOL)progress;
+- (void)httpPostRequestWithUrl:(HttpProtocolServiceName)name params:(NSDictionary *)params progress:(BOOL)progress;
+- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString*)name;
+- (void)didFinishHttpRequest:(NSString*)name;
 
 @end

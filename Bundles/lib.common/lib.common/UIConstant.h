@@ -30,4 +30,16 @@
 #define UI_DIVIDER_COLOR  [UIColor colorWithHexString:@"#e0e0e0"]
 #define LIGHT_GRAY_COLOR RGB_COLOR(246, 246, 246)
 
+#define FONT_GRAY_COLOR      [UIColor colorWithHexString:@"#8f8f8f"]
+
+// Font
+#define FONT_12       [UIFont systemFontOfSize:12.0]
+#define FONT_14       [UIFont systemFontOfSize:14.0]
+#define FONT_16       [UIFont systemFontOfSize:16.0]
+#define FONT_18       [UIFont systemFontOfSize:18.0]
+
+// GCD
+//GCD - 一次性执行
+#define DISPATCH_ONCE_BLOCK(onceBlock) static dispatch_once_t onceToken; dispatch_once(&onceToken, onceBlock);
+
 #endif /* UIConstant_h */

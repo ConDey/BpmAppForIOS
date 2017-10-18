@@ -39,6 +39,8 @@ extern NSString *const FMDBUserDetailsTableName; // 用户登录表名
 
 // Message
 - (void)insertMessageIntoDB:(NSMutableArray<MessageModel*>*)messages; // 存入消息到数据库中
+- (NSMutableArray<MessageModel*>*)selectMessagesFromDB; // 查询当前未读的Message
+- (NSMutableArray<MessageModel*>*)selectReadedMessagesFromDB; // 查询当前已读的Message
 - (void)updateMessageReadState:(NSString*)topicId; // 更新消息已读状态
 - (NSMutableArray<MessageModel*>*)selectMessageByPage:(NSString*)topicId pageIndex:(int)pageIndex pageSize:(int)pageSize; // 分页查询消息
 

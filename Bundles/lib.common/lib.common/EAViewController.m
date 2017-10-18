@@ -180,18 +180,18 @@
     return _bundle;
 }
 
-- (void)httpPostRequestWithUrl:(NSString *)url params:(NSDictionary *)params progress:(BOOL)progress {
+- (void)httpPostRequestWithUrl:(HttpProtocolServiceName)name params:(NSDictionary *)params progress:(BOOL)progress {
     
-    AFHTTPSessionManager *manager = [EAProtocol createAFHTTPSessionManager:url];
+    AFHTTPSessionManager *manager = [[EAProtocol sharedInstance] createAFHTTPSessionManager:name];
     
     if (progress) {
         [SVProgressHUD showWithStatus:@"正在努力加载..."];
     }
-    [manager POST:[EAProtocol loadRequestServiceUrlWithName:url] parameters:params progress:nil
+    [manager POST:[[EAProtocol sharedInstance] loadRequestServiceUrlWithName:[[EAProtocol sharedInstance] getServiceNameByEnum:name]] parameters:params progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-              NSDictionary *result  = [EAProtocol doRequestJSONSerializationdDecode:responseObject];
-              if ([EAProtocol isRequestJSONSerializationSuccess:result]) {
-                  [self didAnalysisRequestResultWithData:result andService:url];
+              NSDictionary *result  = [[EAProtocol sharedInstance] doRequestJSONSerializationdDecode:responseObject];
+              if ([[EAProtocol sharedInstance] isRequestJSONSerializationSuccess:result]) {
+                  [self didAnalysisRequestResultWithData:result andService:[[EAProtocol sharedInstance] getServiceNameByEnum:name]];
                   if (progress)  [SVProgressHUD dismiss];
               }
               else {
@@ -200,28 +200,28 @@
                       
                   }
               }
-              [self didFinishHttpRequest:url];
+              [self didFinishHttpRequest:[[EAProtocol sharedInstance] getServiceNameByEnum:name]];
           }
           failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
               NSLog(@"%@",error);  //这里打印错误信息
               [SVProgressHUD showErrorWithStatus:@"系统繁忙,请稍后再试"];
-              [self didFinishHttpRequest:url];
+              [self didFinishHttpRequest:[[EAProtocol sharedInstance] getServiceNameByEnum:name]];
           }];
 }
 
 
-- (void)httpGetRequestWithUrl:(NSString *)url params:(NSDictionary *)params progress:(BOOL)progress {
+- (void)httpGetRequestWithUrl:(HttpProtocolServiceName)name params:(NSDictionary *)params progress:(BOOL)progress {
     
-    AFHTTPSessionManager *manager = [EAProtocol createAFHTTPSessionManager:url];
+    AFHTTPSessionManager *manager = [[EAProtocol sharedInstance] createAFHTTPSessionManager:name];
     
     if (progress) {
         [SVProgressHUD showWithStatus:@"正在努力加载..."];
     }
-    [manager GET:[EAProtocol loadRequestServiceUrlWithName:url] parameters:params progress:nil
+    [manager GET:[[EAProtocol sharedInstance] loadRequestServiceUrlWithName:[[EAProtocol sharedInstance] getServiceNameByEnum:name]] parameters:params progress:nil
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             NSDictionary *result  = [EAProtocol doRequestJSONSerializationdDecode:responseObject];
-             if ([EAProtocol isRequestJSONSerializationSuccess:result]) {
-                 [self didAnalysisRequestResultWithData:result andService:url];
+             NSDictionary *result  = [[EAProtocol sharedInstance] doRequestJSONSerializationdDecode:responseObject];
+             if ([[EAProtocol sharedInstance] isRequestJSONSerializationSuccess:result]) {
+                 [self didAnalysisRequestResultWithData:result andService:[[EAProtocol sharedInstance] getServiceNameByEnum:name]];
                  if (progress)  [SVProgressHUD dismiss];
              }
              else {
@@ -230,20 +230,20 @@
                      
                  }
              }
-             [self didFinishHttpRequest:url];
+             [self didFinishHttpRequest:[[EAProtocol sharedInstance] getServiceNameByEnum:name]];
          }
          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
              NSLog(@"%@",error);  //这里打印错误信息
              [SVProgressHUD showErrorWithStatus:@"系统繁忙,请稍后再试"];
-             [self didFinishHttpRequest:url];
+             [self didFinishHttpRequest:[[EAProtocol sharedInstance] getServiceNameByEnum:name]];
          }];
 }
 
-- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name {
+- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString*)name {
     
 }
 
-- (void)didFinishHttpRequest:(NSString *)name {
+- (void)didFinishHttpRequest:(NSString*)name {
     
 }
 

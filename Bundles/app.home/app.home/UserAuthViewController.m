@@ -101,8 +101,9 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setObject:username  forKey:@"username"];
     [params setObject:password  forKey:@"password"];
+    [params setObject:@"ios" forKey:@"clientType"];
     
-    [self httpPostRequestWithUrl:@"common/logon" params:params progress:YES];
+    [self httpPostRequestWithUrl:HttpProtocolServiceUserLogin params:params progress:YES];
     
 }
 

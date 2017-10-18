@@ -14,6 +14,8 @@
 @property (nonatomic,retain) NSString *password;
 
 @property (nonatomic,retain) NSString *fullName;
+@property (nonatomic,retain) NSString *orgFullName;
+@property (nonatomic,retain) NSString *photo;
 @property (nonatomic,retain) NSString *departmentName;
 @property (nonatomic,retain) NSString *position;
 @property (nonatomic,retain) NSString *email;

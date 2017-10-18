@@ -114,13 +114,14 @@ static FMDBHelper *_instance;
     [createMessageTableSQL appendString:@"gmtCreate varchar(200), "];
     [createMessageTableSQL appendString:@"title varchar(200), "];
     [createMessageTableSQL appendString:@"topic varchar(200), "];
+    [createMessageTableSQL appendString:@"topicIcon varchar(200), "];
     [createMessageTableSQL appendString:@"needPush varchar(200), "];
-    [createMessageTableSQL appendString:@"toemp varchar(200), "];
+    [createMessageTableSQL appendString:@"updateTime varchar(200), "];
     [createMessageTableSQL appendString:@"pushed varchar(200), "];
     [createMessageTableSQL appendString:@"canClick varchar(200), "];
     [createMessageTableSQL appendString:@"isread varchar(200), "];
-    [createMessageTableSQL appendString:@"updatetime varchar(200), "];
-    [createMessageTableSQL appendString:@"username varchar(200) "];
+    [createMessageTableSQL appendString:@"username varchar(200), "];
+    [createMessageTableSQL appendString:@"updateId varchar(200) "];
     [createMessageTableSQL appendString:@")"];
     [database executeUpdate:createMessageTableSQL];
     
@@ -180,7 +181,7 @@ static FMDBHelper *_instance;
 }
 
 - (UserDetails *)selectUserdetailsWithUsername:(NSString *)username {
-    if([BOBUtils is_string_null:username]) {
+    if([username isEqualToString:@""] || username == nil) {
         return nil;
     }
     NSMutableString* getUserDetailsSql = [[NSMutableString alloc] initWithString:@"select * from "];
@@ -213,7 +214,7 @@ static FMDBHelper *_instance;
     FMResultSet* result = [self.database executeQuery:[NSString stringWithFormat:getLastRequestTimeSql, username]];
     while ([result next]) {
         NSString* lastRequestTime = [result stringForColumn:@"lastrequesttime"];
-        if ([BOBUtils is_string_not_null:lastRequestTime]) {
+        if ([lastRequestTime isEqualToString:@""] || lastRequestTime == nil) {
             if (isDateFormat) {
                 return [TimeUtils getDateStr:lastRequestTime ByDateFormate:@"yyyy-MM-dd HH:mm:ss"];
             }else {
@@ -326,7 +327,7 @@ static FMDBHelper *_instance;
 }
 
 - (NSMutableArray<MessageTopicModel*>*)selectTopicFromDB {
-    NSString* username = [[[CurrentUser sharedInstance] userdetails] username];
+    NSString* username = [[[CurrentUser currentUser] userdetails] username];
     // 根据message来获取topic
     NSMutableArray* topicIds = [[NSMutableArray alloc] init];
     NSMutableString* topicSql = [[NSMutableString alloc] initWithString:@"select distinct topic from "];
@@ -388,9 +389,9 @@ static FMDBHelper *_instance;
         NSMutableString* unReadSql = [[NSMutableString alloc] initWithString:@"select count(*) from "];
         [unReadSql appendString:FMDBMessageTableName];
         [unReadSql appendString:@" where topic == '%@' and username == '%@' and isread == '0'"];
-        FMResultSet* unReadResult = [self.database executeQuery:[NSString stringWithFormat:unReadSql, topic.topicId, [[[CurrentUser sharedInstance] userdetails] username]]];
+        FMResultSet* unReadResult = [self.database executeQuery:[NSString stringWithFormat:unReadSql, topic.topicId, [[[CurrentUser currentUser] userdetails] username]]];
         if (unReadResult != nil) {
-            topic.unReadMessages = [self.database intForQuery:[NSString stringWithFormat:unReadSql, topic.topicId, [[[CurrentUser sharedInstance] userdetails] username]]] ;
+            topic.unReadMessages = [self.database intForQuery:[NSString stringWithFormat:unReadSql, topic.topicId, [[[CurrentUser currentUser] userdetails] username]]] ;
         }else {
             NSLog(@"UnRead_Select_Error: %@", [self.database lastErrorMessage]);
             topic.unReadMessages = 0;
@@ -399,12 +400,12 @@ static FMDBHelper *_instance;
         NSMutableString* latestMessageSql = [[NSMutableString alloc] initWithString:@"select * from "];
         [latestMessageSql appendString:FMDBMessageTableName];
         [latestMessageSql appendString:@" where topic == '%@' and username == '%@' order by gmtCreate desc limit 0 , 1"];
-        FMResultSet* latestMessageResult = [self.database executeQuery:[NSString stringWithFormat:latestMessageSql, topic.topicId, [[[CurrentUser sharedInstance] userdetails] username]]];
+        FMResultSet* latestMessageResult = [self.database executeQuery:[NSString stringWithFormat:latestMessageSql, topic.topicId, [[[CurrentUser currentUser] userdetails] username]]];
         // 查询数目
         NSMutableString* latestMessageNumSql = [[NSMutableString alloc] initWithString:@"select count(*) as num from "];
         [latestMessageNumSql appendString:FMDBMessageTableName];
         [latestMessageNumSql appendString:@" where topic == '%@' and username == '%@' order by gmtCreate desc limit 0 , 1"];
-        FMResultSet* latestMessageNumResult = [self.database executeQuery:[NSString stringWithFormat:latestMessageNumSql, topic.topicId, [[[CurrentUser sharedInstance] userdetails] username]]];
+        //FMResultSet* latestMessageNumResult = [self.database executeQuery:[NSString stringWithFormat:latestMessageNumSql, topic.topicId, [[[CurrentUser currentUser] userdetails] username]]];
         
         if ([latestMessageResult next]) {
             
@@ -431,7 +432,7 @@ static FMDBHelper *_instance;
 #pragma mark - message
 
 - (void)insertMessageIntoDB:(NSMutableArray<MessageModel*>*)messages {
-    NSString* username = [[[CurrentUser sharedInstance] userdetails] username];
+    NSString* username = [[[CurrentUser currentUser] userdetails] username];
     
     for (int i=0; i<[messages count]; i++) {
         MessageModel* message = [messages objectAtIndex:i];
@@ -446,37 +447,59 @@ static FMDBHelper *_instance;
              gmtCreate,   \
              title,       \
              topic,       \
+             topicIcon,   \
              needPush,    \
-             toemp,       \
              pushed,      \
              canClick,    \
              isread,      \
-             updatetime,  \
-             username) values (?,?,?,?,?,?,?,?,?,?,?,?,?)"];
+             updateTime,  \
+             username,    \
+             updateId) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"];
             Boolean result = [self.database executeUpdate:insertMessageSql,
                               message.msgId,
                               message.content,
                               message.clickUrl,
-                              [NSString stringWithFormat:@"%ld",message.gmtCreate],
+                              message.createdTime,
                               message.title,
-                              [NSString stringWithFormat:@"%d",message.topic],
+                              message.topicId,
+                              message.topicIcon,
                               [self transBool2Str:message.needPush],
-                              message.toemp,
                               [self transBool2Str:message.pushed],
                               [self transBool2Str:message.canClick],
-                              @"0", // 默认未读状态
+                              [self transBool2Str:message.isRead],
                               [TimeUtils getNowMills],
-                              username];
+                              username,
+                              message.internalMsgId];
             // 更新topic最新的时间
-            [self updateLatestMessageTimeWithTopicId:[NSString stringWithFormat:@"%d",message.topic] withLatestTime:[NSString stringWithFormat:@"%ld",message.gmtCreate]];
+            //[self updateLatestMessageTimeWithTopicId:[NSString stringWithFormat:@"%d",message.topic] withLatestTime:[NSString stringWithFormat:@"%ld",message.gmtCreate]];
             
             NSLog(@"Insert_Message_Info: %hhu", result);
         }
     }
 }
 
+- (NSMutableArray<MessageModel*>*)selectMessagesFromDB {
+    NSString* username = [[[CurrentUser currentUser] userdetails] username];
+    NSMutableString* selectMsgSql = [[NSMutableString alloc] initWithString:@"select * from "];
+    [selectMsgSql appendString:FMDBMessageTableName];
+    [selectMsgSql appendString:@" where username == ? and isread == '0' order by gmtCreate desc"];
+    FMResultSet* result = [self.database executeQuery:selectMsgSql, username];
+    
+    return [self convertWithMessageResult:result];
+}
+
+- (NSMutableArray<MessageModel*>*)selectReadedMessagesFromDB {
+    NSString* username = [[[CurrentUser currentUser] userdetails] username];
+    NSMutableString* selectMsgSql = [[NSMutableString alloc] initWithString:@"select * from "];
+    [selectMsgSql appendString:FMDBMessageTableName];
+    [selectMsgSql appendString:@" where username == ? and isread == '1' order by gmtCreate desc"];
+    FMResultSet* result = [self.database executeQuery:selectMsgSql, username];
+    
+    return [self convertWithMessageResult:result];
+}
+
 - (void)updateMessageReadState:(NSString*)topicId {
-    NSString* username = [[[CurrentUser sharedInstance] userdetails] username];
+    NSString* username = [[[CurrentUser currentUser] userdetails] username];
     
     NSMutableString* readStatesql = [[NSMutableString alloc] initWithString:@"update "];
     [readStatesql appendString:FMDBMessageTableName];
@@ -486,7 +509,7 @@ static FMDBHelper *_instance;
 }
 
 - (NSMutableArray<MessageModel*>*)selectMessageByPage:(NSString*)topicId pageIndex:(int)pageIndex pageSize:(int)pageSize {
-    NSString* username = [[[CurrentUser sharedInstance] userdetails] username];
+    NSString* username = [[[CurrentUser currentUser] userdetails] username];
     
     NSMutableString* sql = [[NSMutableString alloc] initWithString:@"select * from "];
     [sql appendString:FMDBMessageTableName];
@@ -497,7 +520,7 @@ static FMDBHelper *_instance;
 
 // 根据当前messageId来查询message
 - (NSMutableArray<MessageModel*>*)getMessageById:(NSString*)messageId {
-    NSString* username = [[[CurrentUser sharedInstance] userdetails] username];
+    NSString* username = [[[CurrentUser currentUser] userdetails] username];
     
     NSMutableString* sql = [[NSMutableString alloc] initWithString:@"select * from "];
     [sql appendString:FMDBMessageTableName];
@@ -518,15 +541,16 @@ static FMDBHelper *_instance;
         message.msgId = [result stringForColumn:@"message_id"];
         message.content = [result stringForColumn:@"content"];
         message.clickUrl = [result stringForColumn:@"clickUrl"];
-        message.gmtCreate = [[result stringForColumn:@"gmtCreate"] longLongValue];
+        message.createdTime = [result stringForColumn:@"gmtCreate"];
         message.title = [result stringForColumn:@"title"];
-        message.topic = [[result stringForColumn:@"topic"] intValue];
+        message.topicId = [result stringForColumn:@"topic"];
+        message.topicIcon = [result stringForColumn:@"topicIcon"];
         message.needPush = [self transStr2Bool:[result stringForColumn:@"needPush"]];
-        message.toemp = [result stringForColumn:@"toemp"];
         message.pushed = [self transStr2Bool:[result stringForColumn:@"pushed"]];
         message.canClick = [self transStr2Bool:[result stringForColumn:@"canClick"]];
         message.isRead = [self transStr2Bool:[result stringForColumn:@"isread"]];
         message.username = [result stringForColumn:@"username"];
+        message.internalMsgId = [result stringForColumn:@"updateId"];
         
         [messages addObject:message];
     }
