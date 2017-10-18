@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,9 +27,19 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXXXXXXXXXXXXXXXX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2k1-0I-y8W">
-                        <rect key="frame" x="83" y="46.5" width="249" height="19.5"/>
+                        <rect key="frame" x="83" y="46.5" width="189" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.1764705882352941" green="0.1764705882352941" blue="0.1764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhR-Kb-32P">
+                        <rect key="frame" x="282" y="46" width="50" height="19.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="387-po-hJo"/>
+                            <constraint firstAttribute="height" constant="19.5" id="57z-mJ-h8g"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -37,12 +47,15 @@
                     <constraint firstItem="2k1-0I-y8W" firstAttribute="leading" secondItem="GjL-Q4-Nim" secondAttribute="trailing" constant="15" id="Bnm-ws-OZe"/>
                     <constraint firstItem="GjL-Q4-Nim" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="Eeh-tJ-ndq"/>
                     <constraint firstItem="GjL-Q4-Nim" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="G9W-9z-zH0"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="2k1-0I-y8W" secondAttribute="trailing" constant="20" id="ebo-1u-dgA"/>
+                    <constraint firstItem="EhR-Kb-32P" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Yan-MY-cDa"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="2k1-0I-y8W" secondAttribute="trailing" constant="80" id="ebo-1u-dgA"/>
                     <constraint firstItem="2k1-0I-y8W" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jVh-H5-b3g"/>
+                    <constraint firstItem="EhR-Kb-32P" firstAttribute="leading" secondItem="2k1-0I-y8W" secondAttribute="trailing" constant="10" id="prk-mn-vnS"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="headImageView" destination="GjL-Q4-Nim" id="F6T-O1-LFm"/>
+                <outlet property="numOfDep" destination="EhR-Kb-32P" id="KHr-Ya-Jpj"/>
                 <outlet property="titleLabel" destination="2k1-0I-y8W" id="H0I-ut-Z3N"/>
             </connections>
             <point key="canvasLocation" x="43" y="20"/>

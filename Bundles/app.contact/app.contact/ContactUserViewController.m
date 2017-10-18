@@ -102,8 +102,6 @@
 
 // 点击跳转事件
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
     if (indexPath.row == 3 && ![NSString isStringBlank:self.user.mobile]) {
         // 拨打电话
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel://" stringByAppendingString:self.user.mobile]]];
