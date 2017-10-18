@@ -5,18 +5,17 @@
 //  Created by ConDey on 2017/7/12.
 //  Copyright © 2017年 Eazytec. All rights reserved.
 //
-#import "ContactSelectDepController.h"
-#import "ContactViewController.h"
-#import "ContactUserViewController.h"
-#import "ContactSearchController.h"
 
+#import "ContactSelectDepController.h"
+#import "ContactUserViewController.h"
+#import "ContactViewController.h"
 #import "ContractTableViewCell.h"
 #import "ContractTableViewHeader.h"
 
 #import "Deparment.h"
 #import "User.h"
 
-@interface ContactViewController ()
+@interface ContactSelectDepController ()
 
 @property (nonatomic,retain)  NSString *dep_id;
 @property (nonatomic,retain)  NSString *dep_name;
@@ -26,18 +25,19 @@
 
 @end
 
-@implementation ContactViewController
+@implementation ContactSelectDepController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    //通讯录信息
-    CGFloat height =  self.view.bounds.size.height -STATUS_BAR_HEIGHT - NAV_HEIGHT;
+   
     
+    
+    CGFloat height =  self.view.bounds.size.height -STATUS_BAR_HEIGHT - NAV_HEIGHT;
+
     if(self.tabBarController != nil) {
         height = height - TAB_HEIGHT;
     }
-   
+    
     self.grouptableview.delegate    = self;
     self.grouptableview.dataSource  = self;
     
@@ -59,7 +59,7 @@
         [params setObject:self.dep  forKey:@"parentId"];
     }
     
-    [self httpGetRequestWithUrl:HttpProtocolServiceContactDepart params:params progress:YES];
+    [self httpGetRequestWithUrl:@"department/listByParentId" params:params progress:YES];
     
 }
 
@@ -107,7 +107,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    int num = 1;
+    int num = 0;
     if (self.departments != nil && [self.departments count] > 0) {
         num++;
     }
@@ -118,28 +118,22 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-        if(section == 0) {
-            return 2;
-        }else if(section==1){
-             if (self.departments != nil && [self.departments count] > 0) {
-                return [self.departments count];
-            } else {
-                return [self.users count];
-            }
-        }
-        else {
+    if(section==0){
+        if (self.departments != nil && [self.departments count] > 0) {
+            return [self.departments count];
+        } else {
             return [self.users count];
         }
-
+    }
+    else {
+        return [self.users count];
+    }
+    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if(section==0){
-        ContractTableViewHeader *header = [ContractTableViewHeader initWithTitle:@" "];
-        header.frame = CGRectMake(0, 0, self.grouptableview.bounds.size.width,20);
-        return header;
-    }
-    else if(section == 1) {
+    
+    if(section == 0) {
         NSString *title=@"员工列表";
         if (self.departments != nil && [self.departments count] > 0) {
             title = @"部门列表";
@@ -156,77 +150,52 @@
         return header;
     }
     
-   
+    
     
 }
-//数据显示
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     ContractTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContractTableViewCell" forIndexPath:indexPath];
-   
-         if(indexPath.section==0){
-             if(indexPath.row==0){
-                 cell.headImageView.image = [UIImage imageNamed:@"ic_contact_search.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
-                 cell.titleLabel.text = @"人员搜索";
-             }
-             if(indexPath.row==1){
-                 cell.headImageView.image = [UIImage imageNamed:@"ic_contact_local.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
-                 cell.titleLabel.text = @"本地通讯录";
-             }
-             cell.numOfDep.text=@"";
-       }else if(indexPath.section == 1) {
-            if (self.departments != nil && [self.departments count] > 0) {
-                 cell.accessoryType= UITableViewCellAccessoryDisclosureIndicator;
-                // 显示部门
-                Deparment *deparment = [self.departments objectAtIndex:indexPath.row];//一个部门的信息
-                NSString *name = deparment.name;
-                cell.headImageView.image = [UIImage circleImageWithText:[name substringToIndex:1] size:CGSizeMake(40,40)];
-                cell.titleLabel.text = name;
-                NSString *num=[NSString stringWithFormat:@"%ld",deparment.userCount];//一个部门下的人员信息
-                cell.numOfDep.text=num;
-            } else {
-                // 显示员工
-                 cell.accessoryType= UITableViewCellAccessoryDisclosureIndicator;
-                User *user =  [self.users objectAtIndex:indexPath.row];
-                NSString *name = user.fullName;
-    
-                if ([name length] > 2) {
-                    cell.headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
-                } else {
-                    cell.headImageView.image = [UIImage circleImageWithText:name size:CGSizeMake(40,40)];
-                }
-                cell.titleLabel.text = name;
-                cell.numOfDep.text=@"";
-            }
-        }
-        else {
+    if(indexPath.section == 0) {
+        if (self.departments != nil && [self.departments count] > 0) {
+            // 显示部门
+            Deparment *deparment = [self.departments objectAtIndex:indexPath.row];
+            NSString *name = deparment.name;
+            cell.headImageView.image = [UIImage circleImageWithText:[name substringToIndex:1] size:CGSizeMake(40,40)];
+            cell.titleLabel.text = name;
+            
+        } else {
             // 显示员工
             User *user =  [self.users objectAtIndex:indexPath.row];
             NSString *name = user.fullName;
+            
             if ([name length] > 2) {
                 cell.headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
             } else {
                 cell.headImageView.image = [UIImage circleImageWithText:name size:CGSizeMake(40,40)];
             }
             cell.titleLabel.text = name;
-            cell.numOfDep.text=@"";
         }
-        return  cell;
-
+    }
+    else {
+        // 显示员工
+        User *user =  [self.users objectAtIndex:indexPath.row];
+        NSString *name = user.fullName;
+        if ([name length] > 2) {
+            cell.headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
+        } else {
+            cell.headImageView.image = [UIImage circleImageWithText:name size:CGSizeMake(40,40)];
+        }
+        cell.titleLabel.text = name;
+    }
+    return  cell;
+    
 }
 
 // 点击跳转事件
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section==0){
-        if(indexPath.row==0){
-            ContactSearchController *sa=[[ContactSearchController alloc]init];
-            [self.navigationController pushViewController:sa animated:YES];
-        }
-        if(indexPath.row==1){
-            NSLog(@"本地通讯录");
-        }
-        
-      }else  if(indexPath.section == 1) {
+    if(indexPath.section == 0) {
         if (self.departments != nil && [self.departments count] > 0) {
             
             Deparment *dp = [self.departments objectAtIndex:indexPath.row];
@@ -234,7 +203,7 @@
             if(dp.childCount == 0 && dp.userCount == 0) {
                 [SVProgressHUD showErrorWithStatus:@"此部门下没有数据"];
             } else {
-                ContactSelectDepController *vc = [[ContactSelectDepController alloc] init];
+                ContactViewController *vc = [[ContactViewController alloc] init];
                 vc.dep = dp.id;
                 [self.navigationController pushViewController: vc animated:true];
             }
@@ -242,8 +211,9 @@
         } else {
             
             User *user = [self.users objectAtIndex:indexPath.row];
+            
             ContactUserViewController *vc = [[ContactUserViewController alloc]initWithNibName:@"ContactUserViewController" bundle:self.bundle];
-                        vc.user = user;
+            vc.user = user;
             [self.navigationController pushViewController: vc animated:true];
         }
     }
@@ -263,11 +233,8 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if(section==0){
-        return 20;
-    }else{
+    
     return 50;
-    }
 }
 
 #pragma mark - Table view setting
@@ -283,4 +250,13 @@
     }
 }
 
+
+
+
+
+
+
+
+
 @end
+
