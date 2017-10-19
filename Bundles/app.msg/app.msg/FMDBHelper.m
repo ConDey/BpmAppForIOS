@@ -498,13 +498,13 @@ static FMDBHelper *_instance;
     return [self convertWithMessageResult:result];
 }
 
-- (void)updateMessageReadState:(NSString*)topicId {
+- (void)updateMessageReadState:(NSString*)msgId {
     NSString* username = [[[CurrentUser currentUser] userdetails] username];
     
     NSMutableString* readStatesql = [[NSMutableString alloc] initWithString:@"update "];
     [readStatesql appendString:FMDBMessageTableName];
-    [readStatesql appendString:@" set isread = '1' where username == ? and topic == ?"];
-    Boolean result = [self.database executeUpdate:readStatesql, username, topicId];
+    [readStatesql appendString:@" set isread = '1' where username == ? and message_id == ?"];
+    Boolean result = [self.database executeUpdate:readStatesql, username, msgId];
     NSLog(@"Update_Read_State_Info: %hhu", result);
 }
 

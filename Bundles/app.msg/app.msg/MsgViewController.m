@@ -25,6 +25,8 @@ static NSString* IS_REFRESH_FALSE = @"0";
 @property (nonatomic, assign) Boolean isrefresh;
 @property (nonatomic, assign) Boolean needRefresh;
 
+@property (nonatomic, assign) Boolean isInUnRead; // 在未读界面
+
 @end
 
 @implementation MsgViewController
@@ -32,11 +34,6 @@ static NSString* IS_REFRESH_FALSE = @"0";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
     
     self.navDisplay = YES;
     [self setTitleOfNav:@"消息"];
@@ -54,12 +51,17 @@ static NSString* IS_REFRESH_FALSE = @"0";
     [self initData];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+}
+
 - (void) initData {
     
     _isfirst = YES;
     _isforward = NO;
     _isrefresh = NO;
     _needRefresh = true;
+    _isInUnRead = YES;
     
     // 获取上次请求时间
     //NSString* date = [[FMDBHelper sharedInstance] getLastRequestTimeByUsername:username withDateFormat:YES];
@@ -80,30 +82,40 @@ static NSString* IS_REFRESH_FALSE = @"0";
 #pragma mark - netwrok
 - (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name {
     
-    NSString* username = [[[CurrentUser currentUser] userdetails] username];
-    _datas = [[NSMutableArray alloc] init];
+    if (name == [[EAProtocol sharedInstance] getServiceNameByEnum:HttpProtocolServiceMessageList]) {
     
-    MessageListModel* messagesModel = [MessageListModel mj_objectWithKeyValues:result];
-    if (messagesModel.success) {
-        // 更新请求时间
-        [[FMDBHelper sharedInstance] setLastRequestTime:[TimeUtils getNowMills] ByUserName:username];
-        if ([[messagesModel datas] count] > 0) {
-            
-            // 存入数据到数据库中
-            // 这里要new一个线程, 插数据是耗时操作
-            //[[FMDBHelper sharedInstance] insetTopicIntoDB:[self getLatestTopics:[messagesModel messages]]];
-            [[FMDBHelper sharedInstance] insertMessageIntoDB:[messagesModel datas]];
-            
-            _datas = [[FMDBHelper sharedInstance] selectMessagesFromDB];
-            
+        NSString* username = [[[CurrentUser currentUser] userdetails] username];
+        _datas = [[NSMutableArray alloc] init];
+        
+        MessageListModel* messagesModel = [MessageListModel mj_objectWithKeyValues:result];
+        if (messagesModel.success) {
+            // 更新请求时间
+            [[FMDBHelper sharedInstance] setLastRequestTime:[TimeUtils getNowMills] ByUserName:username];
+            if ([[messagesModel datas] count] > 0) {
+                
+                // 存入数据到数据库中
+                // 这里要new一个线程, 插数据是耗时操作
+                //[[FMDBHelper sharedInstance] insetTopicIntoDB:[self getLatestTopics:[messagesModel messages]]];
+                [[FMDBHelper sharedInstance] insertMessageIntoDB:[messagesModel datas]];
+                
+                _datas = [[FMDBHelper sharedInstance] selectMessagesFromDB];
+                
+            }else {
+                _datas = [[FMDBHelper sharedInstance] selectMessagesFromDB];
+            }
         }else {
-            _datas = [[FMDBHelper sharedInstance] selectMessagesFromDB];
+            [SVProgressHUD showErrorWithStatus:messagesModel.errorMsg];
         }
-    }else {
-        [SVProgressHUD showErrorWithStatus:messagesModel.errorMsg];
+        
+        [self.tableView reloadData];
     }
     
-    [self.tableView reloadData];
+    if (name == [[EAProtocol sharedInstance] getServiceNameByEnum:HttpProtocolServiceMessageReaded]) {
+        BaseModel* resultModel = [BaseModel mj_objectWithKeyValues:result];
+        if (!resultModel.success) {
+            [SVProgressHUD showErrorWithStatus:resultModel.errorMsg];
+        }
+    }
 }
 
 #pragma mark - tableview
@@ -133,11 +145,10 @@ static NSString* IS_REFRESH_FALSE = @"0";
         cell.msgTime.text = [TimeUtils showDate:date isShowHAndM:NO];
     }
     
-    UIImage* defaultMsgIcon = [UIImage imageNamed:@"ic_msg"];
+    UIImage* defaultMsgIcon = [UIImage imageNamed:@"ic_message_default" inBundle:self.bundle compatibleWithTraitCollection:nil];
     if (model.topicIcon == nil) {
          cell.msgIcon.image = defaultMsgIcon;
     }else {
-        NSString* s = [NSString stringWithFormat:@"%@%@", [REQUEST_SERVICE_URL substringWithRange:NSMakeRange(0, [REQUEST_SERVICE_URL length]-1)],model.topicIcon];
         [cell.msgIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [REQUEST_SERVICE_URL substringWithRange:NSMakeRange(0, [REQUEST_SERVICE_URL length]-1)],model.topicIcon]] placeholderImage:defaultMsgIcon];
     }
     
@@ -149,6 +160,49 @@ static NSString* IS_REFRESH_FALSE = @"0";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     // 取消点击之后的选中效果
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    MessageModel* model = [_datas objectAtIndex:indexPath.row];
+    
+    if (model.canClick) {
+        if (model.msgId != nil) {
+            // 更新已读状态
+            [[FMDBHelper sharedInstance] updateMessageReadState:model.msgId];
+            // 更新服务器上已读状态
+            NSDictionary* dict = @{
+                                   @"internalMessageId" : model.internalMsgId,
+                                   };
+            [self httpGetRequestWithUrl:HttpProtocolServiceMessageReaded params:dict progress:NO];
+            
+            if (_isInUnRead) {
+                _datas = [[FMDBHelper sharedInstance] selectMessagesFromDB];
+            }else {
+                _datas = [[FMDBHelper sharedInstance] selectReadedMessagesFromDB];
+            }
+            [self.tableView reloadData];
+            
+            // 根据url跳转
+            NSString* url = @"";
+            NSString* clickUrl = model.clickUrl;
+            if (clickUrl != nil && ![clickUrl isEqualToString:@""]) {
+                if ([clickUrl hasPrefix:@"native"]) {
+                    clickUrl = [clickUrl stringByReplacingOccurrencesOfString:@"native:" withString:@""];
+                    [Small openUri:clickUrl fromController:self];
+                }else {
+                    clickUrl = [clickUrl stringByReplacingOccurrencesOfString:@"h5:" withString:@""];
+                    if ([clickUrl hasPrefix:@"http:"] || [clickUrl hasPrefix:@"https:"] ||
+                        [clickUrl hasPrefix:@"file:"]) {
+                        url = clickUrl;
+                    }else {
+                        url = [NSString stringWithFormat:@"%@%@", REQUEST_SERVICE_URL, clickUrl];
+                    }
+                    // 这里要把url中的&替换掉，不然中间的参数也会被直接截取导致url不全，提示404错误。这里用一个url中不会出现的符号替换
+                    url = [url stringByReplacingOccurrencesOfString:@"&" withString:@"EAZYTEC"];
+                    [Small openUri:[NSString stringWithFormat:@"app.webkit?url=%@&urltitle=%@", url, [NSString encodeString:model.title]] fromController:self];
+                }
+            }
+        }
+        
+    }
 }
 
 #pragma mark - 懒加载
@@ -185,7 +239,14 @@ static NSString* IS_REFRESH_FALSE = @"0";
 
 // sliderBar 选择
 - (void)sliderBarAction:(NSInteger)index {
-    
+    if (index == 0) {
+        _isInUnRead = YES;
+        _datas = [[FMDBHelper sharedInstance] selectMessagesFromDB];
+    }else {
+        _isInUnRead = NO;
+        _datas = [[FMDBHelper sharedInstance] selectReadedMessagesFromDB];
+    }
+    [self.tableView reloadData];
 }
 
 /*

@@ -170,6 +170,9 @@
 		84301BB81F974A5600F01F8F /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301B9B1F974A5500F01F8F /* UIImageView+WebCache.m */; };
 		84301BB91F974A5600F01F8F /* UIView+WebCacheOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301B9C1F974A5500F01F8F /* UIView+WebCacheOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301BBA1F974A5600F01F8F /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301B9D1F974A5500F01F8F /* UIView+WebCacheOperation.m */; };
+		84301BEB1F9883F300F01F8F /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84301BE91F9883F200F01F8F /* libUMessage_Sdk_1.5.0a.a */; };
+		84301BEC1F9883F400F01F8F /* UMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301BEA1F9883F200F01F8F /* UMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84301BEE1F98846300F01F8F /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84301BED1F98846200F01F8F /* UserNotifications.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -345,6 +348,9 @@
 		84301B9B1F974A5500F01F8F /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		84301B9C1F974A5500F01F8F /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		84301B9D1F974A5500F01F8F /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		84301BE91F9883F200F01F8F /* libUMessage_Sdk_1.5.0a.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.5.0a.a; sourceTree = "<group>"; };
+		84301BEA1F9883F200F01F8F /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		84301BED1F98846200F01F8F /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -352,6 +358,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84301BEE1F98846300F01F8F /* UserNotifications.framework in Frameworks */,
+				84301BEB1F9883F300F01F8F /* libUMessage_Sdk_1.5.0a.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +407,7 @@
 		0686A8791F0C875000697582 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84301BED1F98846200F01F8F /* UserNotifications.framework */,
 				06C6B9F31F14AB2900D444E6 /* SystemConfiguration.framework */,
 				06C6B9F11F14AB2400D444E6 /* Security.framework */,
 				06C6B9EF1F14AB1C00D444E6 /* MobileCoreServices.framework */,
@@ -448,6 +457,7 @@
 		06C3A4761F0C7D4400633543 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				84301BE71F9883C100F01F8F /* Push */,
 				84301B801F974A5500F01F8F /* SDWebImage */,
 				84301B3B1F9724DD00F01F8F /* Utils */,
 				84301B361F97230800F01F8F /* Model */,
@@ -736,6 +746,24 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		84301BE71F9883C100F01F8F /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				84301BE81F9883F200F01F8F /* UMessage_Sdk_1.5.0a */,
+			);
+			name = Push;
+			sourceTree = "<group>";
+		};
+		84301BE81F9883F200F01F8F /* UMessage_Sdk_1.5.0a */ = {
+			isa = PBXGroup;
+			children = (
+				84301BE91F9883F200F01F8F /* libUMessage_Sdk_1.5.0a.a */,
+				84301BEA1F9883F200F01F8F /* UMessage.h */,
+			);
+			name = UMessage_Sdk_1.5.0a;
+			path = Push/UMessage_Sdk_1.5.0a;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -828,6 +856,7 @@
 				84301B391F97232700F01F8F /* BaseModel.h in Headers */,
 				84301B3E1F97254700F01F8F /* TimeUtils.h in Headers */,
 				84301AE31F95F60A00F01F8F /* BaseTableViewCell.h in Headers */,
+				84301BEC1F9883F400F01F8F /* UMessage.h in Headers */,
 				06C3A47A1F0C7D8900633543 /* EAViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1098,6 +1127,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib.common/Push/UMessage_Sdk_1.5.0a",
+				);
 				MACH_O_TYPE = mh_dylib;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eazytec.bpm.lib.common;
@@ -1125,6 +1158,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib.common/Push/UMessage_Sdk_1.5.0a",
+				);
 				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eazytec.bpm.lib.common;
 				PRODUCT_MODULE_NAME = com_eazytec_bpm_lib_common;

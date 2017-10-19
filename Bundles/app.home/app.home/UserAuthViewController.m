@@ -121,6 +121,13 @@
     NSString *token = [result objectForKey:@"token"];
     [[CurrentUser currentUser] updateWithUserDetails:userdetail Token:token];
     
+    // Push 添加别名(先remove再add）
+//    [UMessage removeAlias:userdetail.username type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+//        [UMessage addAlias:userdetail.username type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+//            NSLog(@"ADD_ALIAS_SUCCESS");
+//        }];
+//    }];
+    
     UserHomeTabController *tab = [[UserHomeTabController alloc]init];
     UserHomeNavController *nav = [[UserHomeNavController alloc]initWithRootViewController:tab];
     [self presentViewController:nav animated:YES completion:nil];

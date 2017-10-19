@@ -24,6 +24,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.urltitle = [NSString decodeString:self.urltitle];
     self.url = [NSString decodeString:self.url];
+    // 这里把EAZYTEC换回&
+    self.url = [self.url stringByReplacingOccurrencesOfString:@"EAZYTEC" withString:@"&"];
     
     [self.view addSubview:self.webview];
     [self.view addSubview:self.progressView];

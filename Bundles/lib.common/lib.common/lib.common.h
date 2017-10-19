@@ -43,4 +43,12 @@ FOUNDATION_EXPORT const unsigned char lib_commonVersionString[];
 
 #import "UIConstant.h"
 
+// Push
+#import "UMessage.h"
+#import <UserNotifications/UserNotifications.h>
+
+// Small
+#import <Small/SMBundle.h>
+#import <Small/Small.h>
+
 
