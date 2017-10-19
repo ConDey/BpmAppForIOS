@@ -85,7 +85,7 @@
     fullName=[user objectForKey:@"fullName"];
     //取名字后2位
     if([fullName length]>2){
-       cell.searchImg.image=[UIImage circleImageWithText:[fullName substringFromIndex:[fullName length]-2] size:CGSizeMake(40, 40)];
+       cell.searchImg.image=[UIImage circleImageWithText:[fullName substringFromIndex:[fullName length]-3] size:CGSizeMake(40, 40)];
     }else{
         
         cell.searchImg.image=[UIImage circleImageWithText:fullName size:CGSizeMake(40, 40)];
@@ -102,7 +102,7 @@
 
 //点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"搜索中");
+    //NSLog(@"搜索中");
     NSMutableDictionary *user=[self.userDetail objectAtIndex:indexPath.row];
     NSString *userId=[[NSString alloc]init];
     userId=[user objectForKey:@"id"];
