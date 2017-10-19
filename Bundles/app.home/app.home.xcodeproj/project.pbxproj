@@ -37,6 +37,12 @@
 		06C6BB021F17164500D444E6 /* ic_homeapp_process.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB011F17164500D444E6 /* ic_homeapp_process.png */; };
 		06C6BB0A1F1743A500D444E6 /* ic_homeapp_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB091F1743A500D444E6 /* ic_homeapp_image.png */; };
 		06C6BB0C1F1743E300D444E6 /* ic_homeapp_filepicker.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB0B1F1743E300D444E6 /* ic_homeapp_filepicker.png */; };
+		F80A8ACD1F98224100E126C6 /* PasswordChangeController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8ACB1F98224100E126C6 /* PasswordChangeController.h */; };
+		F80A8ACE1F98224100E126C6 /* PasswordChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8ACC1F98224100E126C6 /* PasswordChangeController.m */; };
+		F80A8AD31F98224C00E126C6 /* ic_setting_update.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8ACF1F98224C00E126C6 /* ic_setting_update.png */; };
+		F80A8AD41F98224C00E126C6 /* ic_setting_updatepwd.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8AD01F98224C00E126C6 /* ic_setting_updatepwd.png */; };
+		F80A8AD51F98224C00E126C6 /* ic_setting_loginout.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8AD11F98224C00E126C6 /* ic_setting_loginout.png */; };
+		F80A8AD61F98224C00E126C6 /* ic_setting_setting.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8AD21F98224C00E126C6 /* ic_setting_setting.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +79,12 @@
 		06C6BB091F1743A500D444E6 /* ic_homeapp_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_image.png; sourceTree = "<group>"; };
 		06C6BB0B1F1743E300D444E6 /* ic_homeapp_filepicker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_filepicker.png; sourceTree = "<group>"; };
 		06F809C41F263593000872C4 /* Small.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Small.framework; path = "../../Frameworks/build/Debug-iphoneos/Small.framework"; sourceTree = "<group>"; };
+		F80A8ACB1F98224100E126C6 /* PasswordChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordChangeController.h; sourceTree = "<group>"; };
+		F80A8ACC1F98224100E126C6 /* PasswordChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeController.m; sourceTree = "<group>"; };
+		F80A8ACF1F98224C00E126C6 /* ic_setting_update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_update.png; sourceTree = "<group>"; };
+		F80A8AD01F98224C00E126C6 /* ic_setting_updatepwd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_updatepwd.png; sourceTree = "<group>"; };
+		F80A8AD11F98224C00E126C6 /* ic_setting_loginout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_loginout.png; sourceTree = "<group>"; };
+		F80A8AD21F98224C00E126C6 /* ic_setting_setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_setting.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +155,10 @@
 			isa = PBXGroup;
 			children = (
 				06C5A2D91F26D32A00A189FB /* app.json */,
+				F80A8AD11F98224C00E126C6 /* ic_setting_loginout.png */,
+				F80A8AD21F98224C00E126C6 /* ic_setting_setting.png */,
+				F80A8ACF1F98224C00E126C6 /* ic_setting_update.png */,
+				F80A8AD01F98224C00E126C6 /* ic_setting_updatepwd.png */,
 				061A90991F1F4F1100B7C227 /* ic_setting_default_photo.png */,
 				06C6BB0B1F1743E300D444E6 /* ic_homeapp_filepicker.png */,
 				06C6BB091F1743A500D444E6 /* ic_homeapp_image.png */,
@@ -228,6 +244,8 @@
 		06C6BAD91F15CB1200D444E6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F80A8ACB1F98224100E126C6 /* PasswordChangeController.h */,
+				F80A8ACC1F98224100E126C6 /* PasswordChangeController.m */,
 				06C6BADA1F15CB3600D444E6 /* UserHomeSettingController.h */,
 				06C6BADB1F15CB3600D444E6 /* UserHomeSettingController.m */,
 				061A90951F1E2E5800B7C227 /* UserHomeSettingController.xib */,
@@ -262,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BAEC1F1603CF00D444E6 /* EAApp.h in Headers */,
+				F80A8ACD1F98224100E126C6 /* PasswordChangeController.h in Headers */,
 				06C6BAD71F15CA3600D444E6 /* UserHomeAppController.h in Headers */,
 				06C6BADC1F15CB3600D444E6 /* UserHomeSettingController.h in Headers */,
 				06C6BA511F14F2EA00D444E6 /* UserHomeNavController.h in Headers */,
@@ -305,8 +324,7 @@
 				TargetAttributes = {
 					06C3A4081F0B630100633543 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 4KU6JMLAYK;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -335,15 +353,19 @@
 				06C6BB021F17164500D444E6 /* ic_homeapp_process.png in Resources */,
 				06C6BAF81F16F93100D444E6 /* UserHomeAppViewCell.xib in Resources */,
 				061A90961F1E2E5800B7C227 /* UserHomeSettingController.xib in Resources */,
+				F80A8AD31F98224C00E126C6 /* ic_setting_update.png in Resources */,
 				06C6BB0A1F1743A500D444E6 /* ic_homeapp_image.png in Resources */,
 				06C6BB0C1F1743E300D444E6 /* ic_homeapp_filepicker.png in Resources */,
 				06C5A2DA1F26D32A00A189FB /* app.json in Resources */,
+				F80A8AD41F98224C00E126C6 /* ic_setting_updatepwd.png in Resources */,
 				06C6BAE81F1601F300D444E6 /* UserHomeAppController.xib in Resources */,
 				06C6B96A1F145D3700D444E6 /* UserAuthViewController.xib in Resources */,
+				F80A8AD51F98224C00E126C6 /* ic_setting_loginout.png in Resources */,
 				06C6B9871F149D6D00D444E6 /* Assert.xcassets in Resources */,
 				06C6BB001F17164000D444E6 /* ic_homeapp_notice.png in Resources */,
 				06C6BAFE1F17160F00D444E6 /* ic_homeapp_contact.png in Resources */,
 				061A909A1F1F4F1100B7C227 /* ic_setting_default_photo.png in Resources */,
+				F80A8AD61F98224C00E126C6 /* ic_setting_setting.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +379,7 @@
 				06C6BAF11F160E2600D444E6 /* NSLayoutConstraintOnePixelLine.m in Sources */,
 				0686A8971F0CB23D00697582 /* UserAuthViewController.m in Sources */,
 				06C6BADD1F15CB3600D444E6 /* UserHomeSettingController.m in Sources */,
+				F80A8ACE1F98224100E126C6 /* PasswordChangeController.m in Sources */,
 				06C6BA4E1F14F1E200D444E6 /* UserHomeTabController.m in Sources */,
 				06C6BAF71F16F93100D444E6 /* UserHomeAppViewCell.m in Sources */,
 				06C6BAED1F1603CF00D444E6 /* EAApp.m in Sources */,
@@ -473,8 +496,9 @@
 				CLANG_ANALYZER_OBJC_INCOMP_METHOD_TYPES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: feng sun (FYL3GNPRUX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4KU6JMLAYK;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -500,8 +524,9 @@
 				CLANG_ANALYZER_OBJC_INCOMP_METHOD_TYPES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: feng sun (FYL3GNPRUX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4KU6JMLAYK;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

@@ -29,9 +29,12 @@
         make.right.mas_equalTo(-20);
         make.height.mas_equalTo(40);
     }];
-    searchBar.backgroundColor=[UIColor whiteColor];
-    searchBar.tintColor=UI_GRAY_COLOR;
-    searchBar.showsCancelButton=YES;
+    searchBar.barStyle=UISearchBarStyleDefault;
+    searchBar.backgroundColor=[UIColor clearColor];
+    searchBar.tintColor=[UIColor whiteColor];
+    searchBar.showsCancelButton=NO;
+    searchBar.placeholder=@"点击输入搜索的内容";
+    searchBar.backgroundImage=[UIImage new];
     
    
     [self.tableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -46,10 +49,10 @@
     [self.tableview registerNib:[UINib nibWithNibName:@"ContactSearchCell" bundle:self.bundle] forCellReuseIdentifier:@"SearchCell"];
     NSLog(@"%@",searchBar.text);
     //获取数据
-    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-      [params setObject:@"" forKey:@"name"];
+   NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    [params setObject:searchBar.text forKey:@"name"];
     [self httpGetRequestWithUrl:HttpProtocolServiceContactUserList params:params progress:nil];
-    
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,16 +99,34 @@
     return 60;
     
 }
+
 //点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    NSMutableDictionary *user=[self.userDetail objectAtIndex:indexPath.row];
-//    NSString *userId=[[NSString alloc]init];
-//    userId=[user objectForKey:@"id"];
-//    ContactUserViewController *vc = [[ContactUserViewController alloc]initWithNibName:@"ContactUserViewController" bundle:self.bundle];
-//    vc.user.id=userId;
-//    [self.navigationController pushViewController: vc animated:true];
-//
+    NSLog(@"搜索中");
+    NSMutableDictionary *user=[self.userDetail objectAtIndex:indexPath.row];
+    NSString *userId=[[NSString alloc]init];
+    userId=[user objectForKey:@"id"];
+    ContactUserViewController *vc = [[ContactUserViewController alloc]initWithNibName:@"ContactUserViewController" bundle:self.bundle];
+    vc.user.id=userId;
+    [self.navigationController pushViewController: vc animated:true];
+
     
 }
+//搜索
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    if(searchBar.text.length==0)
+    {
+        [params setObject:@"" forKey:@"name"];
+    }else{
+        [params setObject:searchText forKey:@"name"];
+    }
+    [self httpGetRequestWithUrl:HttpProtocolServiceContactUserList params:params progress:nil];
+    [self.tableview reloadData];
+    
+}
+
+
+
 
 @end

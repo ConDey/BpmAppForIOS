@@ -208,8 +208,7 @@
 				TargetAttributes = {
 					06C6BB171F18592200D444E6 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 4KU6JMLAYK;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -365,8 +364,9 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Sun (2CMVFJS84Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4KU6JMLAYK;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -388,8 +388,9 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Feng Sun (2CMVFJS84Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4KU6JMLAYK;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

@@ -32,6 +32,16 @@
 		06C6BAA41F15C1C500D444E6 /* com_eazytec_bpm_lib_common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C6BAA31F15C1C500D444E6 /* com_eazytec_bpm_lib_common.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		06C6BAD21F15C8FE00D444E6 /* ContactViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C6BAD01F15C8FE00D444E6 /* ContactViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C6BAD31F15C8FE00D444E6 /* ContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C6BAD11F15C8FE00D444E6 /* ContactViewController.m */; };
+		F80A8ADA1F98226400E126C6 /* ic_contact_search.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8AD71F98226400E126C6 /* ic_contact_search.png */; };
+		F80A8ADB1F98226400E126C6 /* ic_contact_local.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8AD81F98226400E126C6 /* ic_contact_local.png */; };
+		F80A8ADC1F98226400E126C6 /* ic_search_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8AD91F98226400E126C6 /* ic_search_icon.png */; };
+		F80A8AE01F9822BB00E126C6 /* ContactSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80A8ADD1F9822BB00E126C6 /* ContactSearchCell.xib */; };
+		F80A8AE11F9822BB00E126C6 /* ContactSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8ADE1F9822BB00E126C6 /* ContactSearchCell.m */; };
+		F80A8AE21F9822BB00E126C6 /* ContactSearchCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8ADF1F9822BB00E126C6 /* ContactSearchCell.h */; };
+		F80A8AE71F9822C900E126C6 /* ContactSelectDepController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8AE31F9822C800E126C6 /* ContactSelectDepController.h */; };
+		F80A8AE81F9822C900E126C6 /* ContactSearchController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8AE41F9822C800E126C6 /* ContactSearchController.h */; };
+		F80A8AE91F9822C900E126C6 /* ContactSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8AE51F9822C800E126C6 /* ContactSearchController.m */; };
+		F80A8AEA1F9822C900E126C6 /* ContactSelectDepController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8AE61F9822C900E126C6 /* ContactSelectDepController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +72,17 @@
 		06C6BAA31F15C1C500D444E6 /* com_eazytec_bpm_lib_common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = com_eazytec_bpm_lib_common.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/BpmApp-eufyfkcxftanxsbzvzzlyyfyzmkq/Build/Products/Debug-iphonesimulator/com_eazytec_bpm_lib_common.framework"; sourceTree = "<group>"; };
 		06C6BAD01F15C8FE00D444E6 /* ContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactViewController.h; sourceTree = "<group>"; };
 		06C6BAD11F15C8FE00D444E6 /* ContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactViewController.m; sourceTree = "<group>"; };
+		F80A8AD71F98226400E126C6 /* ic_contact_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_contact_search.png; sourceTree = "<group>"; };
+		F80A8AD81F98226400E126C6 /* ic_contact_local.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_contact_local.png; sourceTree = "<group>"; };
+		F80A8AD91F98226400E126C6 /* ic_search_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_search_icon.png; sourceTree = "<group>"; };
+		F80A8ADD1F9822BB00E126C6 /* ContactSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactSearchCell.xib; sourceTree = "<group>"; };
+		F80A8ADE1F9822BB00E126C6 /* ContactSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSearchCell.m; sourceTree = "<group>"; };
+		F80A8ADF1F9822BB00E126C6 /* ContactSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSearchCell.h; sourceTree = "<group>"; };
+		F80A8AE31F9822C800E126C6 /* ContactSelectDepController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSelectDepController.h; sourceTree = "<group>"; };
+		F80A8AE41F9822C800E126C6 /* ContactSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSearchController.h; sourceTree = "<group>"; };
+		F80A8AE51F9822C800E126C6 /* ContactSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSearchController.m; sourceTree = "<group>"; };
+		F80A8AE61F9822C900E126C6 /* ContactSelectDepController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSelectDepController.m; sourceTree = "<group>"; };
+		F80A8B3C1F982A9A00E126C6 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +102,9 @@
 			children = (
 				061A90891F1DE14A00B7C227 /* ic_contact_email.png */,
 				061A908A1F1DE14A00B7C227 /* ic_contact_group.png */,
+				F80A8AD81F98226400E126C6 /* ic_contact_local.png */,
+				F80A8AD71F98226400E126C6 /* ic_contact_search.png */,
+				F80A8AD91F98226400E126C6 /* ic_search_icon.png */,
 				061A908B1F1DE14A00B7C227 /* ic_contact_position.png */,
 				061A908C1F1DE14A00B7C227 /* ic_contact_tel.png */,
 				061A908D1F1DE14A00B7C227 /* ic_contact_user.png */,
@@ -103,6 +127,9 @@
 			isa = PBXGroup;
 			children = (
 				06414F6C1F19E9DA0005342C /* ContractTableViewCell.h */,
+				F80A8ADF1F9822BB00E126C6 /* ContactSearchCell.h */,
+				F80A8ADE1F9822BB00E126C6 /* ContactSearchCell.m */,
+				F80A8ADD1F9822BB00E126C6 /* ContactSearchCell.xib */,
 				06414F6D1F19E9DA0005342C /* ContractTableViewCell.m */,
 				06414F6E1F19E9DA0005342C /* ContractTableViewCell.xib */,
 				0634550B1F1C483200F1BEF8 /* ContractTableViewHeader.h */,
@@ -139,6 +166,7 @@
 				06C6BACF1F15C8EA00D444E6 /* Src */,
 				06C6BA911F15C0D200D444E6 /* app.contact.h */,
 				06C6BA921F15C0D200D444E6 /* Info.plist */,
+				F80A8B3C1F982A9A00E126C6 /* PrefixHeader.pch */,
 			);
 			path = app.contact;
 			sourceTree = "<group>";
@@ -166,6 +194,10 @@
 			children = (
 				06C6BAD01F15C8FE00D444E6 /* ContactViewController.h */,
 				06C6BAD11F15C8FE00D444E6 /* ContactViewController.m */,
+				F80A8AE41F9822C800E126C6 /* ContactSearchController.h */,
+				F80A8AE51F9822C800E126C6 /* ContactSearchController.m */,
+				F80A8AE31F9822C800E126C6 /* ContactSelectDepController.h */,
+				F80A8AE61F9822C900E126C6 /* ContactSelectDepController.m */,
 				061A906A1F1CB19B00B7C227 /* ContactUserViewController.h */,
 				061A906B1F1CB19B00B7C227 /* ContactUserViewController.m */,
 				061A906E1F1CB34700B7C227 /* ContactUserViewController.xib */,
@@ -185,8 +217,11 @@
 				063455181F1C96AB00F1BEF8 /* User.h in Headers */,
 				061A906C1F1CB19B00B7C227 /* ContactUserViewController.h in Headers */,
 				063455141F1C960D00F1BEF8 /* Deparment.h in Headers */,
+				F80A8AE81F9822C900E126C6 /* ContactSearchController.h in Headers */,
 				0634550D1F1C483200F1BEF8 /* ContractTableViewHeader.h in Headers */,
 				06C6BA931F15C0D200D444E6 /* app.contact.h in Headers */,
+				F80A8AE71F9822C900E126C6 /* ContactSelectDepController.h in Headers */,
+				F80A8AE21F9822BB00E126C6 /* ContactSearchCell.h in Headers */,
 				06414F6F1F19E9DA0005342C /* ContractTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,8 +258,7 @@
 				TargetAttributes = {
 					06C6BA8D1F15C0D200D444E6 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 4KU6JMLAYK;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -252,12 +286,16 @@
 			files = (
 				061A90941F1DE62B00B7C227 /* ContactUserViewController.xib in Resources */,
 				061A90911F1DE14A00B7C227 /* ic_contact_tel.png in Resources */,
+				F80A8ADA1F98226400E126C6 /* ic_contact_search.png in Resources */,
 				063455101F1C484100F1BEF8 /* ContractTableViewHeader.xib in Resources */,
 				061A90831F1DD3CC00B7C227 /* ContractUserTableViewCell.xib in Resources */,
+				F80A8ADB1F98226400E126C6 /* ic_contact_local.png in Resources */,
 				06414F711F19E9DA0005342C /* ContractTableViewCell.xib in Resources */,
 				061A90901F1DE14A00B7C227 /* ic_contact_position.png in Resources */,
 				061A908F1F1DE14A00B7C227 /* ic_contact_group.png in Resources */,
 				061A90921F1DE14A00B7C227 /* ic_contact_user.png in Resources */,
+				F80A8ADC1F98226400E126C6 /* ic_search_icon.png in Resources */,
+				F80A8AE01F9822BB00E126C6 /* ContactSearchCell.xib in Resources */,
 				061A908E1F1DE14A00B7C227 /* ic_contact_email.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +307,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F80A8AE11F9822BB00E126C6 /* ContactSearchCell.m in Sources */,
+				F80A8AE91F9822C900E126C6 /* ContactSearchController.m in Sources */,
+				F80A8AEA1F9822C900E126C6 /* ContactSelectDepController.m in Sources */,
 				061A906D1F1CB19B00B7C227 /* ContactUserViewController.m in Sources */,
 				063455191F1C96AB00F1BEF8 /* User.m in Sources */,
 				06C6BAD31F15C8FE00D444E6 /* ContactViewController.m in Sources */,
@@ -385,11 +426,13 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: feng sun (FYL3GNPRUX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4KU6JMLAYK;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/app.contact/PrefixHeader.pch";
 				INFOPLIST_FILE = app.contact/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -408,11 +451,13 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: feng sun (FYL3GNPRUX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4KU6JMLAYK;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/app.contact/PrefixHeader.pch";
 				INFOPLIST_FILE = app.contact/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

@@ -10,7 +10,7 @@
 #import "ContractUserTableViewCell.h"
 
 @interface ContactUserViewController ()
-
+@property (nonatomic,copy) NSString *userId;
 @end
 
 @implementation ContactUserViewController
