@@ -11,7 +11,6 @@
 		06C6BAA11F15C1BF00D444E6 /* com_eazytec_bpm_lib_common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C6BAA01F15C1BF00D444E6 /* com_eazytec_bpm_lib_common.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		06C6BACD1F15C39000D444E6 /* MsgViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C6BACB1F15C39000D444E6 /* MsgViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C6BACE1F15C39000D444E6 /* MsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C6BACC1F15C39000D444E6 /* MsgViewController.m */; };
-		84301AC01F95E0A800F01F8F /* MessageTopicModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301ABE1F95E0A800F01F8F /* MessageTopicModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301AC11F95E0A800F01F8F /* MessageTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301ABF1F95E0A800F01F8F /* MessageTopicModel.m */; };
 		84301AC41F95E10B00F01F8F /* MessageModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301AC21F95E10B00F01F8F /* MessageModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301AC51F95E10B00F01F8F /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301AC31F95E10B00F01F8F /* MessageModel.m */; };
@@ -19,8 +18,10 @@
 		84301AEA1F95F98F00F01F8F /* MessageMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301AE81F95F98F00F01F8F /* MessageMainCell.m */; };
 		F80A8B381F98269200E126C6 /* MessageListModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B361F98269200E126C6 /* MessageListModel.h */; };
 		F80A8B391F98269200E126C6 /* MessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B371F98269200E126C6 /* MessageListModel.m */; };
-		F80A8B3A1F9826F200E126C6 /* FMDBHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301ABA1F95DDCB00F01F8F /* FMDBHelper.h */; };
-		F80A8B3B1F98270000E126C6 /* FMDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301ABB1F95DDCB00F01F8F /* FMDBHelper.m */; };
+		F80A8B3A1F9826F200E126C6 /* (null) in Headers */ = {isa = PBXBuildFile; };
+		F80A8B3B1F98270000E126C6 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F80A8B3F1F98380200E126C6 /* FMDBHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B3D1F98380200E126C6 /* FMDBHelper.h */; };
+		F80A8B401F98380200E126C6 /* FMDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B3E1F98380200E126C6 /* FMDBHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,8 @@
 		84301AE81F95F98F00F01F8F /* MessageMainCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageMainCell.m; sourceTree = "<group>"; };
 		F80A8B361F98269200E126C6 /* MessageListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListModel.h; sourceTree = "<group>"; };
 		F80A8B371F98269200E126C6 /* MessageListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListModel.m; sourceTree = "<group>"; };
+		F80A8B3D1F98380200E126C6 /* FMDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBHelper.h; sourceTree = "<group>"; };
+		F80A8B3E1F98380200E126C6 /* FMDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,8 +109,8 @@
 		84301AB91F95DDB000F01F8F /* Db */ = {
 			isa = PBXGroup;
 			children = (
-				84301B401F972AF800F01F8F /* FMDBHelper.h */,
-				84301B411F972AF900F01F8F /* FMDBHelper.m */,
+				F80A8B3D1F98380200E126C6 /* FMDBHelper.h */,
+				F80A8B3E1F98380200E126C6 /* FMDBHelper.m */,
 			);
 			name = Db;
 			sourceTree = "<group>";
@@ -145,19 +148,8 @@
 		84301AF91F9621A500F01F8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				84301B241F96E1F000F01F8F /* Assert.xcassets */,
-				84301B1E1F96DFCC00F01F8F /* ic_homeapp_contact.png */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		84301B311F97220D00F01F8F /* List */ = {
-			isa = PBXGroup;
-			children = (
-				84301B321F97227900F01F8F /* MessageListModel.h */,
-				84301B331F97227900F01F8F /* MessageListModel.m */,
-			);
-			name = List;
 			sourceTree = "<group>";
 		};
 		F80A8B351F98268300E126C6 /* List */ = {
@@ -177,7 +169,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BA6D1F15C09300D444E6 /* app.msg.h in Headers */,
-				F80A8B3A1F9826F200E126C6 /* FMDBHelper.h in Headers */,
+				F80A8B3A1F9826F200E126C6 /* (null) in Headers */,
+				F80A8B3F1F98380200E126C6 /* FMDBHelper.h in Headers */,
 				F80A8B381F98269200E126C6 /* MessageListModel.h in Headers */,
 				84301AC41F95E10B00F01F8F /* MessageModel.h in Headers */,
 				84301AE91F95F98F00F01F8F /* MessageMainCell.h in Headers */,
@@ -243,8 +236,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84301B1F1F96DFCC00F01F8F /* ic_homeapp_contact.png in Resources */,
-				84301B251F96E1F000F01F8F /* Assert.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,12 +246,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F80A8B3B1F98270000E126C6 /* FMDBHelper.m in Sources */,
+				F80A8B3B1F98270000E126C6 /* (null) in Sources */,
 				F80A8B391F98269200E126C6 /* MessageListModel.m in Sources */,
 				06C6BACE1F15C39000D444E6 /* MsgViewController.m in Sources */,
 				84301AC11F95E0A800F01F8F /* MessageTopicModel.m in Sources */,
 				84301AEA1F95F98F00F01F8F /* MessageMainCell.m in Sources */,
-				84301B431F972AF900F01F8F /* FMDBHelper.m in Sources */,
+				F80A8B401F98380200E126C6 /* FMDBHelper.m in Sources */,
 				84301AC51F95E10B00F01F8F /* MessageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,6 +21,8 @@ static NSString * _Nonnull const MessageReadedServiceUrl        = @"msg/setInter
 static NSString * _Nonnull const ContactDepartServiceUrl        = @"department/listByParentId";
 static NSString * _Nonnull const ContactUserDetailServiceUrl        = @"user/detail";
 static NSString * _Nonnull const ContactUserListServiceUrl      =@"user/list";
+//修改密码
+static NSString * _Nonnull const PasswordChangeServiceUrl       =@"password/change";
 // 服务名称枚举
 typedef NS_ENUM(NSInteger, HttpProtocolServiceName) {
     // 枚举成员
@@ -30,6 +32,7 @@ typedef NS_ENUM(NSInteger, HttpProtocolServiceName) {
     HttpProtocolServiceContactDepart        = 3,
     HttpProtocolServiceContactUserDetail    = 4,
     HttpProtocolServiceContactUserList      = 5,
+    HttpProtocolServicePasswordChange       = 6,
 };
 
 @interface EAProtocol : NSObject

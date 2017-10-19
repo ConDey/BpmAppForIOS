@@ -10,7 +10,7 @@
 #import "ContractUserTableViewCell.h"
 
 @interface ContactUserViewController ()
-@property (nonatomic,copy) NSString *userId;
+
 @end
 
 @implementation ContactUserViewController
@@ -37,7 +37,13 @@
     [super viewWillAppear:YES];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-    [params setObject:self.user.id forKey:@"userId"];
+    if(self.userId==nil){
+        [params setObject:self.user.id forKey:@"userId"];
+        
+    }else{
+        [params setObject:self.userId forKey:@"userId"];
+        
+    }
     
     // 更新数据
     [self httpGetRequestWithUrl:HttpProtocolServiceContactUserDetail params:params progress:YES];

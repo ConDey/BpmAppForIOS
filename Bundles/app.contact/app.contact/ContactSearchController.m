@@ -107,8 +107,8 @@
     NSString *userId=[[NSString alloc]init];
     userId=[user objectForKey:@"id"];
     ContactUserViewController *vc = [[ContactUserViewController alloc]initWithNibName:@"ContactUserViewController" bundle:self.bundle];
-    vc.user.id=userId;
-    [self.navigationController pushViewController: vc animated:true];
+    vc.userId=userId;
+    [self.navigationController pushViewController: vc animated:YES];
 
     
 }
@@ -123,6 +123,7 @@
     }
     [self httpGetRequestWithUrl:HttpProtocolServiceContactUserList params:params progress:nil];
     [self.tableview reloadData];
+    [searchBar resignFirstResponder];
     
 }
 
