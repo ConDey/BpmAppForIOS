@@ -113,12 +113,12 @@
     NSString *oldPassword=self.currentPassword.text;
     NSString *newPassword=self.changedPassword.text;
     NSString *confirmPassowrd=self.changedPassword2.text;
-    NSLog(@"jiu= %@    xin= %@  er= %@",oldPassword,newPassword,confirmPassowrd);
+    //NSLog(@"jiu= %@    xin= %@  er= %@",oldPassword,newPassword,confirmPassowrd);
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     [params setObject:oldPassword forKey:@"oldPassword"];
     [params setObject:newPassword forKey:@"newPassword"];
     [params setObject:confirmPassowrd forKey:@"confirmPassword"];
-    [self httpPostRequestWithUrl:@"password/change" params:params progress:YES];
+    [self httpPostRequestWithUrl:HttpProtocolServicePasswordChange  params:params progress:YES];
     
 }
 

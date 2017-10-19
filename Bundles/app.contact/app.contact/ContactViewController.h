@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ContactViewController : EAViewController<UITableViewDelegate, UITableViewDataSource>
+#import <Contacts/Contacts.h>
+#import <ContactsUI/ContactsUI.h>
+@interface ContactViewController : EAViewController<UITableViewDelegate, UITableViewDataSource,CNContactPickerDelegate>
 
 @property (nonatomic,retain) NSString *dep;
-
+@property (nonatomic,assign) CGFloat numOfHideSection;
 @end

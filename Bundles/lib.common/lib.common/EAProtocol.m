@@ -71,6 +71,9 @@ static EAProtocol *_instance;
                                                     ContactDepartServiceUrl,
                                                     ContactUserDetailServiceUrl,
                                                     ContactUserListServiceUrl,
+                                                    PasswordChangeServiceUrl,
+                                                    ContactNoticeDetailServiceUrl,
+                                                    ContactNoticeListServiceUrl,
                            nil];
     }
     return _webServiceUrls;

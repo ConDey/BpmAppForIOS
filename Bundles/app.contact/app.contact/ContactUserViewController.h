@@ -13,5 +13,6 @@
 @interface ContactUserViewController : EAViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic,retain) User *user;
+@property (nonatomic,copy) NSString *userId;
 
 @end

@@ -11,17 +11,25 @@
 		06C6BAA11F15C1BF00D444E6 /* com_eazytec_bpm_lib_common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C6BAA01F15C1BF00D444E6 /* com_eazytec_bpm_lib_common.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		06C6BACD1F15C39000D444E6 /* MsgViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C6BACB1F15C39000D444E6 /* MsgViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C6BACE1F15C39000D444E6 /* MsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C6BACC1F15C39000D444E6 /* MsgViewController.m */; };
-		84301AC01F95E0A800F01F8F /* MessageTopicModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301ABE1F95E0A800F01F8F /* MessageTopicModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301AC11F95E0A800F01F8F /* MessageTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301ABF1F95E0A800F01F8F /* MessageTopicModel.m */; };
 		84301AC41F95E10B00F01F8F /* MessageModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301AC21F95E10B00F01F8F /* MessageModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301AC51F95E10B00F01F8F /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301AC31F95E10B00F01F8F /* MessageModel.m */; };
 		84301AE91F95F98F00F01F8F /* MessageMainCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301AE71F95F98F00F01F8F /* MessageMainCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301AEA1F95F98F00F01F8F /* MessageMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301AE81F95F98F00F01F8F /* MessageMainCell.m */; };
+<<<<<<< HEAD
 		84301B341F97227900F01F8F /* MessageListModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301B321F97227900F01F8F /* MessageListModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301B351F97227900F01F8F /* MessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301B331F97227900F01F8F /* MessageListModel.m */; };
 		84301B421F972AF900F01F8F /* FMDBHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301B401F972AF800F01F8F /* FMDBHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301B431F972AF900F01F8F /* FMDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301B411F972AF900F01F8F /* FMDBHelper.m */; };
 		84301BE51F983FF500F01F8F /* ic_message_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 84301BE41F983FF400F01F8F /* ic_message_default.png */; };
+=======
+		F80A8B381F98269200E126C6 /* MessageListModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B361F98269200E126C6 /* MessageListModel.h */; };
+		F80A8B391F98269200E126C6 /* MessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B371F98269200E126C6 /* MessageListModel.m */; };
+		F80A8B3A1F9826F200E126C6 /* (null) in Headers */ = {isa = PBXBuildFile; };
+		F80A8B3B1F98270000E126C6 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		F80A8B3F1F98380200E126C6 /* FMDBHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B3D1F98380200E126C6 /* FMDBHelper.h */; };
+		F80A8B401F98380200E126C6 /* FMDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B3E1F98380200E126C6 /* FMDBHelper.m */; };
+>>>>>>> 75e1c88407e4a2a404d4a909d988f0bb000a6c19
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,11 +47,18 @@
 		84301AC31F95E10B00F01F8F /* MessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
 		84301AE71F95F98F00F01F8F /* MessageMainCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageMainCell.h; sourceTree = "<group>"; };
 		84301AE81F95F98F00F01F8F /* MessageMainCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageMainCell.m; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		84301B321F97227900F01F8F /* MessageListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageListModel.h; sourceTree = "<group>"; };
 		84301B331F97227900F01F8F /* MessageListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageListModel.m; sourceTree = "<group>"; };
 		84301B401F972AF800F01F8F /* FMDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBHelper.h; sourceTree = "<group>"; };
 		84301B411F972AF900F01F8F /* FMDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBHelper.m; sourceTree = "<group>"; };
 		84301BE41F983FF400F01F8F /* ic_message_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_message_default.png; sourceTree = "<group>"; };
+=======
+		F80A8B361F98269200E126C6 /* MessageListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListModel.h; sourceTree = "<group>"; };
+		F80A8B371F98269200E126C6 /* MessageListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListModel.m; sourceTree = "<group>"; };
+		F80A8B3D1F98380200E126C6 /* FMDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBHelper.h; sourceTree = "<group>"; };
+		F80A8B3E1F98380200E126C6 /* FMDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBHelper.m; sourceTree = "<group>"; };
+>>>>>>> 75e1c88407e4a2a404d4a909d988f0bb000a6c19
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +125,8 @@
 		84301AB91F95DDB000F01F8F /* Db */ = {
 			isa = PBXGroup;
 			children = (
-				84301B401F972AF800F01F8F /* FMDBHelper.h */,
-				84301B411F972AF900F01F8F /* FMDBHelper.m */,
+				F80A8B3D1F98380200E126C6 /* FMDBHelper.h */,
+				F80A8B3E1F98380200E126C6 /* FMDBHelper.m */,
 			);
 			name = Db;
 			sourceTree = "<group>";
@@ -119,7 +134,7 @@
 		84301ABD1F95E01D00F01F8F /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				84301B311F97220D00F01F8F /* List */,
+				F80A8B351F98268300E126C6 /* List */,
 				84301ABE1F95E0A800F01F8F /* MessageTopicModel.h */,
 				84301ABF1F95E0A800F01F8F /* MessageTopicModel.m */,
 				84301AC21F95E10B00F01F8F /* MessageModel.h */,
@@ -149,16 +164,19 @@
 		84301AF91F9621A500F01F8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				84301BE41F983FF400F01F8F /* ic_message_default.png */,
+=======
+>>>>>>> 75e1c88407e4a2a404d4a909d988f0bb000a6c19
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		84301B311F97220D00F01F8F /* List */ = {
+		F80A8B351F98268300E126C6 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				84301B321F97227900F01F8F /* MessageListModel.h */,
-				84301B331F97227900F01F8F /* MessageListModel.m */,
+				F80A8B361F98269200E126C6 /* MessageListModel.h */,
+				F80A8B371F98269200E126C6 /* MessageListModel.m */,
 			);
 			name = List;
 			sourceTree = "<group>";
@@ -171,9 +189,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BA6D1F15C09300D444E6 /* app.msg.h in Headers */,
-				84301B421F972AF900F01F8F /* FMDBHelper.h in Headers */,
-				84301AC01F95E0A800F01F8F /* MessageTopicModel.h in Headers */,
-				84301B341F97227900F01F8F /* MessageListModel.h in Headers */,
+				F80A8B3A1F9826F200E126C6 /* (null) in Headers */,
+				F80A8B3F1F98380200E126C6 /* FMDBHelper.h in Headers */,
+				F80A8B381F98269200E126C6 /* MessageListModel.h in Headers */,
 				84301AC41F95E10B00F01F8F /* MessageModel.h in Headers */,
 				84301AE91F95F98F00F01F8F /* MessageMainCell.h in Headers */,
 				06C6BACD1F15C39000D444E6 /* MsgViewController.h in Headers */,
@@ -212,8 +230,7 @@
 				TargetAttributes = {
 					06C6BA671F15C09300D444E6 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 4KU6JMLAYK;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -239,7 +256,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				84301BE51F983FF500F01F8F /* ic_message_default.png in Resources */,
+=======
+>>>>>>> 75e1c88407e4a2a404d4a909d988f0bb000a6c19
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,11 +270,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84301B351F97227900F01F8F /* MessageListModel.m in Sources */,
+				F80A8B3B1F98270000E126C6 /* (null) in Sources */,
+				F80A8B391F98269200E126C6 /* MessageListModel.m in Sources */,
 				06C6BACE1F15C39000D444E6 /* MsgViewController.m in Sources */,
 				84301AC11F95E0A800F01F8F /* MessageTopicModel.m in Sources */,
 				84301AEA1F95F98F00F01F8F /* MessageMainCell.m in Sources */,
-				84301B431F972AF900F01F8F /* FMDBHelper.m in Sources */,
+				F80A8B401F98380200E126C6 /* FMDBHelper.m in Sources */,
 				84301AC51F95E10B00F01F8F /* MessageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,8 +386,9 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: feng sun (FYL3GNPRUX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4KU6JMLAYK;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -389,8 +411,9 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: feng sun (FYL3GNPRUX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4KU6JMLAYK;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
