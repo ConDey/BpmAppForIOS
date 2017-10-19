@@ -70,6 +70,7 @@ static EAProtocol *_instance;
                                                     MessageReadedServiceUrl,
                                                     ContactDepartServiceUrl,
                                                     ContactUserDetailServiceUrl,
+                                                    ContactUserListServiceUrl,
                            nil];
     }
     return _webServiceUrls;

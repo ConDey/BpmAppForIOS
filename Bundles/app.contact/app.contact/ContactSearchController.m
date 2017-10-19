@@ -9,6 +9,7 @@
 #import "ContactSearchController.h"
 #import "ContactSearchCell.h"
 #import "ContactUserViewController.h"
+
 @interface ContactSearchController ()
 @property(nonatomic,retain)NSString *user_id;
 @property(nonatomic,retain)NSString *user_fullName;
@@ -47,7 +48,7 @@
     //获取数据
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
       [params setObject:@"" forKey:@"name"];
-    [self httpGetRequestWithUrl:@"user/list" params:params progress:nil];
+    [self httpGetRequestWithUrl:HttpProtocolServiceContactUserList params:params progress:nil];
     
 }
 
