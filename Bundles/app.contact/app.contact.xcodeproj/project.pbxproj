@@ -100,6 +100,9 @@
 		061A90881F1DE14000B7C227 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				84301BBB1F98221E00F01F8F /* ic_contact_local.png */,
+				84301BBC1F98221F00F01F8F /* ic_contact_search.png */,
+				84301BBD1F98221F00F01F8F /* ic_search_icon.png */,
 				061A90891F1DE14A00B7C227 /* ic_contact_email.png */,
 				061A908A1F1DE14A00B7C227 /* ic_contact_group.png */,
 				F80A8AD81F98226400E126C6 /* ic_contact_local.png */,
@@ -126,6 +129,9 @@
 		06414F6B1F19E9A80005342C /* Item */ = {
 			isa = PBXGroup;
 			children = (
+				84301BC21F98224300F01F8F /* ContactSearchCell.h */,
+				84301BC11F98224200F01F8F /* ContactSearchCell.m */,
+				84301BC31F98224300F01F8F /* ContactSearchCell.xib */,
 				06414F6C1F19E9DA0005342C /* ContractTableViewCell.h */,
 				F80A8ADF1F9822BB00E126C6 /* ContactSearchCell.h */,
 				F80A8ADE1F9822BB00E126C6 /* ContactSearchCell.m */,
@@ -162,6 +168,7 @@
 		06C6BA901F15C0D200D444E6 /* app.contact */ = {
 			isa = PBXGroup;
 			children = (
+				84301BD61F9832C800F01F8F /* PrefixHeader.pch */,
 				061A90881F1DE14000B7C227 /* resources */,
 				06C6BACF1F15C8EA00D444E6 /* Src */,
 				06C6BA911F15C0D200D444E6 /* app.contact.h */,
@@ -192,6 +199,10 @@
 		06C6BB0D1F1858BE00D444E6 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				84301BC81F98224F00F01F8F /* ContactSearchController.h */,
+				84301BC91F98224F00F01F8F /* ContactSearchController.m */,
+				84301BCA1F98224F00F01F8F /* ContactSelectDepController.h */,
+				84301BC71F98224F00F01F8F /* ContactSelectDepController.m */,
 				06C6BAD01F15C8FE00D444E6 /* ContactViewController.h */,
 				06C6BAD11F15C8FE00D444E6 /* ContactViewController.m */,
 				F80A8AE41F9822C800E126C6 /* ContactSearchController.h */,
@@ -212,6 +223,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84301BCE1F98225000F01F8F /* ContactSelectDepController.h in Headers */,
 				06C6BAD21F15C8FE00D444E6 /* ContactViewController.h in Headers */,
 				061A90861F1DDD2B00B7C227 /* ContractUserTableViewCell.h in Headers */,
 				063455181F1C96AB00F1BEF8 /* User.h in Headers */,
@@ -219,6 +231,7 @@
 				063455141F1C960D00F1BEF8 /* Deparment.h in Headers */,
 				F80A8AE81F9822C900E126C6 /* ContactSearchController.h in Headers */,
 				0634550D1F1C483200F1BEF8 /* ContractTableViewHeader.h in Headers */,
+				84301BD71F9832C900F01F8F /* PrefixHeader.pch in Headers */,
 				06C6BA931F15C0D200D444E6 /* app.contact.h in Headers */,
 				F80A8AE71F9822C900E126C6 /* ContactSelectDepController.h in Headers */,
 				F80A8AE21F9822BB00E126C6 /* ContactSearchCell.h in Headers */,
@@ -284,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84301BBE1F98222100F01F8F /* ic_contact_local.png in Resources */,
 				061A90941F1DE62B00B7C227 /* ContactUserViewController.xib in Resources */,
 				061A90911F1DE14A00B7C227 /* ic_contact_tel.png in Resources */,
 				F80A8ADA1F98226400E126C6 /* ic_contact_search.png in Resources */,
@@ -297,6 +311,9 @@
 				F80A8ADC1F98226400E126C6 /* ic_search_icon.png in Resources */,
 				F80A8AE01F9822BB00E126C6 /* ContactSearchCell.xib in Resources */,
 				061A908E1F1DE14A00B7C227 /* ic_contact_email.png in Resources */,
+				84301BC01F98222100F01F8F /* ic_search_icon.png in Resources */,
+				84301BC61F98224300F01F8F /* ContactSearchCell.xib in Resources */,
+				84301BBF1F98222100F01F8F /* ic_contact_search.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +330,7 @@
 				061A906D1F1CB19B00B7C227 /* ContactUserViewController.m in Sources */,
 				063455191F1C96AB00F1BEF8 /* User.m in Sources */,
 				06C6BAD31F15C8FE00D444E6 /* ContactViewController.m in Sources */,
+				84301BCB1F98225000F01F8F /* ContactSelectDepController.m in Sources */,
 				0634550E1F1C483200F1BEF8 /* ContractTableViewHeader.m in Sources */,
 				063455151F1C960D00F1BEF8 /* Deparment.m in Sources */,
 				06414F701F19E9DA0005342C /* ContractTableViewCell.m in Sources */,

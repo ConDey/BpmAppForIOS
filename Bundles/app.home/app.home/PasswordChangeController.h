@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "com_eazytec_bpm_lib_common/lib.common.h"
+
 @interface PasswordChangeController :EAViewController<UITextFieldDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate>
 
 @end
