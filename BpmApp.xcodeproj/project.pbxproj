@@ -21,7 +21,6 @@
 		0697637E1EFA4C760012D367 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0697637C1EFA4C760012D367 /* LaunchScreen.storyboard */; };
 		06C5A2D61F26CFD800A189FB /* com_eazytec_bpm_app_notice.framework in Resources */ = {isa = PBXBuildFile; fileRef = 06C5A2D01F26CF4E00A189FB /* com_eazytec_bpm_app_notice.framework */; };
 		06C6BAC51F15C26A00D444E6 /* Small.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 06361BF81F0F5D4400B1D545 /* Small.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		84301BE31F983FE100F01F8F /* ic_message_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 84301BE01F983FDE00F01F8F /* ic_message_default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,7 +163,6 @@
 		06F809A61F263526000872C4 /* app.msg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.msg.xcodeproj; path = Bundles/app.msg/app.msg.xcodeproj; sourceTree = "<group>"; };
 		06F809AC1F26352C000872C4 /* app.webkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.webkit.xcodeproj; path = Bundles/app.webkit/app.webkit.xcodeproj; sourceTree = "<group>"; };
 		06F809B21F263532000872C4 /* lib.common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = lib.common.xcodeproj; path = Bundles/lib.common/lib.common.xcodeproj; sourceTree = "<group>"; };
-		84301BE01F983FDE00F01F8F /* ic_message_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_message_default.png; path = Bundles/app.msg/app.msg/ic_message_default.png; sourceTree = "<group>"; };
 		84301BEF1F9889DA00F01F8F /* BpmApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BpmApp.entitlements; sourceTree = "<group>"; };
 		84301BFB1F98B9E400F01F8F /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -242,7 +240,6 @@
 		069763621EFA4C760012D367 = {
 			isa = PBXGroup;
 			children = (
-				84301BE01F983FDE00F01F8F /* ic_message_default.png */,
 				062618881EFA52D200F1EF72 /* Bundles */,
 				069763851EFA4D5D0012D367 /* Frameworks */,
 				0697636D1EFA4C760012D367 /* BpmApp */,
@@ -502,7 +499,6 @@
 				0697637B1EFA4C760012D367 /* Assets.xcassets in Resources */,
 				061468901F2641B3004CC8B9 /* com_eazytec_bpm_lib_common.framework in Resources */,
 				061468921F2641BB004CC8B9 /* com_eazytec_bpm_app_msg.framework in Resources */,
-				84301BE31F983FE100F01F8F /* ic_message_default.png in Resources */,
 				061468931F2641BF004CC8B9 /* com_eazytec_bpm_app_home.framework in Resources */,
 				061468941F2641C1004CC8B9 /* com_eazytec_bpm_app_contact.framework in Resources */,
 				06C5A2D61F26CFD800A189FB /* com_eazytec_bpm_app_notice.framework in Resources */,
@@ -677,7 +673,7 @@
 				INFOPLIST_FILE = BpmApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.eazytec.bpmapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "36cedace-739b-4470-8338-d4cfa18515ef";

@@ -24,6 +24,7 @@
     bgimageview.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     [self.view addSubview:bgimageview];
     
+    
     [Small setBaseUri:@"http://"];
     [Small setUpWithComplection:^{
         UIViewController *mainController = [Small controllerForUri:@"app.home"];

@@ -16,11 +16,11 @@
 		84301AC51F95E10B00F01F8F /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301AC31F95E10B00F01F8F /* MessageModel.m */; };
 		84301AE91F95F98F00F01F8F /* MessageMainCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301AE71F95F98F00F01F8F /* MessageMainCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301AEA1F95F98F00F01F8F /* MessageMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301AE81F95F98F00F01F8F /* MessageMainCell.m */; };
-		84301B341F97227900F01F8F /* MessageListModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301B321F97227900F01F8F /* MessageListModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84301B351F97227900F01F8F /* MessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301B331F97227900F01F8F /* MessageListModel.m */; };
-		84301B421F972AF900F01F8F /* FMDBHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301B401F972AF800F01F8F /* FMDBHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84301B431F972AF900F01F8F /* FMDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301B411F972AF900F01F8F /* FMDBHelper.m */; };
 		84301BE51F983FF500F01F8F /* ic_message_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 84301BE41F983FF400F01F8F /* ic_message_default.png */; };
+		84301C641F997D7600F01F8F /* FMDBHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301C621F997D7500F01F8F /* FMDBHelper.h */; };
+		84301C651F997D7600F01F8F /* FMDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301C631F997D7500F01F8F /* FMDBHelper.m */; };
+		84301C681F997D7F00F01F8F /* MessageListModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301C661F997D7E00F01F8F /* MessageListModel.h */; };
+		84301C691F997D7F00F01F8F /* MessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301C671F997D7E00F01F8F /* MessageListModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,11 +38,11 @@
 		84301AC31F95E10B00F01F8F /* MessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
 		84301AE71F95F98F00F01F8F /* MessageMainCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageMainCell.h; sourceTree = "<group>"; };
 		84301AE81F95F98F00F01F8F /* MessageMainCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageMainCell.m; sourceTree = "<group>"; };
-		84301B321F97227900F01F8F /* MessageListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageListModel.h; sourceTree = "<group>"; };
-		84301B331F97227900F01F8F /* MessageListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageListModel.m; sourceTree = "<group>"; };
-		84301B401F972AF800F01F8F /* FMDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBHelper.h; sourceTree = "<group>"; };
-		84301B411F972AF900F01F8F /* FMDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBHelper.m; sourceTree = "<group>"; };
 		84301BE41F983FF400F01F8F /* ic_message_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_message_default.png; sourceTree = "<group>"; };
+		84301C621F997D7500F01F8F /* FMDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBHelper.h; sourceTree = "<group>"; };
+		84301C631F997D7500F01F8F /* FMDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBHelper.m; sourceTree = "<group>"; };
+		84301C661F997D7E00F01F8F /* MessageListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListModel.h; sourceTree = "<group>"; };
+		84301C671F997D7E00F01F8F /* MessageListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,8 +109,8 @@
 		84301AB91F95DDB000F01F8F /* Db */ = {
 			isa = PBXGroup;
 			children = (
-				F80A8B3D1F98380200E126C6 /* FMDBHelper.h */,
-				F80A8B3E1F98380200E126C6 /* FMDBHelper.m */,
+				84301C621F997D7500F01F8F /* FMDBHelper.h */,
+				84301C631F997D7500F01F8F /* FMDBHelper.m */,
 			);
 			name = Db;
 			sourceTree = "<group>";
@@ -148,7 +148,6 @@
 		84301AF91F9621A500F01F8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-
 				84301BE41F983FF400F01F8F /* ic_message_default.png */,
 			);
 			name = "Supporting Files";
@@ -157,8 +156,8 @@
 		F80A8B351F98268300E126C6 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				F80A8B361F98269200E126C6 /* MessageListModel.h */,
-				F80A8B371F98269200E126C6 /* MessageListModel.m */,
+				84301C661F997D7E00F01F8F /* MessageListModel.h */,
+				84301C671F997D7E00F01F8F /* MessageListModel.m */,
 			);
 			name = List;
 			sourceTree = "<group>";
@@ -171,9 +170,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BA6D1F15C09300D444E6 /* app.msg.h in Headers */,
-				F80A8B3A1F9826F200E126C6 /* (null) in Headers */,
-				F80A8B3F1F98380200E126C6 /* FMDBHelper.h in Headers */,
-				F80A8B381F98269200E126C6 /* MessageListModel.h in Headers */,
+				84301C641F997D7600F01F8F /* FMDBHelper.h in Headers */,
+				84301C681F997D7F00F01F8F /* MessageListModel.h in Headers */,
 				84301AC41F95E10B00F01F8F /* MessageModel.h in Headers */,
 				84301AE91F95F98F00F01F8F /* MessageMainCell.h in Headers */,
 				06C6BACD1F15C39000D444E6 /* MsgViewController.h in Headers */,
@@ -238,9 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 				84301BE51F983FF500F01F8F /* ic_message_default.png in Resources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,12 +247,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F80A8B3B1F98270000E126C6 /* (null) in Sources */,
-				F80A8B391F98269200E126C6 /* MessageListModel.m in Sources */,
 				06C6BACE1F15C39000D444E6 /* MsgViewController.m in Sources */,
+				84301C651F997D7600F01F8F /* FMDBHelper.m in Sources */,
 				84301AC11F95E0A800F01F8F /* MessageTopicModel.m in Sources */,
+				84301C691F997D7F00F01F8F /* MessageListModel.m in Sources */,
 				84301AEA1F95F98F00F01F8F /* MessageMainCell.m in Sources */,
-				F80A8B401F98380200E126C6 /* FMDBHelper.m in Sources */,
 				84301AC51F95E10B00F01F8F /* MessageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
