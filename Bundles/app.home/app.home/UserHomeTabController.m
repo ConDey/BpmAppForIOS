@@ -66,7 +66,7 @@
 }
 
 - (UIViewController *)appController {
-    UIViewController *controller = [[UserHomeAppController alloc]initWithNibName:@"UserHomeAppController" bundle:self.bundle];
+    UIViewController *controller = [[UserHomeAppController alloc] init];
     UIImage *image = [UIImage imageNamed:@"ic_home_app" inBundle:self.bundle compatibleWithTraitCollection:nil];
     UIImage *selected_image = [UIImage imageNamed:@"ic_home_app_on" inBundle:self.bundle compatibleWithTraitCollection:nil];
     UITabBarItem *barItem = [[UITabBarItem alloc] initWithTitle:@"应用" image:image selectedImage:selected_image];

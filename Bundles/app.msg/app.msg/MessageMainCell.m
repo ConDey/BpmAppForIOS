@@ -84,7 +84,7 @@
         [_msgTime mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.contentView);
             make.right.mas_equalTo(self.contentView).offset(-10);
-            make.width.mas_equalTo(50);
+            make.width.mas_equalTo(58);
         }];
     }
     return _msgTime;

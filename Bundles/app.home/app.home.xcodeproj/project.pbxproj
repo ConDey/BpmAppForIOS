@@ -37,6 +37,13 @@
 		06C6BB021F17164500D444E6 /* ic_homeapp_process.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB011F17164500D444E6 /* ic_homeapp_process.png */; };
 		06C6BB0A1F1743A500D444E6 /* ic_homeapp_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB091F1743A500D444E6 /* ic_homeapp_image.png */; };
 		06C6BB0C1F1743E300D444E6 /* ic_homeapp_filepicker.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB0B1F1743E300D444E6 /* ic_homeapp_filepicker.png */; };
+		84301C761F998D2600F01F8F /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 84301C751F998D2500F01F8F /* PrefixHeader.pch */; };
+		84301C7A1F99960700F01F8F /* AppModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301C781F99960700F01F8F /* AppModel.h */; };
+		84301C7B1F99960700F01F8F /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301C791F99960700F01F8F /* AppModel.m */; };
+		84301C7E1F99990E00F01F8F /* AppListModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301C7C1F99990E00F01F8F /* AppListModel.h */; };
+		84301C7F1F99990E00F01F8F /* AppListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301C7D1F99990E00F01F8F /* AppListModel.m */; };
+		84301C831F999C2E00F01F8F /* AppModelHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301C811F999C2E00F01F8F /* AppModelHelper.h */; };
+		84301C841F999C2E00F01F8F /* AppModelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301C821F999C2E00F01F8F /* AppModelHelper.m */; };
 		F80A8ACD1F98224100E126C6 /* PasswordChangeController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8ACB1F98224100E126C6 /* PasswordChangeController.h */; };
 		F80A8ACE1F98224100E126C6 /* PasswordChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8ACC1F98224100E126C6 /* PasswordChangeController.m */; };
 		F80A8AD31F98224C00E126C6 /* ic_setting_update.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8ACF1F98224C00E126C6 /* ic_setting_update.png */; };
@@ -79,6 +86,13 @@
 		06C6BB091F1743A500D444E6 /* ic_homeapp_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_image.png; sourceTree = "<group>"; };
 		06C6BB0B1F1743E300D444E6 /* ic_homeapp_filepicker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_filepicker.png; sourceTree = "<group>"; };
 		06F809C41F263593000872C4 /* Small.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Small.framework; path = "../../Frameworks/build/Debug-iphoneos/Small.framework"; sourceTree = "<group>"; };
+		84301C751F998D2500F01F8F /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		84301C781F99960700F01F8F /* AppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
+		84301C791F99960700F01F8F /* AppModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
+		84301C7C1F99990E00F01F8F /* AppListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppListModel.h; sourceTree = "<group>"; };
+		84301C7D1F99990E00F01F8F /* AppListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppListModel.m; sourceTree = "<group>"; };
+		84301C811F999C2E00F01F8F /* AppModelHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppModelHelper.h; sourceTree = "<group>"; };
+		84301C821F999C2E00F01F8F /* AppModelHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppModelHelper.m; sourceTree = "<group>"; };
 		F80A8ACB1F98224100E126C6 /* PasswordChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordChangeController.h; sourceTree = "<group>"; };
 		F80A8ACC1F98224100E126C6 /* PasswordChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeController.m; sourceTree = "<group>"; };
 		F80A8ACF1F98224C00E126C6 /* ic_setting_update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_update.png; sourceTree = "<group>"; };
@@ -145,9 +159,9 @@
 		06C3A40B1F0B630100633543 /* app.home */ = {
 			isa = PBXGroup;
 			children = (
+				84301C751F998D2500F01F8F /* PrefixHeader.pch */,
 				06C3A4361F0C72FB00633543 /* Src */,
 				06C3A4351F0C72EB00633543 /* Supporting Files */,
-				84301BD81F98338200F01F8F /* PrefixHeader.pch */,
 			);
 			path = app.home;
 			sourceTree = "<group>";
@@ -155,10 +169,6 @@
 		06C3A4351F0C72EB00633543 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				84301B181F96DCB900F01F8F /* ic_setting_loginout.png */,
-				84301B1B1F96DCBA00F01F8F /* ic_setting_setting.png */,
-				84301B191F96DCBA00F01F8F /* ic_setting_update.png */,
-				84301B1A1F96DCBA00F01F8F /* ic_setting_updatepwd.png */,
 				06C5A2D91F26D32A00A189FB /* app.json */,
 				F80A8AD11F98224C00E126C6 /* ic_setting_loginout.png */,
 				F80A8AD21F98224C00E126C6 /* ic_setting_setting.png */,
@@ -261,8 +271,12 @@
 		06C6BAE91F1603B300D444E6 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				84301C801F999BF300F01F8F /* Helper */,
+				84301C771F9995A400F01F8F /* List */,
 				06C6BAEA1F1603CF00D444E6 /* EAApp.h */,
 				06C6BAEB1F1603CF00D444E6 /* EAApp.m */,
+				84301C781F99960700F01F8F /* AppModel.h */,
+				84301C791F99960700F01F8F /* AppModel.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -277,6 +291,24 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		84301C771F9995A400F01F8F /* List */ = {
+			isa = PBXGroup;
+			children = (
+				84301C7C1F99990E00F01F8F /* AppListModel.h */,
+				84301C7D1F99990E00F01F8F /* AppListModel.m */,
+			);
+			name = List;
+			sourceTree = "<group>";
+		};
+		84301C801F999BF300F01F8F /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				84301C811F999C2E00F01F8F /* AppModelHelper.h */,
+				84301C821F999C2E00F01F8F /* AppModelHelper.m */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -285,10 +317,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BAEC1F1603CF00D444E6 /* EAApp.h in Headers */,
+				84301C761F998D2600F01F8F /* PrefixHeader.pch in Headers */,
 				F80A8ACD1F98224100E126C6 /* PasswordChangeController.h in Headers */,
 				06C6BAD71F15CA3600D444E6 /* UserHomeAppController.h in Headers */,
+				84301C7E1F99990E00F01F8F /* AppListModel.h in Headers */,
 				06C6BADC1F15CB3600D444E6 /* UserHomeSettingController.h in Headers */,
+				84301C831F999C2E00F01F8F /* AppModelHelper.h in Headers */,
 				06C6BA511F14F2EA00D444E6 /* UserHomeNavController.h in Headers */,
+				84301C7A1F99960700F01F8F /* AppModel.h in Headers */,
 				06C6BAF01F160E2600D444E6 /* NSLayoutConstraintOnePixelLine.h in Headers */,
 				06C6BAF61F16F93100D444E6 /* UserHomeAppViewCell.h in Headers */,
 				06C6BA4D1F14F1E200D444E6 /* UserHomeTabController.h in Headers */,
@@ -329,6 +365,7 @@
 				TargetAttributes = {
 					06C3A4081F0B630100633543 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 4KU6JMLAYK;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -383,11 +420,14 @@
 			files = (
 				06C6BAF11F160E2600D444E6 /* NSLayoutConstraintOnePixelLine.m in Sources */,
 				0686A8971F0CB23D00697582 /* UserAuthViewController.m in Sources */,
+				84301C7F1F99990E00F01F8F /* AppListModel.m in Sources */,
 				06C6BADD1F15CB3600D444E6 /* UserHomeSettingController.m in Sources */,
 				F80A8ACE1F98224100E126C6 /* PasswordChangeController.m in Sources */,
+				84301C841F999C2E00F01F8F /* AppModelHelper.m in Sources */,
 				06C6BA4E1F14F1E200D444E6 /* UserHomeTabController.m in Sources */,
 				06C6BAF71F16F93100D444E6 /* UserHomeAppViewCell.m in Sources */,
 				06C6BAED1F1603CF00D444E6 /* EAApp.m in Sources */,
+				84301C7B1F99960700F01F8F /* AppModel.m in Sources */,
 				06C6BA521F14F2EA00D444E6 /* UserHomeNavController.m in Sources */,
 				06C6BAD81F15CA3600D444E6 /* UserHomeAppController.m in Sources */,
 			);
@@ -503,7 +543,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4KU6JMLAYK;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -532,7 +572,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4KU6JMLAYK;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

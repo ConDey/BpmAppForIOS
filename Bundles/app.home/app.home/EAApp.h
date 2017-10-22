@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, APPType) {
     AppTypeWeb           // 代表WEB应用
 };
 
-@property (nonatomic,retain) NSString *id;
+@property (nonatomic,retain) NSString *appId;
 @property (nonatomic,retain) NSString *name;
 @property (nonatomic,retain) NSString *displayName;
 @property (nonatomic,retain) NSString *imageUrl;

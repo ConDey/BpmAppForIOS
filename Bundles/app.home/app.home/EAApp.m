@@ -18,7 +18,7 @@
 - (instancetype)initWithDict:(NSDictionary *)dict {
     if ([self init]) {
         
-        self.id = [dict objectForKey:@"id"];
+        self.appId = [dict objectForKey:@"id"];
         self.packageName = [dict objectForKey:@"packagename"];
         self.name = [dict objectForKey:@"name"];
         self.displayName = [dict objectForKey:@"diplayname"];
