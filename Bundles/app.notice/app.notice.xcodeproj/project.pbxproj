@@ -18,6 +18,9 @@
 		F80A8B6A1F98C54600E126C6 /* NoticeListViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B671F98C54600E126C6 /* NoticeListViewCell.h */; };
 		F80A8B6B1F98C54600E126C6 /* NoticeListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B681F98C54600E126C6 /* NoticeListViewCell.m */; };
 		F80A8B6C1F98C54600E126C6 /* NoticeListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80A8B691F98C54600E126C6 /* NoticeListViewCell.xib */; };
+		F8AFFAE41F9D73DF00CE74F5 /* NoticeDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFAE11F9D73DE00CE74F5 /* NoticeDetailViewCell.m */; };
+		F8AFFAE51F9D73DF00CE74F5 /* NoticeDetailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFAE21F9D73DE00CE74F5 /* NoticeDetailViewCell.xib */; };
+		F8AFFAE61F9D73DF00CE74F5 /* NoticeDetailViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFAE31F9D73DF00CE74F5 /* NoticeDetailViewCell.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +38,9 @@
 		F80A8B671F98C54600E126C6 /* NoticeListViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeListViewCell.h; sourceTree = "<group>"; };
 		F80A8B681F98C54600E126C6 /* NoticeListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoticeListViewCell.m; sourceTree = "<group>"; };
 		F80A8B691F98C54600E126C6 /* NoticeListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeListViewCell.xib; sourceTree = "<group>"; };
+		F8AFFAE11F9D73DE00CE74F5 /* NoticeDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeDetailViewCell.m; sourceTree = "<group>"; };
+		F8AFFAE21F9D73DE00CE74F5 /* NoticeDetailViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeDetailViewCell.xib; sourceTree = "<group>"; };
+		F8AFFAE31F9D73DF00CE74F5 /* NoticeDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeDetailViewCell.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				F80A8B671F98C54600E126C6 /* NoticeListViewCell.h */,
+				F8AFFAE31F9D73DF00CE74F5 /* NoticeDetailViewCell.h */,
+				F8AFFAE11F9D73DE00CE74F5 /* NoticeDetailViewCell.m */,
+				F8AFFAE21F9D73DE00CE74F5 /* NoticeDetailViewCell.xib */,
 				F80A8B681F98C54600E126C6 /* NoticeListViewCell.m */,
 				F80A8B691F98C54600E126C6 /* NoticeListViewCell.xib */,
 			);
@@ -144,6 +153,7 @@
 				06C5A2C51F26CF4D00A189FB /* app.notice.h in Headers */,
 				F80A8B601F98C33400E126C6 /* NoticeDetailViewController.h in Headers */,
 				F80A8B561F98B6D600E126C6 /* NoticeViewController.h in Headers */,
+				F8AFFAE61F9D73DF00CE74F5 /* NoticeDetailViewCell.h in Headers */,
 				F80A8B6A1F98C54600E126C6 /* NoticeListViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F80A8B6C1F98C54600E126C6 /* NoticeListViewCell.xib in Resources */,
+				F8AFFAE51F9D73DF00CE74F5 /* NoticeDetailViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +232,7 @@
 				F80A8B651F98C3E200E126C6 /* NoticeDetailModel.m in Sources */,
 				F80A8B6B1F98C54600E126C6 /* NoticeListViewCell.m in Sources */,
 				F80A8B611F98C33400E126C6 /* NoticeDetailViewController.m in Sources */,
+				F8AFFAE41F9D73DF00CE74F5 /* NoticeDetailViewCell.m in Sources */,
 				F80A8B571F98B6D600E126C6 /* NoticeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

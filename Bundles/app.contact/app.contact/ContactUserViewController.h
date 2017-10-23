@@ -10,7 +10,7 @@
 
 #import "User.h"
 
-@interface ContactUserViewController : EAViewController<UITableViewDelegate, UITableViewDataSource>
+@interface ContactUserViewController : EAViewController<UITableViewDelegate, UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate>
 
 @property (nonatomic,retain) User *user;
 @property (nonatomic,copy) NSString *userId;
