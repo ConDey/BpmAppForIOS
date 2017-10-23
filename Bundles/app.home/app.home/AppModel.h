@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) NSString* appId;
 @property (nonatomic, strong) NSString* orderNo;
-@property (nonatomic, strong) NSString* displayName;
+@property (nonatomic, strong) NSString* diplayName;
 @property (nonatomic, strong) NSString* packageName;
 @property (nonatomic, strong) NSString* imageUrl;
 @property (nonatomic, strong) NSString* description;

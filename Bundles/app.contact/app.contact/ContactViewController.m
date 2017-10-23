@@ -77,7 +77,7 @@
 }
 
 
-- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name {
+- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
     
     self.dep_id = [result objectForKey:@"id"];
     self.dep_name = [result objectForKey:@"name"];

@@ -47,7 +47,7 @@
     [self setTitleOfNav:@"通知公告"];
 }
 
--(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name{
+-(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
     self.noticeList=[result objectForKey:@"datas"];
     NSLog(@"%@",self.noticeList);
     [self.tableview reloadData];

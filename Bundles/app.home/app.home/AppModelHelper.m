@@ -32,7 +32,7 @@
     mApp.appId = data.appId;
     mApp.packageName = data.packageName;
     mApp.name = data.name;
-    mApp.displayName = data.displayName;
+    mApp.displayName = data.diplayName;
     mApp.imageUrl = data.imageUrl;
     mApp.bundleName = data.bundleName;
     

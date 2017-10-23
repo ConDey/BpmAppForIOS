@@ -191,7 +191,7 @@
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
               NSDictionary *result  = [[EAProtocol sharedInstance] doRequestJSONSerializationdDecode:responseObject];
               if ([[EAProtocol sharedInstance] isRequestJSONSerializationSuccess:result]) {
-                  [self didAnalysisRequestResultWithData:result andService:[[EAProtocol sharedInstance] getServiceNameByEnum:name]];
+                  [self didAnalysisRequestResultWithData:result andService:name];
                   if (progress)  [SVProgressHUD dismiss];
               }
               else {
@@ -200,12 +200,12 @@
                       
                   }
               }
-              [self didFinishHttpRequest:[[EAProtocol sharedInstance] getServiceNameByEnum:name]];
+              [self didFinishHttpRequest:name];
           }
           failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
               NSLog(@"%@",error);  //这里打印错误信息
               [SVProgressHUD showErrorWithStatus:@"系统繁忙,请稍后再试"];
-              [self didFinishHttpRequest:[[EAProtocol sharedInstance] getServiceNameByEnum:name]];
+              [self didFinishHttpRequest:name];
           }];
 }
 
@@ -221,7 +221,7 @@
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              NSDictionary *result  = [[EAProtocol sharedInstance] doRequestJSONSerializationdDecode:responseObject];
              if ([[EAProtocol sharedInstance] isRequestJSONSerializationSuccess:result]) {
-                 [self didAnalysisRequestResultWithData:result andService:[[EAProtocol sharedInstance] getServiceNameByEnum:name]];
+                 [self didAnalysisRequestResultWithData:result andService:name];
                  if (progress)  [SVProgressHUD dismiss];
              }
              else {
@@ -230,20 +230,20 @@
                      
                  }
              }
-             [self didFinishHttpRequest:[[EAProtocol sharedInstance] getServiceNameByEnum:name]];
+             [self didFinishHttpRequest:name];
          }
          failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull   error) {
              NSLog(@"%@",error);  //这里打印错误信息
              [SVProgressHUD showErrorWithStatus:@"系统繁忙,请稍后再试"];
-             [self didFinishHttpRequest:[[EAProtocol sharedInstance] getServiceNameByEnum:name]];
+             [self didFinishHttpRequest:name];
          }];
 }
 
-- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString*)name {
+- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
     
 }
 
-- (void)didFinishHttpRequest:(NSString*)name {
+- (void)didFinishHttpRequest:(HttpProtocolServiceName)name {
     
 }
 
