@@ -29,7 +29,7 @@
     self.isUp=NO;
     self.isDown=NO;
     self.isFirst=NO;
-    self.cellHeight=80;
+    self.cellHeight=70;
     
     self.grouptableview.delegate=self;
     self.grouptableview.dataSource=self;
@@ -54,7 +54,7 @@
         [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight+1] forKey:@"pageSize"];
         [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
         [self.grouptableview.mj_header endRefreshing];
-         [self.grouptableview.mj_footer endRefreshing];
+       
     }];
 
     //上拉刷新
@@ -127,7 +127,7 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return (int)(SCREEN_HEIGHT-55)/self.cellHeight;
+    return (int)(SCREEN_HEIGHT-15-NAV_HEIGHT)/self.cellHeight;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NoticeListViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"NoticeList"];
