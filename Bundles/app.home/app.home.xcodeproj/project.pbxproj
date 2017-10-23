@@ -93,6 +93,9 @@
 		84301C7D1F99990E00F01F8F /* AppListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppListModel.m; sourceTree = "<group>"; };
 		84301C811F999C2E00F01F8F /* AppModelHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppModelHelper.h; sourceTree = "<group>"; };
 		84301C821F999C2E00F01F8F /* AppModelHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppModelHelper.m; sourceTree = "<group>"; };
+		847206D41F9D85FA00A7CE7E /* ic_homeapp_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_card.png; sourceTree = "<group>"; };
+		847206D51F9D85FA00A7CE7E /* ic_homeapp_file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_file.png; sourceTree = "<group>"; };
+		847206D61F9D85FD00A7CE7E /* ic_homeapp_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_search.png; sourceTree = "<group>"; };
 		F80A8ACB1F98224100E126C6 /* PasswordChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordChangeController.h; sourceTree = "<group>"; };
 		F80A8ACC1F98224100E126C6 /* PasswordChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeController.m; sourceTree = "<group>"; };
 		F80A8ACF1F98224C00E126C6 /* ic_setting_update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_update.png; sourceTree = "<group>"; };
@@ -169,6 +172,9 @@
 		06C3A4351F0C72EB00633543 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				847206D41F9D85FA00A7CE7E /* ic_homeapp_card.png */,
+				847206D51F9D85FA00A7CE7E /* ic_homeapp_file.png */,
+				847206D61F9D85FD00A7CE7E /* ic_homeapp_search.png */,
 				06C5A2D91F26D32A00A189FB /* app.json */,
 				F80A8AD11F98224C00E126C6 /* ic_setting_loginout.png */,
 				F80A8AD21F98224C00E126C6 /* ic_setting_setting.png */,

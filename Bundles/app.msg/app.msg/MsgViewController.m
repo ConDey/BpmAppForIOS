@@ -80,9 +80,9 @@ static NSString* IS_REFRESH_FALSE = @"0";
 }
 
 #pragma mark - netwrok
-- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name {
+- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
     
-    if (name == [[EAProtocol sharedInstance] getServiceNameByEnum:HttpProtocolServiceMessageList]) {
+    if (name == HttpProtocolServiceMessageList) {
     
         NSString* username = [[[CurrentUser currentUser] userdetails] username];
         _datas = [[NSMutableArray alloc] init];
@@ -110,7 +110,7 @@ static NSString* IS_REFRESH_FALSE = @"0";
         [self.tableView reloadData];
     }
     
-    if (name == [[EAProtocol sharedInstance] getServiceNameByEnum:HttpProtocolServiceMessageReaded]) {
+    if (name == HttpProtocolServiceMessageReaded) {
         BaseModel* resultModel = [BaseModel mj_objectWithKeyValues:result];
         if (!resultModel.success) {
             [SVProgressHUD showErrorWithStatus:resultModel.errorMsg];

@@ -17,6 +17,7 @@
 @property (nonatomic,retain) NSMutableArray *apps;
 @property (nonatomic,retain) NSMutableArray *allApps;
 
+@property (nonatomic,retain) UIScrollView *scrollView;
 
 @property (strong, nonatomic) UIImageView *headImageView;
 @property (strong, nonatomic) UIView *dividerOne;
@@ -28,9 +29,6 @@
 @property (strong, nonatomic) UIView *dividerFour;
 @property (strong, nonatomic) UICollectionView *allAppsCollectionView;
 @property (strong, nonatomic) UIView *dividerFive;
-
-@property (strong, nonatomic) NSLayoutConstraint *appsCollectionViewHeigthConstraint;
-@property (strong, nonatomic) NSLayoutConstraint *allAppsCollectionViewHeigthConstraint;
 
 @end
 
@@ -61,13 +59,19 @@
 }
 
 - (void)initView {
-    [self.view addSubview:self.headImageView];
+    
+    [self.view addSubview:self.scrollView];
+    [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.view);
+    }];
+    
+    [self.scrollView addSubview:self.headImageView];
     [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.mas_equalTo(self.view);
         make.height.mas_equalTo(110);
     }];
     
-    [self.view addSubview:self.dividerOne];
+    [self.scrollView addSubview:self.dividerOne];
     [_dividerOne mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
         make.left.right.mas_equalTo(self.view);
@@ -75,27 +79,28 @@
     }];
     
     // 常用应用
-    [self.view addSubview:self.usualAppsLabel];
+    [self.scrollView addSubview:self.usualAppsLabel];
     [_usualAppsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(40);
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.dividerOne.mas_bottom).offset(25);
     }];
     
-    [self.view addSubview:self.dividerTwo];
+    [self.scrollView addSubview:self.dividerTwo];
     [_dividerTwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.usualAppsLabel.mas_bottom);
     }];
     
-    [self.view addSubview:self.appsCollectionView];
+    [self.scrollView addSubview:self.appsCollectionView];
     [_appsCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.dividerTwo.mas_bottom);
+        //make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
     }];
     
-    [self.view addSubview:self.dividerThree];
+    [self.scrollView addSubview:self.dividerThree];
     [_dividerThree mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
         make.left.right.mas_equalTo(self.view);
@@ -103,36 +108,33 @@
     }];
     
     // 全部应用
-    [self.view addSubview:self.allAppsLabel];
+    [self.scrollView addSubview:self.allAppsLabel];
     [_allAppsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(40);
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.dividerThree.mas_bottom).offset(25);
     }];
     
-    [self.view addSubview:self.dividerFour];
+    [self.scrollView addSubview:self.dividerFour];
     [_dividerFour mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.allAppsLabel.mas_bottom);
     }];
     
-    [self.view addSubview:self.allAppsCollectionView];
+    [self.scrollView addSubview:self.allAppsCollectionView];
     [_allAppsCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.dividerFour.mas_bottom);
+        //make.height.mas_equalTo([self appscountdisplay:self.allApps] / 4  *  (100 + ONE_PX));
     }];
     
-    [self.view addSubview:self.dividerFive];
+    [self.scrollView addSubview:self.dividerFive];
     [_dividerFive mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.allAppsCollectionView.mas_bottom);
     }];
-    
-    self.appsCollectionViewHeigthConstraint.constant = [self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX);
-    
-    self.allAppsCollectionViewHeigthConstraint.constant = [self appscountdisplay:self.allApps] / 4  *  (100 + ONE_PX);
     
 }
 
@@ -173,25 +175,33 @@
 }
 
 #pragma mark - network
-- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name {
+- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
     
-    if (name == [[EAProtocol sharedInstance] getServiceNameByEnum:HttpProtocolServiceAppMenuList]) {
+    if (name == HttpProtocolServiceAppMenuList) {
         
         AppListModel* appsModel = [AppListModel mj_objectWithKeyValues:result];
         if (appsModel.success) {
             _apps = [AppModelHelper createBpmAppByDatas:appsModel.apps];
         }
+        // 更新高度
+        [self.appsCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
+        }];
+        [self.appsCollectionView reloadData];
     }
     
-    if (name == [[EAProtocol sharedInstance] getServiceNameByEnum:HttpProtocolServiceAppMenuAllList]) {
+    if (name == HttpProtocolServiceAppMenuAllList) {
         
         AppListModel* allAppsModel = [AppListModel mj_objectWithKeyValues:result];
         if (allAppsModel.success) {
             _allApps = [AppModelHelper createBpmAppByDatas:allAppsModel.apps];
         }
+        // 更新高度
+        [self.allAppsCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo([self appscountdisplay:self.allApps] / 4  *  (100 + ONE_PX));
+        }];
+        [self.allAppsCollectionView reloadData];
     }
-    
-    [self.appsCollectionView reloadData];
 }
 
 #pragma mark - CollectionViewDelegate
@@ -241,11 +251,11 @@
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (collectionView == self.appsCollectionView) {
         if(self.apps == nil) {
             return 0;
         }
@@ -263,7 +273,7 @@
     
     UserHomeAppViewCell *cell = (UserHomeAppViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"UserHomeAppViewCell" forIndexPath:indexPath];
     
-    if (indexPath.section == 0) {
+    if (collectionView == self.appsCollectionView) {
         if (indexPath.row >= [self.apps count]) {
             cell.titleLabel.text = @"";
             cell.imageView.image = nil;
@@ -278,7 +288,7 @@
         }
     }
     
-    if (indexPath.section == 1) {
+    if (collectionView == self.allAppsCollectionView) {
         if (indexPath.row >= [self.allApps count]) {
             cell.titleLabel.text = @"";
             cell.imageView.image = nil;
@@ -317,9 +327,21 @@
 }
 
 # pragma mark - getter
+- (UIScrollView*)scrollView {
+    if (_scrollView == nil) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.scrollEnabled = YES;
+        _scrollView.showsVerticalScrollIndicator = NO;
+        _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, 1000);
+    }
+    return _scrollView;
+}
+
 - (UIImageView*)headImageView {
     if(_headImageView == nil) {
-        _headImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_homeapp_head"]];
+        _headImageView = [[UIImageView alloc] init];
+        UIImage *image = [UIImage imageNamed:@"ic_homeapp_head" inBundle:self.bundle compatibleWithTraitCollection:nil];
+        _headImageView.image = image;
     }
     return _headImageView;
 }
@@ -327,7 +349,7 @@
 - (UILabel*)usualAppsLabel {
     if (_usualAppsLabel == nil) {
         _usualAppsLabel = [[UILabel alloc] init];
-        _usualAppsLabel.text = @"常用应用";
+        _usualAppsLabel.text = @"   常用应用";
         _usualAppsLabel.font = [UIFont systemFontOfSize:15];
         _usualAppsLabel.textAlignment = UITextAlignmentLeft;
         _usualAppsLabel.backgroundColor = [UIColor whiteColor];
@@ -339,13 +361,13 @@
 - (UILabel*)allAppsLabel {
     if (_allAppsLabel == nil) {
         _allAppsLabel = [[UILabel alloc] init];
-        _allAppsLabel.text = @"全部应用";
+        _allAppsLabel.text = @"   全部应用";
         _allAppsLabel.font = [UIFont systemFontOfSize:15];
         _allAppsLabel.textAlignment = UITextAlignmentLeft;
         _allAppsLabel.backgroundColor = [UIColor whiteColor];
         
     }
-    return _usualAppsLabel;
+    return _allAppsLabel;
 }
 
 - (UIView*)dividerOne{
@@ -390,9 +412,16 @@
 
 - (UICollectionView*)appsCollectionView {
     if (_appsCollectionView == nil) {
-        _appsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.appsCollectionViewHeigthConstraint];
+        
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.itemSize = CGSizeMake(100, 100);
+        flowLayout.minimumInteritemSpacing = 1;
+        flowLayout.minimumLineSpacing = 2;
+        
+        _appsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _appsCollectionView.delegate = self;
         _appsCollectionView.dataSource = self;
+        _appsCollectionView.backgroundColor = UI_GRAY_COLOR;
         
         NSBundle *bundle = [NSBundle bundleForClass:[self class]];
         [self.appsCollectionView registerNib:[UINib nibWithNibName:@"UserHomeAppViewCell" bundle:bundle]forCellWithReuseIdentifier:@"UserHomeAppViewCell"];
@@ -402,9 +431,16 @@
 
 - (UICollectionView*)allAppsCollectionView {
     if (_allAppsCollectionView == nil) {
-        _allAppsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero];
+        
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.itemSize = CGSizeMake(100, 100);
+        flowLayout.minimumInteritemSpacing = 1;
+        flowLayout.minimumLineSpacing = 1;
+        
+        _allAppsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _allAppsCollectionView.delegate = self;
         _allAppsCollectionView.dataSource = self;
+        _allAppsCollectionView.backgroundColor = UI_GRAY_COLOR;
         
         NSBundle *bundle = [NSBundle bundleForClass:[self class]];
         [self.allAppsCollectionView registerNib:[UINib nibWithNibName:@"UserHomeAppViewCell" bundle:bundle]forCellWithReuseIdentifier:@"UserHomeAppViewCell"];

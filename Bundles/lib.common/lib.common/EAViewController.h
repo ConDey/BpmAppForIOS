@@ -29,7 +29,7 @@
 
 - (void)httpGetRequestWithUrl:(HttpProtocolServiceName)name params:(NSDictionary *)params progress:(BOOL)progress;
 - (void)httpPostRequestWithUrl:(HttpProtocolServiceName)name params:(NSDictionary *)params progress:(BOOL)progress;
-- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString*)name;
-- (void)didFinishHttpRequest:(NSString*)name;
+- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name;
+- (void)didFinishHttpRequest:(HttpProtocolServiceName)name;
 
 @end

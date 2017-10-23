@@ -107,7 +107,7 @@
     
 }
 
-- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name {
+- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
     
     UserDetails *userdetail = [[UserDetails alloc]init];
     

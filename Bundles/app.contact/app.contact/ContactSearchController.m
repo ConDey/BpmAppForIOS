@@ -64,7 +64,7 @@
     self.navDisplay=YES;
     [self setTitleOfNav:@"人员搜索"];
 }
--(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name{
+-(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
     NSMutableArray *ud=[[NSMutableArray alloc]init];
     ud=[result objectForKey:@"datas"];
     self.userDetail=[[NSArray alloc]initWithArray:ud];

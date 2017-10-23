@@ -132,7 +132,7 @@
     [self httpGetRequestWithUrl:HttpProtocolServiceContactUserDetail params:params progress:YES];
 }
 
-- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name {
+- (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
     
     self.user = [User mj_objectWithKeyValues:result];
     [self.tableview reloadData];
