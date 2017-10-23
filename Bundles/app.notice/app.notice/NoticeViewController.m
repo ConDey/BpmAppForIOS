@@ -80,7 +80,7 @@
     
 }
 
--(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name{
+-(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
     
     NSArray *data=[result objectForKey:@"datas"];
     self.noticeList=[[NSArray alloc]initWithArray:data];
@@ -109,12 +109,17 @@
     cell.createdBy.textColor=UI_BLUE_COLOR;
     cell.createdBy.layer.borderWidth=1;
     cell.createdBy.layer.borderColor=UI_BLUE_COLOR.CGColor;
-    cell.createdBy.layer.cornerRadius=10;
+    cell.createdBy.layer.cornerRadius=4.f;
     cell.createdBy.layer.masksToBounds=YES;
     //创建时间
     cell.createdTime.textColor=FONT_GRAY_COLOR;
     
-    
+    //cell阴影
+    cell.layer.cornerRadius=2.0f;
+    cell.layer.shadowColor=[UIColor blackColor].CGColor;
+    cell.layer.shadowOffset=CGSizeMake(3, 3);
+    cell.layer.shadowRadius=2.0f;
+    cell.layer.shadowOpacity=0.3;
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

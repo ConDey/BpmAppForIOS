@@ -42,7 +42,7 @@
     [self httpGetRequestWithUrl:HttpProtocolServiceNoticeDetail  params:params progress:YES];
 }
 
--(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name{
+-(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
     self.noticeDetail=[NoticeDetailModel mj_objectWithKeyValues:result];
     
     [self.tableview reloadData];
