@@ -40,6 +40,9 @@
 		F80A8AE21F9822BB00E126C6 /* ContactSearchCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8ADF1F9822BB00E126C6 /* ContactSearchCell.h */; };
 		F80A8AE81F9822C900E126C6 /* ContactSearchController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8AE41F9822C800E126C6 /* ContactSearchController.h */; };
 		F80A8AE91F9822C900E126C6 /* ContactSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8AE51F9822C800E126C6 /* ContactSearchController.m */; };
+		F8AFFAEA1F9D7A7200CE74F5 /* ic_contact_way_msg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFAE71F9D7A7100CE74F5 /* ic_contact_way_msg.png */; };
+		F8AFFAEB1F9D7A7200CE74F5 /* ic_contact_way_tel.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFAE81F9D7A7100CE74F5 /* ic_contact_way_tel.png */; };
+		F8AFFAEC1F9D7A7200CE74F5 /* app_banner.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFAE91F9D7A7200CE74F5 /* app_banner.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +82,9 @@
 		F80A8AE41F9822C800E126C6 /* ContactSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactSearchController.h; sourceTree = "<group>"; };
 		F80A8AE51F9822C800E126C6 /* ContactSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactSearchController.m; sourceTree = "<group>"; };
 		F80A8B3C1F982A9A00E126C6 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		F8AFFAE71F9D7A7100CE74F5 /* ic_contact_way_msg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_contact_way_msg.png; sourceTree = "<group>"; };
+		F8AFFAE81F9D7A7100CE74F5 /* ic_contact_way_tel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_contact_way_tel.png; sourceTree = "<group>"; };
+		F8AFFAE91F9D7A7200CE74F5 /* app_banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_banner.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,9 @@
 			children = (
 				061A90891F1DE14A00B7C227 /* ic_contact_email.png */,
 				061A908A1F1DE14A00B7C227 /* ic_contact_group.png */,
+				F8AFFAE91F9D7A7200CE74F5 /* app_banner.png */,
+				F8AFFAE71F9D7A7100CE74F5 /* ic_contact_way_msg.png */,
+				F8AFFAE81F9D7A7100CE74F5 /* ic_contact_way_tel.png */,
 				F80A8AD81F98226400E126C6 /* ic_contact_local.png */,
 				F80A8AD71F98226400E126C6 /* ic_contact_search.png */,
 				F80A8AD91F98226400E126C6 /* ic_search_icon.png */,
@@ -278,11 +287,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8AFFAEB1F9D7A7200CE74F5 /* ic_contact_way_tel.png in Resources */,
+				F8AFFAEA1F9D7A7200CE74F5 /* ic_contact_way_msg.png in Resources */,
 				061A90941F1DE62B00B7C227 /* ContactUserViewController.xib in Resources */,
 				061A90911F1DE14A00B7C227 /* ic_contact_tel.png in Resources */,
 				F80A8ADA1F98226400E126C6 /* ic_contact_search.png in Resources */,
 				063455101F1C484100F1BEF8 /* ContractTableViewHeader.xib in Resources */,
 				061A90831F1DD3CC00B7C227 /* ContractUserTableViewCell.xib in Resources */,
+				F8AFFAEC1F9D7A7200CE74F5 /* app_banner.png in Resources */,
 				F80A8ADB1F98226400E126C6 /* ic_contact_local.png in Resources */,
 				06414F711F19E9DA0005342C /* ContractTableViewCell.xib in Resources */,
 				061A90901F1DE14A00B7C227 /* ic_contact_position.png in Resources */,
