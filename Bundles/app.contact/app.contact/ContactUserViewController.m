@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTitleOfNav:self.user.fullName];
-    //没图
+    //背景图
     UIImageView *picView=[[UIImageView alloc]init];
     picView.image=[UIImage imageNamed:@"app_banner.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
     [self.view addSubview:picView];
@@ -249,7 +249,8 @@
 
 //打电话 发信息
 -(void)tapMeg:(UITapGestureRecognizer *)sender{
-    
+    NSLog(@"msg");
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithFormat:@"sms://%@",self.user.mobile]]];
 }
 
 -(void)tapTel:(UITapGestureRecognizer *)sender{
