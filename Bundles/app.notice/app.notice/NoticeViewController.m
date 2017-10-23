@@ -54,9 +54,11 @@
         [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight+1] forKey:@"pageSize"];
         [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
         [self.grouptableview.mj_header endRefreshing];
+         [self.grouptableview.mj_footer endRefreshing];
     }];
 
     //上拉刷新
+    //每次下拉保留上次的最后3个
  self.grouptableview.mj_footer=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
      if(self.totalPage==[NSString stringWithFormat:@"%ld",self.pgNo]){
          [self.grouptableview.mj_footer endRefreshingWithNoMoreData];
@@ -66,9 +68,10 @@
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:@"" forKey:@"title"];
           [params setObject:[NSString stringWithFormat:@"%ld",self.pgNo] forKey:@"pageNo"];
-          [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight] forKey:@"pageSize"];
+          [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight-3] forKey:@"pageSize"];
          [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
          [self.grouptableview.mj_footer endRefreshing];
+     
     }];
   
 }
@@ -98,26 +101,24 @@
 -(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
     self.totalPage=[result objectForKey:@"totalPages"];
     NSArray *data=[result objectForKey:@"datas"];
-  //  NSLog(@"总页数%@",[result objectForKey:@"totalPages"]);
     if(self.isFirst){
-        self.noticeList=[[NSArray alloc]initWithArray:data];
-     //  NSLog(@"开始%ld",[self.noticeList count]);
+        self.noticeList=[[NSMutableArray alloc]initWithArray:data];
           self.isFirst=NO;
          [self.tableview reloadData];
     }
     if(self.isUp){
-    self.noticeList=[[NSArray alloc]initWithArray:data];
+    self.noticeList=[[NSMutableArray alloc]initWithArray:data];
         self.isUp=NO;
          [self.tableview reloadData];
     }
     if(self.isDown){
         for(NSDictionary *noticeData in data){
-        NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.noticeList];
+            [self.noticeList removeObjectAtIndex:0];
+            NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.noticeList];
             NSArray *temp2=[temp arrayByAddingObject:noticeData];
-            self.noticeList=[[NSArray alloc]initWithArray:temp2];
+            self.noticeList=[[NSMutableArray alloc]initWithArray:temp2];
         }
-        self.isDown=NO;
-       NSLog(@"上拉%ld",[self.noticeList count]);
+         self.isDown=NO;
          [self.tableview reloadData];
     }
 }
