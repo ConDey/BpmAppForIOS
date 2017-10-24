@@ -54,11 +54,11 @@
         [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight+1] forKey:@"pageSize"];
         [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
         [self.grouptableview.mj_header endRefreshing];
-       
+
     }];
 
     //上拉刷新
-    //每次下拉保留上次的最后3个
+    //每次下拉保留上次的最后2个
  self.grouptableview.mj_footer=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
      if(self.totalPage==[NSString stringWithFormat:@"%ld",self.pgNo]){
          [self.grouptableview.mj_footer endRefreshingWithNoMoreData];
@@ -68,10 +68,10 @@
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:@"" forKey:@"title"];
           [params setObject:[NSString stringWithFormat:@"%ld",self.pgNo] forKey:@"pageNo"];
-          [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight-3] forKey:@"pageSize"];
+          [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight-2] forKey:@"pageSize"];
          [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
          [self.grouptableview.mj_footer endRefreshing];
-     
+
     }];
   
 }
@@ -92,7 +92,6 @@
     [params setObject:@"" forKey:@"title"];
     [params setObject:@"1" forKey:@"pageNo"];
     [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight+1] forKey:@"pageSize"];
-    //NSLog(@"一页的个数：%@",size);
     [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
     [SVProgressHUD dismiss];
     
@@ -104,22 +103,18 @@
     if(self.isFirst){
         self.noticeList=[[NSMutableArray alloc]initWithArray:data];
           self.isFirst=NO;
-         [self.tableview reloadData];
+         [self.grouptableview reloadData];
     }
     if(self.isUp){
     self.noticeList=[[NSMutableArray alloc]initWithArray:data];
         self.isUp=NO;
-         [self.tableview reloadData];
+         [self.grouptableview reloadData];
     }
     if(self.isDown){
-        for(NSDictionary *noticeData in data){
-            [self.noticeList removeObjectAtIndex:0];
-            NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.noticeList];
-            NSArray *temp2=[temp arrayByAddingObject:noticeData];
-            self.noticeList=[[NSMutableArray alloc]initWithArray:temp2];
-        }
+        [self.noticeList addObjectsFromArray:data];
+        NSLog(@"%ld",self.noticeList.count);
          self.isDown=NO;
-         [self.tableview reloadData];
+         [self.grouptableview reloadData];
     }
 }
 
@@ -127,7 +122,7 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return (int)(SCREEN_HEIGHT-15-NAV_HEIGHT)/self.cellHeight;
+    return [self.noticeList count];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NoticeListViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"NoticeList"];
@@ -164,6 +159,10 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 15;
 }
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 100;
+}
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *notciceData=[self.noticeList objectAtIndex:indexPath.row];
