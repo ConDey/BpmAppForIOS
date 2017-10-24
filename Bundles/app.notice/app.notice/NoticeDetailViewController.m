@@ -61,11 +61,13 @@
     
     //内容
     cell.noticeDetailTitle.text=self.noticeDetail.title;
-    cell.noticeDetailTime.text=self.noticeDetail.createTime;
+    cell.noticeDetailTime.text=self.noticeDetail.createdTime;
     cell.noticeDetailContent.attributedText=as;
     //cell属性
+    cell.noticeDetailTitle.font=[UIFont boldSystemFontOfSize:17];
     cell.noticeDetailTime.textAlignment=NSTextAlignmentLeft;
     cell.noticeDetailTime.textColor=FONT_GRAY_COLOR;
+    cell.noticeDetailContent.font=[UIFont systemFontOfSize:17];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -129,7 +129,7 @@
     
     if((self.noticeList.count>self.select)&&(self.noticeList.count-(int)((SCREEN_HEIGHT-105)/self.cellHeight)<=self.select)){
         NSLog(@"%ld",self.select);
-        [self.grouptableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.select inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.grouptableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.select inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
     
 }
