@@ -9,6 +9,7 @@
 #import "NoticeDetailViewController.h"
 #import "NoticeDetailModel.h"
 #import "NoticeDetailViewCell.h"
+#import "NoticeViewController.h"
 @interface NoticeDetailViewController ()
 @property(retain,nonatomic)NoticeDetailModel *noticeDetail;
 
@@ -70,5 +71,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return self.view.bounds.size.height;
 }
+
+
 @end
 

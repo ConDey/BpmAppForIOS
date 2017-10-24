@@ -10,7 +10,6 @@
 
 
 @interface NoticeViewController : EAViewController<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic,retain) NSMutableArray *noticeList;
-
+@property (nonatomic,retain) NSArray *noticeList;
 
 @end

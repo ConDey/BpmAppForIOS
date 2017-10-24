@@ -17,7 +17,9 @@
 @property(nonatomic,assign)BOOL isUp;
 @property(nonatomic,assign)BOOL isDown;
 @property(nonatomic,assign)BOOL isFirst;
-@property(nonatomic,retain)NSString *totalPage;
+@property(nonatomic,assign)NSInteger select;
+
+
 @end
 
 @implementation NoticeViewController
@@ -25,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=LIGHT_GRAY_COLOR;
-    self.pgNo=1;
+    self.select=0;
     self.isUp=NO;
     self.isDown=NO;
     self.isFirst=NO;
@@ -44,36 +46,32 @@
     self.grouptableview.backgroundColor=[UIColor whiteColor];
     [self.grouptableview registerNib:[UINib nibWithNibName:@"NoticeListViewCell" bundle:self.bundle]  forCellReuseIdentifier:@"NoticeList"];
     self.grouptableview.backgroundColor=LIGHT_GRAY_COLOR;
-    
     //下拉刷新
     self.grouptableview.mj_header=[MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.grouptableview.mj_footer.hidden=NO;
         self.isUp=YES;
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:@"" forKey:@"title"];
         [params setObject:@"1" forKey:@"pageNo"];
-        [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight+1] forKey:@"pageSize"];
+        [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight] forKey:@"pageSize"];
         [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
-        [self.grouptableview.mj_header endRefreshing];
-
+        
     }];
 
     //上拉刷新
-    //每次下拉保留上次的最后2个
  self.grouptableview.mj_footer=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-     if(self.totalPage==[NSString stringWithFormat:@"%ld",self.pgNo]){
-         [self.grouptableview.mj_footer endRefreshingWithNoMoreData];
-     }
+      self.grouptableview.mj_footer.hidden=NO;
         self.isDown=YES;
         self.pgNo=self.pgNo+1;
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:@"" forKey:@"title"];
           [params setObject:[NSString stringWithFormat:@"%ld",self.pgNo] forKey:@"pageNo"];
-          [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight-2] forKey:@"pageSize"];
+          [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight] forKey:@"pageSize"];
          [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
-         [self.grouptableview.mj_footer endRefreshing];
-
     }];
   
+   
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,37 +83,55 @@
     [super viewWillAppear:YES];
     self.navDisplay=YES;
     [self setTitleOfNav:@"通知公告"];
-    [SVProgressHUD showWithStatus:@""];
     self.isFirst=YES;
-   
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     [params setObject:@"" forKey:@"title"];
     [params setObject:@"1" forKey:@"pageNo"];
-    [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight+1] forKey:@"pageSize"];
+    [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight] forKey:@"pageSize"];
     [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
-    [SVProgressHUD dismiss];
+    
     
 }
 
 -(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
-    self.totalPage=[result objectForKey:@"totalPages"];
     NSArray *data=[result objectForKey:@"datas"];
     if(self.isFirst){
-        self.noticeList=[[NSMutableArray alloc]initWithArray:data];
-          self.isFirst=NO;
-         [self.grouptableview reloadData];
+        if(self.noticeList.count==0){
+        self.noticeList=[[NSArray alloc]initWithArray:data];
+        self.pgNo=1;
+        }
+        self.isFirst=NO;
+        [self.grouptableview reloadData];
+    
     }
     if(self.isUp){
     self.noticeList=[[NSMutableArray alloc]initWithArray:data];
+        self.pgNo=1;
         self.isUp=NO;
-         [self.grouptableview reloadData];
+        [self.grouptableview.mj_header endRefreshing];
+        [self.grouptableview reloadData];
     }
     if(self.isDown){
-        [self.noticeList addObjectsFromArray:data];
-        NSLog(@"%ld",self.noticeList.count);
+        NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.noticeList];
+        [temp addObjectsFromArray:data];
+        self.noticeList=[[NSArray alloc]initWithArray:temp];
          self.isDown=NO;
-         [self.grouptableview reloadData];
+        
+        if([data count]==0){
+            self.grouptableview.mj_footer.hidden=YES;
+        }else{
+            
+         [self.grouptableview.mj_footer endRefreshing];
+        }
+        [self.grouptableview reloadData];
+        
     }
+    
+    if((self.noticeList.count>self.select)&&(self.noticeList.count-(int)((SCREEN_HEIGHT-105)/self.cellHeight)<=self.select)){
+        NSLog(@"%ld",self.select);
+        [self.grouptableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.select inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -126,6 +142,9 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NoticeListViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"NoticeList"];
+    if(cell==nil){
+        cell=[[NoticeListViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NoticeList"];
+    }
     if(indexPath.row<[self.noticeList count]){
     NSDictionary *noticeData=[self.noticeList objectAtIndex:indexPath.row];
   
@@ -166,6 +185,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *notciceData=[self.noticeList objectAtIndex:indexPath.row];
+    self.select=indexPath.row;
     NSString *nd=[notciceData objectForKey:@"id"];
     NoticeDetailViewController *ndc=[[NoticeDetailViewController alloc]init];
     ndc.noticeID=nd;
