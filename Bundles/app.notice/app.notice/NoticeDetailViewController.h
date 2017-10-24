@@ -10,5 +10,6 @@
 
 @interface NoticeDetailViewController : EAViewController<UITableViewDataSource,UITableViewDelegate>
 @property(retain,nonatomic)NSString *noticeID;
+@property(nonatomic,weak)NSArray *list;
 @end
 

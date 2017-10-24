@@ -23,6 +23,7 @@ FOUNDATION_EXPORT const unsigned char lib_commonVersionString[];
 #import "Masonry.h"
 #import "FMDB.h"
 #import "FDSlideBar.h"
+#import "MJRefresh.h"
 
 #import "EAViewController.h"
 #import "BaseTableViewCell.h"

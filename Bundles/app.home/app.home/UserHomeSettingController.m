@@ -25,14 +25,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    //[self.panelView setFrame:CGRectMake(10,10,self.view.frame.size.width-20,180)];
     [self.panelView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
         make.top.mas_equalTo(10);
         make.right.mas_equalTo(-10);
         make.height.mas_equalTo(150);
     }];
+    self.panelView.layer.cornerRadius=2.0f;
+    self.panelView.layer.shadowColor=[UIColor blackColor].CGColor;
+    self.panelView.layer.shadowOffset=CGSizeMake(3, 3);
+    self.panelView.layer.shadowRadius=2.0f;
+    self.panelView.layer.shadowOpacity=0.3;
+    
     self.nameTextView.text = [CurrentUser currentUser].userdetails.fullName;
     self.departmentTextView.text = [CurrentUser currentUser].userdetails.departmentName;
     self.poTextView.text=[CurrentUser currentUser].userdetails.position;

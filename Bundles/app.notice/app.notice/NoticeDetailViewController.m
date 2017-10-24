@@ -9,6 +9,7 @@
 #import "NoticeDetailViewController.h"
 #import "NoticeDetailModel.h"
 #import "NoticeDetailViewCell.h"
+#import "NoticeViewController.h"
 @interface NoticeDetailViewController ()
 @property(retain,nonatomic)NoticeDetailModel *noticeDetail;
 
@@ -31,7 +32,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
@@ -42,7 +43,7 @@
     [self httpGetRequestWithUrl:HttpProtocolServiceNoticeDetail  params:params progress:YES];
 }
 
--(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(NSString *)name{
+-(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
     self.noticeDetail=[NoticeDetailModel mj_objectWithKeyValues:result];
     
     [self.tableview reloadData];
@@ -60,15 +61,19 @@
     
     //内容
     cell.noticeDetailTitle.text=self.noticeDetail.title;
-    cell.noticeDetailTime.text=self.noticeDetail.createTime;
+    cell.noticeDetailTime.text=self.noticeDetail.createdTime;
     cell.noticeDetailContent.attributedText=as;
     //cell属性
+    cell.noticeDetailTitle.font=[UIFont boldSystemFontOfSize:17];
     cell.noticeDetailTime.textAlignment=NSTextAlignmentLeft;
     cell.noticeDetailTime.textColor=FONT_GRAY_COLOR;
+    cell.noticeDetailContent.font=[UIFont systemFontOfSize:17];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return self.view.bounds.size.height;
 }
+
+
 @end
 
