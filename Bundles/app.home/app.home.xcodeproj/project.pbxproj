@@ -44,6 +44,10 @@
 		84301C7F1F99990E00F01F8F /* AppListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301C7D1F99990E00F01F8F /* AppListModel.m */; };
 		84301C831F999C2E00F01F8F /* AppModelHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301C811F999C2E00F01F8F /* AppModelHelper.h */; };
 		84301C841F999C2E00F01F8F /* AppModelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301C821F999C2E00F01F8F /* AppModelHelper.m */; };
+		847206D81F9EE50700A7CE7E /* ic_homeapp_stub.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D71F9EDD2100A7CE7E /* ic_homeapp_stub.png */; };
+		847206D91F9EE50700A7CE7E /* ic_homeapp_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D41F9D85FA00A7CE7E /* ic_homeapp_card.png */; };
+		847206DA1F9EE50700A7CE7E /* ic_homeapp_file.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D51F9D85FA00A7CE7E /* ic_homeapp_file.png */; };
+		847206DB1F9EE50700A7CE7E /* ic_homeapp_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D61F9D85FD00A7CE7E /* ic_homeapp_search.png */; };
 		F80A8ACD1F98224100E126C6 /* PasswordChangeController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8ACB1F98224100E126C6 /* PasswordChangeController.h */; };
 		F80A8ACE1F98224100E126C6 /* PasswordChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8ACC1F98224100E126C6 /* PasswordChangeController.m */; };
 		F80A8AD31F98224C00E126C6 /* ic_setting_update.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8ACF1F98224C00E126C6 /* ic_setting_update.png */; };
@@ -96,6 +100,7 @@
 		847206D41F9D85FA00A7CE7E /* ic_homeapp_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_card.png; sourceTree = "<group>"; };
 		847206D51F9D85FA00A7CE7E /* ic_homeapp_file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_file.png; sourceTree = "<group>"; };
 		847206D61F9D85FD00A7CE7E /* ic_homeapp_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_search.png; sourceTree = "<group>"; };
+		847206D71F9EDD2100A7CE7E /* ic_homeapp_stub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_stub.png; sourceTree = "<group>"; };
 		F80A8ACB1F98224100E126C6 /* PasswordChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordChangeController.h; sourceTree = "<group>"; };
 		F80A8ACC1F98224100E126C6 /* PasswordChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeController.m; sourceTree = "<group>"; };
 		F80A8ACF1F98224C00E126C6 /* ic_setting_update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_update.png; sourceTree = "<group>"; };
@@ -172,6 +177,7 @@
 		06C3A4351F0C72EB00633543 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				847206D71F9EDD2100A7CE7E /* ic_homeapp_stub.png */,
 				847206D41F9D85FA00A7CE7E /* ic_homeapp_card.png */,
 				847206D51F9D85FA00A7CE7E /* ic_homeapp_file.png */,
 				847206D61F9D85FD00A7CE7E /* ic_homeapp_search.png */,
@@ -398,6 +404,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847206D81F9EE50700A7CE7E /* ic_homeapp_stub.png in Resources */,
+				847206D91F9EE50700A7CE7E /* ic_homeapp_card.png in Resources */,
+				847206DA1F9EE50700A7CE7E /* ic_homeapp_file.png in Resources */,
+				847206DB1F9EE50700A7CE7E /* ic_homeapp_search.png in Resources */,
 				06C6BB021F17164500D444E6 /* ic_homeapp_process.png in Resources */,
 				06C6BAF81F16F93100D444E6 /* UserHomeAppViewCell.xib in Resources */,
 				061A90961F1E2E5800B7C227 /* UserHomeSettingController.xib in Resources */,

@@ -18,13 +18,16 @@
 @property (nonatomic,retain) NSMutableArray *allApps;
 
 @property (nonatomic,retain) UIScrollView *scrollView;
+@property (nonatomic,retain) UIView *scrollContainerView; //Masonry下Scrollview的过渡视图
 
 @property (strong, nonatomic) UIImageView *headImageView;
 @property (strong, nonatomic) UIView *dividerOne;
+@property (strong, nonatomic) UIView *dividerSix;
 @property (strong, nonatomic) UILabel *usualAppsLabel;
 @property (strong, nonatomic) UIView *dividerTwo;
 @property (strong, nonatomic) UICollectionView *appsCollectionView;
 @property (strong, nonatomic) UIView *dividerThree;
+@property (strong, nonatomic) UIView *dividerSeven;
 @property (strong, nonatomic) UILabel *allAppsLabel;
 @property (strong, nonatomic) UIView *dividerFour;
 @property (strong, nonatomic) UICollectionView *allAppsCollectionView;
@@ -65,77 +68,100 @@
         make.edges.mas_equalTo(self.view);
     }];
     
-    [self.scrollView addSubview:self.headImageView];
+    [self.scrollView addSubview:self.scrollContainerView];
+    
+    [self.scrollContainerView addSubview:self.headImageView];
     [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.mas_equalTo(self.view);
+        make.left.top.right.mas_equalTo(self.scrollContainerView);
         make.height.mas_equalTo(110);
     }];
-    
-    [self.scrollView addSubview:self.dividerOne];
+
+    [self.scrollContainerView addSubview:self.dividerOne];
     [_dividerOne mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
-        make.left.right.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.headImageView.mas_bottom);
     }];
-    
-    // 常用应用
-    [self.scrollView addSubview:self.usualAppsLabel];
-    [_usualAppsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(40);
-        make.left.right.mas_equalTo(self.view);
+
+    [self.scrollContainerView addSubview:self.dividerSix];
+    [_dividerSix mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(1);
+        make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.dividerOne.mas_bottom).offset(25);
     }];
     
-    [self.scrollView addSubview:self.dividerTwo];
+    // 常用应用
+    [self.scrollContainerView addSubview:self.usualAppsLabel];
+    [_usualAppsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(40);
+        make.left.right.mas_equalTo(self.scrollContainerView);
+        make.top.mas_equalTo(self.dividerSix.mas_bottom);
+    }];
+
+    [self.scrollContainerView addSubview:self.dividerTwo];
     [_dividerTwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
-        make.left.right.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.usualAppsLabel.mas_bottom);
     }];
-    
-    [self.scrollView addSubview:self.appsCollectionView];
+
+    [self.scrollContainerView addSubview:self.appsCollectionView];
     [_appsCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.dividerTwo.mas_bottom);
         //make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
     }];
-    
-    [self.scrollView addSubview:self.dividerThree];
+
+    [self.scrollContainerView addSubview:self.dividerThree];
     [_dividerThree mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
-        make.left.right.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.appsCollectionView.mas_bottom);
     }];
     
-    // 全部应用
-    [self.scrollView addSubview:self.allAppsLabel];
-    [_allAppsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(40);
-        make.left.right.mas_equalTo(self.view);
+    [self.scrollContainerView addSubview:self.dividerSeven];
+    [_dividerSeven mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(1);
+        make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.dividerThree.mas_bottom).offset(25);
     }];
-    
-    [self.scrollView addSubview:self.dividerFour];
+
+    // 全部应用
+    [self.scrollContainerView addSubview:self.allAppsLabel];
+    [_allAppsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(40);
+        make.left.right.mas_equalTo(self.scrollContainerView);
+        make.top.mas_equalTo(self.dividerSeven.mas_bottom);
+    }];
+
+    [self.scrollContainerView addSubview:self.dividerFour];
     [_dividerFour mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
-        make.left.right.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.allAppsLabel.mas_bottom);
     }];
-    
-    [self.scrollView addSubview:self.allAppsCollectionView];
+
+    [self.scrollContainerView addSubview:self.allAppsCollectionView];
     [_allAppsCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.dividerFour.mas_bottom);
         //make.height.mas_equalTo([self appscountdisplay:self.allApps] / 4  *  (100 + ONE_PX));
     }];
-    
-    [self.scrollView addSubview:self.dividerFive];
+
+    [self.scrollContainerView addSubview:self.dividerFive];
     [_dividerFive mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
-        make.left.right.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.allAppsCollectionView.mas_bottom);
+        make.bottom.mas_equalTo(self.scrollContainerView.mas_bottom);
     }];
-    
+
+    [_scrollContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(self.scrollView);
+        make.bottom.mas_equalTo(self.scrollView.mas_bottom).offset(-30);
+        make.width.mas_equalTo(self.scrollView);
+        
+    }];
 }
 
 - (void)initData{
@@ -214,12 +240,21 @@
     
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     
-    if (indexPath.row >= [self.apps count]) {
-        [cell setBackgroundColor:[UIColor whiteColor]];
+    if (collectionView == _appsCollectionView) {
+
+        if (indexPath.row >= [self.apps count]) {
+            [cell setBackgroundColor:[UIColor whiteColor]];
+        }else {
+            [cell setBackgroundColor:UI_BK_COLOR];
+        }
     }else {
-        [cell setBackgroundColor:UI_BK_COLOR];
+        
+        if (indexPath.row >= [self.allApps count]) {
+            [cell setBackgroundColor:[UIColor whiteColor]];
+        }else {
+            [cell setBackgroundColor:UI_BK_COLOR];
+        }
     }
-    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -229,7 +264,21 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    EAApp *app = [self.apps objectAtIndex:indexPath.row];
+    EAApp *app;
+    
+    if (collectionView == _appsCollectionView) {
+        // 空白的cell直接return掉
+        if (indexPath.row >= [self.apps count]) {
+            return;
+        }
+        app = [self.apps objectAtIndex:indexPath.row];
+    }else {
+        // 空白的cell直接return掉
+        if (indexPath.row >= [self.allApps count]) {
+            return;
+        }
+        app = [self.allApps objectAtIndex:indexPath.row];
+    }
     
     if (![app installed]) {
         [SVProgressHUD showErrorWithStatus:@"应用尚未安装"];
@@ -272,6 +321,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     UserHomeAppViewCell *cell = (UserHomeAppViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"UserHomeAppViewCell" forIndexPath:indexPath];
+
+    UIImage* defaultMsgIcon = [UIImage imageNamed:@"ic_homeapp_stub" inBundle:self.bundle compatibleWithTraitCollection:nil];
     
     if (collectionView == self.appsCollectionView) {
         if (indexPath.row >= [self.apps count]) {
@@ -282,7 +333,10 @@
             if (app != nil) {
                 cell.titleLabel.text = app.displayName;
                 if (app.imageUrlType == ImageUrlTypeInner) {
+                    
                     cell.imageView.image = [UIImage imageNamed:app.imageUrl inBundle:self.bundle compatibleWithTraitCollection:nil];
+                }else {
+                    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", REQUEST_URL, app.imageUrl]] placeholderImage:defaultMsgIcon];
                 }
             }
         }
@@ -297,7 +351,10 @@
             if (app != nil) {
                 cell.titleLabel.text = app.displayName;
                 if (app.imageUrlType == ImageUrlTypeInner) {
+
                     cell.imageView.image = [UIImage imageNamed:app.imageUrl inBundle:self.bundle compatibleWithTraitCollection:nil];
+                }else {
+                    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", REQUEST_URL, app.imageUrl]] placeholderImage:defaultMsgIcon];
                 }
             }
         }
@@ -329,12 +386,18 @@
 # pragma mark - getter
 - (UIScrollView*)scrollView {
     if (_scrollView == nil) {
-        _scrollView = [[UIScrollView alloc] init];
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 500)];
         _scrollView.scrollEnabled = YES;
         _scrollView.showsVerticalScrollIndicator = NO;
-        _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, 1000);
     }
     return _scrollView;
+}
+
+- (UIView*)scrollContainerView {
+    if (_scrollContainerView == nil) {
+        _scrollContainerView = [[UIView alloc] init];
+    }
+    return _scrollContainerView;
 }
 
 - (UIImageView*)headImageView {
@@ -408,6 +471,22 @@
         _dividerFive.backgroundColor = UI_GRAY_COLOR;
     }
     return _dividerFive;
+}
+
+- (UIView*)dividerSix{
+    if (_dividerSix == nil) {
+        _dividerSix = [[UIView alloc] init];
+        _dividerSix.backgroundColor = UI_GRAY_COLOR;
+    }
+    return _dividerSix;
+}
+
+- (UIView*)dividerSeven{
+    if (_dividerSeven == nil) {
+        _dividerSeven = [[UIView alloc] init];
+        _dividerSeven.backgroundColor = UI_GRAY_COLOR;
+    }
+    return _dividerSeven;
 }
 
 - (UICollectionView*)appsCollectionView {

@@ -31,7 +31,7 @@
         make.left.mas_equalTo(10);
         make.top.mas_equalTo(10);
         make.right.mas_equalTo(-10);
-        make.height.mas_equalTo(180);
+        make.height.mas_equalTo(150);
     }];
     self.nameTextView.text = [CurrentUser currentUser].userdetails.fullName;
     self.departmentTextView.text = [CurrentUser currentUser].userdetails.departmentName;

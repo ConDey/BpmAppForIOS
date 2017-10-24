@@ -36,16 +36,16 @@
     mApp.imageUrl = data.imageUrl;
     mApp.bundleName = data.bundleName;
     
-    if ([data.imageUrlType isEqualToString:@"1"]) {
+    if (data.imageUrlType == (long)1) {
         mApp.imageUrlType = ImageUrlTypeInner;
     }else {
         mApp.imageUrlType = ImageUrlTypeRemote;
     }
     
-    if ([data.type isEqualToString:@"1"]) {
-        mApp.imageUrlType = AppTypeInner;
+    if (data.type == (long)1) {
+        mApp.appType = AppTypeInner;
     }else {
-        mApp.imageUrlType = AppTypeRemote;
+        mApp.appType = AppTypeWeb;
     }
     
     return mApp;

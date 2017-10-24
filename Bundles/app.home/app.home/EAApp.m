@@ -87,7 +87,7 @@
         }
         
         NSString *url = nil;
-        if ([self.bundleName hasPrefix:@"http:"] || [self.bundleName hasPrefix:@"https:"] ) {
+        if ([self.bundleName hasPrefix:@"http:"] || [self.bundleName hasPrefix:@"https:"] || [self.bundleName hasPrefix:@"file:"]) {
             url = [NSString encodeToPercentEscapeString:self.bundleName];
         } else {
             url = [NSString encodeToPercentEscapeString:[NSString stringWithFormat:@"%@%@",REQUEST_SERVICE_URL ,self.bundleName]];

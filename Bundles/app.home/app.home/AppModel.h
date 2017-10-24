@@ -18,8 +18,8 @@
 @property (nonatomic, strong) NSString* description;
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* helpText;
-@property (nonatomic, strong) NSString* imageUrlType;
+@property (nonatomic, assign) long imageUrlType;
 @property (nonatomic, strong) NSString* bundleName;
-@property (nonatomic, strong) NSString* type;
+@property (nonatomic, assign) long type;
 
 @end
