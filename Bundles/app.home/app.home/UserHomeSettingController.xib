@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lrb-X8-IQM">
-                    <rect key="frame" x="10" y="10" width="355" height="150"/>
+                    <rect key="frame" x="10" y="10" width="355" height="180"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_setting_default_photo.png" translatesAutoresizingMaskIntoConstraints="NO" id="gBK-4a-DSM">
                             <rect key="frame" x="260" y="20" width="75" height="75"/>
@@ -115,7 +115,7 @@
                         <constraint firstItem="y1s-Kn-gDj" firstAttribute="leading" secondItem="Lrb-X8-IQM" secondAttribute="leading" constant="20" id="D1a-hV-lrp"/>
                         <constraint firstItem="Lni-NO-cYt" firstAttribute="top" secondItem="HX5-DJ-WRW" secondAttribute="bottom" constant="10" id="E5R-0F-hgl"/>
                         <constraint firstItem="VP6-KG-1hm" firstAttribute="top" secondItem="XJb-Wg-QkH" secondAttribute="bottom" constant="10" id="Gnq-iy-c00"/>
-                        <constraint firstAttribute="height" constant="150" id="QKr-df-dW7"/>
+                        <constraint firstAttribute="height" constant="180" id="QKr-df-dW7"/>
                         <constraint firstItem="bzv-dZ-xAn" firstAttribute="leading" secondItem="Lrb-X8-IQM" secondAttribute="leading" constant="20" id="avV-KH-KxU"/>
                         <constraint firstItem="gBK-4a-DSM" firstAttribute="leading" secondItem="8g7-yv-8A0" secondAttribute="trailing" constant="20" id="bgL-O6-bdr"/>
                         <constraint firstAttribute="trailing" secondItem="gBK-4a-DSM" secondAttribute="trailing" constant="20" id="bjS-Up-rJU"/>

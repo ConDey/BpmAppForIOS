@@ -28,6 +28,9 @@
 		06C6BBB01F19045700D444E6 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BBAC1F19045700D444E6 /* fonts */; };
 		06C6BBB11F19045700D444E6 /* js in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BBAD1F19045700D444E6 /* js */; };
 		06C6BBB21F19045700D444E6 /* jswebview.html in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BBAE1F19045700D444E6 /* jswebview.html */; };
+		F8AFFBF71F9F398700CE74F5 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */; };
+		F8AFFC061F9F616100CE74F5 /* ChooseViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFC041F9F616100CE74F5 /* ChooseViewController.h */; };
+		F8AFFC071F9F616100CE74F5 /* ChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFC051F9F616100CE74F5 /* ChooseViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +59,9 @@
 		06C6BBAC1F19045700D444E6 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = www/fonts; sourceTree = "<group>"; };
 		06C6BBAD1F19045700D444E6 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; name = js; path = www/js; sourceTree = "<group>"; };
 		06C6BBAE1F19045700D444E6 /* jswebview.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = jswebview.html; path = www/jswebview.html; sourceTree = "<group>"; };
+		F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		F8AFFC041F9F616100CE74F5 /* ChooseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseViewController.h; sourceTree = "<group>"; };
+		F8AFFC051F9F616100CE74F5 /* ChooseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +96,7 @@
 		06C6BB1A1F18592200D444E6 /* app.webkit */ = {
 			isa = PBXGroup;
 			children = (
+				F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */,
 				06C6BBAA1F19044C00D444E6 /* www */,
 				06C6BB2F1F185A7500D444E6 /* Src */,
 				06C6BB301F185A7A00D444E6 /* Supporting Files */,
@@ -117,6 +124,8 @@
 				06C6BB371F185DAE00D444E6 /* EAWebController.m */,
 				06C6BB8E1F1868F000D444E6 /* BPMJsApi.h */,
 				06C6BB8F1F1868F000D444E6 /* BPMJsApi.m */,
+				F8AFFC041F9F616100CE74F5 /* ChooseViewController.h */,
+				F8AFFC051F9F616100CE74F5 /* ChooseViewController.m */,
 			);
 			name = Src;
 			sourceTree = "<group>";
@@ -165,9 +174,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BB1D1F18592200D444E6 /* app.webkit.h in Headers */,
+				F8AFFC061F9F616100CE74F5 /* ChooseViewController.h in Headers */,
 				06C6BB831F18669E00D444E6 /* dsbridge.h in Headers */,
 				06C6BB851F18669E00D444E6 /* DUIwebview.h in Headers */,
 				06C6BB901F1868F000D444E6 /* BPMJsApi.h in Headers */,
+				F8AFFBF71F9F398700CE74F5 /* PrefixHeader.pch in Headers */,
 				06C6BB891F18669E00D444E6 /* DWKwebview.h in Headers */,
 				06C6BB8D1F18669E00D444E6 /* JSBWebEventDelegate.h in Headers */,
 				06C6BB871F18669E00D444E6 /* DWebview.h in Headers */,
@@ -250,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BB911F1868F000D444E6 /* BPMJsApi.m in Sources */,
+				F8AFFC071F9F616100CE74F5 /* ChooseViewController.m in Sources */,
 				06C6BB8A1F18669E00D444E6 /* DWKwebview.m in Sources */,
 				06C6BB861F18669E00D444E6 /* DUIwebview.m in Sources */,
 				06C6BB391F185DAE00D444E6 /* EAWebController.m in Sources */,

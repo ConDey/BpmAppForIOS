@@ -21,6 +21,7 @@
 
 -(void)viewDidLoad{
     //输入当前密码
+    self.view.backgroundColor=LIGHT_GRAY_COLOR;
     self.currentPassword=[[UITextField alloc]init];
     self.currentPassword.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:self.currentPassword];
