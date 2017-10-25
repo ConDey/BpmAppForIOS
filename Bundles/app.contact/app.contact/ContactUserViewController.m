@@ -99,6 +99,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ContractUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContractUserTableViewCell" forIndexPath:indexPath];
+    if(cell==nil){
+        cell=[[ContractUserTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ContractUserTableViewCell"];
+        }
+    
     if(indexPath.section==0){
         for(UIView *view in [cell subviews]){
         [view removeFromSuperview];
@@ -271,16 +275,8 @@
 }
 
 -(void)tapTel:(UITapGestureRecognizer *)sender{
-    UIAlertController *call=[UIAlertController alertControllerWithTitle:@"是否要拨打电话？" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancel=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *sure=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSLog(@"boda");
-          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel://" stringByAppendingString:self.user.mobile]]];
-    }];
-    [call addAction:cancel];
-    [call addAction:sure];
-    [self presentViewController:call animated:YES completion:nil];
-  
+   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel://" stringByAppendingString:self.user.mobile]]];
+   
 }
 #pragma mark - Table view setting
 

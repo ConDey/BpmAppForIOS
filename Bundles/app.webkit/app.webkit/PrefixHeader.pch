@@ -8,6 +8,6 @@
 
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
-#import "com_eazytec_bpm_app_contact/"
+
 #import "com_eazytec_bpm_lib_common/lib.common.h"
 #endif /* PrefixHeader_pch */

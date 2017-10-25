@@ -33,7 +33,7 @@
                 <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="setTitle()">
                     设置修改标题
                 </button>
-                <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="choose()">
+                <button type="button" class="mui-btn mui-btn-outlined" onclick="choosePeople()">
                      人员选择
                 </button>
             </div>
@@ -54,8 +54,10 @@
                  function setTitle() {
                     bpmbridget.call("setTitle",{title: "我被修改了"});
                 }
-               function choose(){
-                   bmpbriget.call("choose");
+                  function choosePeople(){
+                    alert("xxxx");
+                    bpmbridget.call("choose");
+                  
                }
     
         </script>
