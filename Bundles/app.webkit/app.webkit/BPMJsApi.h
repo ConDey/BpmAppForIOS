@@ -20,5 +20,5 @@
 
 -(void)delegate_close;
 -(void)delegate_setTitle:(NSString *_Nonnull)title;
-
+-(void)delegate_choose;
 @end

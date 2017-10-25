@@ -5,7 +5,7 @@
 //  Created by ConDey on 2017/7/14.
 //  Copyright © 2017年 Eazytec. All rights reserved.
 //
-
+#import "ChooseViewController.h"
 #import "EAWebController.h"
 
 @interface EAWebController()
@@ -124,5 +124,9 @@
     [self setTitleOfNav:title];
     
 }
-
+//人员选择
+-(void)delegate_choose{
+    ChooseViewController *cs=[[ChooseViewController alloc]init];
+    [self.navigationController pushViewController:cs animated:YES];
+}
 @end

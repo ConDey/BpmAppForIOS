@@ -22,4 +22,9 @@
     }
 }
 
+-(void)choose:(NSDictionary *)args{
+    if (self.delegate != nil) {
+        [self.delegate delegate_choose];
+    }
+}
 @end
