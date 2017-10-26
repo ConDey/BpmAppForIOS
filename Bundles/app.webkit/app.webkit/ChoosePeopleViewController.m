@@ -15,7 +15,9 @@
 @property(nonatomic,retain)NSArray *departments;
 @property(nonatomic,retain)NSArray *users;
 @property(nonatomic,retain)UICollectionView *selectColl;
+@property(nonatomic,retain)UICollectionView *selectTitle;
 @property(nonatomic,retain)UILabel *selectLabel;
+@property(nonatomic,retain)NSArray *depNum;
 @end
 
 @implementation ChoosePeopleViewController
@@ -23,35 +25,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.selectData=@[
-    @{@"id":@"zhangsan",
-      @"username":@"zhangsan",
-      @"fullName":@"张三"
-                    },
-    @{  @"id":@"lisi",
-        @"username":@"lisi",
-        @"fullName":@"李四"
-                    }
+                      @{@"id":@"zhangsan",
+                        @"username":@"zhangsan",
+                        @"fullName":@"张三"
+                        },
+                      @{  @"id":@"lisi",
+                          @"username":@"lisi",
+                          @"fullName":@"李四"
+                          }
                       ];
+    
+    NSDictionary *dic=[[NSDictionary alloc]initWithObjectsAndKeys:@"",@"id",@"全部",@"name",nil];
+    self.depNum=[[NSArray alloc]initWithObjects:dic, nil];
+    NSLog(@"%d",self.depNum.count);
+    
+    
     //部门层次
-    UIView *dep=[[UIView alloc]init];
-    [self.view addSubview:dep];
-    [dep mas_makeConstraints:^(MASConstraintMaker *make) {
+    UICollectionViewFlowLayout *flowlayout=[[UICollectionViewFlowLayout alloc]init];
+    
+    flowlayout.itemSize=CGSizeMake(120, 40);
+    flowlayout.minimumLineSpacing=1;
+    flowlayout.minimumInteritemSpacing=1;
+    flowlayout.sectionInset=UIEdgeInsetsMake(0, 10, 0, 0);
+    flowlayout.scrollDirection=UICollectionViewScrollDirectionHorizontal;
+    self.selectTitle=[[UICollectionView alloc]initWithFrame:self.view.frame collectionViewLayout:flowlayout];
+    self.selectTitle.dataSource=self;
+    self.selectTitle.delegate=self;
+    [self.view addSubview:self.selectTitle];
+    [self.selectTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.left.mas_equalTo(0);
         make.height.mas_equalTo(40);
     }];
-    UILabel *totalLabel=[[UILabel alloc]init];
-    totalLabel.text=@"   全部";
-    totalLabel.textColor=FONT_GRAY_COLOR;
-    totalLabel.font=FONT_18;
-    [dep addSubview:totalLabel];
-    [totalLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
-    }];
+    self.selectTitle.backgroundColor=[UIColor whiteColor];
+    [self.selectTitle registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"collectionCell"];
     //已选择人数
     self.selectLabel=[[UILabel alloc]init];
     [self.view addSubview:self.selectLabel];
     [self.selectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(dep.mas_bottom).mas_equalTo(1);
+        make.top.mas_equalTo(self.selectTitle.mas_bottom).mas_equalTo(1);
         make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(40);
     }];
@@ -81,9 +92,9 @@
     rightLayer.backgroundColor = [UIColor grayColor].CGColor;
     rightLayer.frame = CGRectMake(selectAndSearch.frame.size.width+SCREEN_WIDTH-20, selectAndSearch.frame.size.height+31, 1.0, 20);
     [selectAndSearch.layer addSublayer:rightLayer];
-        //选择项
+    //选择项
     UICollectionViewFlowLayout *layout=[[UICollectionViewFlowLayout alloc]init];
-     CGFloat width=((SCREEN_WIDTH-20)/2-10)/5;
+    CGFloat width=((SCREEN_WIDTH-20)/2-10)/5;
     layout.itemSize=CGSizeMake(width, width);
     layout.minimumLineSpacing=1;
     layout.minimumInteritemSpacing=1;
@@ -100,7 +111,7 @@
     self.selectColl.backgroundColor=[UIColor whiteColor];
     [self.selectColl registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"collectionCell"];
     
-        //搜索项
+    //搜索项
     UISearchBar *searchBar=[[UISearchBar alloc]init];
     [selectAndSearch addSubview:searchBar];
     [searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -122,21 +133,14 @@
     self.grouptableview.backgroundColor=LIGHT_GRAY_COLOR;
     [self.grouptableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"tableCell"];
     self.grouptableview.backgroundColor=[UIColor clearColor];
-    //获取数据
-    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-    
-    if ([NSString isStringBlank:self.dep]) {
-        [params setObject:@"" forKey:@"parentId"];
-    } else {
-        [params setObject:self.dep  forKey:@"parentId"];
-    }
-    
-    [self httpGetRequestWithUrl:HttpProtocolServiceContactDepart params:params progress:YES];
-    
-    
-    
+    [self UrlData:@""];
 }
-
+//获取数据
+-(void)UrlData:(NSString *)dep{
+NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [params setObject:dep forKey:@"parentId"];
+[self httpGetRequestWithUrl:HttpProtocolServiceContactDepart params:params progress:YES];
+}
 //解析数据
 - (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
     
@@ -172,8 +176,8 @@
     UITableViewCell *tableCell=[tableView dequeueReusableCellWithIdentifier:@"tableCell"];
     if(tableCell!=nil){
         for (UIView *view in [tableCell subviews]) {
-        [view removeFromSuperview];
-      }
+            [view removeFromSuperview];
+        }
     }
     UILabel *titleLabel=[[UILabel alloc]init];
     UIImageView *headImageView=[[UIImageView alloc]init];
@@ -214,7 +218,7 @@
             NSString *name = [user objectForKey:@"fullName"];
             
             if ([name length] > 2) {
-               headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
+                headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
             } else {
                 headImageView.image = [UIImage circleImageWithText:name size:CGSizeMake(40,40)];
             }
@@ -224,7 +228,7 @@
     }
     else {
         // 显示员工
-       NSDictionary *user =  [self.users objectAtIndex:indexPath.row];
+        NSDictionary *user =  [self.users objectAtIndex:indexPath.row];
         NSString *name =  [user objectForKey:@"fullName"];
         if ([name length] > 2) {
             headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
@@ -248,10 +252,10 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(section==0){
-    if(self.departments.count>0&&self.departments!=nil){
-        return self.departments.count;
-    }else{
-        
+        if(self.departments.count>0&&self.departments!=nil){
+            return self.departments.count;
+        }else{
+            
             return self.users.count;
         }
     }else{
@@ -283,7 +287,7 @@
         return header;
     }
     else {
-      UIView *header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+        UIView *header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
         UILabel *la=[[UILabel alloc]init];
         [header addSubview:la];
         la.text=@"员工列表";
@@ -305,93 +309,159 @@
 //点击通讯录
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(self.selectData.count<5){
-    NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.selectData];
-    BOOL isHas=NO;
-    if(indexPath.section==0){
-        if(self.departments.count>0&&self.departments!=nil){
-            ChoosePeopleViewController *cs=[[ChoosePeopleViewController alloc]init];
-            NSDictionary *dic=[self.departments objectAtIndex:indexPath.row];
-            cs.dep=[dic objectForKey:@"id"];
-            [self.navigationController pushViewController:cs animated:YES];
-        }else{
+        NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.selectData];
+        BOOL isHas=NO;
+        if(indexPath.section==0){
+            if(self.departments.count>0&&self.departments!=nil){
+                NSDictionary *deparment = [self.departments objectAtIndex:indexPath.row];//一个部门的信息
+                //增加头部标题信息
+                NSString *name = [deparment objectForKey:@"name"];
+                NSDictionary *dic=[self.departments objectAtIndex:indexPath.row];
+                NSString *dep=[dic objectForKey:@"id"];
+                NSDictionary *addDic=[[NSDictionary alloc]initWithObjectsAndKeys:dep,@"id",name,@"name",nil];
+                NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.depNum];
+                NSArray *temp2=[temp arrayByAddingObject:addDic];
+                self.depNum=[[NSArray alloc]initWithArray:temp2];
+                [self.selectTitle reloadData];
+                  //刷新tableview
+                [self UrlData:dep];
+                [self.grouptableview reloadData];
+            }else{
+                
+                NSDictionary *dic=[self.users objectAtIndex:indexPath.row];
+                for(NSDictionary *data in self.selectData){
+                    if(data==dic){
+                        [temp removeObject:data];
+                        isHas=YES;
+                    }
+                }
+                if(isHas==NO){
+                    NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:self.selectData];
+                    self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
+                }else{
+                    self.selectData=[[NSArray alloc]initWithArray:temp];
+                }
+            }
             
+        }else{
             NSDictionary *dic=[self.users objectAtIndex:indexPath.row];
             for(NSDictionary *data in self.selectData){
                 if(data==dic){
                     [temp removeObject:data];
                     isHas=YES;
-            }
+                }
             }
             if(isHas==NO){
-            NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:self.selectData];
+                NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:self.selectData];
                 self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
             }else{
                 self.selectData=[[NSArray alloc]initWithArray:temp];
             }
         }
-        
-    }else{
-        NSDictionary *dic=[self.users objectAtIndex:indexPath.row];
-        for(NSDictionary *data in self.selectData){
-            if(data==dic){
-                [temp removeObject:data];
-                isHas=YES;
-            }
-        }
-        if(isHas==NO){
-            NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:self.selectData];
-            self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
-        }else{
-            self.selectData=[[NSArray alloc]initWithArray:temp];
-        }
-    }
-   self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%ld/5)",[self.selectData count]];
-    [self.selectColl reloadData];
+        self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%d/5)",[self.selectData count]];
+        [self.selectColl reloadData];
     }
 }
 
 #pragma mark-<UICollectionViewDatasource,UICollectionViewDelegate>
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell *collectionCell=[collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell"
-   forIndexPath:indexPath];
-   // collectionCell.layer.borderWidth=1;
-    UIImageView *selectImg=[[UIImageView alloc]init];
-    UILabel *laX=[[UILabel alloc]init];
-    [selectImg addSubview:laX];
-    [laX mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.mas_equalTo(0);
-        make.size.mas_equalTo(CGSizeMake(10, 10));
-    }];
-    laX.text=@"X";
-    [collectionCell addSubview:selectImg];
-    CGFloat width=(self.selectColl.frame.size.width-10)/5;
-    [selectImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(width, width));
-        make.centerY.mas_equalTo(collectionCell.mas_centerY);
-        make.left.mas_equalTo(2);
-    }];
-    NSDictionary *user =  [self.selectData objectAtIndex:indexPath.row];
-    NSString *name = [user objectForKey:@"fullName"];
-    
-    if ([name length] > 2) {
-        selectImg.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
-    } else {
-        selectImg.image = [UIImage circleImageWithText:name size:CGSizeMake(40,40)];
+    UICollectionViewCell *collectionCell=[collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell"forIndexPath:indexPath];
+    if(collectionCell!=nil){
+        for(UIView *view in [collectionCell subviews]){
+            [view removeFromSuperview];
+        }
     }
+    if(collectionView==self.selectColl){
+        
+        UIImageView *selectImg=[[UIImageView alloc]init];
+        UILabel *laX=[[UILabel alloc]init];
+        [selectImg addSubview:laX];
+        [laX mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.right.mas_equalTo(0);
+            make.size.mas_equalTo(CGSizeMake(10, 10));
+        }];
+        laX.text=@"X";
+        [collectionCell addSubview:selectImg];
+        CGFloat width=(self.selectColl.frame.size.width-10)/5;
+        [selectImg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(width, width));
+            make.centerY.mas_equalTo(collectionCell.mas_centerY);
+            make.left.mas_equalTo(2);
+        }];
+        NSDictionary *user =  [self.selectData objectAtIndex:indexPath.row];
+        NSString *name = [user objectForKey:@"fullName"];
+        
+        if ([name length] > 2) {
+            selectImg.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
+        } else {
+            selectImg.image = [UIImage circleImageWithText:name size:CGSizeMake(40,40)];
+        }
+    }
+    if(collectionView==self.selectTitle){
+        if(indexPath.row<self.depNum.count){
+            UILabel *totalLabel=[[UILabel alloc]init];
+            totalLabel.textColor=FONT_GRAY_COLOR;
+            totalLabel.font=FONT_12;
+            [collectionCell addSubview:totalLabel];
+            [totalLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.bottom.mas_equalTo(0);
+                make.left.mas_equalTo(0);
+                make.width.mas_equalTo(100);
+            }];
+            NSDictionary *dic=[self.depNum objectAtIndex:indexPath.row];
+            totalLabel.text=[dic objectForKey:@"name"];
+            totalLabel.textAlignment=NSTextAlignmentCenter;
+
+        UIImage *rightArrow=[UIImage imageNamed:@"ic_right_arrow.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+        UIImageView *arrow=[[UIImageView alloc]initWithImage:rightArrow];
+        [collectionCell addSubview:arrow];
+        [arrow mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(collectionCell.mas_centerY);
+            make.left.mas_equalTo(totalLabel.mas_right);
+            make.size.mas_equalTo(CGSizeMake(20, 20));
+        }];
+        }
+        }
     
     return collectionCell;
 }
+
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [self.selectData count];
-
+    NSInteger *num=0;
+    if(collectionView==self.selectColl){
+        num=[self.selectData count];
+    }
+    if(collectionView==self.selectTitle){
+        num=[self.depNum count];
+    }
+    return num;
 }
 
-
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if(collectionView==self.selectColl){
+    NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.selectData];
+    [temp removeObjectAtIndex:indexPath.row];
+    self.selectData=[[NSArray alloc]initWithArray:temp];
+    [self.selectColl reloadData];
+    }
+    if(collectionView==self.selectTitle){
+        NSDictionary *dic=[self.depNum objectAtIndex:indexPath.row];
+        NSString *depID=[dic objectForKey:@"id"];
+        [self UrlData:depID];
+        NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.depNum];
+        for(int i=indexPath.row+1;i<self.depNum.count;i++){
+            [temp removeObjectAtIndex:i];
+        }
+        self.depNum=[[NSArray alloc]initWithArray:temp];
+        [self.selectTitle reloadData];
+    }
+}
 
 
 
 
 @end
+

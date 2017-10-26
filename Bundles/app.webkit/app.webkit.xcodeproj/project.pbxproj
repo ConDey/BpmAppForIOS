@@ -31,6 +31,7 @@
 		F8AFFBF71F9F398700CE74F5 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8AFFC111FA0185E00CE74F5 /* ChoosePeopleViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFC0F1FA0185E00CE74F5 /* ChoosePeopleViewController.h */; };
 		F8AFFC121FA0185E00CE74F5 /* ChoosePeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFC101FA0185E00CE74F5 /* ChoosePeopleViewController.m */; };
+		F8AFFC261FA165C100CE74F5 /* ic_right_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC251FA165C000CE74F5 /* ic_right_arrow.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		F8AFFC0F1FA0185E00CE74F5 /* ChoosePeopleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleViewController.h; sourceTree = "<group>"; };
 		F8AFFC101FA0185E00CE74F5 /* ChoosePeopleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleViewController.m; sourceTree = "<group>"; };
+		F8AFFC251FA165C000CE74F5 /* ic_right_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_right_arrow.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		06C6BB301F185A7A00D444E6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F8AFFC251FA165C000CE74F5 /* ic_right_arrow.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8AFFC261FA165C100CE74F5 /* ic_right_arrow.png in Resources */,
 				06C6BBAF1F19045700D444E6 /* css in Resources */,
 				06C6BBB11F19045700D444E6 /* js in Resources */,
 				06C6BBB01F19045700D444E6 /* fonts in Resources */,

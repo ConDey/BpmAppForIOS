@@ -7,7 +7,7 @@
 //
 
 #import "ContactUserViewController.h"
-#import "ContractUserTableViewCell.h"
+
 
 @interface ContactUserViewController ()
 
@@ -42,7 +42,7 @@
     self.grouptableview.dataSource  = self;
     self.grouptableview.delegate=self;
     [self.grouptableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-    [self.grouptableview registerNib:[UINib nibWithNibName:@"ContractUserTableViewCell" bundle:self.bundle]  forCellReuseIdentifier:@"ContractUserTableViewCell"];
+    [self.grouptableview registerClass:[UITableViewCell class]  forCellReuseIdentifier:@"ContractUserTableViewCell"];
     
     [self.view addSubview:self.grouptableview];
     [self.grouptableview mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -98,15 +98,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ContractUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContractUserTableViewCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContractUserTableViewCell"forIndexPath:indexPath];
+   
     if(cell==nil){
-        cell=[[ContractUserTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ContractUserTableViewCell"];
-        }
-    
-    if(indexPath.section==0){
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ContractUserTableViewCell"];
+    }else{
         for(UIView *view in [cell subviews]){
-        [view removeFromSuperview];
+            [view removeFromSuperview];
         }
+    }
+    if(indexPath.section==0){
         //信息电话按钮
         UIView *callAndMsg=[[UIView alloc]init];
         [cell addSubview:callAndMsg];
@@ -172,37 +173,65 @@
         //点击打电话
         UITapGestureRecognizer *tapTel=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapTel:)];
         [call addGestureRecognizer:tapTel];
-    }
-    else  if (indexPath.section==1){
+    }else{
+        UIImageView *leftImageView=[[UIImageView alloc]init];
+        [cell addSubview:leftImageView];
+        [leftImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(cell.mas_centerY);
+            make.size.mas_equalTo(CGSizeMake(30, 30));
+            make.left.mas_equalTo(20);
+        }];
+        UILabel  *titleLabel=[[UILabel alloc]init];
+        [cell addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(leftImageView.mas_right).mas_equalTo(15);
+            make.centerY.mas_equalTo(cell.mas_centerY);
+             make.size.mas_equalTo(CGSizeMake(100, 25));
+        }];
+        UILabel  *detailLabel=[[UILabel alloc]init];
+        [cell addSubview:detailLabel];
+        [detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(15);
+            make.centerY.mas_equalTo(cell.mas_centerY);
+            make.height.mas_equalTo(25);
+            make.right.mas_equalTo(-20);
+        }];
+        detailLabel.textColor=FONT_GRAY_COLOR;
+        detailLabel.font=FONT_14;
+        detailLabel.textAlignment=NSTextAlignmentRight;
+     if (indexPath.section==1){
+       
         if (indexPath.row == 0) {
-            cell.leftImageView.image =  [UIImage imageNamed:@"ic_contact_user" inBundle:self.bundle compatibleWithTraitCollection:nil];
-            cell.titleLabel.text = @"人员姓名";
-            cell.detailLabel.text = self.user.fullName;
+            leftImageView.image =  [UIImage imageNamed:@"ic_contact_user" inBundle:self.bundle compatibleWithTraitCollection:nil];
+            titleLabel.text = @"人员姓名";
+            detailLabel.text = self.user.fullName;
         }
         
         else if(indexPath.row == 1) {
-            cell.leftImageView.image =  [UIImage imageNamed:@"ic_contact_group" inBundle:self.bundle compatibleWithTraitCollection:nil];
-            cell.titleLabel.text = @"所属部门";
-            cell.detailLabel.text = self.user.departmentName;
+            leftImageView.image =  [UIImage imageNamed:@"ic_contact_group" inBundle:self.bundle compatibleWithTraitCollection:nil];
+            titleLabel.text = @"所属部门";
+            detailLabel.text = self.user.departmentName;
         }
         
         else if(indexPath.row == 2) {
-            cell.leftImageView.image =  [UIImage imageNamed:@"ic_contact_position" inBundle:self.bundle compatibleWithTraitCollection:nil];
-            cell.titleLabel.text = @"工作职位";
-            cell.detailLabel.text = self.user.position;
+            leftImageView.image =  [UIImage imageNamed:@"ic_contact_position" inBundle:self.bundle compatibleWithTraitCollection:nil];
+            titleLabel.text = @"工作职位";
+            detailLabel.text = self.user.position;
         }
     }else {
+       
         if(indexPath.row == 0) {
-            cell.leftImageView.image =  [UIImage imageNamed:@"ic_contact_tel" inBundle:self.bundle compatibleWithTraitCollection:nil];
-            cell.titleLabel.text = @"联系方式";
-            cell.detailLabel.text = self.user.mobile;
+            leftImageView.image =  [UIImage imageNamed:@"ic_contact_tel" inBundle:self.bundle compatibleWithTraitCollection:nil];
+            titleLabel.text = @"联系方式";
+            detailLabel.text = self.user.mobile;
         }
         
         else if(indexPath.row ==1) {
-            cell.leftImageView.image =  [UIImage imageNamed:@"ic_contact_email" inBundle:self.bundle compatibleWithTraitCollection:nil];
-            cell.titleLabel.text = @"电子邮件";
-            cell.detailLabel.text = self.user.email;
+            leftImageView.image =  [UIImage imageNamed:@"ic_contact_email" inBundle:self.bundle compatibleWithTraitCollection:nil];
+            titleLabel.text = @"电子邮件";
+            detailLabel.text = self.user.email;
         }
+    }
     }
     return cell;
 }
