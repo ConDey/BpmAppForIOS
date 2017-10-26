@@ -5,27 +5,33 @@
 //  Created by feng sun on 2017/10/25.
 //  Copyright © 2017年 Eazytec. All rights reserved.
 //
-
+#import "EAWebController.h"
 #import "ChoosePeopleViewController.h"
 
 @interface ChoosePeopleViewController ()
 @property(nonatomic,retain)NSArray *selectData;
 @property(nonatomic,retain)NSArray *departments;
 @property(nonatomic,retain)NSArray *users;
+@property(nonatomic,retain)NSArray *search;
 @property(nonatomic,retain)UICollectionView *selectColl;
 @property(nonatomic,retain)UICollectionView *selectTitle;//部门选择显示
 @property(nonatomic,retain)UILabel *selectLabel;
 @property(nonatomic,retain)NSArray *depNum;//部门选择
 @property(nonatomic,assign)BOOL isSearch;
 @property(nonatomic,retain) UISearchBar *searchBar;
+@property(nonatomic,retain)UIBarButtonItem *rightButtonItem;
 @end
 
 @implementation ChoosePeopleViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.rightButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemUndo target:self action:@selector(dataSend)];
+    self.navigationItem.rightBarButtonItem=self.rightButtonItem;
+    self.isSearch=NO;
     //导航栏右按钮
-      self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem.title=@"确认选择";
+    //默认选择项
     self.selectData=@[
                       @{@"id":@"zhangsan",
                         @"username":@"zhangsan",
@@ -122,6 +128,7 @@
     self.searchBar.showsCancelButton=NO;
     self.searchBar.placeholder=@" 点击输入搜索";
     self.searchBar.backgroundImage=[UIImage new];
+    self.searchBar.delegate=self;
     //部门人员列表
     [self.view addSubview:self.grouptableview];
     [self.grouptableview mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -136,17 +143,28 @@
     self.grouptableview.backgroundColor=[UIColor clearColor];
     [self UrlData:@""];
 }
-//获取数据
+//获取通讯录数据
 -(void)UrlData:(NSString *)dep{
 NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setObject:dep forKey:@"parentId"];
 [self httpGetRequestWithUrl:HttpProtocolServiceContactDepart params:params progress:YES];
 }
+//获取搜索数据
+-(void)UrlSearch:(NSString *)searchName{
+    self.isSearch=YES;
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    [params setObject:searchName forKey:@"name"];
+    [self httpGetRequestWithUrl:HttpProtocolServiceContactUserList params:params progress:nil];
+  
+}
 //解析数据
 - (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
     if(self.isSearch){
-        self.users=[result objectForKey:@"datas"];
-         self.isSearch=nil;
+        NSLog(@"解析搜索数据");
+        NSMutableArray *ud=[[NSMutableArray alloc]init];
+        ud=[result objectForKey:@"datas"];
+        self.search=[[NSArray alloc]initWithArray:ud];
+        
     }else{
     NSArray *childarray = [result objectForKey:@"childs"];
     if (childarray == nil || [childarray count] == 0) {
@@ -158,7 +176,7 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     NSArray *userarray = [result objectForKey:@"users"];
     if (userarray == nil || [userarray count] == 0) {
         self.users = [[NSArray alloc]init];
-    } else {
+    }else {
         self.users = [[NSArray alloc]initWithArray:userarray];
     }
     }
@@ -172,6 +190,7 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [self setTitleOfNav:@"人员选择"];
+    
 }
 
 
@@ -205,11 +224,12 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         make.centerY.mas_equalTo(tableCell.mas_centerY);
     }];
     if(self.isSearch){
-        NSDictionary *users = [self.users objectAtIndex:indexPath.row];//一个部门的信息
+        NSDictionary *users = [self.search objectAtIndex:indexPath.row];
         NSString *name = [users objectForKey:@"fullName"];
-        headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-3] size:CGSizeMake(40,40)];
+        headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
         titleLabel.text = name;
         numOfDep.text=@"";
+        
     }else{
     if(indexPath.section == 0) {
         if (self.departments != nil && [self.departments count] > 0) {
@@ -252,16 +272,25 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     return tableCell;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSInteger num=0;
-    if(self.departments.count>0&&self.departments!=nil){
-        num++;
+     NSInteger num=0;
+    if(self.isSearch){
+        return 1;
+    }else{
+        if(self.departments.count>0&&self.departments!=nil){
+            num++;
+        }
+        if(self.users.count>0&&self.users!=nil){
+            num++;
+        }
     }
-    if(self.users.count>0&&self.users!=nil){
-        num++;
-    }
+   
+    
     return num;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(self.isSearch){
+        return  self.users.count;
+    }else{
     if(section==0){
         if(self.departments.count>0&&self.departments!=nil){
             return self.departments.count;
@@ -272,11 +301,16 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     }else{
         return self.users.count;
     }
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *header = [[UIView alloc]init];
+    if(self.isSearch){
+        header.frame=CGRectMake(0, 0, 0, 0);
+    }else{
     if(section == 0) {
         NSString *title=@"员工列表";
         if (self.departments != nil && [self.departments count] > 0) {
@@ -284,7 +318,6 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         } else {
             title = @"员工列表";
         }
-        UIView *header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
         UILabel *la=[[UILabel alloc]init];
         [header addSubview:la];
         [la mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -295,10 +328,9 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         la.font=FONT_14;
         la.textColor=FONT_GRAY_COLOR;
         header.frame = CGRectMake(0, 0, self.grouptableview.bounds.size.width, 50);
-        return header;
+    
     }
     else {
-        UIView *header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
         UILabel *la=[[UILabel alloc]init];
         [header addSubview:la];
         la.text=@"员工列表";
@@ -309,20 +341,47 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         la.font=FONT_14;
         la.textColor=FONT_GRAY_COLOR;
         header.frame = CGRectMake(0, 0, self.grouptableview.bounds.size.width, 50);
-        return header;
+        
     }
+    }
+    
+    return header;
     
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if(self.isSearch){
+        return 0.01;
+    }else{
     return 50;
+    }
 }
 //点击通讯录
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(self.selectData.count<5){
-        NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.selectData];
-        BOOL isHas=NO;
+        if (self.search.count!=0) {
+            //通过搜索选择的人员
+            BOOL isHas=NO;
+            NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.selectData];
+            NSDictionary *dic=[self.search objectAtIndex:indexPath.row];
+            for(NSDictionary *data in self.selectData){
+                if(data==dic){
+                    [temp removeObject:data];
+                    isHas=YES;
+                }
+            }
+            if(isHas==NO){
+                NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:self.selectData];
+                self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
+            }else{
+                self.selectData=[[NSArray alloc]initWithArray:temp];
+            }
+
+        }
+        else{
+        
         if(indexPath.section==0){
+            //部门选择标题
             if(self.departments.count>0&&self.departments!=nil){
                 NSDictionary *deparment = [self.departments objectAtIndex:indexPath.row];//一个部门的信息
                 //增加头部标题信息
@@ -338,7 +397,9 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
                 [self UrlData:dep];
                 [self.grouptableview reloadData];
             }else{
-                
+                //选择的人员
+                NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.selectData];
+                BOOL isHas=NO;
                 NSDictionary *dic=[self.users objectAtIndex:indexPath.row];
                 for(NSDictionary *data in self.selectData){
                     if(data==dic){
@@ -352,9 +413,12 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
                 }else{
                     self.selectData=[[NSArray alloc]initWithArray:temp];
                 }
+
             }
             
         }else{
+            NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.selectData];
+            BOOL isHas=NO;
             NSDictionary *dic=[self.users objectAtIndex:indexPath.row];
             for(NSDictionary *data in self.selectData){
                 if(data==dic){
@@ -368,12 +432,35 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
             }else{
                 self.selectData=[[NSArray alloc]initWithArray:temp];
             }
+            
         }
+            //部门还是具体人员
+        }
+        //搜索还是通讯录
         self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%d/5)",self.selectData.count];
         [self.selectColl reloadData];
+        
     }
 }
-
+//获取选择信息
+-(NSArray *)addDelectData:(NSArray *)arr numOfArr:(NSInteger)num{
+    BOOL isHas=NO;
+    NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:arr];
+    NSDictionary *dic=[arr objectAtIndex:num];
+    for(NSDictionary *data in arr){
+        if(data==dic){
+            [temp removeObject:data];
+            isHas=YES;
+        }
+    }
+    if(isHas==NO){
+        NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:arr];
+        arr=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
+    }else{
+        arr=[[NSArray alloc]initWithArray:temp];
+    }
+    return arr;
+}
 #pragma mark-<UICollectionViewDatasource,UICollectionViewDelegate>
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *collectionCell=[collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell"forIndexPath:indexPath];
@@ -463,11 +550,12 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [self.selectColl reloadData];
     }
     if(collectionView==self.selectTitle){
+        self.isSearch=NO;
         NSDictionary *dic=[self.depNum objectAtIndex:indexPath.row];
         NSString *depID=[dic objectForKey:@"id"];
         [self UrlData:depID];
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.depNum];
-        for(NSInteger i=indexPath.row+1;i<self.depNum.count;i++){
+        for(NSInteger i=self.depNum.count-1;i>indexPath.row;i--){
             [temp removeObjectAtIndex:i];
         }
         self.depNum=[[NSArray alloc]initWithArray:temp];
@@ -477,20 +565,11 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
 //搜索
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     NSLog(@"搜索开始");
-    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    if(searchBar.text.length==0)
-    {
-        [self UrlData:@""];
-    }else{
-        self.isSearch=YES;
-        [params setObject:searchText forKey:@"name"];
-        [self httpGetRequestWithUrl:HttpProtocolServiceContactUserList params:params progress:nil];
-        [self.grouptableview reloadData];
-       
-    }
-   
+    [self UrlSearch:searchText];
 }
-
+-(void)dataSend{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 @end

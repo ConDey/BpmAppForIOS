@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "com_eazytec_bpm_lib_common/lib.common.h"
 @interface ChoosePeopleViewController :EAViewController<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,UISearchBarDelegate>
+
 @end
