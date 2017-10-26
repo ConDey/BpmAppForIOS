@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setTitleOfNav:self.user.fullName];
+    
     //背景图
     UIImageView *picView=[[UIImageView alloc]init];
     picView.image=[UIImage imageNamed:@"app_banner.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
@@ -28,14 +28,20 @@
         make.top.mas_equalTo(0);
         make.height.mas_equalTo(200);
     }];
-    UIImage *name=[UIImage circleImageWithText:self.user.fullName size:CGSizeMake(60, 60)];
+    UIImage *name=[[UIImage alloc]init];
+    if(self.userName.length==0){
+    name=[UIImage circleImageWithText:self.user.fullName size:CGSizeMake(60, 60)];
+    }else{
+     name=[UIImage circleImageWithText:self.userName size:CGSizeMake(60, 60)];
+    }
+  
     UIImageView *nameImg=[[UIImageView alloc]initWithImage:name];
     [picView addSubview:nameImg];
     [nameImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(picView);
         make.size.mas_equalTo(CGSizeMake(60, 60));
     }];
-    
+   
     
     
     
@@ -62,11 +68,10 @@
         
     }else{
         [params setObject:self.userId forKey:@"userId"];
-        
     }
-    
     // 更新数据
     [self httpGetRequestWithUrl:HttpProtocolServiceContactUserDetail params:params progress:YES];
+    
 }
 
 - (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {

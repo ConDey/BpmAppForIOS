@@ -10,20 +10,22 @@
 
 @interface ChoosePeopleViewController ()
 @property(nonatomic,retain)NSArray *selectData;
-@property (nonatomic,retain) NSString *dep_id;
-@property (nonatomic,retain) NSString *dep_name;
 @property(nonatomic,retain)NSArray *departments;
 @property(nonatomic,retain)NSArray *users;
 @property(nonatomic,retain)UICollectionView *selectColl;
-@property(nonatomic,retain)UICollectionView *selectTitle;
+@property(nonatomic,retain)UICollectionView *selectTitle;//部门选择显示
 @property(nonatomic,retain)UILabel *selectLabel;
-@property(nonatomic,retain)NSArray *depNum;
+@property(nonatomic,retain)NSArray *depNum;//部门选择
+@property(nonatomic,assign)BOOL isSearch;
+@property(nonatomic,retain) UISearchBar *searchBar;
 @end
 
 @implementation ChoosePeopleViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //导航栏右按钮
+      self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     self.selectData=@[
                       @{@"id":@"zhangsan",
                         @"username":@"zhangsan",
@@ -37,12 +39,11 @@
     
     NSDictionary *dic=[[NSDictionary alloc]initWithObjectsAndKeys:@"",@"id",@"全部",@"name",nil];
     self.depNum=[[NSArray alloc]initWithObjects:dic, nil];
-    NSLog(@"%d",self.depNum.count);
     
     
     //部门层次
     UICollectionViewFlowLayout *flowlayout=[[UICollectionViewFlowLayout alloc]init];
-    
+   
     flowlayout.itemSize=CGSizeMake(120, 40);
     flowlayout.minimumLineSpacing=1;
     flowlayout.minimumInteritemSpacing=1;
@@ -112,15 +113,15 @@
     [self.selectColl registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"collectionCell"];
     
     //搜索项
-    UISearchBar *searchBar=[[UISearchBar alloc]init];
-    [selectAndSearch addSubview:searchBar];
-    [searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.searchBar=[[UISearchBar alloc]init];
+    [selectAndSearch addSubview:self.searchBar];
+    [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.top.bottom.mas_equalTo(0);
         make.width.mas_equalTo((SCREEN_WIDTH-20)/2);
     }];
-    searchBar.showsCancelButton=NO;
-    searchBar.placeholder=@" 点击输入搜索";
-    searchBar.backgroundImage=[UIImage new];
+    self.searchBar.showsCancelButton=NO;
+    self.searchBar.placeholder=@" 点击输入搜索";
+    self.searchBar.backgroundImage=[UIImage new];
     //部门人员列表
     [self.view addSubview:self.grouptableview];
     [self.grouptableview mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -143,9 +144,10 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
 }
 //解析数据
 - (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
-    
-    self.dep_id = [result objectForKey:@"id"];
-    self.dep_name = [result objectForKey:@"name"];
+    if(self.isSearch){
+        self.users=[result objectForKey:@"datas"];
+         self.isSearch=nil;
+    }else{
     NSArray *childarray = [result objectForKey:@"childs"];
     if (childarray == nil || [childarray count] == 0) {
         self.departments = [[NSArray alloc]init];
@@ -159,7 +161,9 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     } else {
         self.users = [[NSArray alloc]initWithArray:userarray];
     }
+    }
     [self.grouptableview reloadData];
+   
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -200,7 +204,13 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         make.right.mas_equalTo(-10);
         make.centerY.mas_equalTo(tableCell.mas_centerY);
     }];
-    
+    if(self.isSearch){
+        NSDictionary *users = [self.users objectAtIndex:indexPath.row];//一个部门的信息
+        NSString *name = [users objectForKey:@"fullName"];
+        headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-3] size:CGSizeMake(40,40)];
+        titleLabel.text = name;
+        numOfDep.text=@"";
+    }else{
     if(indexPath.section == 0) {
         if (self.departments != nil && [self.departments count] > 0) {
             tableCell.accessoryType= UITableViewCellAccessoryDisclosureIndicator;
@@ -237,6 +247,7 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         }
         titleLabel.text = name;
         numOfDep.text=@"";
+    }
     }
     return tableCell;
 }
@@ -358,7 +369,7 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
                 self.selectData=[[NSArray alloc]initWithArray:temp];
             }
         }
-        self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%d/5)",[self.selectData count]];
+        self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%d/5)",self.selectData.count];
         [self.selectColl reloadData];
     }
 }
@@ -411,7 +422,11 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
             NSDictionary *dic=[self.depNum objectAtIndex:indexPath.row];
             totalLabel.text=[dic objectForKey:@"name"];
             totalLabel.textAlignment=NSTextAlignmentCenter;
-
+            if(indexPath.row<self.depNum.count-1){
+                totalLabel.textColor=UI_BLUE_COLOR;
+            }else{
+                totalLabel.textColor=UI_GRAY_COLOR;
+            }
         UIImage *rightArrow=[UIImage imageNamed:@"ic_right_arrow.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         UIImageView *arrow=[[UIImageView alloc]initWithImage:rightArrow];
         [collectionCell addSubview:arrow];
@@ -430,7 +445,7 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     return 1;
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    NSInteger *num=0;
+    NSInteger num=0;
     if(collectionView==self.selectColl){
         num=[self.selectData count];
     }
@@ -452,14 +467,29 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         NSString *depID=[dic objectForKey:@"id"];
         [self UrlData:depID];
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.depNum];
-        for(int i=indexPath.row+1;i<self.depNum.count;i++){
+        for(NSInteger i=indexPath.row+1;i<self.depNum.count;i++){
             [temp removeObjectAtIndex:i];
         }
         self.depNum=[[NSArray alloc]initWithArray:temp];
         [self.selectTitle reloadData];
     }
 }
-
+//搜索
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    NSLog(@"搜索开始");
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    if(searchBar.text.length==0)
+    {
+        [self UrlData:@""];
+    }else{
+        self.isSearch=YES;
+        [params setObject:searchText forKey:@"name"];
+        [self httpGetRequestWithUrl:HttpProtocolServiceContactUserList params:params progress:nil];
+        [self.grouptableview reloadData];
+       
+    }
+   
+}
 
 
 

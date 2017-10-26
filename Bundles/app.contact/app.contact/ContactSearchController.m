@@ -78,7 +78,7 @@
     
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //NSLog(@"////%@",self.userDetail);
+    
     ContactSearchCell *cell=[tableView dequeueReusableCellWithIdentifier:@"SearchCell"];
     NSMutableDictionary *user=[self.userDetail objectAtIndex:indexPath.row];
     NSString *fullName=[[NSString alloc]init];
@@ -108,6 +108,7 @@
     userId=[user objectForKey:@"id"];
     ContactUserViewController *vc = [[ContactUserViewController alloc]initWithNibName:@"ContactUserViewController" bundle:self.bundle];
     vc.userId=userId;
+    vc.userName=[user objectForKey:@"fullName"];
     [self.navigationController pushViewController: vc animated:YES];
 
     

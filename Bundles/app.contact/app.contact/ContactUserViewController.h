@@ -14,5 +14,5 @@
 
 @property (nonatomic,retain) User *user;
 @property (nonatomic,copy) NSString *userId;
-
+@property (nonatomic,copy) NSString *userName;
 @end
