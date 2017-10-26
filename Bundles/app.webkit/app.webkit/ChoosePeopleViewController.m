@@ -152,10 +152,13 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
 //获取搜索数据
 -(void)UrlSearch:(NSString *)searchName{
     self.isSearch=YES;
+    if(searchName.length!=0){
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     [params setObject:searchName forKey:@"name"];
     [self httpGetRequestWithUrl:HttpProtocolServiceContactUserList params:params progress:nil];
-  
+    }else{
+        NSLog(@"搜索输入为空");
+    }
 }
 //解析数据
 - (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
@@ -202,6 +205,7 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
             [view removeFromSuperview];
         }
     }
+    tableCell.accessoryType=UITableViewCellAccessoryNone;
     UILabel *titleLabel=[[UILabel alloc]init];
     UIImageView *headImageView=[[UIImageView alloc]init];
     UILabel *numOfDep=[[UILabel alloc]init];
@@ -224,12 +228,14 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         make.centerY.mas_equalTo(tableCell.mas_centerY);
     }];
     if(self.isSearch){
+        if(self.search.count>0){
+        
         NSDictionary *users = [self.search objectAtIndex:indexPath.row];
         NSString *name = [users objectForKey:@"fullName"];
         headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
         titleLabel.text = name;
         numOfDep.text=@"";
-        
+        }
     }else{
     if(indexPath.section == 0) {
         if (self.departments != nil && [self.departments count] > 0) {
@@ -258,6 +264,7 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     }
     else {
         // 显示员工
+       
         NSDictionary *user =  [self.users objectAtIndex:indexPath.row];
         NSString *name =  [user objectForKey:@"fullName"];
         if ([name length] > 2) {
@@ -289,7 +296,7 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(self.isSearch){
-        return  self.users.count;
+        return  self.search.count;
     }else{
     if(section==0){
         if(self.departments.count>0&&self.departments!=nil){
@@ -358,11 +365,11 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
 }
 //点击通讯录
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(self.selectData.count<5){
-        if (self.search.count!=0) {
-            //通过搜索选择的人员
-            BOOL isHas=NO;
+        if (self.isSearch) {
+            UITableViewCell *tableCell=[self.grouptableview cellForRowAtIndexPath:indexPath];
+            
             NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.selectData];
+            BOOL isHas=NO;
             NSDictionary *dic=[self.search objectAtIndex:indexPath.row];
             for(NSDictionary *data in self.selectData){
                 if(data==dic){
@@ -371,12 +378,15 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
                 }
             }
             if(isHas==NO){
-                NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:self.selectData];
-                self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
+                if(self.selectData.count<5){
+                    tableCell.accessoryType=UITableViewCellAccessoryCheckmark;
+                    NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:self.selectData];
+                    self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
+                }
             }else{
+                tableCell.accessoryType=UITableViewCellAccessoryNone;
                 self.selectData=[[NSArray alloc]initWithArray:temp];
             }
-
         }
         else{
         
@@ -398,6 +408,9 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
                 [self.grouptableview reloadData];
             }else{
                 //选择的人员
+                
+                UITableViewCell *tableCell=[self.grouptableview cellForRowAtIndexPath:indexPath];
+               
                 NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.selectData];
                 BOOL isHas=NO;
                 NSDictionary *dic=[self.users objectAtIndex:indexPath.row];
@@ -408,15 +421,21 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
                     }
                 }
                 if(isHas==NO){
+                    if(self.selectData.count<5){
+                    tableCell.accessoryType=UITableViewCellAccessoryCheckmark;
                     NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:self.selectData];
                     self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
+                    }
                 }else{
+                    tableCell.accessoryType=UITableViewCellAccessoryNone;
                     self.selectData=[[NSArray alloc]initWithArray:temp];
                 }
-
+                
             }
             
         }else{
+            
+            UITableViewCell *tableCell=[self.grouptableview cellForRowAtIndexPath:indexPath];
             NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.selectData];
             BOOL isHas=NO;
             NSDictionary *dic=[self.users objectAtIndex:indexPath.row];
@@ -427,9 +446,13 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
                 }
             }
             if(isHas==NO){
+                if(self.selectData.count<5){
+                tableCell.accessoryType=UITableViewCellAccessoryCheckmark;
                 NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:self.selectData];
                 self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
+                }
             }else{
+                tableCell.accessoryType=UITableViewCellAccessoryNone;
                 self.selectData=[[NSArray alloc]initWithArray:temp];
             }
             
@@ -440,27 +463,9 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%d/5)",self.selectData.count];
         [self.selectColl reloadData];
         
-    }
+    
 }
-//获取选择信息
--(NSArray *)addDelectData:(NSArray *)arr numOfArr:(NSInteger)num{
-    BOOL isHas=NO;
-    NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:arr];
-    NSDictionary *dic=[arr objectAtIndex:num];
-    for(NSDictionary *data in arr){
-        if(data==dic){
-            [temp removeObject:data];
-            isHas=YES;
-        }
-    }
-    if(isHas==NO){
-        NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:arr];
-        arr=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
-    }else{
-        arr=[[NSArray alloc]initWithArray:temp];
-    }
-    return arr;
-}
+
 #pragma mark-<UICollectionViewDatasource,UICollectionViewDelegate>
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *collectionCell=[collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell"forIndexPath:indexPath];
@@ -564,7 +569,6 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
 }
 //搜索
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    NSLog(@"搜索开始");
     [self UrlSearch:searchText];
 }
 -(void)dataSend{
