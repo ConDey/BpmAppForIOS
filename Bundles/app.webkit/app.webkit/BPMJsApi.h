@@ -22,4 +22,5 @@
 -(void)delegate_setTitlebarVisible:(Boolean)visible;
 -(void)delegate_setTitle:(NSString *_Nonnull)title;
 -(void)delegate_choose;
+-(void)delegate_showPeople;
 @end

@@ -36,6 +36,7 @@
                 <button type="button" class="mui-btn mui-btn-outlined" onclick="choosePeople()">
                      人员选择
                 </button>
+              
             </div>
         </div>
     </body>
@@ -55,8 +56,8 @@
                     bpmbridget.call("setTitle",{title: "我被修改了"});
                 }
                   function choosePeople(){
-                    alert("xxxx");
                     bpmbridget.call("choose");
+                    bpmbridget.call("showPeople");
                   
                }
     

@@ -7,9 +7,11 @@
 //
 
 #import "EAWebController.h"
-
+#import "ChoosePeopleViewController.h"
 @interface EAWebController()
-
+{
+    NSString *arr;
+}
 @property (retain, nonatomic) UIProgressView *progressView;
 @property (retain,nonatomic) WKWebView *wkwebview;
 
@@ -128,6 +130,16 @@
 // 显示标题栏
 - (void)delegate_setTitlebarVisible:(Boolean)visible {
 
+}
+//选择人员
+- (void)delegate_choose {
+    ChoosePeopleViewController *cs=[[ChoosePeopleViewController alloc]init];
+    [self.navigationController pushViewController:cs animated:YES];
+}
+//人员选择显示
+- (void)delegate_showPeople {
+        arr=[[NSString alloc]initWithData:self.selectData encoding:NSUTF8StringEncoding];
+        NSLog(@"数据--%@",arr);
 }
 
 @end
