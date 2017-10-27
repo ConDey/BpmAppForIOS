@@ -86,6 +86,7 @@
     return NO;
 }
 
+
 /**
  *  设置NavItem是否显示
  *  @param isDisplay navitem是否显示

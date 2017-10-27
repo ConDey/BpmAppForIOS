@@ -5,7 +5,7 @@
 //  Created by ConDey on 2017/7/14.
 //  Copyright © 2017年 Eazytec. All rights reserved.
 //
-#import "ChoosePeopleViewController.h"
+
 #import "EAWebController.h"
 
 @interface EAWebController()
@@ -31,7 +31,7 @@
     [self.view addSubview:self.progressView];
     
     
-  //  if ([NSString isStringBlank:self.url]) {
+    if ([NSString isStringBlank:self.url] || [self.url containsString:@"jswebview"]) {
         NSString *htmlPath = [self.bundle pathForResource:@"jswebview"
                                                    ofType:@"html"];
         NSURL *baseURL = [NSURL fileURLWithPath:htmlPath];
@@ -39,14 +39,14 @@
         
         [self.webview loadRequest:request];
         
-//    } else {
-//        NSURL *url = [NSURL URLWithString:self.url];
-//        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-//
-//        NSString *cookie = [NSString stringWithFormat:@"token=%@",[CurrentUser currentUser].token];
-//        [request addValue:cookie forHTTPHeaderField:@"Cookie"];
-//        [self.webview loadRequest:request];
-//    }
+    } else {
+        NSURL *url = [NSURL URLWithString:self.url];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        
+        NSString *cookie = [NSString stringWithFormat:@"token=%@",[CurrentUser currentUser].token];
+        [request addValue:cookie forHTTPHeaderField:@"Cookie"];
+        [self.webview loadRequest:request];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -117,7 +117,6 @@
 // 关闭此页面
 - (void)delegate_close {
     [self.navigationController popViewControllerAnimated:YES];
-   
 }
 
 // 设置标题
@@ -125,12 +124,10 @@
     [self setTitleOfNav:title];
     
 }
-//人员选择
-- (void)delegate_choose {
-    NSLog(@"试试");
-    ChoosePeopleViewController *cs=[[ChoosePeopleViewController alloc]init];
-    [self.navigationController pushViewController:cs animated:YES];
-    
+
+// 显示标题栏
+- (void)delegate_setTitlebarVisible:(Boolean)visible {
+
 }
 
 @end

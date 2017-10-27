@@ -16,6 +16,12 @@
     }
 }
 
+- (void)setTitlebarVisible:(NSDictionary *)args {
+    if (self.delegate != nil) {
+        [self.delegate delegate_setTitlebarVisible:(Boolean)[args valueForKey:@"visible"]];
+    }
+}
+
 - (void)setTitle:(NSDictionary *)args {
     if (self.delegate != nil) {
         [self.delegate delegate_setTitle:(NSString *)[args valueForKey:@"title"]];
