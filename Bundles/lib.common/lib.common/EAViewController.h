@@ -24,6 +24,7 @@
 // NavigationItem 相关方法和配置
 - (void)setNavDisplay:(BOOL)isDisplay; // 配置NavItem是否显示
 - (void)setTitleOfNav:(NSString *)titleOfNav;  // 配置NavItem的title
+- (void)setTitleStyleOfNavFont:(UIFont *)titleFont Color:(UIColor *)titleColor; // 配置NavItem的titleStyle
 - (void)setTitleViewOfNav:(UIView *)viewOfNav; // 配置NavItem的titleView
 - (void)setCommonBackLeftButtonItem; // 配置默认的返回ButtonItem
 

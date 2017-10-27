@@ -114,6 +114,10 @@
     }
 }
 
+- (void)setTitleStyleOfNavFont:(UIFont *)titleFont Color:(UIColor *)titleColor {
+    self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:titleFont, NSFontAttributeName, titleColor, NSForegroundColorAttributeName, nil];
+}
+
 /**
  *  初始化NavigationItem.titleView
  *  1.如果存在TabBarController,则navigationItem是由tabBarController来管理的.

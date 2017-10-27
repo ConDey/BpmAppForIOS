@@ -28,6 +28,8 @@
 		06C6BBB01F19045700D444E6 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BBAC1F19045700D444E6 /* fonts */; };
 		06C6BBB11F19045700D444E6 /* js in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BBAD1F19045700D444E6 /* js */; };
 		06C6BBB21F19045700D444E6 /* jswebview.html in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BBAE1F19045700D444E6 /* jswebview.html */; };
+		84AE716A1FA2C495002530AD /* BaseDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE71681FA2C495002530AD /* BaseDataResult.h */; };
+		84AE716B1FA2C495002530AD /* BaseDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE71691FA2C495002530AD /* BaseDataResult.m */; };
 		F8AFFBF71F9F398700CE74F5 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8AFFC111FA0185E00CE74F5 /* ChoosePeopleViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFC0F1FA0185E00CE74F5 /* ChoosePeopleViewController.h */; };
 		F8AFFC121FA0185E00CE74F5 /* ChoosePeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFC101FA0185E00CE74F5 /* ChoosePeopleViewController.m */; };
@@ -60,6 +62,8 @@
 		06C6BBAC1F19045700D444E6 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = www/fonts; sourceTree = "<group>"; };
 		06C6BBAD1F19045700D444E6 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; name = js; path = www/js; sourceTree = "<group>"; };
 		06C6BBAE1F19045700D444E6 /* jswebview.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = jswebview.html; path = www/jswebview.html; sourceTree = "<group>"; };
+		84AE71681FA2C495002530AD /* BaseDataResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseDataResult.h; sourceTree = "<group>"; };
+		84AE71691FA2C495002530AD /* BaseDataResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseDataResult.m; sourceTree = "<group>"; };
 		F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		F8AFFC0F1FA0185E00CE74F5 /* ChoosePeopleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleViewController.h; sourceTree = "<group>"; };
 		F8AFFC101FA0185E00CE74F5 /* ChoosePeopleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleViewController.m; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 		06C6BB2F1F185A7500D444E6 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				84AE71671FA2C35C002530AD /* Data */,
 				06C6BB771F18669E00D444E6 /* Dsbridge */,
 				06C6BB361F185DAE00D444E6 /* EAWebController.h */,
 				06C6BB371F185DAE00D444E6 /* EAWebController.m */,
@@ -169,6 +174,15 @@
 			name = www;
 			sourceTree = "<group>";
 		};
+		84AE71671FA2C35C002530AD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				84AE71681FA2C495002530AD /* BaseDataResult.h */,
+				84AE71691FA2C495002530AD /* BaseDataResult.m */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -178,6 +192,7 @@
 			files = (
 				06C6BB1D1F18592200D444E6 /* app.webkit.h in Headers */,
 				06C6BB831F18669E00D444E6 /* dsbridge.h in Headers */,
+				84AE716A1FA2C495002530AD /* BaseDataResult.h in Headers */,
 				06C6BB851F18669E00D444E6 /* DUIwebview.h in Headers */,
 				06C6BB901F1868F000D444E6 /* BPMJsApi.h in Headers */,
 				06C6BB891F18669E00D444E6 /* DWKwebview.h in Headers */,
@@ -267,6 +282,7 @@
 				06C6BB911F1868F000D444E6 /* BPMJsApi.m in Sources */,
 				06C6BB8A1F18669E00D444E6 /* DWKwebview.m in Sources */,
 				06C6BB861F18669E00D444E6 /* DUIwebview.m in Sources */,
+				84AE716B1FA2C495002530AD /* BaseDataResult.m in Sources */,
 				06C6BB391F185DAE00D444E6 /* EAWebController.m in Sources */,
 				F8AFFC121FA0185E00CE74F5 /* ChoosePeopleViewController.m in Sources */,
 				06C6BB881F18669E00D444E6 /* DWebview.m in Sources */,
@@ -387,6 +403,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/app.webkit/PrefixHeader.pch";
 				INFOPLIST_FILE = app.webkit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -411,6 +428,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/app.webkit/PrefixHeader.pch";
 				INFOPLIST_FILE = app.webkit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

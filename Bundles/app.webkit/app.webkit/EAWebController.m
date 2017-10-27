@@ -7,6 +7,7 @@
 //
 
 #import "EAWebController.h"
+#import "BaseDataResult.h"
 
 @interface EAWebController()
 
@@ -120,14 +121,125 @@
 }
 
 // 设置标题
-- (void)delegate_setTitle:(NSString *_Nonnull)title {
-    [self setTitleOfNav:title];
+- (void)delegate_setTitle:(NSString *)title fontSize:(NSString *)fontsize fontColor:(NSString *)fontcolor callback:(void (^ _Nonnull)(NSString * _Nullable, BOOL))completionHandler{
+    
+    BaseDataResult *result;
+
+    if (![NSString isStringNil:title] && ![NSString isStringNil:fontsize] && ![NSString isStringNil:fontcolor]) {
+        
+        [self setTitleOfNav:title];
+        UIFont *titleFont = [UIFont systemFontOfSize:[fontsize floatValue]];
+        UIColor *titleColor = [UIColor colorWithHexString:fontcolor];
+        [self setTitleStyleOfNavFont:titleFont Color:titleColor];
+        
+        result = [[BaseDataResult alloc] initWithSuccess:YES];
+    }else {
+        result = [[BaseDataResult alloc] initWithSuccess:NO];
+    }
+    NSString *resultJson = [JsonUtils dictionaryToJson:result.keyValues];
+    
+    completionHandler(resultJson, YES);
+    
+    return;
+}
+
+// 人员选择
+- (void)delegate_choose {
     
 }
 
 // 显示标题栏
-- (void)delegate_setTitlebarVisible:(Boolean)visible {
+- (void)delegate_setTitlebarVisible:(NSString *_Nonnull)visible callback:(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
+    
+    BaseDataResult *result;
+    
+    if (![NSString isStringNil:visible]) {
+        if ([visible isEqualToString:@"YES"]) {
+            [self.navigationController setNavigationBarHidden:NO];
+        }else if ([visible isEqualToString:@"NO"]) {
+            [self.navigationController setNavigationBarHidden:YES];
+        }
+        result = [[BaseDataResult alloc] initWithSuccess:YES];
+    }else {
+        result = [[BaseDataResult alloc] initWithSuccess:NO];
+    }
+    NSString* resultJson = [JsonUtils dictionaryToJson:result.keyValues];
+    
+    completionHandler(resultJson, YES);
+    
+    return;
+}
 
+// 设置标题栏背景颜色
+- (void)delegate_setTitlebarBgColor:(NSString *_Nonnull)bgcolor callback:(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
+    
+    BaseDataResult *result;
+    
+    if (![NSString isStringNil:bgcolor]) {
+        UIColor* bgColor = [UIColor colorWithHexString:bgcolor];
+        [self.navigationController.navigationBar setBarTintColor:bgColor];
+        
+        result = [[BaseDataResult alloc] initWithSuccess:YES];
+    }else {
+        result = [[BaseDataResult alloc] initWithSuccess:NO];
+    }
+    NSString* resultJson = [JsonUtils dictionaryToJson:result.keyValues];
+    
+    completionHandler(resultJson, YES);
+    
+    return;
+}
+
+// 设置标题栏背景图片
+- (void)delegate_setTitlebarBgImage:(NSString *_Nonnull)bgimageUrl callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler {
+    
+    BaseDataResult *result;
+    
+    if (![NSString isStringNil:bgimageUrl]) {
+        
+        NSURL* imageUrl = [NSURL URLWithString:bgimageUrl];
+        NSData* imageData = [NSData dataWithContentsOfURL:imageUrl];
+        UIImage* bgImg = [UIImage sd_imageWithData:imageData];
+        [self.navigationController.navigationBar setBackgroundImage:bgImg forBarMetrics:UIBarMetricsDefault];
+        
+        result = [[BaseDataResult alloc] initWithSuccess:YES];
+    }else {
+        result = [[BaseDataResult alloc] initWithSuccess:NO];
+    }
+    NSString* resultJson = [JsonUtils dictionaryToJson:result.keyValues];
+    
+    completionHandler(resultJson, YES);
+    
+    return;
+}
+
+// 设置右边标题栏按钮并绑定事件
+- (void)delegate_bindRightBtn:(NSString *)imageUrl callbackName:(NSString *)callbackName callback:(void (^)(NSString * _Nullable, BOOL))completionHandler {
+    
+    BaseDataResult *result;
+    
+    if (![NSString isStringNil:imageUrl] && ![NSString isStringNil:callbackName]) {
+        
+        NSURL* btnImageUrl = [NSURL URLWithString:imageUrl];
+        NSData* imageData = [NSData dataWithContentsOfURL:btnImageUrl];
+        UIImage* bgImg = [UIImage sd_imageWithData:imageData];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:bgImg style:UIBarButtonItemStylePlain target:self action:@selector(rightBtnBindAction:)];
+        //self.navigationItem.rightBarButtonItem s
+        
+        result = [[BaseDataResult alloc] initWithSuccess:YES];
+    }else {
+        result = [[BaseDataResult alloc] initWithSuccess:NO];
+    }
+    NSString* resultJson = [JsonUtils dictionaryToJson:result.keyValues];
+    
+    completionHandler(resultJson, YES);
+    
+    return;
+}
+
+#pragma mark - additional methods
+- (void)rightBtnBindAction:(id)sender {
+    
 }
 
 @end

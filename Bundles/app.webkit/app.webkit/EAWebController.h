@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "dsbridge.h"
 #import "BPMJsApi.h"
-#import "com_eazytec_bpm_lib_common/lib.common.h"
 
 @interface EAWebController : EAViewController<BPMJsApiDelegate>
 

@@ -173,6 +173,8 @@
 		84301C5F1F99799C00F01F8F /* TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301C5D1F99799C00F01F8F /* TimeUtils.m */; };
 		84301C601F99799C00F01F8F /* TimeUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301C5E1F99799C00F01F8F /* TimeUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301C611F997CB900F01F8F /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C6B9A61F14A65100D444E6 /* AFNetworkReachabilityManager.m */; };
+		84AE716E1FA2C5B0002530AD /* JsonUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE716C1FA2C5B0002530AD /* JsonUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84AE716F1FA2C5B0002530AD /* JsonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE716D1FA2C5B0002530AD /* JsonUtils.m */; };
 		F8AFFBA91F9D947700CE74F5 /* MJRefreshAutoFooter.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFB7C1F9D947700CE74F5 /* MJRefreshAutoFooter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8AFFBAA1F9D947700CE74F5 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFB7D1F9D947700CE74F5 /* MJRefreshAutoFooter.m */; };
 		F8AFFBAB1F9D947700CE74F5 /* MJRefreshBackFooter.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFB7E1F9D947700CE74F5 /* MJRefreshBackFooter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -418,6 +420,8 @@
 		84301C5B1F99798D00F01F8F /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
 		84301C5D1F99799C00F01F8F /* TimeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeUtils.m; sourceTree = "<group>"; };
 		84301C5E1F99799C00F01F8F /* TimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeUtils.h; sourceTree = "<group>"; };
+		84AE716C1FA2C5B0002530AD /* JsonUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JsonUtils.h; sourceTree = "<group>"; };
+		84AE716D1FA2C5B0002530AD /* JsonUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JsonUtils.m; sourceTree = "<group>"; };
 		F8AFFB7C1F9D947700CE74F5 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		F8AFFB7D1F9D947700CE74F5 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		F8AFFB7E1F9D947700CE74F5 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -894,6 +898,8 @@
 			children = (
 				84301C5E1F99799C00F01F8F /* TimeUtils.h */,
 				84301C5D1F99799C00F01F8F /* TimeUtils.m */,
+				84AE716C1FA2C5B0002530AD /* JsonUtils.h */,
+				84AE716D1FA2C5B0002530AD /* JsonUtils.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1009,6 +1015,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84AE716E1FA2C5B0002530AD /* JsonUtils.h in Headers */,
 				06C3A4631F0C7ADA00633543 /* lib.common.h in Headers */,
 				06C6B9C81F14A65100D444E6 /* AFNetworking.h in Headers */,
 				06C6B9CB1F14A65100D444E6 /* AFSecurityPolicy.h in Headers */,
@@ -1251,6 +1258,7 @@
 				84301C5C1F99798D00F01F8F /* BaseModel.m in Sources */,
 				84301A851F95D74800F01F8F /* View+MASAdditions.m in Sources */,
 				06C6B9D21F14A65100D444E6 /* AFURLSessionManager.m in Sources */,
+				84AE716F1FA2C5B0002530AD /* JsonUtils.m in Sources */,
 				06C6B9D81F14A65100D444E6 /* AFImageDownloader.m in Sources */,
 				F8AFFBBC1F9D947700CE74F5 /* MJRefreshBackNormalFooter.m in Sources */,
 				06C6B9E41F14A65100D444E6 /* UIProgressView+AFNetworking.m in Sources */,
