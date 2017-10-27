@@ -29,7 +29,7 @@
         make.left.mas_equalTo(10);
         make.top.mas_equalTo(10);
         make.right.mas_equalTo(-10);
-        make.height.mas_equalTo(150);
+        make.height.mas_equalTo(160);
     }];
     self.panelView.layer.cornerRadius=2.0f;
     self.panelView.layer.shadowColor=[UIColor blackColor].CGColor;

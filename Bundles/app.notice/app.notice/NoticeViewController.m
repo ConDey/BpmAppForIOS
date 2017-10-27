@@ -53,7 +53,7 @@
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:@"" forKey:@"title"];
         [params setObject:@"1" forKey:@"pageNo"];
-        [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight] forKey:@"pageSize"];
+        [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight] forKey:@"pageSize"];
         [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
         
     }];
@@ -66,7 +66,7 @@
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:@"" forKey:@"title"];
           [params setObject:[NSString stringWithFormat:@"%ld",self.pgNo] forKey:@"pageNo"];
-          [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight] forKey:@"pageSize"];
+          [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight] forKey:@"pageSize"];
          [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
     }];
   
@@ -87,7 +87,7 @@
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     [params setObject:@"" forKey:@"title"];
     [params setObject:@"1" forKey:@"pageNo"];
-    [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-105)/self.cellHeight] forKey:@"pageSize"];
+    [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight] forKey:@"pageSize"];
     [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
     
     
@@ -163,12 +163,7 @@
     //创建时间
     cell.createdTime.textColor=FONT_GRAY_COLOR;
     }
-    //cell阴影
-    cell.layer.cornerRadius=2.0f;
-    cell.layer.shadowColor=[UIColor blackColor].CGColor;
-    cell.layer.shadowOffset=CGSizeMake(3, 3);
-    cell.layer.shadowRadius=2.0f;
-    cell.layer.shadowOpacity=0.3;
+    
     
     return cell;
 }

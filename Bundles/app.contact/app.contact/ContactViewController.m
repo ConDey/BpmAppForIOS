@@ -265,7 +265,6 @@
             }
             
         } else {
-            
             User *user = [self.users objectAtIndex:indexPath.row];
             ContactUserViewController *vc = [[ContactUserViewController alloc]initWithNibName:@"ContactUserViewController" bundle:self.bundle];
                         vc.user = user;
@@ -274,10 +273,11 @@
     }
     else {
         
-        User *user = [self.users objectAtIndex:indexPath.row];
-        
+       User *user = [self.users objectAtIndex:indexPath.row];
+       
         ContactUserViewController *vc = [[ContactUserViewController alloc]initWithNibName:@"ContactUserViewController" bundle:self.bundle];
         vc.user = user;
+        
         [self.navigationController pushViewController: vc animated:true];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

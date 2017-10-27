@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		061A906C1F1CB19B00B7C227 /* ContactUserViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 061A906A1F1CB19B00B7C227 /* ContactUserViewController.h */; };
 		061A906D1F1CB19B00B7C227 /* ContactUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A906B1F1CB19B00B7C227 /* ContactUserViewController.m */; };
-		061A90831F1DD3CC00B7C227 /* ContractUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061A90801F1DD3CC00B7C227 /* ContractUserTableViewCell.xib */; };
-		061A90861F1DDD2B00B7C227 /* ContractUserTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 061A90841F1DDD2B00B7C227 /* ContractUserTableViewCell.h */; };
-		061A90871F1DDD2B00B7C227 /* ContractUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A90851F1DDD2B00B7C227 /* ContractUserTableViewCell.m */; };
 		061A908E1F1DE14A00B7C227 /* ic_contact_email.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A90891F1DE14A00B7C227 /* ic_contact_email.png */; };
 		061A908F1F1DE14A00B7C227 /* ic_contact_group.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A908A1F1DE14A00B7C227 /* ic_contact_group.png */; };
 		061A90901F1DE14A00B7C227 /* ic_contact_position.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A908B1F1DE14A00B7C227 /* ic_contact_position.png */; };
@@ -49,9 +46,6 @@
 		061A906A1F1CB19B00B7C227 /* ContactUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUserViewController.h; sourceTree = "<group>"; };
 		061A906B1F1CB19B00B7C227 /* ContactUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUserViewController.m; sourceTree = "<group>"; };
 		061A906E1F1CB34700B7C227 /* ContactUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactUserViewController.xib; sourceTree = "<group>"; };
-		061A90801F1DD3CC00B7C227 /* ContractUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContractUserTableViewCell.xib; sourceTree = "<group>"; };
-		061A90841F1DDD2B00B7C227 /* ContractUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContractUserTableViewCell.h; sourceTree = "<group>"; };
-		061A90851F1DDD2B00B7C227 /* ContractUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContractUserTableViewCell.m; sourceTree = "<group>"; };
 		061A90891F1DE14A00B7C227 /* ic_contact_email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_contact_email.png; sourceTree = "<group>"; };
 		061A908A1F1DE14A00B7C227 /* ic_contact_group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_contact_group.png; sourceTree = "<group>"; };
 		061A908B1F1DE14A00B7C227 /* ic_contact_position.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_contact_position.png; sourceTree = "<group>"; };
@@ -140,9 +134,6 @@
 				0634550B1F1C483200F1BEF8 /* ContractTableViewHeader.h */,
 				0634550C1F1C483200F1BEF8 /* ContractTableViewHeader.m */,
 				0634550F1F1C484100F1BEF8 /* ContractTableViewHeader.xib */,
-				061A90801F1DD3CC00B7C227 /* ContractUserTableViewCell.xib */,
-				061A90841F1DDD2B00B7C227 /* ContractUserTableViewCell.h */,
-				061A90851F1DDD2B00B7C227 /* ContractUserTableViewCell.m */,
 			);
 			name = Item;
 			sourceTree = "<group>";
@@ -216,7 +207,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BAD21F15C8FE00D444E6 /* ContactViewController.h in Headers */,
-				061A90861F1DDD2B00B7C227 /* ContractUserTableViewCell.h in Headers */,
 				063455181F1C96AB00F1BEF8 /* User.h in Headers */,
 				061A906C1F1CB19B00B7C227 /* ContactUserViewController.h in Headers */,
 				063455141F1C960D00F1BEF8 /* Deparment.h in Headers */,
@@ -293,7 +283,6 @@
 				061A90911F1DE14A00B7C227 /* ic_contact_tel.png in Resources */,
 				F80A8ADA1F98226400E126C6 /* ic_contact_search.png in Resources */,
 				063455101F1C484100F1BEF8 /* ContractTableViewHeader.xib in Resources */,
-				061A90831F1DD3CC00B7C227 /* ContractUserTableViewCell.xib in Resources */,
 				F8AFFAEC1F9D7A7200CE74F5 /* app_banner.png in Resources */,
 				F80A8ADB1F98226400E126C6 /* ic_contact_local.png in Resources */,
 				06414F711F19E9DA0005342C /* ContractTableViewCell.xib in Resources */,
@@ -321,7 +310,6 @@
 				0634550E1F1C483200F1BEF8 /* ContractTableViewHeader.m in Sources */,
 				063455151F1C960D00F1BEF8 /* Deparment.m in Sources */,
 				06414F701F19E9DA0005342C /* ContractTableViewCell.m in Sources */,
-				061A90871F1DDD2B00B7C227 /* ContractUserTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
