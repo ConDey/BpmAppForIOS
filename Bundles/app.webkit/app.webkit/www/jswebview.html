@@ -30,8 +30,32 @@
                 <button type="button" class="mui-btn mui-btn-outlined" onclick="closewindow()">
                     关闭页面
                 </button>
+                <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"
+                    onclick="setTitlebarVisible()">
+                    显示标题栏
+                </button>
+                <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"
+                    onclick="setTitlebarInvisible()">
+                    隐藏标题栏
+                </button>
+                <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"
+                    onclick="setTitlebarBgColor()">
+                    设置标题栏背景颜色
+                </button>
+                <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"
+                    onclick="setTitlebarBgImage()">
+                    设置标题栏背景图片
+                </button>
                 <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="setTitle()">
                     设置修改标题
+                </button>
+                <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"
+                    onclick="startWindow()">
+                    新建WebViewActivity
+                </button>
+                <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"
+                    onclick="skipWindow()">
+                    新建WebViewActivity并结束当前activity
                 </button>
             </div>
         </div>
@@ -48,8 +72,49 @@
                      bpmbridget.call("close");
                  }
     
-                 function setTitle() {
-                    bpmbridget.call("setTitle",{title: "我被修改了"});
+                 // 显示标题栏
+                 function setTitlebarVisible() {
+                     bpmbridget.call("setTitlebarVisible",{visible: YES}, function(result){
+                                     alert(result);
+                                     });
+                 }
+    
+                 // 隐藏标题栏
+                 function setTitlebarInvisible() {
+                     bpmbridget.call("setTitlebarVisible",{visible: NO}, function(result){
+                                     alert(result);
+                                     });
+                 }
+    
+                // 设置标题栏背景颜色
+                function setTitlebarBgColor() {ild
+                    bpmbridget.call("setTitlebarBgColor",{bgColor: "#3892FF"}, function(result){
+                                    alert(result);
+                                    });
+                }
+    
+                // 设置标题栏背景图片
+                function setTitlebarBgImage() {
+                    bpmbridget.call("setTitlebarBgImage",{bgImgUrl: "https://58.215.198.210:9997/bpmapp/bpm_toolbar_bg.png"}, function(result){
+                                    alert(result);
+                                    });
+                }
+    
+                // 设置标题
+                function setTitleBarTextView() {
+                    bpmbridget.call("setTitlebarTextView",{title: "XXXX", fontSize: "19", fontColor: "#3892FF"}, function(result){
+                                    alert(result);
+                                    });
+                }
+    
+                // 新建窗口
+                function startWindow() {
+                    bpmbridget.call("startWindow",{url: "https://58.215.198.210:9997/bpmapp/newjswebview.html", title: "hello"});
+                }
+    
+                // 新建窗口并结束当前窗口
+                function skipWindow() {
+                    bpmbridget.call("skipWindow",{url: "https://58.215.198.210:9997/bpmapp/newjswebview.html", title: "hello"});
                 }
     
     

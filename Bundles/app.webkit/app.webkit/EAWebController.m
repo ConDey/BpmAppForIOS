@@ -31,7 +31,7 @@
     [self.view addSubview:self.progressView];
     
     
-    if ([NSString isStringBlank:self.url]) {
+    if ([NSString isStringBlank:self.url] || [self.url containsString:@"jswebview"]) {
         NSString *htmlPath = [self.bundle pathForResource:@"jswebview"
                                                    ofType:@"html"];
         NSURL *baseURL = [NSURL fileURLWithPath:htmlPath];
@@ -123,6 +123,11 @@
 - (void)delegate_setTitle:(NSString *_Nonnull)title {
     [self setTitleOfNav:title];
     
+}
+
+// 显示标题栏
+- (void)delegate_setTitlebarVisible:(Boolean)visible {
+
 }
 
 @end
