@@ -36,8 +36,11 @@
                 <button type="button" class="mui-btn mui-btn-outlined" onclick="choosePeople()">
                      人员选择
                 </button>
-              
+                <button type="button" class="mui-btn mui-btn-outlined" onclick="showPeople()">
+                    人员选择显示
+                </button>
             </div>
+            
         </div>
     </body>
     <script src="js/mui.min.js"></script>
@@ -57,9 +60,9 @@
                 }
                   function choosePeople(){
                     bpmbridget.call("choose");
-                    bpmbridget.call("showPeople");
-                  
                }
-    
+             function showPeople(){
+                bpmbridget.call("showPeople");
+              }
         </script>
 </html>

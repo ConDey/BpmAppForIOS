@@ -7,7 +7,9 @@
 //
 
 #import "BPMJsApi.h"
+@interface BPMJsApi()
 
+@end
 @implementation BPMJsApi
 
 - (void)close:(NSDictionary *)args {
@@ -33,7 +35,7 @@
         [self.delegate delegate_choose];
     }
 }
-- (void)showPeople:(NSDictionary *)args {
+- (void)showPeople:(NSDictionary *) args {
     if (self.delegate != nil) {
         [self.delegate delegate_showPeople];
     }
