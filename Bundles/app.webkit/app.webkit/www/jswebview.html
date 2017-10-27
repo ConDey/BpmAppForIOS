@@ -30,7 +30,7 @@
                 <button type="button" class="mui-btn mui-btn-outlined" onclick="closewindow()">
                     关闭页面
                 </button>
-                <button type="button" class="mui-btn mui-btn-outlined" onclick="choosePeople()">
+                <button type="button" class="mui-btn mui-btn-outlined" onclick="userChoose()">
                      人员选择
                 </button>
                 <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"
@@ -109,8 +109,8 @@
                  function setTitle() {
                     bpmbridget.call("setTitle",{title: "我被修改了"});
                 }
-                  function choosePeople(){
-                    bpmbridget.call("choose");
+                  function userChoose(){
+                    bpmbridget.call("userChoose");
                   
                  }
     

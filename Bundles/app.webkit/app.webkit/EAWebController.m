@@ -193,15 +193,11 @@
     return;
 }
 //选择人员
-- (void)delegate_choose {
+- (void)delegate_userChoose {
     ChoosePeopleViewController *cs=[[ChoosePeopleViewController alloc]init];
     [self.navigationController pushViewController:cs animated:YES];
 }
-////人员选择显示
-//- (void)delegate_showPeople {
-//        arr=[[NSString alloc]initWithData:self.selectData encoding:NSUTF8StringEncoding];
-//        NSLog(@"数据--%@",arr);
-//}
+
 
 // 设置标题栏背景图片
 - (void)delegate_setTitlebarBgImage:(NSString *_Nonnull)bgimageUrl callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler {

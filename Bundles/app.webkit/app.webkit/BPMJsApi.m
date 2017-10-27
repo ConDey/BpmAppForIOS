@@ -16,9 +16,9 @@
     }
 }
 
-- (void)choose:(NSDictionary *)args {
+- (void)userChoose:(NSDictionary *)args {
     if (self.delegate != nil) {
-        [self.delegate delegate_choose];
+        [self.delegate delegate_userChoose];
     }
 }
 
