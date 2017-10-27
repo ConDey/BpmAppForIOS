@@ -136,10 +136,10 @@
     ChoosePeopleViewController *cs=[[ChoosePeopleViewController alloc]init];
     [self.navigationController pushViewController:cs animated:YES];
 }
-//人员选择显示
-- (void)delegate_showPeople {
-        arr=[[NSString alloc]initWithData:self.selectData encoding:NSUTF8StringEncoding];
-        NSLog(@"数据--%@",arr);
-}
+////人员选择显示
+//- (void)delegate_showPeople {
+//        arr=[[NSString alloc]initWithData:self.selectData encoding:NSUTF8StringEncoding];
+//        NSLog(@"数据--%@",arr);
+//}
 
 @end

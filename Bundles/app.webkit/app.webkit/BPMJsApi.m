@@ -35,10 +35,6 @@
         [self.delegate delegate_choose];
     }
 }
-- (void)showPeople:(NSDictionary *) args {
-    if (self.delegate != nil) {
-        [self.delegate delegate_showPeople];
-    }
-}
+
 
 @end
