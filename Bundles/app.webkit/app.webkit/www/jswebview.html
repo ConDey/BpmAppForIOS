@@ -91,6 +91,7 @@
                     新建WebViewActivity并结束当前activity
                 </button>
             </div>
+            
         </div>
     </body>
     <script src="js/mui.min.js"></script>
@@ -105,8 +106,10 @@
                      bpmbridget.call("close");
                  }
     
-                 function choosePeople(){
-                    alert("xxxx");
+                 function setTitle() {
+                    bpmbridget.call("setTitle",{title: "我被修改了"});
+                }
+                  function choosePeople(){
                     bpmbridget.call("choose");
                   
                  }

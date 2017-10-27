@@ -572,7 +572,20 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [self UrlSearch:searchText];
 }
 -(void)dataSend{
-    [self.navigationController popViewControllerAnimated:YES];
+    EAWebController *ea=[[EAWebController alloc]init];
+   
+    NSMutableArray *data=[[NSMutableArray alloc]init
+                          ];
+    for(NSDictionary *dic in self.selectData){
+        NSString *name=[dic objectForKey:@"fullName"];
+        NSString *userId=[dic objectForKey:@"id"];
+        NSDictionary *userDic=[[NSDictionary alloc]initWithObjectsAndKeys:name,@"name",userId,@"id",nil];
+        [data addObject:userDic];
+    }
+    NSDictionary *dic1=[[NSDictionary alloc]initWithObjectsAndKeys:data,@"users", @"true",@"success",@"",@"errorMsg",nil];
+    NSData *selectData=[NSJSONSerialization dataWithJSONObject:dic1 options:NSJSONWritingPrettyPrinted error:nil ];
+    ea.selectData=selectData;
+    [self.navigationController pushViewController:ea animated:YES];
 }
 
 
