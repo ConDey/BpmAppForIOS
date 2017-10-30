@@ -51,13 +51,56 @@
                 [view removeFromSuperview];
         }
     }
-    UILabel *attachLabel=[[UILabel alloc]init];
-    [cell addSubview:attachLabel];
-    [attachLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 10, 0, 0));
-    }];
+    NSArray *fileType=@[@"apk",@"doc",@"img",@"pdf",@"ppt",@"txt",@"xls",@"zip",@"bg"];
     NSDictionary *attachDic =[self.attachmentList objectAtIndex:indexPath.row];
-     attachLabel.text=[attachDic objectForKey:@"name"];
+    NSString *str=[attachDic objectForKey:@"name"];
+    
+    UIImageView *attachImg=[[UIImageView alloc]init];
+    UILabel *attachLabel=[[UILabel alloc]init];
+    UILabel *loadLabel=[[UILabel alloc]init];
+    [cell addSubview:attachLabel];
+    [cell addSubview:loadLabel];
+    [cell addSubview:attachImg];
+    [attachImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(5);
+        make.centerY.mas_equalTo(cell.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(30, 30));
+    }];
+    [attachLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.centerY.mas_equalTo(cell.mas_centerY);
+       make.size.mas_equalTo(CGSizeMake(250, 30));
+      make.left.mas_equalTo(attachImg.mas_right).mas_equalTo(5);
+    }];
+    [loadLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, SCREEN_WIDTH-5-250-30-5, 0, 5));
+    }];
+    BOOL isEqual=NO;
+    NSString *strTail=[str substringFromIndex:[str rangeOfString:@"."].location+1];
+            for(NSString *type in fileType){
+                if([strTail isEqualToString:type]){
+                    isEqual=YES;
+                }
+            }
+    
+    
+    if([strTail isEqualToString:@"png"]||[strTail isEqualToString:@"jpg"]){
+        attachImg.image=[UIImage imageNamed:@"ic_download_type_img.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+    }else{
+        if(isEqual){
+        attachImg.image=[UIImage imageNamed:[NSString stringWithFormat:@"ic_download_type_%@.png",strTail] inBundle:self.bundle compatibleWithTraitCollection:nil];
+        }else{
+        attachImg.image=[UIImage imageNamed:@"ic_download_type_unkonw.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+        }
+    }
+    
+    
+     attachLabel.text=str;
+     attachLabel.font=FONT_12;
+    
+    loadLabel.text=@"点击下载";
+    loadLabel.textColor=UI_BLUE_COLOR;
+    loadLabel.textAlignment=NSTextAlignmentRight;
+    loadLabel.font=FONT_12;
     return cell;
 }
 

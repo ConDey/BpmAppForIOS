@@ -21,6 +21,15 @@
 		F8AFFC691FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC681FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png */; };
 		F8AFFC6C1FA700C500CE74F5 /* AttachmentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFC6A1FA700C500CE74F5 /* AttachmentViewController.h */; };
 		F8AFFC6D1FA700C500CE74F5 /* AttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFC6B1FA700C500CE74F5 /* AttachmentViewController.m */; };
+		F8AFFC891FA7161100CE74F5 /* ic_download_type_ppt.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC801FA7161000CE74F5 /* ic_download_type_ppt.png */; };
+		F8AFFC8A1FA7161100CE74F5 /* ic_download_type_apk.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC811FA7161000CE74F5 /* ic_download_type_apk.png */; };
+		F8AFFC8B1FA7161100CE74F5 /* ic_download_type_unkonw.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC821FA7161000CE74F5 /* ic_download_type_unkonw.png */; };
+		F8AFFC8C1FA7161100CE74F5 /* ic_download_type_doc.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC831FA7161000CE74F5 /* ic_download_type_doc.png */; };
+		F8AFFC8D1FA7161100CE74F5 /* ic_download_type_zip.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC841FA7161100CE74F5 /* ic_download_type_zip.png */; };
+		F8AFFC8E1FA7161100CE74F5 /* ic_download_type_txt.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC851FA7161100CE74F5 /* ic_download_type_txt.png */; };
+		F8AFFC8F1FA7161100CE74F5 /* ic_download_type_pdf.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC861FA7161100CE74F5 /* ic_download_type_pdf.png */; };
+		F8AFFC901FA7161100CE74F5 /* ic_download_type_xls.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC871FA7161100CE74F5 /* ic_download_type_xls.png */; };
+		F8AFFC911FA7161100CE74F5 /* ic_download_type_img.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +50,15 @@
 		F8AFFC681FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_floatingbutton_bg.png; sourceTree = "<group>"; };
 		F8AFFC6A1FA700C500CE74F5 /* AttachmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachmentViewController.h; sourceTree = "<group>"; };
 		F8AFFC6B1FA700C500CE74F5 /* AttachmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachmentViewController.m; sourceTree = "<group>"; };
+		F8AFFC801FA7161000CE74F5 /* ic_download_type_ppt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_ppt.png; sourceTree = "<group>"; };
+		F8AFFC811FA7161000CE74F5 /* ic_download_type_apk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_apk.png; sourceTree = "<group>"; };
+		F8AFFC821FA7161000CE74F5 /* ic_download_type_unkonw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_unkonw.png; sourceTree = "<group>"; };
+		F8AFFC831FA7161000CE74F5 /* ic_download_type_doc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_doc.png; sourceTree = "<group>"; };
+		F8AFFC841FA7161100CE74F5 /* ic_download_type_zip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_zip.png; sourceTree = "<group>"; };
+		F8AFFC851FA7161100CE74F5 /* ic_download_type_txt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_txt.png; sourceTree = "<group>"; };
+		F8AFFC861FA7161100CE74F5 /* ic_download_type_pdf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_pdf.png; sourceTree = "<group>"; };
+		F8AFFC871FA7161100CE74F5 /* ic_download_type_xls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_xls.png; sourceTree = "<group>"; };
+		F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_img.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +120,15 @@
 		06C5A2D81F26D0AF00A189FB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F8AFFC811FA7161000CE74F5 /* ic_download_type_apk.png */,
+				F8AFFC831FA7161000CE74F5 /* ic_download_type_doc.png */,
+				F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */,
+				F8AFFC861FA7161100CE74F5 /* ic_download_type_pdf.png */,
+				F8AFFC801FA7161000CE74F5 /* ic_download_type_ppt.png */,
+				F8AFFC851FA7161100CE74F5 /* ic_download_type_txt.png */,
+				F8AFFC821FA7161000CE74F5 /* ic_download_type_unkonw.png */,
+				F8AFFC871FA7161100CE74F5 /* ic_download_type_xls.png */,
+				F8AFFC841FA7161100CE74F5 /* ic_download_type_zip.png */,
 				F8AFFC681FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png */,
 				06C5A2C31F26CF4D00A189FB /* app.notice.h */,
 				06C5A2C41F26CF4D00A189FB /* Info.plist */,
@@ -217,8 +244,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8AFFC8D1FA7161100CE74F5 /* ic_download_type_zip.png in Resources */,
 				F8AFFC691FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png in Resources */,
+				F8AFFC8F1FA7161100CE74F5 /* ic_download_type_pdf.png in Resources */,
+				F8AFFC8B1FA7161100CE74F5 /* ic_download_type_unkonw.png in Resources */,
+				F8AFFC8C1FA7161100CE74F5 /* ic_download_type_doc.png in Resources */,
+				F8AFFC891FA7161100CE74F5 /* ic_download_type_ppt.png in Resources */,
+				F8AFFC8A1FA7161100CE74F5 /* ic_download_type_apk.png in Resources */,
+				F8AFFC901FA7161100CE74F5 /* ic_download_type_xls.png in Resources */,
+				F8AFFC8E1FA7161100CE74F5 /* ic_download_type_txt.png in Resources */,
 				F80A8B6C1F98C54600E126C6 /* NoticeListViewCell.xib in Resources */,
+				F8AFFC911FA7161100CE74F5 /* ic_download_type_img.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -60,6 +60,7 @@
     //人员选择
     if(userChooseData.length!=0){
     __weak DWebview * web=self.webview;
+        //数据转为string
         NSString *selectNum=[NSString stringWithFormat:@"%ld",[[self.selectData objectForKey:@"users"] count]];
         NSDictionary *selectData=[self.selectData objectForKey:@"users"];
         NSData *select=[NSJSONSerialization dataWithJSONObject:selectData options:NSJSONWritingPrettyPrinted error:nil ];
