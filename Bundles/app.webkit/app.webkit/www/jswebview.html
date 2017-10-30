@@ -109,8 +109,11 @@
                  function setTitle() {
                     bpmbridget.call("setTitle",{title: "我被修改了"});
                 }
+               //人员选择
                   function userChoose(){
-                    bpmbridget.call("userChoose");
+                      bpmbridget.call("userChoose",{selectNum: 5, users:[{id:"1",name:"张三"},{id:"2",name:"李四"}]}, function(result){
+                                    alert(result);
+                                      });
                   
                  }
     
@@ -166,6 +169,13 @@
                  function skipWindow() {
                          bpmbridget.call("skipWindow",{url: "https://58.215.198.210:9997/bpmapp/newjswebview.html", title: "hello"});
                  }
-    
+               
+               
+               function showUserChoose(r){
+                   bpmbridget.call("userChoose",{selectNum: 5, users:[{id:"1",name:"张三"},{id:"2",name:"李四"}]}, function(result){
+                                   alert(result);
+                                   });
+                           
+                       }
         </script>
 </html>

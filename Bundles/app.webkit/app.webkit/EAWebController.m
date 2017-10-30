@@ -9,10 +9,10 @@
 #import "EAWebController.h"
 #import "BaseDataResult.h"
 
-#import "ChoosePeopleViewController.h"
+
 @interface EAWebController()
 {
-    NSString *arr;
+    NSString *userChooseData;
 }
 @property (retain, nonatomic) UIProgressView *progressView;
 @property (retain,nonatomic) WKWebView *wkwebview;
@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    userChooseData=[[NSString alloc]initWithData:self.selectData encoding:NSUTF8StringEncoding];
     // 解码
     self.view.backgroundColor = [UIColor whiteColor];
     self.urltitle = [NSString decodeString:self.urltitle];
@@ -50,6 +50,16 @@
         NSString *cookie = [NSString stringWithFormat:@"token=%@",[CurrentUser currentUser].token];
         [request addValue:cookie forHTTPHeaderField:@"Cookie"];
         [self.webview loadRequest:request];
+    }
+    if(userChooseData.length!=0){
+    __weak DWebview * web=self.webview;
+    [self.webview setJavascriptContextInitedListener:^(){
+        [web callHandler:@"showUserChoose"
+                    arguments:[[NSArray alloc] initWithObjects:userChooseData, nil]
+            completionHandler:^(NSString * value){
+                userChooseData=[[NSString alloc]init];;
+            }];
+    }];
     }
 }
 
@@ -146,10 +156,6 @@
     return;
 }
 
-// 人员选择
-- (void)delegate_choose {
-    
-}
 
 // 显示标题栏
 - (void)delegate_setTitlebarVisible:(NSString *_Nonnull)visible callback:(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
@@ -193,9 +199,16 @@
     return;
 }
 //选择人员
-- (void)delegate_userChoose {
-    ChoosePeopleViewController *cs=[[ChoosePeopleViewController alloc]init];
-    [self.navigationController pushViewController:cs animated:YES];
+-(void)delegate_userChoose:(NSString *_Nonnull)useChooseNum users:(NSString *_Nonnull)userChoose callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler {
+    if (userChooseData.length!=0) {
+         completionHandler(userChooseData, YES);
+    }else {
+        ChoosePeopleViewController *cs=[[ChoosePeopleViewController alloc]init];
+        [self.navigationController pushViewController:cs animated:YES];
+
+    }
+
+
 }
 
 
@@ -203,6 +216,7 @@
 - (void)delegate_setTitlebarBgImage:(NSString *_Nonnull)bgimageUrl callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler {
     
     BaseDataResult *result;
+    
     
     if (![NSString isStringNil:bgimageUrl]) {
         

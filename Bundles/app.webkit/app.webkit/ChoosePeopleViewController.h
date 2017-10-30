@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "com_eazytec_bpm_lib_common/lib.common.h"
-@interface ChoosePeopleViewController :EAViewController<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,UISearchBarDelegate>
+#import "BPMJsApi.h"
 
+@protocol BPMJsApiDelegate;
+@interface ChoosePeopleViewController:EAViewController<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,UISearchBarDelegate>
+@property(nullable, nonatomic,weak) id<BPMJsApiDelegate> delegate;
 @end
+
+
+
+
+
+

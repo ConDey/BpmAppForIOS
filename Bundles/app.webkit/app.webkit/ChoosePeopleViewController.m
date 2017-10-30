@@ -572,8 +572,7 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [self UrlSearch:searchText];
 }
 -(void)dataSend{
-    EAWebController *ea=[[EAWebController alloc]init];
-   
+    //[self showChoose];
     NSMutableArray *data=[[NSMutableArray alloc]init
                           ];
     for(NSDictionary *dic in self.selectData){
@@ -584,10 +583,26 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     }
     NSDictionary *dic1=[[NSDictionary alloc]initWithObjectsAndKeys:data,@"users", @"true",@"success",@"",@"errorMsg",nil];
     NSData *selectData=[NSJSONSerialization dataWithJSONObject:dic1 options:NSJSONWritingPrettyPrinted error:nil ];
+    EAWebController *ea=[[EAWebController alloc]init];
     ea.selectData=selectData;
     [self.navigationController pushViewController:ea animated:YES];
-}
 
+}
+-(void)showChoose{
+    NSMutableArray *data=[[NSMutableArray alloc]init
+                          ];
+    for(NSDictionary *dic in self.selectData){
+        NSString *name=[dic objectForKey:@"fullName"];
+        NSString *userId=[dic objectForKey:@"id"];
+        NSDictionary *userDic=[[NSDictionary alloc]initWithObjectsAndKeys:name,@"name",userId,@"id",nil];
+        [data addObject:userDic];
+    }
+    NSDictionary *dic1=[[NSDictionary alloc]initWithObjectsAndKeys:data,@"users", @"true",@"success",@"",@"errorMsg",nil];
+    NSData *selectData=[NSJSONSerialization dataWithJSONObject:dic1 options:NSJSONWritingPrettyPrinted error:nil ];
+    if(self.delegate!=nil){
+        [self.delegate delegate_showUserChoose:selectData];
+    }
+}
 
 @end
 

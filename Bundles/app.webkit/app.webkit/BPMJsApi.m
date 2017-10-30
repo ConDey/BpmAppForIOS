@@ -15,13 +15,12 @@
         [self.delegate delegate_close];
     }
 }
-
-- (void)userChoose:(NSDictionary *)args {
+//人员选择
+- (void)userChoose:(NSDictionary *)args :(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
     if (self.delegate != nil) {
-        [self.delegate delegate_userChoose];
+        [self.delegate delegate_userChoose:(NSString *)[args valueForKey:@"selectNum"] users:(NSString *)[args valueForKey:@"users"] callback:completionHandler];
     }
 }
-
 // 标题栏隐藏和显示
 - (void)setTitlebarVisible:(NSDictionary *)args :(void (^)(NSString * _Nullable result,BOOL complete))completionHandler{
     if (self.delegate != nil) {
