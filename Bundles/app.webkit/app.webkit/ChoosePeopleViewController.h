@@ -12,7 +12,7 @@
 
 @protocol BPMJsApiDelegate;
 @interface ChoosePeopleViewController:EAViewController<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,UISearchBarDelegate>
-@property(nullable, nonatomic,weak) id<BPMJsApiDelegate> delegate;
+
 @end
 
 

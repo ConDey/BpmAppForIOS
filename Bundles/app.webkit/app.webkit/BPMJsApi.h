@@ -26,5 +26,5 @@
 - (void)delegate_setTitlebarBgColor:(NSString *_Nonnull)bgcolor callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
 - (void)delegate_setTitlebarBgImage:(NSString *_Nonnull)bgimageUrl callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
 - (void)delegate_bindRightBtn:(NSString *_Nonnull)imageUrl callbackName:(NSString *_Nonnull)callbackName callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
--(void)delegate_showUserChoose:(NSData *_Nonnull)data;
+
 @end
