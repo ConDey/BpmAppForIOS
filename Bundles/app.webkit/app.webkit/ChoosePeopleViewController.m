@@ -566,6 +566,7 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         self.depNum=[[NSArray alloc]initWithArray:temp];
         [self.selectTitle reloadData];
     }
+     self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%d/5)",self.selectData.count];
 }
 //搜索
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
@@ -575,14 +576,21 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     //[self showChoose];
     NSMutableArray *data=[[NSMutableArray alloc]init
                           ];
+    NSDictionary *dic1=[[NSDictionary alloc]init];
+    if(self.selectData.count>0){
     for(NSDictionary *dic in self.selectData){
         NSString *name=[dic objectForKey:@"fullName"];
         NSString *userId=[dic objectForKey:@"id"];
         NSDictionary *userDic=[[NSDictionary alloc]initWithObjectsAndKeys:name,@"name",userId,@"id",nil];
         [data addObject:userDic];
     }
-    NSDictionary *dic1=[[NSDictionary alloc]initWithObjectsAndKeys:data,@"users", @"true",@"success",@"",@"errorMsg",nil];
+        dic1=[[NSDictionary alloc]initWithObjectsAndKeys:data,@"users", @"true",@"success",@"",@"errorMsg",nil];
+    }else{
+         dic1=[[NSDictionary alloc]initWithObjectsAndKeys: @"true",@"success",@"",@"errorMsg",nil];
+    }
+    
     NSData *selectData=[NSJSONSerialization dataWithJSONObject:dic1 options:NSJSONWritingPrettyPrinted error:nil ];
+    
     EAWebController *ea=[[EAWebController alloc]init];
     ea.selectData=selectData;
     [self.navigationController pushViewController:ea animated:YES];
