@@ -172,7 +172,7 @@
                
                
                function showUserChoose(r,l){
-                   var json = eval('(' + l + ')');
+                   var json = eval('(' + l + ')');//jsons数据
                    bpmbridget.call("userChoose",{selectNum: r, users:json}, function(result){
                                    alert(result);
                                    });
