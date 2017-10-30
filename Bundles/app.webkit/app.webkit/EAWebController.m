@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //人员选择数据
     if(self.selectData!=nil){
      NSData *selectData=[NSJSONSerialization dataWithJSONObject:self.selectData options:NSJSONWritingPrettyPrinted error:nil ];
     userChooseData=[[NSString alloc]initWithData:selectData encoding:NSUTF8StringEncoding];
@@ -56,6 +57,7 @@
         [request addValue:cookie forHTTPHeaderField:@"Cookie"];
         [self.webview loadRequest:request];
     }
+    //人员选择
     if(userChooseData.length!=0){
     __weak DWebview * web=self.webview;
         NSString *selectNum=[NSString stringWithFormat:@"%ld",[[self.selectData objectForKey:@"users"] count]];
@@ -216,7 +218,7 @@
         NSData *tempData=[NSJSONSerialization dataWithJSONObject:selectUser options:NSJSONWritingPrettyPrinted error:nil ];
          completionHandler([[NSString alloc]initWithData:tempData encoding:NSUTF8StringEncoding], YES);
     }else {
-        ChoosePeopleViewController *cs=[[ChoosePeopleViewController alloc]init];
+        UserChooseViewController *cs=[[UserChooseViewController alloc]init];
         [self.navigationController pushViewController:cs animated:YES];
 
     }

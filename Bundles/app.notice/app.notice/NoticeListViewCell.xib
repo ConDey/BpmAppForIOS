@@ -21,10 +21,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bv0-aJ-2dF">
-                        <rect key="frame" x="10" y="10" width="200" height="18"/>
+                        <rect key="frame" x="10" y="10" width="300" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="JwT-xM-IUA"/>
-                            <constraint firstAttribute="width" constant="200" id="RHc-83-vLe"/>
+                            <constraint firstAttribute="width" constant="300" id="RHc-83-vLe"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>

@@ -6,9 +6,9 @@
 //  Copyright © 2017年 Eazytec. All rights reserved.
 //
 #import "EAWebController.h"
-#import "ChoosePeopleViewController.h"
+#import "UserChooseViewController.h"
 
-@interface ChoosePeopleViewController ()
+@interface UserChooseViewController()
 @property(nonatomic,retain)NSArray *selectData;
 @property(nonatomic,retain)NSArray *departments;
 @property(nonatomic,retain)NSArray *users;
@@ -22,7 +22,7 @@
 @property(nonatomic,retain)UIBarButtonItem *rightButtonItem;
 @end
 
-@implementation ChoosePeopleViewController
+@implementation UserChooseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

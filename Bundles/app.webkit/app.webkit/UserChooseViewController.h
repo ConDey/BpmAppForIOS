@@ -11,7 +11,7 @@
 #import "BPMJsApi.h"
 
 @protocol BPMJsApiDelegate;
-@interface ChoosePeopleViewController:EAViewController<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,UISearchBarDelegate>
+@interface UserChooseViewController:EAViewController<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,UISearchBarDelegate>
 
 @end
 
