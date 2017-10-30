@@ -9,8 +9,10 @@
 #import "UserAuthViewController.h"
 #import "UserHomeNavController.h"
 #import "UserHomeTabController.h"
+#import "ImageModel.h"
 
 @interface UserAuthViewController ()
+@property (strong, nonatomic) IBOutlet UIImageView *userBgIv;
 
 @property (weak, nonatomic) IBOutlet UIView *userAuthPanel;
 
@@ -55,6 +57,12 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    NSDictionary* dict = @{
+                           @"token" : [CurrentUser defaultToken],
+                           };
+    
+    [self httpPostRequestWithUrl:HttpProtocolServiceCommonConfig params:dict progress:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -109,28 +117,47 @@
 
 - (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
     
-    UserDetails *userdetail = [[UserDetails alloc]init];
+    if (name == HttpProtocolServiceCommonConfig) {
+        
+        ImageModel* model = [ImageModel mj_objectWithKeyValues:result];
+        if (model.success) {
+            if (model.loginBackgroundImg != nil && ![model.loginBackgroundImg isEqualToString:@""]) {
+                NSString* imgPath = [NSString stringWithFormat:@"%@/%@", REQUEST_URL, model];
+                
+                [_userBgIv sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"bg_auth" inBundle:self.bundle compatibleWithTraitCollection:nil]];
+            }
+        }else {
+            [SVProgressHUD showErrorWithStatus:model.errorMsg];
+        }
+        
+    }
     
-    userdetail.username = self.userNameTextField.text;
-    userdetail.password = self.passwordTextField.text;
-    userdetail.fullName = [result objectForKey:@"fullName"];
-    userdetail.email = [result objectForKey:@"email"];
-    userdetail.mobile = [result objectForKey:@"mobile"];
-    userdetail.departmentName = [result objectForKey:@"departmentName"];
-    userdetail.position = [result objectForKey:@"position"];
-    NSString *token = [result objectForKey:@"token"];
-    [[CurrentUser currentUser] updateWithUserDetails:userdetail Token:token];
+    if (name == HttpProtocolServiceUserLogin) {
     
-    // Push 添加别名(先remove再add）
-//    [UMessage removeAlias:userdetail.username type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
-//        [UMessage addAlias:userdetail.username type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
-//            NSLog(@"ADD_ALIAS_SUCCESS");
-//        }];
-//    }];
-    
-    UserHomeTabController *tab = [[UserHomeTabController alloc]init];
-    UserHomeNavController *nav = [[UserHomeNavController alloc]initWithRootViewController:tab];
-    [self presentViewController:nav animated:YES completion:nil];
+        UserDetails *userdetail = [[UserDetails alloc]init];
+        
+        userdetail.username = self.userNameTextField.text;
+        userdetail.password = self.passwordTextField.text;
+        userdetail.fullName = [result objectForKey:@"fullName"];
+        userdetail.email = [result objectForKey:@"email"];
+        userdetail.mobile = [result objectForKey:@"mobile"];
+        userdetail.departmentName = [result objectForKey:@"departmentName"];
+        userdetail.position = [result objectForKey:@"position"];
+        NSString *token = [result objectForKey:@"token"];
+        [[CurrentUser currentUser] updateWithUserDetails:userdetail Token:token];
+        
+        // Push 添加别名(先remove再add）
+    //    [UMessage removeAlias:userdetail.username type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+    //        [UMessage addAlias:userdetail.username type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+    //            NSLog(@"ADD_ALIAS_SUCCESS");
+    //        }];
+    //    }];
+        
+        UserHomeTabController *tab = [[UserHomeTabController alloc]init];
+        UserHomeNavController *nav = [[UserHomeNavController alloc]initWithRootViewController:tab];
+        [self presentViewController:nav animated:YES completion:nil];
+        
+    }
 }
 
 #pragma mark - TextViewDelegate

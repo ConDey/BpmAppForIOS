@@ -25,4 +25,15 @@
 - (void)delegate_setTitlebarBgColor:(NSString *_Nonnull)bgcolor callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
 - (void)delegate_setTitlebarBgImage:(NSString *_Nonnull)bgimageUrl callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
 - (void)delegate_bindRightBtn:(NSString *_Nonnull)imageUrl callbackName:(NSString *_Nonnull)callbackName callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
+- (void)delegate_startWindowWithUrl:(NSString *_Nonnull)url title:(NSString *_Nonnull)title;
+- (void)delegate_skipWindowWithUrl:(NSString *_Nonnull)url title:(NSString *_Nonnull)title;
+- (void)delegate_getLocalImagesWithMaxNum:(int)maxNum callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
+- (void)delegate_getLocalVideosWithMaxNum:(int)maxNum callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
+- (void)delegate_getCameraWithCallback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
+- (void)delegate_getUserWithCallback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
+- (void)delegate_getTokenWithCallback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
+- (void)delegate_ToastShowWithToast:(NSString *_Nonnull)toast withType:(NSString *_Nonnull)type;
+- (void)delegate_bindAlertWithTitle:(NSString *_Nonnull)title withInfo:(NSString *_Nonnull)info withCallbackName:(NSString *_Nonnull)name Callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
+- (void)delegate_showProgress;
+- (void)delegate_dismissProgress;
 @end

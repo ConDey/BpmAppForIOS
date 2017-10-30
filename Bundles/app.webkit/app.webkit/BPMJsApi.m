@@ -57,4 +57,83 @@
     }
 }
 
+// 新建窗口
+- (void)startWindow:(NSDictionary *)args {
+    if (self.delegate != nil) {
+        [self.delegate delegate_startWindowWithUrl:(NSString *)[args valueForKey:@"url"] title:(NSString *)[args valueForKey:@"title"]];
+    }
+    
+}
+
+// 新建窗口并结束当前窗口
+- (void)skipWindow:(NSDictionary *)args {
+    if (self.delegate != nil) {
+        [self.delegate delegate_skipWindowWithUrl:(NSString *)[args valueForKey:@"url"] title:(NSString *)[args valueForKey:@"title"]];
+    }
+    
+}
+
+// 选择本地图片
+- (void)getImages:(NSDictionary *)args :(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
+    if (self.delegate != nil) {
+        [self.delegate delegate_getLocalImagesWithMaxNum:(int)[args objectForKey:@"selectNum"] callback:completionHandler];
+    }
+}
+
+// 选择本地视频
+- (void)getVideos:(NSDictionary *)args :(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
+    if (self.delegate != nil) {
+        [self.delegate delegate_getLocalVideosWithMaxNum:(int)[args objectForKey:@"selectNum"] callback:completionHandler];
+    }
+}
+
+// 调用系统相机
+- (void)getCamera:(NSDictionary *)args :(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
+    if (self.delegate != nil) {
+        [self.delegate delegate_getCameraWithCallback:completionHandler];
+    }
+}
+
+// 得到当前用户信息
+- (void)getUser:(NSDictionary *)args :(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
+    if (self.delegate != nil) {
+        [self.delegate delegate_getUserWithCallback:completionHandler];
+    }
+}
+
+// 得到token
+- (void)getToken:(NSDictionary *)args :(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
+    if (self.delegate != nil) {
+        [self.delegate delegate_getTokenWithCallback:completionHandler];
+    }
+}
+
+// Toast显示
+- (void)toastShow:(NSDictionary *)args {
+    if (self.delegate != nil) {
+        [self.delegate delegate_ToastShowWithToast:(NSString *)[args valueForKey:@"toast"] withType:(NSString *)[args valueForKey:@"toastType"]];
+    }
+}
+
+// Alert确认框显示js
+- (void)bindAlert:(NSDictionary *)args :(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
+    if (self.delegate != nil) {
+        [self.delegate delegate_bindAlertWithTitle:(NSString *)[args valueForKey:@"dialogTitle"] withInfo:(NSString *)[args valueForKey:@"dialogInfo"] withCallbackName:(NSString *)[args valueForKey:@"callback"] Callback:completionHandler];
+    }
+}
+
+// show progress
+- (void)progressShow:(NSDictionary *)args {
+    if (self.delegate != nil) {
+        [self.delegate delegate_showProgress];
+    }
+}
+
+// dismiss progress
+- (void)progressCancel:(NSDictionary *)args {
+    if (self.delegate != nil) {
+        [self.delegate delegate_dismissProgress];
+    }
+}
+
 @end

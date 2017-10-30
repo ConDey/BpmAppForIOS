@@ -7,15 +7,26 @@
 //
 
 #import "EAWebController.h"
-#import "BaseDataResult.h"
-
 #import "ChoosePeopleViewController.h"
-@interface EAWebController()
+
+#import "BaseDataResult.h"
+#import "ListDataResult.h"
+#import "UserDataResult.h"
+#import "TokenDataResult.h"
+
+typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL complete);
+
+@interface EAWebController() <LGPhotoPickerViewControllerDelegate>
 {
     NSString *arr;
+    NSString *rightBtnCallbackName;
+    CommonCompletionHandler commonHandler;
+    
 }
 @property (retain, nonatomic) UIProgressView *progressView;
-@property (retain,nonatomic) WKWebView *wkwebview;
+@property (retain, nonatomic) WKWebView *wkwebview;
+
+@property (nonatomic, assign) LGShowImageType showType;
 
 @end
 
@@ -33,7 +44,6 @@
     
     [self.view addSubview:self.webview];
     [self.view addSubview:self.progressView];
-    
     
     if ([NSString isStringBlank:self.url] || [self.url containsString:@"jswebview"]) {
         NSString *htmlPath = [self.bundle pathForResource:@"jswebview"
@@ -64,9 +74,13 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
+// 解除监听最好在dealloc中，避免出现添加监听与解除的次数不一致
+- (void)dealloc{
     [self.wkwebview removeObserver:self forKeyPath:@"estimatedProgress"];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
 }
 
 - (DWebview *)webview {
@@ -80,6 +94,7 @@
         _jsApi = [[BPMJsApi alloc] init];
         _jsApi.delegate = self;
         _webview.JavascriptInterfaceObject= _jsApi;
+        
         [_wkwebview addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew| NSKeyValueObservingOptionOld context:nil];
         
     }
@@ -139,16 +154,11 @@
     }else {
         result = [[BaseDataResult alloc] initWithSuccess:NO];
     }
-    NSString *resultJson = [JsonUtils dictionaryToJson:result.keyValues];
+    NSString *resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
     
     completionHandler(resultJson, YES);
     
     return;
-}
-
-// 人员选择
-- (void)delegate_choose {
-    
 }
 
 // 显示标题栏
@@ -166,7 +176,7 @@
     }else {
         result = [[BaseDataResult alloc] initWithSuccess:NO];
     }
-    NSString* resultJson = [JsonUtils dictionaryToJson:result.keyValues];
+    NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
     
     completionHandler(resultJson, YES);
     
@@ -186,7 +196,7 @@
     }else {
         result = [[BaseDataResult alloc] initWithSuccess:NO];
     }
-    NSString* resultJson = [JsonUtils dictionaryToJson:result.keyValues];
+    NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
     
     completionHandler(resultJson, YES);
     
@@ -219,7 +229,7 @@
     }else {
         result = [[BaseDataResult alloc] initWithSuccess:NO];
     }
-    NSString* resultJson = [JsonUtils dictionaryToJson:result.keyValues];
+    NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
     
     completionHandler(resultJson, YES);
     
@@ -237,22 +247,244 @@
         NSData* imageData = [NSData dataWithContentsOfURL:btnImageUrl];
         UIImage* bgImg = [UIImage sd_imageWithData:imageData];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:bgImg style:UIBarButtonItemStylePlain target:self action:@selector(rightBtnBindAction:)];
-        //self.navigationItem.rightBarButtonItem s
+        rightBtnCallbackName = callbackName;
         
         result = [[BaseDataResult alloc] initWithSuccess:YES];
     }else {
         result = [[BaseDataResult alloc] initWithSuccess:NO];
     }
-    NSString* resultJson = [JsonUtils dictionaryToJson:result.keyValues];
+    NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
     
     completionHandler(resultJson, YES);
     
     return;
 }
 
-#pragma mark - additional methods
-- (void)rightBtnBindAction:(id)sender {
+// 新建窗口
+- (void)delegate_startWindowWithUrl:(NSString *)url title:(NSString *)title {
+    [self startWebViewWindowWithUrl:url title:title];
+}
+
+// 新建窗口并结束当前窗口
+- (void)delegate_skipWindowWithUrl:(NSString *)url title:(NSString *)title {
+    [self skipWebViewWindowWithUrl:url title:title];
+}
+
+// 选择本地图片
+- (void)delegate_getLocalImagesWithMaxNum:(int)maxNum callback:(void (^)(NSString * _Nullable, BOOL))completionHandler {
     
+    LGPhotoPickerViewController *pickerVc = [[LGPhotoPickerViewController alloc] initWithShowType:LGShowImageTypeImagePicker];
+    pickerVc.status = PickerViewShowStatusCameraRoll;
+    pickerVc.maxCount = maxNum;   // 最多能选9张图片
+    pickerVc.delegate = self;
+    self.showType = LGShowImageTypeImagePicker;
+    [pickerVc showPickerVc:self];
+    
+    commonHandler = completionHandler;
+    
+}
+
+// 选择本地视频
+- (void)delegate_getLocalVideosWithMaxNum:(int)maxNum callback:(void (^)(NSString * _Nullable, BOOL))completionHandler {
+    
+    LGPhotoPickerViewController *pickerVc = [[LGPhotoPickerViewController alloc] initWithShowType:LGShowImageTypeImagePicker];
+    pickerVc.status = PickerViewShowStatusVideo;
+    pickerVc.maxCount = maxNum;   // 最多能选9个视频
+    pickerVc.delegate = self;
+    self.showType = LGShowImageTypeImagePicker;
+    [pickerVc showPickerVc:self];
+    
+    commonHandler = completionHandler;
+}
+
+// 调用系统相机
+- (void)delegate_getCameraWithCallback:(void (^)(NSString * _Nullable, BOOL))completionHandler {
+    
+    ZLCameraViewController *cameraVC = [[ZLCameraViewController alloc] init];
+    // 拍照最多个数
+    cameraVC.maxCount = 1;
+    // 单拍
+    cameraVC.cameraType = ZLCameraSingle;
+    cameraVC.callback = ^(NSArray *cameras){
+        //在这里得到拍照结果
+        //数组元素是ZLCamera对象
+         ZLCamera *canamerPhoto = cameras[0];
+         UIImage *image = canamerPhoto.photoImage;
+        // 保存拍摄的图片到系统相册
+        //UIImageWriteToSavedPhotosAlbum(image, self, @selector(), nil);
+        __block ALAssetsLibrary *lib = [[ALAssetsLibrary alloc] init];
+        [lib writeImageToSavedPhotosAlbum:image.CGImage metadata:nil
+                          completionBlock:^(NSURL *assetURL, NSError *error) {
+                              
+                              NSMutableArray *urls = [[NSMutableArray alloc] init];
+                              [urls addObject:assetURL.absoluteString];
+                              
+                              ListDataResult *result = [[ListDataResult alloc] initWithSuccess:YES withUrls:urls];
+                              NSString *resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
+                              completionHandler(resultJson, YES);
+                              
+                          }];
+    };
+    [cameraVC showPickerVc:self];
+}
+
+// 当前用户信息
+- (void)delegate_getUserWithCallback:(void (^)(NSString * _Nullable, BOOL))completionHandler {
+    UserDetails *userDetail = [[CurrentUser currentUser] userdetails];
+    UserDataResult *result;
+    if (userDetail == nil) {
+        result = [[UserDataResult alloc] initWithSuccess:NO withUserDetails:nil];
+    }else {
+        result = [[UserDataResult alloc] initWithSuccess:YES withUserDetails:userDetail];
+    }
+    NSString *resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
+    completionHandler(resultJson, YES);
+}
+
+// token
+- (void)delegate_getTokenWithCallback:(void (^)(NSString * _Nullable, BOOL))completionHandler {
+    NSString *token = [[CurrentUser currentUser] token];
+    TokenDataResult *result;
+    if (token == nil || [token isEqualToString:@""]) {
+        result = [[TokenDataResult alloc] initWithSuccess:NO withToken:@""];
+    }else {
+        result = [[TokenDataResult alloc] initWithSuccess:YES withToken:token];
+    }
+    NSString *resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
+    completionHandler(resultJson, YES);
+}
+
+// Toast显示
+- (void)delegate_ToastShowWithToast:(NSString *)toast withType:(NSString *)type {
+    
+    if (type == nil || toast == nil) {
+        [SVProgressHUD showWithStatus:@"参数设置错误"];
+    }else {
+    
+        if ([type isEqualToString:@"info"]) {
+            [SVProgressHUD showInfoWithStatus:toast];
+        }else if ([type isEqualToString:@"error"]) {
+            [SVProgressHUD showErrorWithStatus:toast];
+        }else if ([type isEqualToString:@"success"]) {
+            [SVProgressHUD showSuccessWithStatus:toast];
+        }else {
+            //[SVProgressHUD addGestureToDismiss];
+            [SVProgressHUD showWithStatus:toast];
+        }
+    }
+}
+
+// 绑定alert
+- (void)delegate_bindAlertWithTitle:(NSString *)title withInfo:(NSString *)info withCallbackName:(NSString *)name Callback:(void (^)(NSString * _Nullable, BOOL))completionHandler {
+    if (title == nil || info == nil || name == nil) {
+        [SVProgressHUD showWithStatus:@"参数设置错误"];
+    }else {
+        UIAlertController *alert   = [UIAlertController alertControllerWithTitle:title message:info preferredStyle:UIAlertControllerStyleAlert];
+        // 加入取消按钮
+        UIAlertAction *canelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:canelAction];
+        // 加入确认按钮
+        UIAlertAction *sureAction   = [UIAlertAction actionWithTitle:@"确认退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+             if (![name isEqualToString:@""]) {
+                 [_webview callHandler:name arguments:nil completionHandler:nil];
+             }
+        }];
+        [alert addAction:sureAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+// 显示progress
+- (void)delegate_showProgress {
+    //[SVProgressHUD addGestureToDismiss];
+    [SVProgressHUD showWithStatus:@""];
+}
+
+
+// 隐藏progress
+- (void)delegate_dismissProgress {
+    [SVProgressHUD dismiss];
+}
+
+#pragma mark - additional methods
+// 右边按钮点击事件
+- (void)rightBtnBindAction:(id)sender {
+    if (![rightBtnCallbackName isEqualToString:@""]) {
+     
+        [_webview callHandler:rightBtnCallbackName arguments:nil completionHandler:nil];
+    }
+}
+
+// 新建webview的回调方法
+- (void)startWebViewWindowWithUrl:(NSString *)url title:(NSString *)title {
+    
+    if ([url hasPrefix:@"http:"] || [url hasPrefix:@"https:"] || [url hasPrefix:@"file:"]) {
+        url = [NSString encodeToPercentEscapeString:url];
+    } else {
+        url = [NSString encodeToPercentEscapeString:[NSString stringWithFormat:@"%@%@",REQUEST_SERVICE_URL ,url]];
+    }
+    
+    NSString *allurl = [NSString stringWithFormat:@"app.webkit?url=%@&urltitle=%@", url, [NSString encodeString:title]] ;
+    [Small openUri:allurl fromController:self];
+}
+
+// 新建webview的回调方法并结束当前窗口
+- (void)skipWebViewWindowWithUrl:(NSString *)url title:(NSString *)title {
+    
+    if ([url hasPrefix:@"http:"] || [url hasPrefix:@"https:"] || [url hasPrefix:@"file:"]) {
+        url = [NSString encodeToPercentEscapeString:url];
+    } else {
+        url = [NSString encodeToPercentEscapeString:[NSString stringWithFormat:@"%@%@",REQUEST_SERVICE_URL ,url]];
+    }
+    
+    NSString *allurl = [NSString stringWithFormat:@"app.webkit?url=%@&urltitle=%@", url, [NSString encodeString:title]] ;
+
+    [Small openUri:allurl fromController:self];
+    
+    // 移除当前视图
+    NSMutableArray* vcArr = [[NSMutableArray alloc] initWithArray:self.navigationController.viewControllers];
+    if ([vcArr count] >= 2) {
+        [vcArr removeObjectAtIndex:([vcArr count]-2)];
+    }
+    self.navigationController.viewControllers = vcArr;
+    
+}
+
+#pragma mark - LGPhotoPickerViewControllerDelegate
+
+// 选择图片等回调方法
+- (void)pickerViewControllerDoneAsstes:(NSArray *)assets isOriginal:(BOOL)original{
+    /*
+     //assets的元素是LGPhotoAssets对象，获取image方法如下:
+     NSMutableArray *thumbImageArray = [NSMutableArray array];
+     NSMutableArray *originImage = [NSMutableArray array];
+     NSMutableArray *fullResolutionImage = [NSMutableArray array];
+     
+     for (LGPhotoAssets *photo in assets) {
+     //缩略图
+     [thumbImageArray addObject:photo.thumbImage];
+     //原图
+     [originImage addObject:photo.originImage];
+     //全屏图
+     [fullResolutionImage addObject:fullResolutionImage];
+     }
+     */
+    
+    NSMutableArray *urls = [[NSMutableArray alloc] init];
+    for (LGPhotoAssets* asset in assets) {
+        [urls addObject:asset.assetURL.absoluteString];
+    }
+    
+    ListDataResult *result = [[ListDataResult alloc] initWithSuccess:YES withUrls:urls];
+    NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
+    commonHandler(resultJson, YES);
+}
+
+// 点击 progress 消失
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if ([SVProgressHUD isVisible]) {
+        [SVProgressHUD dismiss];
+    }
 }
 
 @end

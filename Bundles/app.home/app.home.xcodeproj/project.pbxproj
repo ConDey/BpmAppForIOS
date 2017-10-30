@@ -48,6 +48,8 @@
 		847206D91F9EE50700A7CE7E /* ic_homeapp_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D41F9D85FA00A7CE7E /* ic_homeapp_card.png */; };
 		847206DA1F9EE50700A7CE7E /* ic_homeapp_file.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D51F9D85FA00A7CE7E /* ic_homeapp_file.png */; };
 		847206DB1F9EE50700A7CE7E /* ic_homeapp_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D61F9D85FD00A7CE7E /* ic_homeapp_search.png */; };
+		84AE72251FA70372002530AD /* ImageModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE72231FA7036F002530AD /* ImageModel.h */; };
+		84AE72261FA70373002530AD /* ImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE72241FA7036F002530AD /* ImageModel.m */; };
 		F80A8ACD1F98224100E126C6 /* PasswordChangeController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8ACB1F98224100E126C6 /* PasswordChangeController.h */; };
 		F80A8ACE1F98224100E126C6 /* PasswordChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8ACC1F98224100E126C6 /* PasswordChangeController.m */; };
 		F80A8AD31F98224C00E126C6 /* ic_setting_update.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8ACF1F98224C00E126C6 /* ic_setting_update.png */; };
@@ -101,6 +103,8 @@
 		847206D51F9D85FA00A7CE7E /* ic_homeapp_file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_file.png; sourceTree = "<group>"; };
 		847206D61F9D85FD00A7CE7E /* ic_homeapp_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_search.png; sourceTree = "<group>"; };
 		847206D71F9EDD2100A7CE7E /* ic_homeapp_stub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_stub.png; sourceTree = "<group>"; };
+		84AE72231FA7036F002530AD /* ImageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModel.h; sourceTree = "<group>"; };
+		84AE72241FA7036F002530AD /* ImageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageModel.m; sourceTree = "<group>"; };
 		F80A8ACB1F98224100E126C6 /* PasswordChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordChangeController.h; sourceTree = "<group>"; };
 		F80A8ACC1F98224100E126C6 /* PasswordChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeController.m; sourceTree = "<group>"; };
 		F80A8ACF1F98224C00E126C6 /* ic_setting_update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_update.png; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 		06C3A4361F0C72FB00633543 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				84AE72221FA702CD002530AD /* Model */,
 				06C6BA4A1F14F1D900D444E6 /* UserHome */,
 				06C6B9F51F14AC3500D444E6 /* Framework */,
 				0686A8501F0C83D300697582 /* Authentication */,
@@ -321,6 +326,15 @@
 			name = Helper;
 			sourceTree = "<group>";
 		};
+		84AE72221FA702CD002530AD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84AE72231FA7036F002530AD /* ImageModel.h */,
+				84AE72241FA7036F002530AD /* ImageModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -333,6 +347,7 @@
 				F80A8ACD1F98224100E126C6 /* PasswordChangeController.h in Headers */,
 				06C6BAD71F15CA3600D444E6 /* UserHomeAppController.h in Headers */,
 				84301C7E1F99990E00F01F8F /* AppListModel.h in Headers */,
+				84AE72251FA70372002530AD /* ImageModel.h in Headers */,
 				06C6BADC1F15CB3600D444E6 /* UserHomeSettingController.h in Headers */,
 				84301C831F999C2E00F01F8F /* AppModelHelper.h in Headers */,
 				06C6BA511F14F2EA00D444E6 /* UserHomeNavController.h in Headers */,
@@ -441,6 +456,7 @@
 				F80A8ACE1F98224100E126C6 /* PasswordChangeController.m in Sources */,
 				84301C841F999C2E00F01F8F /* AppModelHelper.m in Sources */,
 				06C6BA4E1F14F1E200D444E6 /* UserHomeTabController.m in Sources */,
+				84AE72261FA70373002530AD /* ImageModel.m in Sources */,
 				06C6BAF71F16F93100D444E6 /* UserHomeAppViewCell.m in Sources */,
 				06C6BAED1F1603CF00D444E6 /* EAApp.m in Sources */,
 				84301C7B1F99960700F01F8F /* AppModel.m in Sources */,

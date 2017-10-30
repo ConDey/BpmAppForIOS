@@ -11,6 +11,7 @@
 #import "EAApp.h"
 #import "AppListModel.h"
 #import "AppModelHelper.h"
+#import "ImageModel.h"
 
 @interface UserHomeAppController ()
 
@@ -165,6 +166,14 @@
 }
 
 - (void)initData{
+    
+    
+    NSDictionary* dict = @{
+                           @"token" : [CurrentUser defaultToken],
+                           };
+    
+    [self httpPostRequestWithUrl:HttpProtocolServiceCommonConfig params:dict progress:YES];
+    
     NSDictionary* appDict = @{
                               @"commonUse" : @YES,
                               };
@@ -202,6 +211,21 @@
 
 #pragma mark - network
 - (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
+    
+    if (name == HttpProtocolServiceCommonConfig) {
+        
+        ImageModel* model = [ImageModel mj_objectWithKeyValues:result];
+        if (model.success) {
+            if (model.appBackgroundImg != nil && ![model.appBackgroundImg isEqualToString:@""]) {
+                NSString* imgPath = [NSString stringWithFormat:@"%@/%@", REQUEST_URL, model];
+                
+                [_headImageView sd_setImageWithURL:[NSURL URLWithString:imgPath] placeholderImage:[UIImage imageNamed:@"ic_homeapp_head" inBundle:self.bundle compatibleWithTraitCollection:nil]];
+            }
+        }else {
+            [SVProgressHUD showErrorWithStatus:model.errorMsg];
+        }
+        
+    }
     
     if (name == HttpProtocolServiceAppMenuList) {
         

@@ -106,7 +106,7 @@
             return [UIImage sd_animatedGIFWithData:data];
         }
 
-        return [UIImage imageNamed:name];
+        return [UIImage imageNamed:name inBundle:[NSBundle mainBundle] compatibleWithTraitCollection:nil];
     }
     else {
         NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@"gif"];
@@ -117,7 +117,7 @@
             return [UIImage sd_animatedGIFWithData:data];
         }
 
-        return [UIImage imageNamed:name];
+        return [UIImage imageNamed:name inBundle:[NSBundle mainBundle] compatibleWithTraitCollection:nil];
     }
 }
 
