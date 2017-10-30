@@ -584,15 +584,14 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         NSDictionary *userDic=[[NSDictionary alloc]initWithObjectsAndKeys:name,@"name",userId,@"id",nil];
         [data addObject:userDic];
     }
-        dic1=[[NSDictionary alloc]initWithObjectsAndKeys:data,@"users", @"true",@"success",@"",@"errorMsg",nil];
+        dic1=[[NSDictionary alloc]initWithObjectsAndKeys:data,@"users",nil];
     }else{
          dic1=[[NSDictionary alloc]initWithObjectsAndKeys: @"true",@"success",@"",@"errorMsg",nil];
     }
     
-    NSData *selectData=[NSJSONSerialization dataWithJSONObject:dic1 options:NSJSONWritingPrettyPrinted error:nil ];
     
     EAWebController *ea=[[EAWebController alloc]init];
-    ea.selectData=selectData;
+    ea.selectData=dic1;
     [self.navigationController pushViewController:ea animated:YES];
 
 }

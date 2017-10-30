@@ -171,8 +171,9 @@
                  }
                
                
-               function showUserChoose(r){
-                   bpmbridget.call("userChoose",{selectNum: 5, users:[{id:"1",name:"张三"},{id:"2",name:"李四"}]}, function(result){
+               function showUserChoose(r,l){
+                   var json = eval('(' + l + ')');
+                   bpmbridget.call("userChoose",{selectNum: r, users:json}, function(result){
                                    alert(result);
                                    });
                   
