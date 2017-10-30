@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "com_eazytec_bpm_lib_common/lib.common.h"
-#import "BPMJsApi.h"
 
-@protocol BPMJsApiDelegate;
+
+@protocol userChooseDelegate;
 @interface UserChooseViewController:EAViewController<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,UISearchBarDelegate>
+
+@property (nonatomic,retain) id<userChooseDelegate>userDelegate;
 
 @end
 
-
+@protocol userChooseDelegate<NSObject>;
+-(void)sendSelectData:(NSDictionary *)data;
+@end
 
 
 

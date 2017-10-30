@@ -10,7 +10,7 @@
 #import "dsbridge.h"
 #import "BPMJsApi.h"
 #import "UserChooseViewController.h"
-@interface EAWebController : EAViewController<BPMJsApiDelegate>
+@interface EAWebController : EAViewController<BPMJsApiDelegate,userChooseDelegate>
 
 
 @property (nonatomic,retain) NSString *url;

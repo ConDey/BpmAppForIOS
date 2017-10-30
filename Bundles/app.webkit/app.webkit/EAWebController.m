@@ -280,5 +280,8 @@
 - (void)rightBtnBindAction:(id)sender {
     
 }
-
+-(void)sendSelectData:(NSDictionary *)data{
+    self.selectData=data;
+    
+}
 @end

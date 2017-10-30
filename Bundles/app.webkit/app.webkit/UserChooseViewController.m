@@ -460,7 +460,7 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
             //部门还是具体人员
         }
         //搜索还是通讯录
-        self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%d/5)",self.selectData.count];
+        self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%lu/5)",self.selectData.count];
         [self.selectColl reloadData];
         
     
@@ -566,36 +566,36 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         self.depNum=[[NSArray alloc]initWithArray:temp];
         [self.selectTitle reloadData];
     }
-     self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%d/5)",self.selectData.count];
+     self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%lu/5)",self.selectData.count];
 }
 //搜索
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     [self UrlSearch:searchText];
 }
+//-(void)dataSend{
+//    [self send];
+//}
 -(void)dataSend{
-    //[self showChoose];
     NSMutableArray *data=[[NSMutableArray alloc]init
                           ];
     NSDictionary *dic1=[[NSDictionary alloc]init];
-    if(self.selectData.count>0){
-    for(NSDictionary *dic in self.selectData){
-        NSString *name=[dic objectForKey:@"fullName"];
-        NSString *userId=[dic objectForKey:@"id"];
-        NSDictionary *userDic=[[NSDictionary alloc]initWithObjectsAndKeys:name,@"name",userId,@"id",nil];
-        [data addObject:userDic];
-    }
+        for(NSDictionary *dic in self.selectData){
+            NSString *name=[dic objectForKey:@"fullName"];
+            NSString *userId=[dic objectForKey:@"id"];
+            NSDictionary *userDic=[[NSDictionary alloc]initWithObjectsAndKeys:name,@"name",userId,@"id",nil];
+            [data addObject:userDic];
+        }
         dic1=[[NSDictionary alloc]initWithObjectsAndKeys:data,@"users",nil];
-    }else{
-         dic1=[[NSDictionary alloc]initWithObjectsAndKeys: @"true",@"success",@"",@"errorMsg",nil];
+   
+    EAWebController *ea=[[EAWebController alloc]init];
+    self.userDelegate=ea;
+    if(self.userDelegate!=nil){
+        [self.userDelegate sendSelectData:dic1];
     }
     
-    
-    EAWebController *ea=[[EAWebController alloc]init];
-    ea.selectData=dic1;
-    [self.navigationController pushViewController:ea animated:YES];
-
+        [self.navigationController pushViewController:ea animated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
 }
-
 
 @end
 
