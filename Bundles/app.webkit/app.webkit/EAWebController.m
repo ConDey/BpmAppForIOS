@@ -7,8 +7,6 @@
 //
 
 #import "EAWebController.h"
-#import "ChoosePeopleViewController.h"
-
 #import "BaseDataResult.h"
 #import "ListDataResult.h"
 #import "UserDataResult.h"
@@ -18,7 +16,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 
 @interface EAWebController() <LGPhotoPickerViewControllerDelegate>
 {
-    NSString *arr;
+    NSString *userChooseData;
     NSString *rightBtnCallbackName;
     CommonCompletionHandler commonHandler;
     
@@ -234,7 +232,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         NSData *tempData=[NSJSONSerialization dataWithJSONObject:selectUser options:NSJSONWritingPrettyPrinted error:nil ];
          completionHandler([[NSString alloc]initWithData:tempData encoding:NSUTF8StringEncoding], YES);
     }else {
-        UserChooseViewController *cs=[[UserChooseViewController alloc]init];
+       UserChooseDataViewController *cs=[[UserChooseDataViewController alloc]init];
         [self.navigationController pushViewController:cs animated:YES];
 
     }

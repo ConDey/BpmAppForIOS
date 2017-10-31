@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "dsbridge.h"
 #import "BPMJsApi.h"
-#import "UserChooseViewController.h"
+#import "UserChooseDataViewController.h"
 @interface EAWebController : EAViewController<BPMJsApiDelegate,userChooseDelegate>
 
 

@@ -28,18 +28,18 @@
 		06C6BBB01F19045700D444E6 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BBAC1F19045700D444E6 /* fonts */; };
 		06C6BBB11F19045700D444E6 /* js in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BBAD1F19045700D444E6 /* js */; };
 		06C6BBB21F19045700D444E6 /* jswebview.html in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BBAE1F19045700D444E6 /* jswebview.html */; };
-		84AE716A1FA2C495002530AD /* BaseDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE71681FA2C495002530AD /* BaseDataResult.h */; };
+		84AE716A1FA2C495002530AD /* BaseDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE71681FA2C495002530AD /* BaseDataResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AE716B1FA2C495002530AD /* BaseDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE71691FA2C495002530AD /* BaseDataResult.m */; };
-		84AE72011FA4291D002530AD /* ListDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE71FF1FA4291D002530AD /* ListDataResult.h */; };
+		84AE72011FA4291D002530AD /* ListDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE71FF1FA4291D002530AD /* ListDataResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AE72021FA4291D002530AD /* ListDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE72001FA4291D002530AD /* ListDataResult.m */; };
-		84AE72141FA6A69D002530AD /* UserDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE72121FA6A69C002530AD /* UserDataResult.h */; };
+		84AE72141FA6A69D002530AD /* UserDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE72121FA6A69C002530AD /* UserDataResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AE72151FA6A69D002530AD /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE72131FA6A69C002530AD /* UserDataResult.m */; };
-		84AE72181FA6A6BB002530AD /* TokenDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE72161FA6A6BB002530AD /* TokenDataResult.h */; };
+		84AE72181FA6A6BB002530AD /* TokenDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE72161FA6A6BB002530AD /* TokenDataResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AE72191FA6A6BB002530AD /* TokenDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE72171FA6A6BB002530AD /* TokenDataResult.m */; };
 		F8AFFBF71F9F398700CE74F5 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */; settings = {ATTRIBUTES = (Public, ); }; };
-		F8AFFC111FA0185E00CE74F5 /* UserChooseViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFC0F1FA0185E00CE74F5 /* UserChooseViewController.h */; };
-		F8AFFC121FA0185E00CE74F5 /* UserChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFC101FA0185E00CE74F5 /* UserChooseViewController.m */; };
 		F8AFFC261FA165C100CE74F5 /* ic_right_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC251FA165C000CE74F5 /* ic_right_arrow.png */; };
+		F8AFFCA21FA8003A00CE74F5 /* UserChooseDataViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFCA01FA8003A00CE74F5 /* UserChooseDataViewController.h */; };
+		F8AFFCA31FA8003A00CE74F5 /* UserChooseDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFCA11FA8003A00CE74F5 /* UserChooseDataViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,9 +77,9 @@
 		84AE72161FA6A6BB002530AD /* TokenDataResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenDataResult.h; sourceTree = "<group>"; };
 		84AE72171FA6A6BB002530AD /* TokenDataResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenDataResult.m; sourceTree = "<group>"; };
 		F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		F8AFFC0F1FA0185E00CE74F5 /* UserChooseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserChooseViewController.h; sourceTree = "<group>"; };
-		F8AFFC101FA0185E00CE74F5 /* UserChooseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserChooseViewController.m; sourceTree = "<group>"; };
 		F8AFFC251FA165C000CE74F5 /* ic_right_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_right_arrow.png; sourceTree = "<group>"; };
+		F8AFFCA01FA8003A00CE74F5 /* UserChooseDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserChooseDataViewController.h; sourceTree = "<group>"; };
+		F8AFFCA11FA8003A00CE74F5 /* UserChooseDataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserChooseDataViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,8 +143,8 @@
 				06C6BB371F185DAE00D444E6 /* EAWebController.m */,
 				06C6BB8E1F1868F000D444E6 /* BPMJsApi.h */,
 				06C6BB8F1F1868F000D444E6 /* BPMJsApi.m */,
-				F8AFFC0F1FA0185E00CE74F5 /* UserChooseViewController.h */,
-				F8AFFC101FA0185E00CE74F5 /* UserChooseViewController.m */,
+				F8AFFCA01FA8003A00CE74F5 /* UserChooseDataViewController.h */,
+				F8AFFCA11FA8003A00CE74F5 /* UserChooseDataViewController.m */,
 			);
 			name = Src;
 			sourceTree = "<group>";
@@ -209,18 +209,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BB1D1F18592200D444E6 /* app.webkit.h in Headers */,
-				84AE72011FA4291D002530AD /* ListDataResult.h in Headers */,
 				06C6BB831F18669E00D444E6 /* dsbridge.h in Headers */,
+				84AE72011FA4291D002530AD /* ListDataResult.h in Headers */,
 				84AE716A1FA2C495002530AD /* BaseDataResult.h in Headers */,
 				84AE72141FA6A69D002530AD /* UserDataResult.h in Headers */,
+				84AE72181FA6A6BB002530AD /* TokenDataResult.h in Headers */,
 				06C6BB851F18669E00D444E6 /* DUIwebview.h in Headers */,
 				06C6BB901F1868F000D444E6 /* BPMJsApi.h in Headers */,
-				84AE72181FA6A6BB002530AD /* TokenDataResult.h in Headers */,
 				06C6BB891F18669E00D444E6 /* DWKwebview.h in Headers */,
 				06C6BB8D1F18669E00D444E6 /* JSBWebEventDelegate.h in Headers */,
 				06C6BB871F18669E00D444E6 /* DWebview.h in Headers */,
 				F8AFFBF71F9F398700CE74F5 /* PrefixHeader.pch in Headers */,
-				F8AFFC111FA0185E00CE74F5 /* UserChooseViewController.h in Headers */,
+				F8AFFCA21FA8003A00CE74F5 /* UserChooseDataViewController.h in Headers */,
 				06C6BB8B1F18669E00D444E6 /* JSBUtil.h in Headers */,
 				06C6BB381F185DAE00D444E6 /* EAWebController.h in Headers */,
 			);
@@ -305,11 +305,10 @@
 				06C6BB861F18669E00D444E6 /* DUIwebview.m in Sources */,
 				84AE716B1FA2C495002530AD /* BaseDataResult.m in Sources */,
 				06C6BB391F185DAE00D444E6 /* EAWebController.m in Sources */,
-				F8AFFC121FA0185E00CE74F5 /* ChoosePeopleViewController.m in Sources */,
 				84AE72151FA6A69D002530AD /* UserDataResult.m in Sources */,
-				F8AFFC121FA0185E00CE74F5 /* UserChooseViewController.m in Sources */,
 				06C6BB881F18669E00D444E6 /* DWebview.m in Sources */,
 				06C6BB841F18669E00D444E6 /* dsbridge.m in Sources */,
+				F8AFFCA31FA8003A00CE74F5 /* UserChooseDataViewController.m in Sources */,
 				84AE72021FA4291D002530AD /* ListDataResult.m in Sources */,
 				84AE72191FA6A6BB002530AD /* TokenDataResult.m in Sources */,
 				06C6BB8C1F18669E00D444E6 /* JSBUtil.m in Sources */,
