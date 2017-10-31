@@ -26,11 +26,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.rightButtonItem=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemUndo target:self action:@selector(dataSend)];
+    //导航栏右按钮
+   
+    self.rightButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"确认选择" style:UIBarButtonItemStylePlain target:self action:@selector(dataSend)];
     self.navigationItem.rightBarButtonItem=self.rightButtonItem;
     self.isSearch=NO;
-    //导航栏右按钮
-    self.navigationItem.rightBarButtonItem.title=@"确认选择";
+    
+   
     //默认选择项
     self.selectData=@[
                       @{@"id":@"zhangsan",
@@ -572,9 +574,7 @@
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     [self UrlSearch:searchText];
 }
-//-(void)dataSend{
-//    [self send];
-//}
+
 -(void)dataSend{
     NSMutableArray *data=[[NSMutableArray alloc]init
                           ];
@@ -592,9 +592,15 @@
     if(self.userDelegate!=nil){
         [self.userDelegate sendSelectData:dic1];
     }
+ [self.navigationController pushViewController:ea animated:YES];
+    for (UIViewController *temp in self.navigationController.viewControllers) {
+        if ([temp isKindOfClass:[EAWebController class]]) {
+            [self.navigationController popToViewController:temp animated:YES];
+        }
+    }
     
-    [self.navigationController pushViewController:ea animated:YES];
-    //[self.navigationController popViewControllerAnimated:YES];
+    
+   
 }
 
 @end
