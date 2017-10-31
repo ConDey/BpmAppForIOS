@@ -109,8 +109,14 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *attachDic=[self.attachmentList objectAtIndex:indexPath.row];
-    NSString *attachId=[attachDic objectForKey:@"id"];
-    
+    NSString *attachName=[attachDic objectForKey:@"name"];
+    NSString *attachPath=[attachDic objectForKey:@"relativePath"];
+    attachPath=[NSString stringWithFormat:@"%@/%@",REQUEST_URL,attachPath];
+    EAWebController *eav=[[EAWebController alloc]init];
+    eav.urltitle=attachName;
+    eav.url=attachPath;
+    [self.navigationController pushViewController:eav animated:YES];
   
 }
 @end
+

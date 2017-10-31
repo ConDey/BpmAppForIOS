@@ -57,7 +57,7 @@
 -(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
     self.noticeDetail=[NoticeDetailModel mj_objectWithKeyValues:result];
     self.attachment=[result objectForKey:@"attachments"];
-    NSLog(@"%@",self.attachment);
+   // NSLog(@"%@",self.attachment);
     [self.tableview reloadData];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
