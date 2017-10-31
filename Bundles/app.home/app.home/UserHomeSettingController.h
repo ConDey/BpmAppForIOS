@@ -7,6 +7,7 @@
 //
 
 
-@interface UserHomeSettingController : EAViewController
+@interface UserHomeSettingController : EAViewController<UIAlertViewDelegate>
 
 @end
+

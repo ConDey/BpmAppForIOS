@@ -72,6 +72,7 @@
     self.passwordTextField.text = [[CurrentUser currentUser] password];
     
     
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated{

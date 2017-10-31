@@ -123,7 +123,19 @@
     
 }
 
-
+-(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
+    NSString *state=[result objectForKey:@"success"];
+    Boolean *isSuccess=[state boolValue];
+    if(isSuccess){
+        UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"修改成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *sureChange=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        [alert addAction:sureChange];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }
+}
 
 
 

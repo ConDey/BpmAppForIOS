@@ -138,10 +138,17 @@
         [self.navigationController pushViewController: pc animated:true];
     }else if (section==2){
         //退出
-        [Small setUpWithComplection:^{
-            UIViewController *mainController = [Small controllerForUri:@"app.home"];
-            [self presentViewController:mainController animated:NO completion:nil];
+        UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"确定退出吗" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *sureOut=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [Small setUpWithComplection:^{
+                UIViewController *mainController = [Small controllerForUri:@"app.home"];
+                [self presentViewController:mainController animated:NO completion:nil];
+            }];
         }];
+        [alert addAction:cancel];
+        [alert addAction:sureOut];
+        [self presentViewController:alert animated:YES completion:nil];
     }
     
     [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
