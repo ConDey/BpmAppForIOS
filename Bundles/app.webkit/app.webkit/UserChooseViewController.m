@@ -6,9 +6,9 @@
 //  Copyright © 2017年 Eazytec. All rights reserved.
 //
 #import "EAWebController.h"
-#import "ChoosePeopleViewController.h"
+#import "UserChooseViewController.h"
 
-@interface ChoosePeopleViewController ()
+@interface UserChooseViewController()
 @property(nonatomic,retain)NSArray *selectData;
 @property(nonatomic,retain)NSArray *departments;
 @property(nonatomic,retain)NSArray *users;
@@ -22,7 +22,7 @@
 @property(nonatomic,retain)UIBarButtonItem *rightButtonItem;
 @end
 
-@implementation ChoosePeopleViewController
+@implementation UserChooseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -460,7 +460,7 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
             //部门还是具体人员
         }
         //搜索还是通讯录
-        self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%d/5)",self.selectData.count];
+        self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%lu/5)",self.selectData.count];
         [self.selectColl reloadData];
         
     
@@ -566,28 +566,36 @@ NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
         self.depNum=[[NSArray alloc]initWithArray:temp];
         [self.selectTitle reloadData];
     }
+     self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%lu/5)",self.selectData.count];
 }
 //搜索
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     [self UrlSearch:searchText];
 }
+//-(void)dataSend{
+//    [self send];
+//}
 -(void)dataSend{
-    EAWebController *ea=[[EAWebController alloc]init];
-   
     NSMutableArray *data=[[NSMutableArray alloc]init
                           ];
-    for(NSDictionary *dic in self.selectData){
-        NSString *name=[dic objectForKey:@"fullName"];
-        NSString *userId=[dic objectForKey:@"id"];
-        NSDictionary *userDic=[[NSDictionary alloc]initWithObjectsAndKeys:name,@"name",userId,@"id",nil];
-        [data addObject:userDic];
+    NSDictionary *dic1=[[NSDictionary alloc]init];
+        for(NSDictionary *dic in self.selectData){
+            NSString *name=[dic objectForKey:@"fullName"];
+            NSString *userId=[dic objectForKey:@"id"];
+            NSDictionary *userDic=[[NSDictionary alloc]initWithObjectsAndKeys:name,@"name",userId,@"id",nil];
+            [data addObject:userDic];
+        }
+        dic1=[[NSDictionary alloc]initWithObjectsAndKeys:data,@"users",nil];
+   
+    EAWebController *ea=[[EAWebController alloc]init];
+    self.userDelegate=ea;
+    if(self.userDelegate!=nil){
+        [self.userDelegate sendSelectData:dic1];
     }
-    NSDictionary *dic1=[[NSDictionary alloc]initWithObjectsAndKeys:data,@"users", @"true",@"success",@"",@"errorMsg",nil];
-    NSData *selectData=[NSJSONSerialization dataWithJSONObject:dic1 options:NSJSONWritingPrettyPrinted error:nil ];
-    ea.selectData=selectData;
-    [self.navigationController pushViewController:ea animated:YES];
+    
+        [self.navigationController pushViewController:ea animated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
 }
-
 
 @end
 

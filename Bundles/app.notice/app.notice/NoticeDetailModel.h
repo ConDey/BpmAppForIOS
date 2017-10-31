@@ -13,4 +13,7 @@
 @property (nonatomic,retain) NSString *createdBy;
 @property (nonatomic,retain) NSString *createdTime;
 @property (nonatomic,retain) NSString *content;
+
 @end
+
+

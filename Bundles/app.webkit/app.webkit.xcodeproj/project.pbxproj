@@ -37,8 +37,8 @@
 		84AE72181FA6A6BB002530AD /* TokenDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE72161FA6A6BB002530AD /* TokenDataResult.h */; };
 		84AE72191FA6A6BB002530AD /* TokenDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE72171FA6A6BB002530AD /* TokenDataResult.m */; };
 		F8AFFBF71F9F398700CE74F5 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */; settings = {ATTRIBUTES = (Public, ); }; };
-		F8AFFC111FA0185E00CE74F5 /* ChoosePeopleViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFC0F1FA0185E00CE74F5 /* ChoosePeopleViewController.h */; };
-		F8AFFC121FA0185E00CE74F5 /* ChoosePeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFC101FA0185E00CE74F5 /* ChoosePeopleViewController.m */; };
+		F8AFFC111FA0185E00CE74F5 /* UserChooseViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFC0F1FA0185E00CE74F5 /* UserChooseViewController.h */; };
+		F8AFFC121FA0185E00CE74F5 /* UserChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFC101FA0185E00CE74F5 /* UserChooseViewController.m */; };
 		F8AFFC261FA165C100CE74F5 /* ic_right_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC251FA165C000CE74F5 /* ic_right_arrow.png */; };
 /* End PBXBuildFile section */
 
@@ -77,8 +77,8 @@
 		84AE72161FA6A6BB002530AD /* TokenDataResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenDataResult.h; sourceTree = "<group>"; };
 		84AE72171FA6A6BB002530AD /* TokenDataResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenDataResult.m; sourceTree = "<group>"; };
 		F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		F8AFFC0F1FA0185E00CE74F5 /* ChoosePeopleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChoosePeopleViewController.h; sourceTree = "<group>"; };
-		F8AFFC101FA0185E00CE74F5 /* ChoosePeopleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChoosePeopleViewController.m; sourceTree = "<group>"; };
+		F8AFFC0F1FA0185E00CE74F5 /* UserChooseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserChooseViewController.h; sourceTree = "<group>"; };
+		F8AFFC101FA0185E00CE74F5 /* UserChooseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserChooseViewController.m; sourceTree = "<group>"; };
 		F8AFFC251FA165C000CE74F5 /* ic_right_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_right_arrow.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,8 +143,8 @@
 				06C6BB371F185DAE00D444E6 /* EAWebController.m */,
 				06C6BB8E1F1868F000D444E6 /* BPMJsApi.h */,
 				06C6BB8F1F1868F000D444E6 /* BPMJsApi.m */,
-				F8AFFC0F1FA0185E00CE74F5 /* ChoosePeopleViewController.h */,
-				F8AFFC101FA0185E00CE74F5 /* ChoosePeopleViewController.m */,
+				F8AFFC0F1FA0185E00CE74F5 /* UserChooseViewController.h */,
+				F8AFFC101FA0185E00CE74F5 /* UserChooseViewController.m */,
 			);
 			name = Src;
 			sourceTree = "<group>";
@@ -220,7 +220,7 @@
 				06C6BB8D1F18669E00D444E6 /* JSBWebEventDelegate.h in Headers */,
 				06C6BB871F18669E00D444E6 /* DWebview.h in Headers */,
 				F8AFFBF71F9F398700CE74F5 /* PrefixHeader.pch in Headers */,
-				F8AFFC111FA0185E00CE74F5 /* ChoosePeopleViewController.h in Headers */,
+				F8AFFC111FA0185E00CE74F5 /* UserChooseViewController.h in Headers */,
 				06C6BB8B1F18669E00D444E6 /* JSBUtil.h in Headers */,
 				06C6BB381F185DAE00D444E6 /* EAWebController.h in Headers */,
 			);
@@ -307,6 +307,7 @@
 				06C6BB391F185DAE00D444E6 /* EAWebController.m in Sources */,
 				F8AFFC121FA0185E00CE74F5 /* ChoosePeopleViewController.m in Sources */,
 				84AE72151FA6A69D002530AD /* UserDataResult.m in Sources */,
+				F8AFFC121FA0185E00CE74F5 /* UserChooseViewController.m in Sources */,
 				06C6BB881F18669E00D444E6 /* DWebview.m in Sources */,
 				06C6BB841F18669E00D444E6 /* dsbridge.m in Sources */,
 				84AE72021FA4291D002530AD /* ListDataResult.m in Sources */,

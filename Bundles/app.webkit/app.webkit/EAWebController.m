@@ -34,7 +34,13 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //人员选择数据
+    if(self.selectData!=nil){
+     NSData *selectData=[NSJSONSerialization dataWithJSONObject:self.selectData options:NSJSONWritingPrettyPrinted error:nil ];
+    userChooseData=[[NSString alloc]initWithData:selectData encoding:NSUTF8StringEncoding];
+    }else{
+        userChooseData=[[NSString alloc]init];
+    }
     // 解码
     self.view.backgroundColor = [UIColor whiteColor];
     self.urltitle = [NSString decodeString:self.urltitle];
@@ -60,6 +66,24 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         NSString *cookie = [NSString stringWithFormat:@"token=%@",[CurrentUser currentUser].token];
         [request addValue:cookie forHTTPHeaderField:@"Cookie"];
         [self.webview loadRequest:request];
+    }
+    //人员选择
+    if(userChooseData.length!=0){
+    __weak DWebview * web=self.webview;
+        //数据转为string
+        NSString *selectNum=[NSString stringWithFormat:@"%ld",[[self.selectData objectForKey:@"users"] count]];
+        NSDictionary *selectData=[self.selectData objectForKey:@"users"];
+        NSData *select=[NSJSONSerialization dataWithJSONObject:selectData options:NSJSONWritingPrettyPrinted error:nil ];
+        NSString *str=[[NSString alloc]initWithData:select encoding:NSUTF8StringEncoding];
+      
+    [self.webview setJavascriptContextInitedListener:^(){
+        [web callHandler:@"showUserChoose"
+                    arguments:[[NSArray alloc] initWithObjects:selectNum,str,nil]
+            completionHandler:^(NSString * value){
+                userChooseData=[[NSString alloc]init];
+                
+            }];
+    }];
     }
 }
 
@@ -161,6 +185,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     return;
 }
 
+
 // 显示标题栏
 - (void)delegate_setTitlebarVisible:(NSString *_Nonnull)visible callback:(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
     
@@ -203,20 +228,26 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     return;
 }
 //选择人员
-- (void)delegate_choose {
-    ChoosePeopleViewController *cs=[[ChoosePeopleViewController alloc]init];
-    [self.navigationController pushViewController:cs animated:YES];
+-(void)delegate_userChoose:(NSString *_Nonnull)useChooseNum users:(NSString *_Nonnull)userChoose callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler {
+    if (userChooseData.length!=0) {
+        NSDictionary *selectUser=[[NSDictionary alloc]initWithObjectsAndKeys:userChoose,@"users",@"true",@"success",@"",@"errorMsg" ,nil];
+        NSData *tempData=[NSJSONSerialization dataWithJSONObject:selectUser options:NSJSONWritingPrettyPrinted error:nil ];
+         completionHandler([[NSString alloc]initWithData:tempData encoding:NSUTF8StringEncoding], YES);
+    }else {
+        UserChooseViewController *cs=[[UserChooseViewController alloc]init];
+        [self.navigationController pushViewController:cs animated:YES];
+
+    }
+
+
 }
-////人员选择显示
-//- (void)delegate_showPeople {
-//        arr=[[NSString alloc]initWithData:self.selectData encoding:NSUTF8StringEncoding];
-//        NSLog(@"数据--%@",arr);
-//}
+
 
 // 设置标题栏背景图片
 - (void)delegate_setTitlebarBgImage:(NSString *_Nonnull)bgimageUrl callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler {
     
     BaseDataResult *result;
+    
     
     if (![NSString isStringNil:bgimageUrl]) {
         
@@ -487,4 +518,8 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     }
 }
 
+-(void)sendSelectData:(NSDictionary *)data{
+    self.selectData=data;
+    
+}
 @end

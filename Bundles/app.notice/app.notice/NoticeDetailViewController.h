@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NoticeDetailViewController : EAViewController<UITableViewDataSource,UITableViewDelegate>
+@interface NoticeDetailViewController : EAViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UITextFieldDelegate>
 @property(retain,nonatomic)NSString *noticeID;
-@property(nonatomic,weak)NSArray *list;
+
 @end
 

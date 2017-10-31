@@ -18,9 +18,18 @@
 		F80A8B6A1F98C54600E126C6 /* NoticeListViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B671F98C54600E126C6 /* NoticeListViewCell.h */; };
 		F80A8B6B1F98C54600E126C6 /* NoticeListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B681F98C54600E126C6 /* NoticeListViewCell.m */; };
 		F80A8B6C1F98C54600E126C6 /* NoticeListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80A8B691F98C54600E126C6 /* NoticeListViewCell.xib */; };
-		F8AFFAE41F9D73DF00CE74F5 /* NoticeDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFAE11F9D73DE00CE74F5 /* NoticeDetailViewCell.m */; };
-		F8AFFAE51F9D73DF00CE74F5 /* NoticeDetailViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFAE21F9D73DE00CE74F5 /* NoticeDetailViewCell.xib */; };
-		F8AFFAE61F9D73DF00CE74F5 /* NoticeDetailViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFAE31F9D73DF00CE74F5 /* NoticeDetailViewCell.h */; };
+		F8AFFC691FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC681FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png */; };
+		F8AFFC6C1FA700C500CE74F5 /* AttachmentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFC6A1FA700C500CE74F5 /* AttachmentViewController.h */; };
+		F8AFFC6D1FA700C500CE74F5 /* AttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFC6B1FA700C500CE74F5 /* AttachmentViewController.m */; };
+		F8AFFC891FA7161100CE74F5 /* ic_download_type_ppt.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC801FA7161000CE74F5 /* ic_download_type_ppt.png */; };
+		F8AFFC8A1FA7161100CE74F5 /* ic_download_type_apk.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC811FA7161000CE74F5 /* ic_download_type_apk.png */; };
+		F8AFFC8B1FA7161100CE74F5 /* ic_download_type_unkonw.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC821FA7161000CE74F5 /* ic_download_type_unkonw.png */; };
+		F8AFFC8C1FA7161100CE74F5 /* ic_download_type_doc.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC831FA7161000CE74F5 /* ic_download_type_doc.png */; };
+		F8AFFC8D1FA7161100CE74F5 /* ic_download_type_zip.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC841FA7161100CE74F5 /* ic_download_type_zip.png */; };
+		F8AFFC8E1FA7161100CE74F5 /* ic_download_type_txt.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC851FA7161100CE74F5 /* ic_download_type_txt.png */; };
+		F8AFFC8F1FA7161100CE74F5 /* ic_download_type_pdf.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC861FA7161100CE74F5 /* ic_download_type_pdf.png */; };
+		F8AFFC901FA7161100CE74F5 /* ic_download_type_xls.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC871FA7161100CE74F5 /* ic_download_type_xls.png */; };
+		F8AFFC911FA7161100CE74F5 /* ic_download_type_img.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,9 +47,18 @@
 		F80A8B671F98C54600E126C6 /* NoticeListViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeListViewCell.h; sourceTree = "<group>"; };
 		F80A8B681F98C54600E126C6 /* NoticeListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoticeListViewCell.m; sourceTree = "<group>"; };
 		F80A8B691F98C54600E126C6 /* NoticeListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeListViewCell.xib; sourceTree = "<group>"; };
-		F8AFFAE11F9D73DE00CE74F5 /* NoticeDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeDetailViewCell.m; sourceTree = "<group>"; };
-		F8AFFAE21F9D73DE00CE74F5 /* NoticeDetailViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeDetailViewCell.xib; sourceTree = "<group>"; };
-		F8AFFAE31F9D73DF00CE74F5 /* NoticeDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeDetailViewCell.h; sourceTree = "<group>"; };
+		F8AFFC681FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_floatingbutton_bg.png; sourceTree = "<group>"; };
+		F8AFFC6A1FA700C500CE74F5 /* AttachmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachmentViewController.h; sourceTree = "<group>"; };
+		F8AFFC6B1FA700C500CE74F5 /* AttachmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachmentViewController.m; sourceTree = "<group>"; };
+		F8AFFC801FA7161000CE74F5 /* ic_download_type_ppt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_ppt.png; sourceTree = "<group>"; };
+		F8AFFC811FA7161000CE74F5 /* ic_download_type_apk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_apk.png; sourceTree = "<group>"; };
+		F8AFFC821FA7161000CE74F5 /* ic_download_type_unkonw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_unkonw.png; sourceTree = "<group>"; };
+		F8AFFC831FA7161000CE74F5 /* ic_download_type_doc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_doc.png; sourceTree = "<group>"; };
+		F8AFFC841FA7161100CE74F5 /* ic_download_type_zip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_zip.png; sourceTree = "<group>"; };
+		F8AFFC851FA7161100CE74F5 /* ic_download_type_txt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_txt.png; sourceTree = "<group>"; };
+		F8AFFC861FA7161100CE74F5 /* ic_download_type_pdf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_pdf.png; sourceTree = "<group>"; };
+		F8AFFC871FA7161100CE74F5 /* ic_download_type_xls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_xls.png; sourceTree = "<group>"; };
+		F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_img.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +120,16 @@
 		06C5A2D81F26D0AF00A189FB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F8AFFC811FA7161000CE74F5 /* ic_download_type_apk.png */,
+				F8AFFC831FA7161000CE74F5 /* ic_download_type_doc.png */,
+				F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */,
+				F8AFFC861FA7161100CE74F5 /* ic_download_type_pdf.png */,
+				F8AFFC801FA7161000CE74F5 /* ic_download_type_ppt.png */,
+				F8AFFC851FA7161100CE74F5 /* ic_download_type_txt.png */,
+				F8AFFC821FA7161000CE74F5 /* ic_download_type_unkonw.png */,
+				F8AFFC871FA7161100CE74F5 /* ic_download_type_xls.png */,
+				F8AFFC841FA7161100CE74F5 /* ic_download_type_zip.png */,
+				F8AFFC681FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png */,
 				06C5A2C31F26CF4D00A189FB /* app.notice.h */,
 				06C5A2C41F26CF4D00A189FB /* Info.plist */,
 				F80A8B531F98B64D00E126C6 /* PrefixHeader.pch */,
@@ -116,6 +144,8 @@
 				F80A8B551F98B6D600E126C6 /* NoticeViewController.m */,
 				F80A8B5E1F98C33400E126C6 /* NoticeDetailViewController.h */,
 				F80A8B5F1F98C33400E126C6 /* NoticeDetailViewController.m */,
+				F8AFFC6A1FA700C500CE74F5 /* AttachmentViewController.h */,
+				F8AFFC6B1FA700C500CE74F5 /* AttachmentViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -133,9 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				F80A8B671F98C54600E126C6 /* NoticeListViewCell.h */,
-				F8AFFAE31F9D73DF00CE74F5 /* NoticeDetailViewCell.h */,
-				F8AFFAE11F9D73DE00CE74F5 /* NoticeDetailViewCell.m */,
-				F8AFFAE21F9D73DE00CE74F5 /* NoticeDetailViewCell.xib */,
 				F80A8B681F98C54600E126C6 /* NoticeListViewCell.m */,
 				F80A8B691F98C54600E126C6 /* NoticeListViewCell.xib */,
 			);
@@ -149,11 +176,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8AFFC6C1FA700C500CE74F5 /* AttachmentViewController.h in Headers */,
 				F80A8B641F98C3E200E126C6 /* NoticeDetailModel.h in Headers */,
 				06C5A2C51F26CF4D00A189FB /* app.notice.h in Headers */,
 				F80A8B601F98C33400E126C6 /* NoticeDetailViewController.h in Headers */,
 				F80A8B561F98B6D600E126C6 /* NoticeViewController.h in Headers */,
-				F8AFFAE61F9D73DF00CE74F5 /* NoticeDetailViewCell.h in Headers */,
 				F80A8B6A1F98C54600E126C6 /* NoticeListViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,8 +244,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8AFFC8D1FA7161100CE74F5 /* ic_download_type_zip.png in Resources */,
+				F8AFFC691FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png in Resources */,
+				F8AFFC8F1FA7161100CE74F5 /* ic_download_type_pdf.png in Resources */,
+				F8AFFC8B1FA7161100CE74F5 /* ic_download_type_unkonw.png in Resources */,
+				F8AFFC8C1FA7161100CE74F5 /* ic_download_type_doc.png in Resources */,
+				F8AFFC891FA7161100CE74F5 /* ic_download_type_ppt.png in Resources */,
+				F8AFFC8A1FA7161100CE74F5 /* ic_download_type_apk.png in Resources */,
+				F8AFFC901FA7161100CE74F5 /* ic_download_type_xls.png in Resources */,
+				F8AFFC8E1FA7161100CE74F5 /* ic_download_type_txt.png in Resources */,
 				F80A8B6C1F98C54600E126C6 /* NoticeListViewCell.xib in Resources */,
-				F8AFFAE51F9D73DF00CE74F5 /* NoticeDetailViewCell.xib in Resources */,
+				F8AFFC911FA7161100CE74F5 /* ic_download_type_img.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,8 +268,8 @@
 				F80A8B651F98C3E200E126C6 /* NoticeDetailModel.m in Sources */,
 				F80A8B6B1F98C54600E126C6 /* NoticeListViewCell.m in Sources */,
 				F80A8B611F98C33400E126C6 /* NoticeDetailViewController.m in Sources */,
-				F8AFFAE41F9D73DF00CE74F5 /* NoticeDetailViewCell.m in Sources */,
 				F80A8B571F98B6D600E126C6 /* NoticeViewController.m in Sources */,
+				F8AFFC6D1FA700C500CE74F5 /* AttachmentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

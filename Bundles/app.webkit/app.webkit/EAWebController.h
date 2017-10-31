@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "dsbridge.h"
 #import "BPMJsApi.h"
-
-@interface EAWebController : EAViewController<BPMJsApiDelegate>
+#import "UserChooseViewController.h"
+@interface EAWebController : EAViewController<BPMJsApiDelegate,userChooseDelegate>
 
 
 @property (nonatomic,retain) NSString *url;
@@ -19,5 +19,5 @@
 @property (nonatomic,retain) BPMJsApi *jsApi;
 @property (nonatomic,retain) DWebview *webview;
 
-@property (nonatomic,retain) NSData *selectData;
+@property (nonatomic,retain) NSDictionary *selectData;
 @end
