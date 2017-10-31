@@ -38,7 +38,7 @@
 		84AE72191FA6A6BB002530AD /* TokenDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE72171FA6A6BB002530AD /* TokenDataResult.m */; };
 		F8AFFBF71F9F398700CE74F5 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8AFFC261FA165C100CE74F5 /* ic_right_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC251FA165C000CE74F5 /* ic_right_arrow.png */; };
-		F8AFFCA21FA8003A00CE74F5 /* UserChooseDataViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFCA01FA8003A00CE74F5 /* UserChooseDataViewController.h */; };
+		F8AFFCA21FA8003A00CE74F5 /* UserChooseDataViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFCA01FA8003A00CE74F5 /* UserChooseDataViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8AFFCA31FA8003A00CE74F5 /* UserChooseDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFCA11FA8003A00CE74F5 /* UserChooseDataViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -219,8 +219,8 @@
 				06C6BB891F18669E00D444E6 /* DWKwebview.h in Headers */,
 				06C6BB8D1F18669E00D444E6 /* JSBWebEventDelegate.h in Headers */,
 				06C6BB871F18669E00D444E6 /* DWebview.h in Headers */,
-				F8AFFBF71F9F398700CE74F5 /* PrefixHeader.pch in Headers */,
 				F8AFFCA21FA8003A00CE74F5 /* UserChooseDataViewController.h in Headers */,
+				F8AFFBF71F9F398700CE74F5 /* PrefixHeader.pch in Headers */,
 				06C6BB8B1F18669E00D444E6 /* JSBUtil.h in Headers */,
 				06C6BB381F185DAE00D444E6 /* EAWebController.h in Headers */,
 			);

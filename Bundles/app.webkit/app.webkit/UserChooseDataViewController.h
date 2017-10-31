@@ -8,13 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-
-
 @protocol userChooseDelegate;
 @interface UserChooseDataViewController:EAViewController<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,UISearchBarDelegate>
 
 @property (nonatomic,retain) id<userChooseDelegate>userDelegate;
-
 @end
 
 @protocol userChooseDelegate<NSObject>;
