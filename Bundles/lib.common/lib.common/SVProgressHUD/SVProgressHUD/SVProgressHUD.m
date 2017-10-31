@@ -101,6 +101,8 @@ static const CGFloat SVProgressHUDDefaultAnimationDuration = 0.15;
 #else
     dispatch_once(&once, ^{ sharedView = [[self alloc] initWithFrame:[[UIScreen mainScreen] bounds]]; });
 #endif
+    UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
+    [sharedView addGestureRecognizer:gesture];
     return sharedView;
 }
 

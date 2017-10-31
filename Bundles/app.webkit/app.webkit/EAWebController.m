@@ -426,13 +426,15 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 // 显示progress
 - (void)delegate_showProgress {
     //[SVProgressHUD addGestureToDismiss];
-    [SVProgressHUD showWithStatus:@""];
+    [SVProgressHUD showWithStatus:@"加载中..."];
 }
 
 
 // 隐藏progress
 - (void)delegate_dismissProgress {
-    [SVProgressHUD dismiss];
+    if ([SVProgressHUD isVisible]) {
+        [SVProgressHUD dismiss];
+    }
 }
 
 #pragma mark - additional methods
@@ -511,6 +513,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 
 // 点击 progress 消失
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
