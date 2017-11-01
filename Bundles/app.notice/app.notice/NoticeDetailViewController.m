@@ -35,8 +35,8 @@
         make.bottom.mas_equalTo(-40);
         make.right.mas_equalTo(-20);
     }];
-    UIImage *btImg=[UIImage imageNamed:@"ic_floatingbutton_bg.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
-    attach.backgroundColor=UI_BLUE_COLOR;
+    UIImage *btImg=[UIImage imageNamed:@"ic_download.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+    attach.backgroundColor=[UIColor whiteColor];
     [attach setBackgroundImage:btImg forState:UIControlStateNormal];
     [attach addTarget:self action:@selector(tapAttachment:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -88,7 +88,7 @@
         content.numberOfLines=0;
         content.textAlignment=NSTextAlignmentCenter;
         content.text=self.noticeDetail.title;
-        content.font=[UIFont boldSystemFontOfSize:17];
+        content.font=[UIFont boldSystemFontOfSize:16];
     }else if (indexPath.row==1){
         //时间
         UILabel *content=[[UILabel alloc]init];

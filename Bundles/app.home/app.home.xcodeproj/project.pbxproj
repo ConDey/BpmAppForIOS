@@ -58,9 +58,6 @@
 		F80A8AD41F98224C00E126C6 /* ic_setting_updatepwd.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8AD01F98224C00E126C6 /* ic_setting_updatepwd.png */; };
 		F80A8AD51F98224C00E126C6 /* ic_setting_loginout.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8AD11F98224C00E126C6 /* ic_setting_loginout.png */; };
 		F80A8AD61F98224C00E126C6 /* ic_setting_setting.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8AD21F98224C00E126C6 /* ic_setting_setting.png */; };
-		F8C183071FA894250095A91E /* iVersion.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F8C183041FA894250095A91E /* iVersion.bundle */; };
-		F8C183081FA894250095A91E /* iVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = F8C183051FA894250095A91E /* iVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F8C183091FA894250095A91E /* iVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = F8C183061FA894250095A91E /* iVersion.m */; };
 		F8C1830C1FA944C10095A91E /* version.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8C1830B1FA944C10095A91E /* version.plist */; };
 /* End PBXBuildFile section */
 
@@ -119,9 +116,6 @@
 		F80A8AD01F98224C00E126C6 /* ic_setting_updatepwd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_updatepwd.png; sourceTree = "<group>"; };
 		F80A8AD11F98224C00E126C6 /* ic_setting_loginout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_loginout.png; sourceTree = "<group>"; };
 		F80A8AD21F98224C00E126C6 /* ic_setting_setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_setting.png; sourceTree = "<group>"; };
-		F8C183041FA894250095A91E /* iVersion.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iVersion.bundle; sourceTree = "<group>"; };
-		F8C183051FA894250095A91E /* iVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iVersion.h; sourceTree = "<group>"; };
-		F8C183061FA894250095A91E /* iVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iVersion.m; sourceTree = "<group>"; };
 		F8C1830B1FA944C10095A91E /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,7 +214,6 @@
 			isa = PBXGroup;
 			children = (
 				84459AD51FA95A4300E3A076 /* Push */,
-				F8C183031FA894250095A91E /* iVersion */,
 				84AE72221FA702CD002530AD /* Model */,
 				06C6BA4A1F14F1D900D444E6 /* UserHome */,
 				06C6B9F51F14AC3500D444E6 /* Framework */,
@@ -360,16 +353,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		F8C183031FA894250095A91E /* iVersion */ = {
-			isa = PBXGroup;
-			children = (
-				F8C183041FA894250095A91E /* iVersion.bundle */,
-				F8C183051FA894250095A91E /* iVersion.h */,
-				F8C183061FA894250095A91E /* iVersion.m */,
-			);
-			path = iVersion;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -378,7 +361,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BAEC1F1603CF00D444E6 /* EAApp.h in Headers */,
-				F8C183081FA894250095A91E /* iVersion.h in Headers */,
 				84301C761F998D2600F01F8F /* PrefixHeader.pch in Headers */,
 				F80A8ACD1F98224100E126C6 /* PasswordChangeController.h in Headers */,
 				06C6BAD71F15CA3600D444E6 /* UserHomeAppController.h in Headers */,
@@ -473,7 +455,6 @@
 				06C6B96A1F145D3700D444E6 /* UserAuthViewController.xib in Resources */,
 				F80A8AD51F98224C00E126C6 /* ic_setting_loginout.png in Resources */,
 				06C6B9871F149D6D00D444E6 /* Assert.xcassets in Resources */,
-				F8C183071FA894250095A91E /* iVersion.bundle in Resources */,
 				06C6BB001F17164000D444E6 /* ic_homeapp_notice.png in Resources */,
 				06C6BAFE1F17160F00D444E6 /* ic_homeapp_contact.png in Resources */,
 				061A909A1F1F4F1100B7C227 /* ic_setting_default_photo.png in Resources */,
@@ -500,7 +481,6 @@
 				06C6BAED1F1603CF00D444E6 /* EAApp.m in Sources */,
 				84301C7B1F99960700F01F8F /* AppModel.m in Sources */,
 				06C6BA521F14F2EA00D444E6 /* UserHomeNavController.m in Sources */,
-				F8C183091FA894250095A91E /* iVersion.m in Sources */,
 				06C6BAD81F15CA3600D444E6 /* UserHomeAppController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
