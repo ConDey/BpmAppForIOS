@@ -32,19 +32,19 @@
     self.isDown=NO;
     self.isFirst=NO;
     self.cellHeight=100;
-    if((int)(SCREEN_HEIGHT)%self.cellHeight==0){
-        self.cellNumForEach=(int)(SCREEN_HEIGHT)/self.cellHeight;
+    if((int)(self.view.frame.size.height)%self.cellHeight==0){
+        self.cellNumForEach=(int)(self.view.frame.size.height)/self.cellHeight;
     }else{
-        self.cellNumForEach=(int)(SCREEN_HEIGHT)/self.cellHeight+1;
+        self.cellNumForEach=(int)(self.view.frame.size.height)/self.cellHeight+1;
     }
     
     self.grouptableview.delegate=self;
     self.grouptableview.dataSource=self;
     [self.view addSubview:self.grouptableview];
     [self.grouptableview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(0);
+        make.top.mas_equalTo(15);
         make.left.mas_equalTo(10);
-        make.height.mas_equalTo(SCREEN_HEIGHT);
+        make.bottom.mas_equalTo(-10);
         make.right.mas_equalTo(-10);
     }];
     self.grouptableview.scrollEnabled=YES;
@@ -115,7 +115,7 @@
         }
         self.isFirst=NO;
         
-        if(data.count<(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1){
+        if(data.count<self.cellNumForEach+1){
             self.grouptableview.mj_footer.hidden=YES;
         }
     }
@@ -125,7 +125,7 @@
         self.isUp=NO;
         [self.grouptableview reloadData];
         [self.grouptableview.mj_header endRefreshing];
-        if([data count]<(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1){
+        if([data count]<self.cellNumForEach+1){
             self.grouptableview.mj_footer.hidden=YES;
         }
         self.grouptableview.contentOffset=CGPointMake(0, 0);
@@ -136,7 +136,7 @@
         self.noticeList=[[NSArray alloc]initWithArray:temp];
         self.isDown=NO;
         [self.grouptableview reloadData];
-        if([data count]<(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1){
+        if([data count]<self.cellNumForEach+1){
             self.grouptableview.mj_footer.hidden=YES;
         }else{
             
@@ -186,9 +186,7 @@
 //-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 //    return self.cellHeight;
 //}
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 15;
-}
+
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return self.cellHeight;
 }
