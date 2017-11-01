@@ -27,15 +27,15 @@
     [super viewDidLoad];
     [self.panelView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
-        make.top.mas_equalTo(10);
+        make.top.mas_equalTo(25);
         make.right.mas_equalTo(-10);
-        make.height.mas_equalTo(160);
+        make.height.mas_equalTo(240);
     }];
     self.panelView.layer.cornerRadius=2.0f;
     self.panelView.layer.shadowColor=[UIColor blackColor].CGColor;
     self.panelView.layer.shadowOffset=CGSizeMake(3, 3);
     self.panelView.layer.shadowRadius=2.0f;
-    self.panelView.layer.shadowOpacity=0.3;
+    self.panelView.layer.shadowOpacity=0.2;
     
     self.nameTextView.text = [CurrentUser currentUser].userdetails.fullName;
     self.departmentTextView.text = [CurrentUser currentUser].userdetails.departmentName;
@@ -44,13 +44,15 @@
     [self.view addSubview:self.tableview];
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.panelView.mas_bottom).mas_equalTo(20);
-        make.height.mas_equalTo(250);
+        make.top.mas_equalTo(self.panelView.mas_bottom).mas_equalTo(25);
+        make.height.mas_equalTo(180);
     }];
     [self.tableview setFrame:CGRectMake(0, self.panelView.bounds.size.height+20, self.view.bounds.size.width, self.view.bounds.size.height-self.panelView.bounds.size.height-20)];
     self.tableview.delegate=self;
     self.tableview.dataSource=self;
     [self.tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"HomeSet"];
+    [self.tableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+  
     
     
 }
@@ -69,22 +71,22 @@
 
 #pragma mark-<UITableViewDelegete,UITableViewDatasource>
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return 3;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 1;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"HomeSet"];
     UILabel *label=[[UILabel alloc]init];
     UIImageView *picView=[[UIImageView alloc]init];
-    if(indexPath.section==0){
+    if(indexPath.row==0){
         picView.image=[UIImage imageNamed:@"ic_setting_update.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         label.text=@"在线更新";
-    }else if(indexPath.section==1){
+    }else if(indexPath.row==1){
         picView.image=[UIImage imageNamed:@"ic_setting_updatepwd.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         label.text=@"修改密码";
-    }else if (indexPath.section==2){
+    }else if (indexPath.row==2){
         picView.image=[UIImage imageNamed:@"ic_setting_loginout.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         label.text=@"退出";
     }
@@ -113,30 +115,24 @@
     return cell;
     
 }
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 2;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if(section==2){
-        return 2;
-    }else{
-        return 0;
-    }
-}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 55;
 }
 //点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSInteger section=indexPath.section;
-    if(section==0){
+    NSInteger row=indexPath.row;
+    if(row==0){
         //在线更新
-        NSLog(@"1");
-    }else if (section==1){
+        [iVersion sharedInstance].applicationBundleID = [[NSBundle mainBundle] bundleIdentifier];
+        [iVersion sharedInstance].updatePriority=iVersionUpdatePriorityMedium;
+        [iVersion sharedInstance].viewedVersionDetails = YES;
+        [iVersion sharedInstance].appStoreCountry = @"zh-Hans";
+    }else if (row==1){
         //改密码
         PasswordChangeController *pc=[[PasswordChangeController alloc]init];
         [self.navigationController pushViewController: pc animated:true];
-    }else if (section==2){
+    }else if (row==2){
         //退出
         UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"确定退出吗" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancel=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -156,6 +152,18 @@
     
     
     
+}
+
+
+// 自定义TableViewCell分割线, 清除前面15PX的空白
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 @end
 

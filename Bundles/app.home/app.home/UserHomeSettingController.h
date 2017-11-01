@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Eazytec. All rights reserved.
 //
 
-
-@interface UserHomeSettingController : EAViewController<UIAlertViewDelegate>
+#import "iVersion.h"
+@interface UserHomeSettingController : EAViewController<UIAlertViewDelegate,UIApplicationDelegate>
 
 @end
 

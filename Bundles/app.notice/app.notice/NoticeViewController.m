@@ -56,7 +56,7 @@
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:@"" forKey:@"title"];
         [params setObject:@"1" forKey:@"pageNo"];
-        [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight] forKey:@"pageSize"];
+        [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1] forKey:@"pageSize"];
         [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
         
     }];
@@ -70,7 +70,7 @@
         [params setObject:@"" forKey:@"title"];
           [params setObject:[NSString stringWithFormat:@"%ld",self.pgNo] forKey:@"pageNo"];
      //一次刷新可以布满一个屏幕的cell数目
-          [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight] forKey:@"pageSize"];
+          [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1] forKey:@"pageSize"];
          [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
     }];
   
@@ -91,7 +91,7 @@
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     [params setObject:@"" forKey:@"title"];
     [params setObject:@"1" forKey:@"pageNo"];
-    [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight] forKey:@"pageSize"];
+    [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1] forKey:@"pageSize"];
     [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
     
     
@@ -124,7 +124,7 @@
         self.noticeList=[[NSArray alloc]initWithArray:temp];
          self.isDown=NO;
         [self.grouptableview reloadData];
-        if([data count]==0){
+        if([data count]<(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1){
             self.grouptableview.mj_footer.hidden=YES;
         }else{
             
@@ -157,7 +157,7 @@
     cell.createdBy.text=[noticeData objectForKey:@"createdBy"];
     cell.createdTime.text=[noticeData objectForKey:@"createdTime"];
     //标题
-    cell.noticeTitle.font=[UIFont boldSystemFontOfSize:17];
+    cell.noticeTitle.font=[UIFont boldSystemFontOfSize:15];
     //创建人边框
     cell.backgroundColor=[UIColor whiteColor];
     cell.createdBy.textColor=UI_BLUE_COLOR;
