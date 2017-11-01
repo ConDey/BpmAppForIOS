@@ -61,8 +61,11 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         NSURL *url = [NSURL URLWithString:self.url];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         
-        NSString *cookie = [NSString stringWithFormat:@"token=%@",[CurrentUser currentUser].token];
-        [request addValue:cookie forHTTPHeaderField:@"Cookie"];
+        if (![AttachmentUtils isCanOpenFileType:self.url]) {
+            NSString *cookie = [NSString stringWithFormat:@"token=%@",[CurrentUser currentUser].token];
+            [request addValue:cookie forHTTPHeaderField:@"Cookie"];
+        }
+
         [self.webview loadRequest:request];
     }
     //人员选择

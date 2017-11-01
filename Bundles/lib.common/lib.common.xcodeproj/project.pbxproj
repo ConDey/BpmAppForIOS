@@ -136,9 +136,7 @@
 		84301ACF1F95E54400F01F8F /* FDSlideBarItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301ACB1F95E54400F01F8F /* FDSlideBarItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301AE31F95F60A00F01F8F /* BaseTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301AE11F95F60A00F01F8F /* BaseTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301AE41F95F60A00F01F8F /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301AE21F95F60A00F01F8F /* BaseTableViewCell.m */; };
-		84301BEB1F9883F300F01F8F /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84301BE91F9883F200F01F8F /* libUMessage_Sdk_1.5.0a.a */; };
-		84301BEC1F9883F400F01F8F /* UMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301BEA1F9883F200F01F8F /* UMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84301BEE1F98846300F01F8F /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84301BED1F98846200F01F8F /* UserNotifications.framework */; };
+		84301BEE1F98846300F01F8F /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84301BED1F98846200F01F8F /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		84301C3B1F9978BE00F01F8F /* UIImage+MultiFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301C1D1F9977EF00F01F8F /* UIImage+MultiFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301C3C1F9978BE00F01F8F /* UIImage+GIF.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301C1E1F9977F000F01F8F /* UIImage+GIF.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301C3D1F9978BE00F01F8F /* SDImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301C1F1F9977F100F01F8F /* SDImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -244,7 +242,7 @@
 		84AE720F1FA44FA4002530AD /* X@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84AE71831FA422CF002530AD /* X@2x.png */; };
 		84AE72101FA44FA4002530AD /* xiang.png in Resources */ = {isa = PBXBuildFile; fileRef = 84AE71841FA422CF002530AD /* xiang.png */; };
 		84AE72111FA44FA4002530AD /* xiang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84AE71851FA422CF002530AD /* xiang@2x.png */; };
-		84AE72201FA6FB7C002530AD /* AttachmentUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE721E1FA6FB7B002530AD /* AttachmentUtils.h */; };
+		84AE72201FA6FB7C002530AD /* AttachmentUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE721E1FA6FB7B002530AD /* AttachmentUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AE72211FA6FB7C002530AD /* AttachmentUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE721F1FA6FB7B002530AD /* AttachmentUtils.m */; };
 		F8AFFBA91F9D947700CE74F5 /* MJRefreshAutoFooter.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFB7C1F9D947700CE74F5 /* MJRefreshAutoFooter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8AFFBAA1F9D947700CE74F5 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFB7D1F9D947700CE74F5 /* MJRefreshAutoFooter.m */; };
@@ -455,8 +453,6 @@
 		84301B9A1F974A5500F01F8F /* UIImageView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WebCache.h"; sourceTree = "<group>"; };
 		84301B9B1F974A5500F01F8F /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		84301B9C1F974A5500F01F8F /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
-		84301BE91F9883F200F01F8F /* libUMessage_Sdk_1.5.0a.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.5.0a.a; sourceTree = "<group>"; };
-		84301BEA1F9883F200F01F8F /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		84301BED1F98846200F01F8F /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		84301C1D1F9977EF00F01F8F /* UIImage+MultiFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+MultiFormat.h"; path = "SDWebImage/UIImage+MultiFormat.h"; sourceTree = "<group>"; };
 		84301C1E1F9977F000F01F8F /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+GIF.h"; path = "SDWebImage/UIImage+GIF.h"; sourceTree = "<group>"; };
@@ -617,7 +613,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				84301BEE1F98846300F01F8F /* UserNotifications.framework in Frameworks */,
-				84301BEB1F9883F300F01F8F /* libUMessage_Sdk_1.5.0a.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,7 +716,6 @@
 				84301C581F99796F00F01F8F /* Model */,
 				84301C201F9977FC00F01F8F /* Utils */,
 				84301C1C1F99778800F01F8F /* SDWebImage */,
-				84301BE71F9883C100F01F8F /* Push */,
 				84301AE01F95F5ED00F01F8F /* View */,
 				84301AC61F95E36D00F01F8F /* Component */,
 				84301A9C1F95DAAA00F01F8F /* FMDB */,
@@ -951,24 +945,6 @@
 				84301AE21F95F60A00F01F8F /* BaseTableViewCell.m */,
 			);
 			name = View;
-			sourceTree = "<group>";
-		};
-		84301BE71F9883C100F01F8F /* Push */ = {
-			isa = PBXGroup;
-			children = (
-				84301BE81F9883F200F01F8F /* UMessage_Sdk_1.5.0a */,
-			);
-			name = Push;
-			sourceTree = "<group>";
-		};
-		84301BE81F9883F200F01F8F /* UMessage_Sdk_1.5.0a */ = {
-			isa = PBXGroup;
-			children = (
-				84301BE91F9883F200F01F8F /* libUMessage_Sdk_1.5.0a.a */,
-				84301BEA1F9883F200F01F8F /* UMessage.h */,
-			);
-			name = UMessage_Sdk_1.5.0a;
-			path = Push/UMessage_Sdk_1.5.0a;
 			sourceTree = "<group>";
 		};
 		84301C1B1F99776C00F01F8F /* Recovered References */ = {
@@ -1374,7 +1350,6 @@
 				06C6B9E71F14A65100D444E6 /* UIWebView+AFNetworking.h in Headers */,
 				06C6B9E01F14A65100D444E6 /* UIImageView+AFNetworking.h in Headers */,
 				06C6B9E51F14A65100D444E6 /* UIRefreshControl+AFNetworking.h in Headers */,
-				84AE72201FA6FB7C002530AD /* AttachmentUtils.h in Headers */,
 				06C6B9D51F14A65100D444E6 /* AFAutoPurgingImageCache.h in Headers */,
 				06C6B9E31F14A65100D444E6 /* UIProgressView+AFNetworking.h in Headers */,
 				06C6B9DD1F14A65100D444E6 /* UIButton+AFNetworking.h in Headers */,
@@ -1465,7 +1440,6 @@
 				84301ACF1F95E54400F01F8F /* FDSlideBarItem.h in Headers */,
 				06C6B96C1F147D1F00D444E6 /* UIConstant.h in Headers */,
 				84301AE31F95F60A00F01F8F /* BaseTableViewCell.h in Headers */,
-				84301BEC1F9883F400F01F8F /* UMessage.h in Headers */,
 				06C3A47A1F0C7D8900633543 /* EAViewController.h in Headers */,
 				84AE71C91FA42325002530AD /* LGPhoto.h in Headers */,
 				84AE71CA1FA42325002530AD /* LGPhotoPickerBrowserPhoto.h in Headers */,
@@ -1494,6 +1468,7 @@
 				84AE71E11FA42325002530AD /* ZLCamera.h in Headers */,
 				84AE71E21FA42325002530AD /* ZLCameraImageView.h in Headers */,
 				84AE71E31FA42325002530AD /* ZLCameraView.h in Headers */,
+				84AE72201FA6FB7C002530AD /* AttachmentUtils.h in Headers */,
 				84AE71E41FA42326002530AD /* ZLCameraViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

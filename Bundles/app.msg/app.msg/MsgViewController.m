@@ -53,6 +53,25 @@ static NSString* IS_REFRESH_FALSE = @"0";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    _isforward = YES;
+    if (_isfirst) {
+        _isfirst = NO;
+    }else {
+        long long lastRequestTime = [[[FMDBHelper sharedInstance] getLastRequestTimeByUsername:[[CurrentUser currentUser] userdetails].username withDateFormat:NO] longLongValue];
+        if ([[[FMDBHelper sharedInstance] getIsRefresh] isEqualToString:IS_REFRESH_TRUE]) {
+            [[FMDBHelper sharedInstance] updateIsRefresh:IS_REFRESH_FALSE];
+            [self loadFromNetwork];
+        }else {
+            if (([TimeUtils getNowMillsByLong] - lastRequestTime) > THREE_MINUTES_MILLS) {
+                [self loadFromNetwork];
+            }
+        }
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    _isforward = NO;
 }
 
 - (void) initData {
@@ -63,15 +82,8 @@ static NSString* IS_REFRESH_FALSE = @"0";
     _needRefresh = true;
     _isInUnRead = YES;
     
-    // 获取上次请求时间
-    //NSString* date = [[FMDBHelper sharedInstance] getLastRequestTimeByUsername:username withDateFormat:YES];
-    NSString* date = @"2017-08-20 00:00:00";
+    [self loadFromNetwork];
     
-    NSDictionary* dict = @{
-                           @"date" : date,
-                           };
-    
-    [self httpGetRequestWithUrl:HttpProtocolServiceMessageList params:dict progress:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -249,6 +261,24 @@ static NSString* IS_REFRESH_FALSE = @"0";
     [self.tableView reloadData];
 }
 
+#pragma mark - Push Refresh
+- (void)loadFromNetwork {
+    // 获取上次请求时间
+    NSString* date = [[FMDBHelper sharedInstance] getLastRequestTimeByUsername:[[CurrentUser currentUser] userdetails].username withDateFormat:YES];
+    //NSString* date = @"2017-08-20 00:00:00";
+    NSDictionary* dict = @{
+                           @"date" : date,
+                           };
+    [self httpGetRequestWithUrl:HttpProtocolServiceMessageList params:dict progress:NO];
+}
+
+- (void)getTheNotification {
+    if (_isforward) {
+        [self loadFromNetwork];
+    }else {
+        [[FMDBHelper sharedInstance] updateIsRefresh:IS_REFRESH_TRUE];
+    }
+}
 /*
  #pragma mark - Navigation
  

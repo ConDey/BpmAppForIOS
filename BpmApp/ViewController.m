@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "UMessage.h"
 
 #import <Small/Small.h>
 
@@ -23,7 +24,6 @@
     UIImageView *bgimageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg"]];
     bgimageview.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     [self.view addSubview:bgimageview];
-    
     
     [Small setBaseUri:@"http://"];
     [Small setUpWithComplection:^{

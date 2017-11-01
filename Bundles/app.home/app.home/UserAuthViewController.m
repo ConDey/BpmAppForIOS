@@ -10,6 +10,7 @@
 #import "UserHomeNavController.h"
 #import "UserHomeTabController.h"
 #import "ImageModel.h"
+#import "UMessage.h"
 
 @interface UserAuthViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *userBgIv;
@@ -146,12 +147,27 @@
         NSString *token = [result objectForKey:@"token"];
         [[CurrentUser currentUser] updateWithUserDetails:userdetail Token:token];
         
+        [UMessage setAlias:@"admin" type:kUMessageAliasTypeSina response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+            if (responseObject) {
+                NSLog(@"ADD_ALIAS_SUCCESS");
+            }else {
+                NSLog(@"Error: %@", error.localizedDescription);
+            }
+        }];
+        
+//        [UMessage setAlias:userdetail.username type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+//            if (responseObject) {
+//                NSLog(@"ADD_ALIAS_SUCCESS");
+//            }else {
+//                NSLog(@"Error: %@", error.localizedDescription);
+//            }
+//        }];
         // Push 添加别名(先remove再add）
-    //    [UMessage removeAlias:userdetail.username type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
-    //        [UMessage addAlias:userdetail.username type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
-    //            NSLog(@"ADD_ALIAS_SUCCESS");
-    //        }];
-    //    }];
+//        [UMessage removeAlias:userdetail.username type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+//            if (responseObject) {
+//                NSLog(@"ADD_ALIAS_SUCCESS");
+//            }
+//        }];
         
         UserHomeTabController *tab = [[UserHomeTabController alloc]init];
         UserHomeNavController *nav = [[UserHomeNavController alloc]initWithRootViewController:tab];

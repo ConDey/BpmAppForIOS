@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "com_eazytec_bpm_lib_common/lib.common.h"
+#import "UMessage.h"
+#import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

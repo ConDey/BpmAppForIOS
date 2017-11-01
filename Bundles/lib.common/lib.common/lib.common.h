@@ -31,7 +31,7 @@ FOUNDATION_EXPORT const unsigned char lib_commonVersionString[];
 #import "BaseModel.h"
 #import "TimeUtils.h"
 #import "JsonUtils.h"
-//#import "AttachmentUtils.h"
+#import "AttachmentUtils.h"
 #import "UITableView+Factory.h"
 #import "NSString+EAFoundation.h"
 #import "NSNumber+EAFoundation.h"
@@ -49,8 +49,7 @@ FOUNDATION_EXPORT const unsigned char lib_commonVersionString[];
 #import "UIConstant.h"
 
 // Push
-#import "UMessage.h"
-#import <UserNotifications/UserNotifications.h>
+//#import <UserNotifications/UserNotifications.h>
 
 // Small
 #import <Small/SMBundle.h>
