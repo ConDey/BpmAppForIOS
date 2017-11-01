@@ -116,6 +116,7 @@
 		F80A8AD01F98224C00E126C6 /* ic_setting_updatepwd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_updatepwd.png; sourceTree = "<group>"; };
 		F80A8AD11F98224C00E126C6 /* ic_setting_loginout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_loginout.png; sourceTree = "<group>"; };
 		F80A8AD21F98224C00E126C6 /* ic_setting_setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_setting.png; sourceTree = "<group>"; };
+		F88BC77E1FA9BFD20049346D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F8C1830B1FA944C10095A91E /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,6 +221,7 @@
 				0686A8501F0C83D300697582 /* Authentication */,
 				06C3A4381F0C732500633543 /* UserHomeApp */,
 				06C6BA5D1F15BAA100D444E6 /* UserHomeSetting */,
+				F88BC77E1FA9BFD20049346D /* AppDelegate.h */,
 			);
 			name = Src;
 			sourceTree = "<group>";

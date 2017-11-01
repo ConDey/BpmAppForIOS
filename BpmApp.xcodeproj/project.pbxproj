@@ -24,6 +24,9 @@
 		84459AD41FA9559500E3A076 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84301BFB1F98B9E400F01F8F /* UserNotifications.framework */; };
 		84AE723B1FA8488C002530AD /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AE72391FA8488B002530AD /* libUMessage_Sdk_1.5.0a.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		84AE723D1FA848EE002530AD /* UMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE723A1FA8488C002530AD /* UMessage.h */; };
+		F88BC77B1FA9BEEF0049346D /* iVersion.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F88BC7761FA9BEEF0049346D /* iVersion.bundle */; };
+		F88BC77C1FA9BEEF0049346D /* iVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = F88BC7771FA9BEEF0049346D /* iVersion.h */; };
+		F88BC77D1FA9BEEF0049346D /* iVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BC7781FA9BEEF0049346D /* iVersion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,6 +173,9 @@
 		84301BFB1F98B9E400F01F8F /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		84AE72391FA8488B002530AD /* libUMessage_Sdk_1.5.0a.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMessage_Sdk_1.5.0a.a; path = Push/libUMessage_Sdk_1.5.0a.a; sourceTree = "<group>"; };
 		84AE723A1FA8488C002530AD /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMessage.h; path = Push/UMessage.h; sourceTree = "<group>"; };
+		F88BC7761FA9BEEF0049346D /* iVersion.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iVersion.bundle; sourceTree = "<group>"; };
+		F88BC7771FA9BEEF0049346D /* iVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iVersion.h; sourceTree = "<group>"; };
+		F88BC7781FA9BEEF0049346D /* iVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iVersion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +208,7 @@
 		062618DF1EFB694700F1EF72 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F88BC7751FA9BEEF0049346D /* iVersion */,
 				84AE72381FA84839002530AD /* Push */,
 				062618E41EFB699300F1EF72 /* AppDelegate */,
 				062618E21EFB698800F1EF72 /* Src */,
@@ -350,6 +357,16 @@
 			name = Push;
 			sourceTree = "<group>";
 		};
+		F88BC7751FA9BEEF0049346D /* iVersion */ = {
+			isa = PBXGroup;
+			children = (
+				F88BC7761FA9BEEF0049346D /* iVersion.bundle */,
+				F88BC7771FA9BEEF0049346D /* iVersion.h */,
+				F88BC7781FA9BEEF0049346D /* iVersion.m */,
+			);
+			path = iVersion;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -358,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84AE723D1FA848EE002530AD /* UMessage.h in Headers */,
+				F88BC77C1FA9BEEF0049346D /* iVersion.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +549,7 @@
 				061468931F2641BF004CC8B9 /* com_eazytec_bpm_app_home.framework in Resources */,
 				061468941F2641C1004CC8B9 /* com_eazytec_bpm_app_contact.framework in Resources */,
 				06C5A2D61F26CFD800A189FB /* com_eazytec_bpm_app_notice.framework in Resources */,
+				F88BC77B1FA9BEEF0049346D /* iVersion.bundle in Resources */,
 				061468911F2641B7004CC8B9 /* com_eazytec_bpm_app_webkit.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,6 +561,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F88BC77D1FA9BEEF0049346D /* iVersion.m in Sources */,
 				069763761EFA4C760012D367 /* ViewController.m in Sources */,
 				069763731EFA4C760012D367 /* AppDelegate.m in Sources */,
 				069763701EFA4C760012D367 /* main.m in Sources */,
