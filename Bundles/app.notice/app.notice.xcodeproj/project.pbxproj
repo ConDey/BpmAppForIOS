@@ -30,6 +30,7 @@
 		F8AFFC8F1FA7161100CE74F5 /* ic_download_type_pdf.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC861FA7161100CE74F5 /* ic_download_type_pdf.png */; };
 		F8AFFC901FA7161100CE74F5 /* ic_download_type_xls.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC871FA7161100CE74F5 /* ic_download_type_xls.png */; };
 		F8AFFC911FA7161100CE74F5 /* ic_download_type_img.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */; };
+		F8C183011FA8437D0095A91E /* com_eazytec_bpm_app_webkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C183021FA8437D0095A91E /* com_eazytec_bpm_app_webkit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		F8AFFC861FA7161100CE74F5 /* ic_download_type_pdf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_pdf.png; sourceTree = "<group>"; };
 		F8AFFC871FA7161100CE74F5 /* ic_download_type_xls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_xls.png; sourceTree = "<group>"; };
 		F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_img.png; sourceTree = "<group>"; };
+		F8C183021FA8437D0095A91E /* com_eazytec_bpm_app_webkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = com_eazytec_bpm_app_webkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8C183011FA8437D0095A91E /* com_eazytec_bpm_app_webkit.framework in Frameworks */,
 				06C5A2D31F26CFA400A189FB /* com_eazytec_bpm_lib_common.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +105,7 @@
 		06C5A2D11F26CFA400A189FB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8C183021FA8437D0095A91E /* com_eazytec_bpm_app_webkit.framework */,
 				06C5A2D21F26CFA400A189FB /* com_eazytec_bpm_lib_common.framework */,
 			);
 			name = Frameworks;

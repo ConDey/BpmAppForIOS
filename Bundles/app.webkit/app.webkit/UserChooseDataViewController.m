@@ -5,9 +5,9 @@
 //  Created by feng sun on 2017/10/25.
 //  Copyright © 2017年 Eazytec. All rights reserved.
 //
-#import "EAWebController.h"
-#import "UserChooseDataViewController.h"
 
+#import "UserChooseDataViewController.h"
+#import "EAWebController.h"
 @interface UserChooseDataViewController()
 @property(nonatomic,retain)NSArray *selectData;
 @property(nonatomic,retain)NSArray *departments;
@@ -586,21 +586,11 @@
         [data addObject:userDic];
     }
     dic1=[[NSDictionary alloc]initWithObjectsAndKeys:data,@"users",nil];
-    
-    EAWebController *ea=[[EAWebController alloc]init];
-    self.userDelegate=ea;
     if(self.userDelegate!=nil){
         [self.userDelegate sendSelectData:dic1];
     }
- [self.navigationController pushViewController:ea animated:YES];
-    for (UIViewController *temp in self.navigationController.viewControllers) {
-        if ([temp isKindOfClass:[EAWebController class]]) {
-            [self.navigationController popToViewController:temp animated:YES];
-        }
-    }
-    
-    
-   
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 @end

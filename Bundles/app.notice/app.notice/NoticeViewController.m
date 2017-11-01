@@ -18,6 +18,7 @@
 @property(nonatomic,assign)BOOL isDown;
 @property(nonatomic,assign)BOOL isFirst;
 @property(nonatomic,assign)NSInteger select;
+@property(nonatomic,assign)CGFloat contentY;
 
 
 @end
@@ -27,18 +28,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=LIGHT_GRAY_COLOR;
-    self.select=0;
+    self.select=-1;
     self.isUp=NO;
     self.isDown=NO;
     self.isFirst=NO;
-    self.cellHeight=70;
-    
+    self.cellHeight=90;
+  
+   
     self.grouptableview.delegate=self;
     self.grouptableview.dataSource=self;
     [self.view addSubview:self.grouptableview];
     [self.grouptableview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
         make.left.mas_equalTo(10);
-        make.top.bottom.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
         make.right.mas_equalTo(-10);
     }];
     self.grouptableview.scrollEnabled=YES;
@@ -53,20 +56,21 @@
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:@"" forKey:@"title"];
         [params setObject:@"1" forKey:@"pageNo"];
-        [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight] forKey:@"pageSize"];
+        [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1] forKey:@"pageSize"];
         [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
         
     }];
 
     //上拉刷新
  self.grouptableview.mj_footer=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-      self.grouptableview.mj_footer.hidden=NO;
+      ;
         self.isDown=YES;
         self.pgNo=self.pgNo+1;
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:@"" forKey:@"title"];
           [params setObject:[NSString stringWithFormat:@"%ld",self.pgNo] forKey:@"pageNo"];
-          [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight] forKey:@"pageSize"];
+     //一次刷新可以布满一个屏幕的cell数目
+          [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1] forKey:@"pageSize"];
          [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
     }];
   
@@ -87,7 +91,7 @@
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     [params setObject:@"" forKey:@"title"];
     [params setObject:@"1" forKey:@"pageNo"];
-    [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight] forKey:@"pageSize"];
+    [params setObject:[NSString stringWithFormat:@"%ld",(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1] forKey:@"pageSize"];
     [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
     
     
@@ -102,35 +106,36 @@
         }
         self.isFirst=NO;
         [self.grouptableview reloadData];
-    
+        if(data.count<(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight){
+            [self.grouptableview.mj_footer endRefreshingWithNoMoreData];
+        }
     }
     if(self.isUp){
     self.noticeList=[[NSMutableArray alloc]initWithArray:data];
         self.pgNo=1;
         self.isUp=NO;
-        [self.grouptableview.mj_header endRefreshing];
         [self.grouptableview reloadData];
+        [self.grouptableview.mj_header endRefreshing];
+        self.grouptableview.contentOffset=CGPointMake(0, 0);
     }
     if(self.isDown){
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.noticeList];
         [temp addObjectsFromArray:data];
         self.noticeList=[[NSArray alloc]initWithArray:temp];
          self.isDown=NO;
-        
-        if([data count]==0){
+        [self.grouptableview reloadData];
+        if([data count]<(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1){
             self.grouptableview.mj_footer.hidden=YES;
         }else{
             
          [self.grouptableview.mj_footer endRefreshing];
         }
-        [self.grouptableview reloadData];
+       
         
     }
-    
-    if((self.noticeList.count>self.select)&&(self.noticeList.count-(int)((SCREEN_HEIGHT-105)/self.cellHeight)<=self.select)){
-        NSLog(@"%ld",self.select);
-        [self.grouptableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.select inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
+    self.grouptableview.contentOffset=CGPointMake(0, self.contentY);
+
+
     
 }
 
@@ -152,7 +157,7 @@
     cell.createdBy.text=[noticeData objectForKey:@"createdBy"];
     cell.createdTime.text=[noticeData objectForKey:@"createdTime"];
     //标题
-    cell.noticeTitle.font=[UIFont boldSystemFontOfSize:17];
+    cell.noticeTitle.font=[UIFont boldSystemFontOfSize:15];
     //创建人边框
     cell.backgroundColor=[UIColor whiteColor];
     cell.createdBy.textColor=UI_BLUE_COLOR;
@@ -179,6 +184,8 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    self.contentY=self.grouptableview.contentOffset.y;
     NSDictionary *notciceData=[self.noticeList objectAtIndex:indexPath.row];
     self.select=indexPath.row;
     NSString *nd=[notciceData objectForKey:@"id"];

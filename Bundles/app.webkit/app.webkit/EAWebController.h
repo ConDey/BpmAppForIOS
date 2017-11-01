@@ -19,5 +19,5 @@
 @property (nonatomic,retain) BPMJsApi *jsApi;
 @property (nonatomic,retain) DWebview *webview;
 
-@property (nonatomic,retain) NSDictionary *selectData;
+//@property (nonatomic,retain) NSDictionary *selectData;
 @end

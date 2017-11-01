@@ -32,8 +32,8 @@
     [self.view bringSubviewToFront:attach];
     [attach mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(40, 40));
-        make.bottom.mas_equalTo(-10);
-        make.right.mas_equalTo(-10);
+        make.bottom.mas_equalTo(-40);
+        make.right.mas_equalTo(-20);
     }];
     UIImage *btImg=[UIImage imageNamed:@"ic_floatingbutton_bg.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
     attach.backgroundColor=UI_BLUE_COLOR;
@@ -57,7 +57,7 @@
 -(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
     self.noticeDetail=[NoticeDetailModel mj_objectWithKeyValues:result];
     self.attachment=[result objectForKey:@"attachments"];
-    NSLog(@"%@",self.attachment);
+   // NSLog(@"%@",self.attachment);
     [self.tableview reloadData];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -127,7 +127,7 @@
     }else if (indexPath.row==1){
         height=21;
     }else{
-        height=SCREEN_HEIGHT-NAV_HEIGHT-90;
+        height=SCREEN_HEIGHT-NAV_HEIGHT-101;
     }
     return height;
 }

@@ -32,13 +32,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //人员选择数据
-    if(self.selectData!=nil){
-     NSData *selectData=[NSJSONSerialization dataWithJSONObject:self.selectData options:NSJSONWritingPrettyPrinted error:nil ];
-    userChooseData=[[NSString alloc]initWithData:selectData encoding:NSUTF8StringEncoding];
-    }else{
-        userChooseData=[[NSString alloc]init];
-    }
+  
     // 解码
     self.view.backgroundColor = [UIColor whiteColor];
     self.urltitle = [NSString decodeString:self.urltitle];
@@ -67,24 +61,6 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         }
 
         [self.webview loadRequest:request];
-    }
-    //人员选择
-    if(userChooseData.length!=0){
-    __weak DWebview * web=self.webview;
-        //数据转为string
-        NSString *selectNum=[NSString stringWithFormat:@"%ld",[[self.selectData objectForKey:@"users"] count]];
-        NSDictionary *selectData=[self.selectData objectForKey:@"users"];
-        NSData *select=[NSJSONSerialization dataWithJSONObject:selectData options:NSJSONWritingPrettyPrinted error:nil ];
-        NSString *str=[[NSString alloc]initWithData:select encoding:NSUTF8StringEncoding];
-      
-    [self.webview setJavascriptContextInitedListener:^(){
-        [web callHandler:@"showUserChoose"
-                    arguments:[[NSArray alloc] initWithObjects:selectNum,str,nil]
-            completionHandler:^(NSString * value){
-                userChooseData=[[NSString alloc]init];
-                
-            }];
-    }];
     }
 }
 
@@ -236,6 +212,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
          completionHandler([[NSString alloc]initWithData:tempData encoding:NSUTF8StringEncoding], YES);
     }else {
        UserChooseDataViewController *cs=[[UserChooseDataViewController alloc]init];
+        cs.userDelegate = self;
         [self.navigationController pushViewController:cs animated:YES];
 
     }
@@ -523,7 +500,25 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 }
 
 -(void)sendSelectData:(NSDictionary *)data{
-    self.selectData=data;
+    NSDictionary  *allSelectData=data;
+    //人员选择数据
+    if(allSelectData!=nil){
+        NSData *selectData=[NSJSONSerialization dataWithJSONObject:allSelectData options:NSJSONWritingPrettyPrinted error:nil ];
+        userChooseData=[[NSString alloc]initWithData:selectData encoding:NSUTF8StringEncoding];
+    }
+        __weak DWebview * web=self.webview;
+        //数据转为string
+        NSString *selectNum=[NSString stringWithFormat:@"%ld",[[allSelectData objectForKey:@"users"] count]];
+        NSDictionary *selectUserData=[allSelectData objectForKey:@"users"];
+        NSData *select=[NSJSONSerialization dataWithJSONObject:selectUserData options:NSJSONWritingPrettyPrinted error:nil ];
+        NSString *str=[[NSString alloc]initWithData:select encoding:NSUTF8StringEncoding];
+        
+       [web callHandler:@"showUserChoose"
+                   arguments:[[NSArray alloc] initWithObjects:selectNum,str,nil]
+           completionHandler:^(NSString * value){
+               userChooseData=[[NSString alloc]init];
+           
+        }];
     
 }
 @end
