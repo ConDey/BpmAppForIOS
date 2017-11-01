@@ -44,7 +44,7 @@
     [self.grouptableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(10);
-        make.height.mas_equalTo(SCREEN_HEIGHT-NAV_HEIGHT-15);
+        make.height.mas_equalTo(SCREEN_HEIGHT);
         make.right.mas_equalTo(-10);
     }];
     self.grouptableview.scrollEnabled=YES;
@@ -52,9 +52,7 @@
     self.grouptableview.backgroundColor=[UIColor whiteColor];
     [self.grouptableview registerNib:[UINib nibWithNibName:@"NoticeListViewCell" bundle:self.bundle]  forCellReuseIdentifier:@"NoticeList"];
     self.grouptableview.backgroundColor=LIGHT_GRAY_COLOR;
-    self.grouptableview.estimatedRowHeight=100;
     self.grouptableview.rowHeight=UITableViewAutomaticDimension;
-    
     //下拉刷新
     self.grouptableview.mj_header=[MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.grouptableview.mj_footer.hidden=NO;
@@ -117,7 +115,7 @@
         }
         self.isFirst=NO;
         
-        if(data.count<self.cellNumForEach+1){
+        if(data.count<(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1){
             self.grouptableview.mj_footer.hidden=YES;
         }
     }
@@ -127,7 +125,7 @@
         self.isUp=NO;
         [self.grouptableview reloadData];
         [self.grouptableview.mj_header endRefreshing];
-        if([data count]<self.cellNumForEach+1){
+        if([data count]<(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1){
             self.grouptableview.mj_footer.hidden=YES;
         }
         self.grouptableview.contentOffset=CGPointMake(0, 0);
@@ -138,7 +136,7 @@
         self.noticeList=[[NSArray alloc]initWithArray:temp];
         self.isDown=NO;
         [self.grouptableview reloadData];
-        if([data count]<self.cellNumForEach+1){
+        if([data count]<(int)(SCREEN_HEIGHT-NAV_HEIGHT-15)/self.cellHeight+1){
             self.grouptableview.mj_footer.hidden=YES;
         }else{
             
@@ -185,11 +183,15 @@
     
     return cell;
 }
-
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return self.cellHeight;
+//}
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 15;
 }
-
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return self.cellHeight;
+}
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
