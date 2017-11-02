@@ -133,7 +133,8 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
         if (self.useAllAvailableLanguages)
         {
             bundle = [NSBundle bundleWithPath:bundlePath];
-            NSString *language = [[NSLocale preferredLanguages] count]? [NSLocale preferredLanguages][0]: @"en";
+            NSString *language = [[NSLocale preferredLanguages] count]? [NSLocale preferredLanguages][0]:@"zh-Hans-CN";
+            
             if (![[bundle localizations] containsObject:language])
             {
                 language = [language componentsSeparatedByString:@"-"][0];
@@ -142,9 +143,12 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
             {
                 bundlePath = [bundle pathForResource:language ofType:@"lproj"];
             }
+             NSLog(@"%@",language);
         }
         bundle = [NSBundle bundleWithPath:bundlePath] ?: [NSBundle mainBundle];
+        
     }
+   
     defaultString = [bundle localizedStringForKey:key value:defaultString table:nil];
     return [[NSBundle mainBundle] localizedStringForKey:key value:defaultString table:nil];
 }
@@ -234,39 +238,41 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
     return _delegate;
 }
 
+
+
 - (NSString *)inThisVersionTitle
 {
-    return _inThisVersionTitle ?: [self localizedStringForKey:iVersionInThisVersionTitleKey withDefault:@"New in this version"];
+    return _inThisVersionTitle ?: [self localizedStringForKey:iVersionInThisVersionTitleKey withDefault:@"更新说明"];
 }
 
 - (NSString *)updateAvailableTitle
 {
-    return _updateAvailableTitle ?: [self localizedStringForKey:iVersionUpdateAvailableTitleKey withDefault:@"New version available"];
+    return _updateAvailableTitle ?: [self localizedStringForKey:iVersionUpdateAvailableTitleKey withDefault:@"有新的版本"];
 }
 
 - (NSString *)versionLabelFormat
 {
-    return _versionLabelFormat ?: [self localizedStringForKey:iVersionVersionLabelFormatKey withDefault:@"Version %@"];
+    return _versionLabelFormat ?: [self localizedStringForKey:iVersionVersionLabelFormatKey withDefault:@"版本 %@"];
 }
 
 - (NSString *)okButtonLabel
 {
-    return _okButtonLabel ?: [self localizedStringForKey:iVersionOKButtonKey withDefault:@"OK"];
+    return _okButtonLabel ?: [self localizedStringForKey:iVersionOKButtonKey withDefault:@"好的"];
 }
 
 - (NSString *)ignoreButtonLabel
 {
-    return _ignoreButtonLabel ?: [self localizedStringForKey:iVersionIgnoreButtonKey withDefault:@"Ignore"];
+    return _ignoreButtonLabel ?: [self localizedStringForKey:iVersionIgnoreButtonKey withDefault:@"忽略"];
 }
 
 - (NSString *)downloadButtonLabel
 {
-    return _downloadButtonLabel ?: [self localizedStringForKey:iVersionDownloadButtonKey withDefault:@"Download"];
+    return _downloadButtonLabel ?: [self localizedStringForKey:iVersionDownloadButtonKey withDefault:@"下载更新"];
 }
 
 - (NSString *)remindButtonLabel
 {
-    return _remindButtonLabel ?: [self localizedStringForKey:iVersionRemindButtonKey withDefault:@"Remind Me Later"];
+    return _remindButtonLabel ?: [self localizedStringForKey:iVersionRemindButtonKey withDefault:@"回头再说"];
 }
 
 - (NSURL *)updateURL
