@@ -143,7 +143,7 @@ static NSString *const iVersionMacAppStoreURLFormat = @"macappstore://itunes.app
             {
                 bundlePath = [bundle pathForResource:language ofType:@"lproj"];
             }
-             NSLog(@"%@",language);
+            
         }
         bundle = [NSBundle bundleWithPath:bundlePath] ?: [NSBundle mainBundle];
         
