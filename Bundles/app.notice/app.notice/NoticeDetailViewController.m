@@ -97,14 +97,14 @@
         [contentCreatedBy mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(10);
             make.width.mas_equalTo(60);
-            make.top.bottom.mas_equalTo(0);
+            make.bottom.mas_equalTo(0);
         }];
         UILabel *contentTime=[[UILabel alloc]init];
         [cell addSubview:contentTime];
         [contentTime mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(contentCreatedBy.mas_right).mas_equalTo(10);
             make.right.mas_equalTo(-10);
-            make.top.bottom.mas_equalTo(0);
+            make.bottom.mas_equalTo(0);
         }];
         
         contentCreatedBy.text=self.noticeDetail.createdBy;
@@ -126,7 +126,7 @@
     if(indexPath.row==0){
         ch=currentHeight;
     }else{
-        ch=21;
+        ch=25;
     }
     return ch;
 }
@@ -147,7 +147,7 @@
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(10);
         make.right.left.mas_equalTo(0);
-        make.height.mas_equalTo(height+22);
+        make.height.mas_equalTo(height+26);
     }];
     [self.tableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [self.tableview registerClass:[UITableViewCell class]  forCellReuseIdentifier:@"NoticeDetail"];
@@ -165,7 +165,7 @@
         text.delegate=self;
         text.attributedText=jsString;
         text.font=FONT_16;
-        
+        text.editable=NO;
     }];
     
 }
