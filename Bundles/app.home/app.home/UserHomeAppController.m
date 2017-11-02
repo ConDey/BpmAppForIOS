@@ -172,7 +172,7 @@
                            @"token" : [CurrentUser defaultToken],
                            };
     
-    [self httpPostRequestWithUrl:HttpProtocolServiceCommonConfig params:dict progress:YES];
+    [self httpGetRequestWithUrl:HttpProtocolServiceCommonConfig params:dict progress:YES];
     
     NSDictionary* appDict = @{
                               @"commonUse" : @YES,

@@ -46,7 +46,7 @@
     if([webview isKindOfClass:[DUIwebview class]]){
         [(DUIwebview *)webview loadRequest:request];
     }else{
-        [(DWKwebview *)webview loadRequest:request];
+        [(DUIwebview *)webview loadRequest:request];
     }
 }
 

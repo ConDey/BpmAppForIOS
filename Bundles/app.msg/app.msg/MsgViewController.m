@@ -8,7 +8,6 @@
 
 #import "MsgViewController.h"
 #import "MessageMainCell.h"
-#import "MessageListModel.h"
 
 const static long THREE_MINUTES_MILLS = 180000; // 三分钟
 static NSString* IS_REFRESH_TRUE = @"1";
@@ -36,7 +35,6 @@ static NSString* IS_REFRESH_FALSE = @"0";
     // Do any additional setup after loading the view.
     
     self.navDisplay = YES;
-    [self setTitleOfNav:@"消息"];
     
     self.navigationController.delegate = self;
     
@@ -48,11 +46,15 @@ static NSString* IS_REFRESH_FALSE = @"0";
         make.right.left.bottom.mas_equalTo(self.view);
     }];
     
+    // 监听通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveTheRemoteNotification) name:@"umeng" object:nil];
+    
     [self initData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    [self setTitleOfNav:@"消息"];
     _isforward = YES;
     if (_isfirst) {
         _isfirst = NO;
@@ -272,7 +274,8 @@ static NSString* IS_REFRESH_FALSE = @"0";
     [self httpGetRequestWithUrl:HttpProtocolServiceMessageList params:dict progress:NO];
 }
 
-- (void)getTheNotification {
+// 实现通知的代理方法
+- (void)receiveTheRemoteNotification {
     if (_isforward) {
         [self loadFromNetwork];
     }else {

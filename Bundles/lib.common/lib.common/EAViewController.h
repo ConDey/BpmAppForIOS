@@ -27,6 +27,7 @@
 - (void)setTitleStyleOfNavFont:(UIFont *)titleFont Color:(UIColor *)titleColor; // 配置NavItem的titleStyle
 - (void)setTitleViewOfNav:(UIView *)viewOfNav; // 配置NavItem的titleView
 - (void)setCommonBackLeftButtonItem; // 配置默认的返回ButtonItem
+- (void)doNavigationLeftBarButtonItemAction:(UIBarButtonItem *)item;
 
 - (void)httpGetRequestWithUrl:(HttpProtocolServiceName)name params:(NSDictionary *)params progress:(BOOL)progress;
 - (void)httpPostRequestWithUrl:(HttpProtocolServiceName)name params:(NSDictionary *)params progress:(BOOL)progress;

@@ -10,7 +10,7 @@
 #import "UserHomeNavController.h"
 #import "UserHomeTabController.h"
 #import "ImageModel.h"
-#import "UMessage.h"
+#import "AppDelegate.h"
 
 @interface UserAuthViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *userBgIv;
@@ -63,7 +63,7 @@
                            @"token" : [CurrentUser defaultToken],
                            };
     
-    [self httpPostRequestWithUrl:HttpProtocolServiceCommonConfig params:dict progress:YES];
+    [self httpGetRequestWithUrl:HttpProtocolServiceCommonConfig params:dict progress:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -147,28 +147,10 @@
         userdetail.position = [result objectForKey:@"position"];
         NSString *token = [result objectForKey:@"token"];
         [[CurrentUser currentUser] updateWithUserDetails:userdetail Token:token];
+        [[FMDBHelper sharedInstance] inertUserDetailsTableWithUserDetails:userdetail];
         
-        [UMessage setAlias:@"admin" type:kUMessageAliasTypeSina response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
-            if (responseObject) {
-                NSLog(@"ADD_ALIAS_SUCCESS");
-            }else {
-                NSLog(@"Error: %@", error.localizedDescription);
-            }
-        }];
-        
-//        [UMessage setAlias:userdetail.username type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
-//            if (responseObject) {
-//                NSLog(@"ADD_ALIAS_SUCCESS");
-//            }else {
-//                NSLog(@"Error: %@", error.localizedDescription);
-//            }
-//        }];
-        // Push 添加别名(先remove再add）
-//        [UMessage removeAlias:userdetail.username type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
-//            if (responseObject) {
-//                NSLog(@"ADD_ALIAS_SUCCESS");
-//            }
-//        }];
+        AppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+        [appDelegate setAlias:userdetail.username];
         
         UserHomeTabController *tab = [[UserHomeTabController alloc]init];
         UserHomeNavController *nav = [[UserHomeNavController alloc]initWithRootViewController:tab];

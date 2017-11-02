@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		06C5A2C51F26CF4D00A189FB /* app.notice.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C5A2C31F26CF4D00A189FB /* app.notice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C5A2D31F26CFA400A189FB /* com_eazytec_bpm_lib_common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C5A2D21F26CFA400A189FB /* com_eazytec_bpm_lib_common.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		84459B001FAA0C6D00E3A076 /* ic_common_left_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 84459AFF1FAA0C6C00E3A076 /* ic_common_left_back.png */; };
 		F80A8B561F98B6D600E126C6 /* NoticeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B541F98B6D600E126C6 /* NoticeViewController.h */; };
 		F80A8B571F98B6D600E126C6 /* NoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B551F98B6D600E126C6 /* NoticeViewController.m */; };
 		F80A8B601F98C33400E126C6 /* NoticeDetailViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B5E1F98C33400E126C6 /* NoticeDetailViewController.h */; };
@@ -38,6 +39,7 @@
 		06C5A2C31F26CF4D00A189FB /* app.notice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app.notice.h; sourceTree = "<group>"; };
 		06C5A2C41F26CF4D00A189FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06C5A2D21F26CFA400A189FB /* com_eazytec_bpm_lib_common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = com_eazytec_bpm_lib_common.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/BpmApp-eufyfkcxftanxsbzvzzlyyfyzmkq/Build/Products/Debug-iphoneos/com_eazytec_bpm_lib_common.framework"; sourceTree = "<group>"; };
+		84459AFF1FAA0C6C00E3A076 /* ic_common_left_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_common_left_back.png; sourceTree = "<group>"; };
 		F80A8B531F98B64D00E126C6 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		F80A8B541F98B6D600E126C6 /* NoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeViewController.h; sourceTree = "<group>"; };
 		F80A8B551F98B6D600E126C6 /* NoticeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoticeViewController.m; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 		06C5A2C21F26CF4D00A189FB /* app.notice */ = {
 			isa = PBXGroup;
 			children = (
+				84459AFF1FAA0C6C00E3A076 /* ic_common_left_back.png */,
 				06C5A2D71F26D0AA00A189FB /* Src */,
 				06C5A2D81F26D0AF00A189FB /* Supporting Files */,
 			);
@@ -252,6 +255,7 @@
 				F8AFFC691FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png in Resources */,
 				F8AFFC8F1FA7161100CE74F5 /* ic_download_type_pdf.png in Resources */,
 				F8AFFC8B1FA7161100CE74F5 /* ic_download_type_unkonw.png in Resources */,
+				84459B001FAA0C6D00E3A076 /* ic_common_left_back.png in Resources */,
 				F8AFFC8C1FA7161100CE74F5 /* ic_download_type_doc.png in Resources */,
 				F8AFFC891FA7161100CE74F5 /* ic_download_type_ppt.png in Resources */,
 				F8AFFC8A1FA7161100CE74F5 /* ic_download_type_apk.png in Resources */,

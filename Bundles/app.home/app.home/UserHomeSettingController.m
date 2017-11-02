@@ -124,10 +124,10 @@
     NSInteger row=indexPath.row;
     if(row==0){
         //在线更新
-        [iVersion sharedInstance].applicationBundleID = [[NSBundle mainBundle] bundleIdentifier];
-        [iVersion sharedInstance].updatePriority=iVersionUpdatePriorityMedium;
-        [iVersion sharedInstance].viewedVersionDetails = YES;
-        [iVersion sharedInstance].appStoreCountry = @"zh-Hans";
+//        [iVersion sharedInstance].applicationBundleID = [[NSBundle mainBundle] bundleIdentifier];
+//        [iVersion sharedInstance].updatePriority=iVersionUpdatePriorityMedium;
+//        [iVersion sharedInstance].viewedVersionDetails = YES;
+//        [iVersion sharedInstance].appStoreCountry = @"zh-Hans";
     }else if (row==1){
         //改密码
         PasswordChangeController *pc=[[PasswordChangeController alloc]init];

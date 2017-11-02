@@ -219,6 +219,22 @@
                          bpmbridget.call("skipWindow",{url: "https://58.215.198.210:9997/bpmapp/newjswebview.html", title: "hello"});
                  }
     
+                function registerBack() {
+                    bpmbridget.call("bindBackBtn", {callback: "tback"}, function(result) {
+                                    alert(result);
+                                    });
+                }
+    
+                function tback() {
+                    alert(1);
+                }
+    
+                function unRegisterBack() {
+                    bpmbridget.call("unbindBackBtn", function(result) {
+                                    alert(result);
+                                    });
+                }
+    
                 //[sync] 获得当前用户信息
                 function getUser() {
                     bpmbridget.call("getUser", function(result){

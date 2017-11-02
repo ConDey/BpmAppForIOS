@@ -14,11 +14,13 @@
 
 typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL complete);
 
-@interface EAWebController() <LGPhotoPickerViewControllerDelegate>
+@interface EAWebController() <LGPhotoPickerViewControllerDelegate, WKNavigationDelegate>
 {
     NSString *userChooseData;
     NSString *rightBtnCallbackName;
+    NSString *backBtnCallbackName;
     CommonCompletionHandler commonHandler;
+    Boolean isBindBackBtn;
     
 }
 @property (retain, nonatomic) UIProgressView *progressView;
@@ -52,15 +54,30 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         [self.webview loadRequest:request];
         
     } else {
-        NSURL *url = [NSURL URLWithString:self.url];
+        NSURL *url = [NSURL URLWithString:[self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        
-        if (![AttachmentUtils isCanOpenFileType:self.url]) {
-            NSString *cookie = [NSString stringWithFormat:@"token=%@",[CurrentUser currentUser].token];
-            [request addValue:cookie forHTTPHeaderField:@"Cookie"];
-        }
+        [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request]; // 清除缓存
+        NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
+        [request addValue:cookie forHTTPHeaderField:@"token"];
+        NSLog(@"%@", request.allHTTPHeaderFields);
 
         [self.webview loadRequest:request];
+    }
+}
+
+// webview 回调函数
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
+    // 在url不为nil时重新加载防止白屏现象
+    [webView reload];
+}
+
+- (void)doNavigationLeftBarButtonItemAction:(UIBarButtonItem *)item {
+    if (isBindBackBtn) {
+        if (![backBtnCallbackName isEqualToString:@""]) {
+            [_webview callHandler:backBtnCallbackName arguments:nil completionHandler:nil];
+        }
+    }else {
+        [super doNavigationLeftBarButtonItemAction:item];
     }
 }
 
@@ -417,11 +434,38 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     }
 }
 
+// 绑定返回键
+- (void)delegate_bindBackBtnWithcallbackName:(NSString *)callbackName callback:(void (^)(NSString * _Nullable, BOOL))completionHandler {
+    BaseDataResult *result;
+    
+    if (![NSString isStringNil:callbackName]) {
+        backBtnCallbackName = callbackName;
+        commonHandler = completionHandler;
+        isBindBackBtn = YES;
+        
+        result = [[BaseDataResult alloc] initWithSuccess:YES];
+    }else {
+        result = [[BaseDataResult alloc] initWithSuccess:NO];
+    }
+    NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
+    
+    completionHandler(resultJson, YES);
+    
+    return;
+}
+
+// 解绑返回键
+- (void)delegate_unbindBackBtnWithCallback:(void (^)(NSString * _Nullable, BOOL))completionHandler {
+    isBindBackBtn = NO;
+    BaseDataResult *result = [[BaseDataResult alloc] initWithSuccess:YES];
+    NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
+    completionHandler(resultJson, YES);
+}
+
 #pragma mark - additional methods
 // 右边按钮点击事件
 - (void)rightBtnBindAction:(id)sender {
     if (![rightBtnCallbackName isEqualToString:@""]) {
-     
         [_webview callHandler:rightBtnCallbackName arguments:nil completionHandler:nil];
     }
 }

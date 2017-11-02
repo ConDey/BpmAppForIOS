@@ -110,8 +110,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *attachDic=[self.attachmentList objectAtIndex:indexPath.row];
     NSString *attachName=[attachDic objectForKey:@"name"];
-    NSString *attachPath=[attachDic objectForKey:@"relativePath"];
-    attachPath=[NSString stringWithFormat:@"%@/%@",REQUEST_URL,attachPath];
+    NSString *attachId=[attachDic objectForKey:@"id"];
+    NSString *attachPath=[NSString stringWithFormat:@"%@/external/attachment/down?attachmentId=%@",REQUEST_URL,attachId];
     EAWebController *eav=[[EAWebController alloc]init];
     eav.urltitle=attachName;
     eav.url=attachPath;

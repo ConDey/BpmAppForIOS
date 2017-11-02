@@ -62,7 +62,9 @@
     // 如果preferredStatusBarStyle是UIStatusBarStyleLightContent是BarStyle是UIBarStyleBlack;
     if (self.hasNavController) {
         self.navigationController.navigationBar.barStyle = ([self preferredStatusBarStyle] == UIStatusBarStyleLightContent) ? UIBarStyleBlack : UIBarStyleDefault;
+        
     }
+    [self setCommonBackLeftButtonItem];
 }
 
 /**
@@ -150,8 +152,10 @@
  *   配置默认的返回ButtonItem
  */
 -(void)setCommonBackLeftButtonItem {
-    //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"Common_Back"] style:UIBarButtonItemStylePlain target:self action:@selector(doNavigationLeftBarButtonItemAction:)];
-    self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
+    NSBundle* bun = self.bundle;
+    UIImage* img = [UIImage imageNamed:@"ic_common_left_back" inBundle:self.bundle compatibleWithTraitCollection:nil];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"ic_common_left_back" inBundle:self.bundle compatibleWithTraitCollection:nil] style:UIBarButtonItemStylePlain target:self action:@selector(doNavigationLeftBarButtonItemAction:)];
+    //self.navigationItem.leftBarButtonItem.tintColor = [UIColor whiteColor];
 }
 
 /**

@@ -28,6 +28,7 @@
 		06C6BBB01F19045700D444E6 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BBAC1F19045700D444E6 /* fonts */; };
 		06C6BBB11F19045700D444E6 /* js in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BBAD1F19045700D444E6 /* js */; };
 		06C6BBB21F19045700D444E6 /* jswebview.html in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BBAE1F19045700D444E6 /* jswebview.html */; };
+		84459AFE1FA9B82D00E3A076 /* ic_common_left_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 84459AFD1FA9B82C00E3A076 /* ic_common_left_back.png */; };
 		84AE716A1FA2C495002530AD /* BaseDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE71681FA2C495002530AD /* BaseDataResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AE716B1FA2C495002530AD /* BaseDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE71691FA2C495002530AD /* BaseDataResult.m */; };
 		84AE72011FA4291D002530AD /* ListDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE71FF1FA4291D002530AD /* ListDataResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -68,6 +69,7 @@
 		06C6BBAC1F19045700D444E6 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = www/fonts; sourceTree = "<group>"; };
 		06C6BBAD1F19045700D444E6 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; name = js; path = www/js; sourceTree = "<group>"; };
 		06C6BBAE1F19045700D444E6 /* jswebview.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = jswebview.html; path = www/jswebview.html; sourceTree = "<group>"; };
+		84459AFD1FA9B82C00E3A076 /* ic_common_left_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_common_left_back.png; sourceTree = "<group>"; };
 		84AE71681FA2C495002530AD /* BaseDataResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseDataResult.h; sourceTree = "<group>"; };
 		84AE71691FA2C495002530AD /* BaseDataResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseDataResult.m; sourceTree = "<group>"; };
 		84AE71FF1FA4291D002530AD /* ListDataResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListDataResult.h; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		06C6BB1A1F18592200D444E6 /* app.webkit */ = {
 			isa = PBXGroup;
 			children = (
+				84459AFD1FA9B82C00E3A076 /* ic_common_left_back.png */,
 				F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */,
 				06C6BBAA1F19044C00D444E6 /* www */,
 				06C6BB2F1F185A7500D444E6 /* Src */,
@@ -289,6 +292,7 @@
 				06C6BBAF1F19045700D444E6 /* css in Resources */,
 				06C6BBB11F19045700D444E6 /* js in Resources */,
 				06C6BBB01F19045700D444E6 /* fonts in Resources */,
+				84459AFE1FA9B82D00E3A076 /* ic_common_left_back.png in Resources */,
 				06C6BBB21F19045700D444E6 /* jswebview.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

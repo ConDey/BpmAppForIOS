@@ -17,12 +17,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    // Override point for customization after application launch.
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    ViewController *viewController = [[ViewController alloc] init];
-    self.window.rootViewController = viewController;
-    [self.window makeKeyAndVisible];
-    
     [UMessage startWithAppkey:@"59e8537e07fe651ae30000d6" launchOptions:launchOptions];
     [UMessage openDebugMode:YES];
     // 注册通知
@@ -41,6 +35,12 @@
     }];
     [UMessage setLogEnabled:YES];
     
+    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    ViewController *viewController = [[ViewController alloc] init];
+    self.window.rootViewController = viewController;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -56,6 +56,9 @@
     //关闭友盟自带的弹出框
     [UMessage setAutoAlert:NO];
     [UMessage didReceiveRemoteNotification:userInfo];
+    
+    // 发出通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"umeng" object:nil];
 }
 
 //iOS10新增：处理前台收到通知的代理方法
@@ -73,6 +76,9 @@
     }
     //当应用处于前台时提示设置，需要哪个可以设置哪一个
     completionHandler(UNNotificationPresentationOptionSound|UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionAlert);
+    
+    // 发出通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"umeng" object:nil];
 }
 
 //iOS10新增：处理后台点击通知的代理方法
@@ -86,6 +92,9 @@
     }else{
         //应用处于后台时的本地推送接受
     }
+    
+    // 发出通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"umeng" object:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -114,5 +123,19 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)setAlias:(NSString *)alias {
+    
+        [UMessage setAlias:alias type:@"BPM" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+            if (responseObject) {
+                NSLog(@"ADD_ALIAS_SUCCESS");
+            }else {
+                NSLog(@"Error: %@", error.localizedDescription);
+            }
+        }];
+}
+
+- (void)checkForUpdate {
+    
+}
 
 @end

@@ -55,7 +55,7 @@ static EAProtocol *_instance;
     manager.requestSerializer                         = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer                        = [AFHTTPResponseSerializer serializer];
     
-    if ([NSString isEqualToString:url origin:@"common/logon"]) {
+    if ([NSString isEqualToString:url origin:@"common/logon"] || [NSString isEqualToString:url origin:@"common/config"]) {
         [manager.requestSerializer setValue:[CurrentUser defaultToken] forHTTPHeaderField:@"token"];
     }else {
         [manager.requestSerializer setValue:[CurrentUser currentUser].token forHTTPHeaderField:@"token"];

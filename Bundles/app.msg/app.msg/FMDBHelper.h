@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MessageTopicModel.h"
-#import "MessageModel.h"
+//#import "MessageTopicModel.h"
+//#import "MessageModel.h"
 
 extern NSString *const FMDBUserDetailsTableName; // 用户登录表名
 

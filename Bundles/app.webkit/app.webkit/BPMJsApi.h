@@ -37,4 +37,6 @@
 - (void)delegate_bindAlertWithTitle:(NSString *_Nonnull)title withInfo:(NSString *_Nonnull)info withCallbackName:(NSString *_Nonnull)name Callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
 - (void)delegate_showProgress;
 - (void)delegate_dismissProgress;
+- (void)delegate_bindBackBtnWithcallbackName:(NSString *_Nonnull)callbackName callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
+- (void)delegate_unbindBackBtnWithCallback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
 @end

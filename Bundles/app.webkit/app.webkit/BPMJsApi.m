@@ -135,4 +135,16 @@
     }
 }
 
+- (void)bindBackBtn:(NSDictionary *)args :(void (^)(NSString * _Nullable result,BOOL complete))completionHandler{
+    if (self.delegate != nil) {
+        [self.delegate delegate_bindBackBtnWithcallbackName:(NSString *)[args objectForKey:@"callback"] callback:completionHandler];
+    }
+}
+
+- (void)unbindBackBtn:(NSDictionary *)args :(void (^)(NSString * _Nullable result,BOOL complete))completionHandler{
+    if (self.delegate != nil) {
+        [self.delegate delegate_unbindBackBtnWithCallback:completionHandler];
+    }
+}
+
 @end

@@ -13,6 +13,10 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+//@property (weak, nonatomic) id<PushReceiveDelegate> pushDelegate;
+
+- (void)checkForUpdate;
+- (void)setAlias:(NSString *)alias;
 
 
 @end

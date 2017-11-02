@@ -16,5 +16,10 @@
 #import "UIConstant.h"
 #import "UIColor+EAFoundation.h"
 #import "EAProtocol.h"
+#import "CurrentUser.h"
+#import "UserDetails.h"
+#import "FMDB.h"
+#import "TimeUtils.h"
+#import "BaseModel.h"
 
 #endif /* PrefixHeader_pch */
