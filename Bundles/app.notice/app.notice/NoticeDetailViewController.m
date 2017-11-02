@@ -60,7 +60,10 @@
     [self createdTableview:currentHeight];
     NSAttributedString * as = [[NSAttributedString alloc] initWithData:[self.noticeDetail.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     [self textContent:as];
-    [self attachDownload];
+    if(self.attachment.count!=0)
+    {
+     [self attachDownload];
+    }
     [self.tableview reloadData];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
