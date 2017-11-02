@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "UMessage.h"
 #import <UserNotifications/UserNotifications.h>
+#import "iVersion.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate, iVersionDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 //@property (weak, nonatomic) id<PushReceiveDelegate> pushDelegate;
 
-- (void)checkForUpdate;
+- (void)checkUPdate;
 - (void)setAlias:(NSString *)alias;
 
 

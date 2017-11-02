@@ -44,7 +44,6 @@
 		84459B2D1FAA223A00E3A076 /* checkbox_pic_non2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84459B191FAA223800E3A076 /* checkbox_pic_non2@2x.png */; };
 		84459B2E1FAA223A00E3A076 /* checkbox_pic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84459B1A1FAA223800E3A076 /* checkbox_pic@2x.png */; };
 		84459B2F1FAA223A00E3A076 /* checkbox_pic2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84459B1B1FAA223900E3A076 /* checkbox_pic2@2x.png */; };
-		84AE723D1FA848EE002530AD /* UMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE723A1FA8488C002530AD /* UMessage.h */; };
 		F88BC78C1FAA9D650049346D /* iVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BC78B1FAA9C370049346D /* iVersion.m */; };
 		F88BC78D1FAA9D770049346D /* iVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = F88BC78A1FAA9C370049346D /* iVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -301,7 +300,7 @@
 				069763851EFA4D5D0012D367 /* Frameworks */,
 				0697636D1EFA4C760012D367 /* BpmApp */,
 				0697636C1EFA4C760012D367 /* Products */,
-				8433CCD31FAAD6B60047FBBE /* Recovered References */,
+				8433CCE41FAAD7EF0047FBBE /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -391,7 +390,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8433CCD31FAAD6B60047FBBE /* Recovered References */ = {
+		8433CCE41FAAD7EF0047FBBE /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				84AE723A1FA8488C002530AD /* UMessage.h */,
@@ -454,7 +453,6 @@
 			files = (
 				84459AF91FA99D7000E3A076 /* UMessage.h in Headers */,
 				F88BC78D1FAA9D770049346D /* iVersion.h in Headers */,
-				84AE723D1FA848EE002530AD /* UMessage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

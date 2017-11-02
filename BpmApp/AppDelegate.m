@@ -140,10 +140,6 @@
         }];
 }
 
-- (void)checkForUpdate {
-    
-}
-
 -(void)checkUPdate{
     [iVersion sharedInstance].delegate = self;
     [[iVersion sharedInstance] checkForNewVersion];

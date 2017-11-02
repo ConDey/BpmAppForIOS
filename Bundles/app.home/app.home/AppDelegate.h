@@ -15,7 +15,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-- (void)checkForUpdate;
+- (void)checkUPdate;
 - (void)setAlias:(NSString *)alias;
 
 @end
