@@ -20,6 +20,7 @@
 @implementation PasswordChangeController
 
 -(void)viewDidLoad{
+    [super viewDidLoad];
     //输入当前密码
     self.view.backgroundColor=LIGHT_GRAY_COLOR;
     self.currentPassword=[[UITextField alloc]init];
@@ -129,7 +130,10 @@
     if(isSuccess){
         UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"修改成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *sureChange=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self.navigationController popViewControllerAnimated:YES];
+            [Small setUpWithComplection:^{
+                UIViewController *mainController = [Small controllerForUri:@"app.home"];
+                [self presentViewController:mainController animated:NO completion:nil];
+            }];
         }];
         [alert addAction:sureChange];
         [self presentViewController:alert animated:YES completion:nil];
