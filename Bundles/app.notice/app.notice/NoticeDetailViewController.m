@@ -11,6 +11,9 @@
 #import "NoticeViewController.h"
 #import "AttachmentViewController.h"
 @interface NoticeDetailViewController ()
+{
+    CGFloat currentHeight;
+}
 @property(retain,nonatomic)NoticeDetailModel *noticeDetail;
 @property(retain,nonatomic)NSArray *attachment;
 @end
@@ -19,26 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableview.delegate=self;
-    self.tableview.dataSource=self;
-    [self.view addSubview:self.tableview];
-    [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
-    }];
-    [self.tableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-    [self.tableview registerClass:[UITableViewCell class]  forCellReuseIdentifier:@"NoticeDetail"];
-    UIButton *attach=[[UIButton alloc]init];
-    [self.view addSubview:attach];
-    [self.view bringSubviewToFront:attach];
-    [attach mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(40, 40));
-        make.bottom.mas_equalTo(-40);
-        make.right.mas_equalTo(-20);
-    }];
-    UIImage *btImg=[UIImage imageNamed:@"ic_download.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
-    attach.backgroundColor=[UIColor whiteColor];
-    [attach setBackgroundImage:btImg forState:UIControlStateNormal];
-    [attach addTarget:self action:@selector(tapAttachment:) forControlEvents:UIControlEventTouchUpInside];
+    self.view.backgroundColor=[UIColor whiteColor];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,15 +42,32 @@
 -(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
     self.noticeDetail=[NoticeDetailModel mj_objectWithKeyValues:result];
     self.attachment=[result objectForKey:@"attachments"];
-   // NSLog(@"%@",self.attachment);
+    
+    NSString *str = self.noticeDetail.title;
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:str];
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.lineSpacing = 10;
+    UIFont *font = [UIFont systemFontOfSize:17];
+    [attributeString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
+    [attributeString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, str.length)];
+    NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading;
+    CGRect rect = [attributeString boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, CGFLOAT_MAX) options:options context:nil];
+    currentHeight=rect.size.height;
+    NSLog(@"size:%@", NSStringFromCGSize(rect.size));
+    
+    
+   
+    [self createdTableview:currentHeight];
+    NSAttributedString * as = [[NSAttributedString alloc] initWithData:[self.noticeDetail.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    [self textContent:as];
+    [self attachDownload];
     [self.tableview reloadData];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSInteger num=3;
-    return num;
+    return 2;
 } 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"NoticeDetail"];
@@ -80,57 +82,41 @@
         UILabel *content=[[UILabel alloc]init];
         [cell addSubview:content];
         [content mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(cell.mas_centerX);
-            make.centerY.mas_equalTo(cell.mas_centerY);
             make.top.bottom.mas_equalTo(0);
-            make.left.right.mas_equalTo(0);
+            make.left.mas_equalTo(10);
+            make.right.mas_equalTo(-10);
         }];
         content.numberOfLines=0;
         content.textAlignment=NSTextAlignmentCenter;
         content.text=self.noticeDetail.title;
-        content.font=[UIFont boldSystemFontOfSize:16];
-    }else if (indexPath.row==1){
+        content.font=[UIFont boldSystemFontOfSize:17];
+    }else {
         //时间
         UILabel *content=[[UILabel alloc]init];
         [cell addSubview:content];
         [content mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.left.right.mas_equalTo(10);
+           make.left.mas_equalTo(10);
            make.right.mas_equalTo(-10);
-          make.top.mas_equalTo(0);
+          make.bottom.mas_equalTo(0);
         }];
         content.text=self.noticeDetail.createdTime;
         content.textAlignment=NSTextAlignmentLeft;
         content.textColor=FONT_GRAY_COLOR;
-    }else{
-        //内容
-        UITextView *textContent=[[UITextView alloc]init];
-        [cell addSubview:textContent];
-        [textContent mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
-            make.top.bottom.mas_equalTo(0);
-        }];
-        //html转字符串
-        NSAttributedString * as = [[NSAttributedString alloc] initWithData:[self.noticeDetail.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-        textContent.delegate=self;
-        //textContent.text=self.noticeDetail.content;
-        textContent.attributedText=as;
-        textContent.font=[UIFont systemFontOfSize:17];
-        textContent.selectable=NO;
+        
     }
     return cell;
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat height=0;
+    CGFloat ch=0;
     if(indexPath.row==0){
-        height=80;
-    }else if (indexPath.row==1){
-        height=21;
+        ch=currentHeight;
     }else{
-        height=SCREEN_HEIGHT-NAV_HEIGHT-101;
+        ch=21;
     }
-    return height;
+    return ch;
 }
+
 
 -(void)tapAttachment:(NSString *)sender{
     //获取附件
@@ -139,6 +125,52 @@
     [self.navigationController pushViewController:ach animated:YES];
     
 }
+-(void)createdTableview:(CGFloat)height{
+    self.tableview.delegate=self;
+    self.tableview.dataSource=self;
+    [self.view addSubview:self.tableview];
+   // self.tableview.backgroundColor=[UIColor blueColor];
+    [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(10);
+        make.right.left.mas_equalTo(0);
+        make.height.mas_equalTo(height+22);
+    }];
+    [self.tableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+    [self.tableview registerClass:[UITableViewCell class]  forCellReuseIdentifier:@"NoticeDetail"];
+    
+}
+
+-(void)textContent:(NSAttributedString *)jsString{
+    UITextView *text=[[UITextView alloc]init];
+    [self.view addSubview:text];
+    [text mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.tableview.mas_bottom).mas_equalTo(2);
+        make.left.mas_equalTo(10);
+        make.right.mas_equalTo(-10);
+        make.bottom.mas_equalTo(-10);
+        text.delegate=self;
+        text.attributedText=jsString;
+        text.font=FONT_16;
+        //text.backgroundColor=[UIColor redColor];
+    }];
+    
+}
+
+-(void)attachDownload{
+    UIButton *attach=[[UIButton alloc]init];
+    [self.view addSubview:attach];
+    [self.view bringSubviewToFront:attach];
+    [attach mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+        make.bottom.mas_equalTo(-40);
+        make.right.mas_equalTo(-20);
+    }];
+    UIImage *btImg=[UIImage imageNamed:@"ic_download.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+    attach.backgroundColor=[UIColor whiteColor];
+    [attach setBackgroundImage:btImg forState:UIControlStateNormal];
+    [attach addTarget:self action:@selector(tapAttachment:) forControlEvents:UIControlEventTouchUpInside];
+}
+
 
 @end
 
