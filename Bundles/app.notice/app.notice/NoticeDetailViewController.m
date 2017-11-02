@@ -151,7 +151,7 @@
         text.delegate=self;
         text.attributedText=jsString;
         text.font=FONT_16;
-        //text.backgroundColor=[UIColor redColor];
+        
     }];
     
 }

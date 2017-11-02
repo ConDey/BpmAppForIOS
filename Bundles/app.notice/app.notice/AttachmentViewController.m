@@ -62,17 +62,20 @@
     [cell addSubview:loadLabel];
     [cell addSubview:attachImg];
     [attachImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(5);
+        make.left.mas_equalTo(10);
         make.centerY.mas_equalTo(cell.mas_centerY);
         make.size.mas_equalTo(CGSizeMake(30, 30));
     }];
     [attachLabel mas_makeConstraints:^(MASConstraintMaker *make) {
        make.centerY.mas_equalTo(cell.mas_centerY);
-       make.size.mas_equalTo(CGSizeMake(250, 30));
-      make.left.mas_equalTo(attachImg.mas_right).mas_equalTo(5);
+       make.size.mas_equalTo(CGSizeMake(250, 35));
+      make.left.mas_equalTo(attachImg.mas_right).mas_equalTo(10);
     }];
     [loadLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, SCREEN_WIDTH-5-250-30-5, 0, 5));
+        make.centerY.mas_equalTo(cell.mas_centerY);
+        make.height.mas_equalTo(35);
+        make.right.mas_equalTo(-20);
+         make.left.mas_equalTo(attachLabel.mas_right).mas_equalTo(5);
     }];
     BOOL isEqual=NO;
     NSString *strTail=[str substringFromIndex:[str rangeOfString:@"."].location+1];
@@ -97,7 +100,7 @@
      attachLabel.text=str;
      attachLabel.font=FONT_12;
     
-    loadLabel.text=@"点击下载";
+    loadLabel.text=@"点击查看";
     loadLabel.textColor=UI_BLUE_COLOR;
     loadLabel.textAlignment=NSTextAlignmentRight;
     loadLabel.font=FONT_12;
