@@ -19,6 +19,7 @@
 		F80A8B6A1F98C54600E126C6 /* NoticeListViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B671F98C54600E126C6 /* NoticeListViewCell.h */; };
 		F80A8B6B1F98C54600E126C6 /* NoticeListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B681F98C54600E126C6 /* NoticeListViewCell.m */; };
 		F80A8B6C1F98C54600E126C6 /* NoticeListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80A8B691F98C54600E126C6 /* NoticeListViewCell.xib */; };
+		F88BD58D1FAAFE990049346D /* ic_download.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD58C1FAAFE990049346D /* ic_download.png */; };
 		F8AFFC691FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC681FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png */; };
 		F8AFFC6C1FA700C500CE74F5 /* AttachmentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFC6A1FA700C500CE74F5 /* AttachmentViewController.h */; };
 		F8AFFC6D1FA700C500CE74F5 /* AttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFC6B1FA700C500CE74F5 /* AttachmentViewController.m */; };
@@ -32,7 +33,6 @@
 		F8AFFC901FA7161100CE74F5 /* ic_download_type_xls.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC871FA7161100CE74F5 /* ic_download_type_xls.png */; };
 		F8AFFC911FA7161100CE74F5 /* ic_download_type_img.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */; };
 		F8C183011FA8437D0095A91E /* com_eazytec_bpm_app_webkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C183021FA8437D0095A91E /* com_eazytec_bpm_app_webkit.framework */; };
-		F8C1831D1FA9A1730095A91E /* ic_download.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C1831C1FA9A1730095A91E /* ic_download.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +51,7 @@
 		F80A8B671F98C54600E126C6 /* NoticeListViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeListViewCell.h; sourceTree = "<group>"; };
 		F80A8B681F98C54600E126C6 /* NoticeListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoticeListViewCell.m; sourceTree = "<group>"; };
 		F80A8B691F98C54600E126C6 /* NoticeListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoticeListViewCell.xib; sourceTree = "<group>"; };
+		F88BD58C1FAAFE990049346D /* ic_download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download.png; sourceTree = "<group>"; };
 		F8AFFC681FA6FEFA00CE74F5 /* ic_floatingbutton_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_floatingbutton_bg.png; sourceTree = "<group>"; };
 		F8AFFC6A1FA700C500CE74F5 /* AttachmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachmentViewController.h; sourceTree = "<group>"; };
 		F8AFFC6B1FA700C500CE74F5 /* AttachmentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachmentViewController.m; sourceTree = "<group>"; };
@@ -64,7 +65,6 @@
 		F8AFFC871FA7161100CE74F5 /* ic_download_type_xls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_xls.png; sourceTree = "<group>"; };
 		F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_img.png; sourceTree = "<group>"; };
 		F8C183021FA8437D0095A91E /* com_eazytec_bpm_app_webkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = com_eazytec_bpm_app_webkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8C1831C1FA9A1730095A91E /* ic_download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_download.png; path = ../../../../../../Downloads/ic_download.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +129,7 @@
 		06C5A2D81F26D0AF00A189FB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F8C1831C1FA9A1730095A91E /* ic_download.png */,
+				F88BD58C1FAAFE990049346D /* ic_download.png */,
 				F8AFFC811FA7161000CE74F5 /* ic_download_type_apk.png */,
 				F8AFFC831FA7161000CE74F5 /* ic_download_type_doc.png */,
 				F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */,
@@ -262,9 +262,9 @@
 				F8AFFC8C1FA7161100CE74F5 /* ic_download_type_doc.png in Resources */,
 				F8AFFC891FA7161100CE74F5 /* ic_download_type_ppt.png in Resources */,
 				F8AFFC8A1FA7161100CE74F5 /* ic_download_type_apk.png in Resources */,
+				F88BD58D1FAAFE990049346D /* ic_download.png in Resources */,
 				F8AFFC901FA7161100CE74F5 /* ic_download_type_xls.png in Resources */,
 				F8AFFC8E1FA7161100CE74F5 /* ic_download_type_txt.png in Resources */,
-				F8C1831D1FA9A1730095A91E /* ic_download.png in Resources */,
 				F80A8B6C1F98C54600E126C6 /* NoticeListViewCell.xib in Resources */,
 				F8AFFC911FA7161100CE74F5 /* ic_download_type_img.png in Resources */,
 			);
