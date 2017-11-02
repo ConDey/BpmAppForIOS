@@ -32,6 +32,7 @@
 		F8AFFC901FA7161100CE74F5 /* ic_download_type_xls.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC871FA7161100CE74F5 /* ic_download_type_xls.png */; };
 		F8AFFC911FA7161100CE74F5 /* ic_download_type_img.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */; };
 		F8C183011FA8437D0095A91E /* com_eazytec_bpm_app_webkit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8C183021FA8437D0095A91E /* com_eazytec_bpm_app_webkit.framework */; };
+		F8C1831D1FA9A1730095A91E /* ic_download.png in Resources */ = {isa = PBXBuildFile; fileRef = F8C1831C1FA9A1730095A91E /* ic_download.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		F8AFFC871FA7161100CE74F5 /* ic_download_type_xls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_xls.png; sourceTree = "<group>"; };
 		F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download_type_img.png; sourceTree = "<group>"; };
 		F8C183021FA8437D0095A91E /* com_eazytec_bpm_app_webkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = com_eazytec_bpm_app_webkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8C1831C1FA9A1730095A91E /* ic_download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_download.png; path = ../../../../../../Downloads/ic_download.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		06C5A2D81F26D0AF00A189FB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F8C1831C1FA9A1730095A91E /* ic_download.png */,
 				F8AFFC811FA7161000CE74F5 /* ic_download_type_apk.png */,
 				F8AFFC831FA7161000CE74F5 /* ic_download_type_doc.png */,
 				F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */,
@@ -261,6 +264,7 @@
 				F8AFFC8A1FA7161100CE74F5 /* ic_download_type_apk.png in Resources */,
 				F8AFFC901FA7161100CE74F5 /* ic_download_type_xls.png in Resources */,
 				F8AFFC8E1FA7161100CE74F5 /* ic_download_type_txt.png in Resources */,
+				F8C1831D1FA9A1730095A91E /* ic_download.png in Resources */,
 				F80A8B6C1F98C54600E126C6 /* NoticeListViewCell.xib in Resources */,
 				F8AFFC911FA7161100CE74F5 /* ic_download_type_img.png in Resources */,
 			);

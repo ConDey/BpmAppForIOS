@@ -44,6 +44,9 @@
 		84459B2D1FAA223A00E3A076 /* checkbox_pic_non2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84459B191FAA223800E3A076 /* checkbox_pic_non2@2x.png */; };
 		84459B2E1FAA223A00E3A076 /* checkbox_pic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84459B1A1FAA223800E3A076 /* checkbox_pic@2x.png */; };
 		84459B2F1FAA223A00E3A076 /* checkbox_pic2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84459B1B1FAA223900E3A076 /* checkbox_pic2@2x.png */; };
+		84AE723D1FA848EE002530AD /* UMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE723A1FA8488C002530AD /* UMessage.h */; };
+		F88BC78C1FAA9D650049346D /* iVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BC78B1FAA9C370049346D /* iVersion.m */; };
+		F88BC78D1FAA9D770049346D /* iVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = F88BC78A1FAA9C370049346D /* iVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,6 +213,10 @@
 		84459B191FAA223800E3A076 /* checkbox_pic_non2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkbox_pic_non2@2x.png"; path = "Images/checkbox_pic_non2@2x.png"; sourceTree = "<group>"; };
 		84459B1A1FAA223800E3A076 /* checkbox_pic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkbox_pic@2x.png"; path = "Images/checkbox_pic@2x.png"; sourceTree = "<group>"; };
 		84459B1B1FAA223900E3A076 /* checkbox_pic2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "checkbox_pic2@2x.png"; path = "Images/checkbox_pic2@2x.png"; sourceTree = "<group>"; };
+		84AE723A1FA8488C002530AD /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMessage.h; path = Push/UMessage.h; sourceTree = "<group>"; };
+		F88BC7891FAA9C370049346D /* iVersion.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iVersion.bundle; sourceTree = "<group>"; };
+		F88BC78A1FAA9C370049346D /* iVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iVersion.h; sourceTree = "<group>"; };
+		F88BC78B1FAA9C370049346D /* iVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iVersion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +251,7 @@
 			children = (
 				84459B071FAA21E200E3A076 /* Images */,
 				84459AF51FA99D5500E3A076 /* Push */,
+				F88BC7881FAA9C370049346D /* iVersion */,
 				062618E41EFB699300F1EF72 /* AppDelegate */,
 				062618E21EFB698800F1EF72 /* Src */,
 			);
@@ -293,6 +301,7 @@
 				069763851EFA4D5D0012D367 /* Frameworks */,
 				0697636D1EFA4C760012D367 /* BpmApp */,
 				0697636C1EFA4C760012D367 /* Products */,
+				8433CCD31FAAD6B60047FBBE /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -382,6 +391,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8433CCD31FAAD6B60047FBBE /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				84AE723A1FA8488C002530AD /* UMessage.h */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		84459AF51FA99D5500E3A076 /* Push */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,6 +435,16 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		F88BC7881FAA9C370049346D /* iVersion */ = {
+			isa = PBXGroup;
+			children = (
+				F88BC7891FAA9C370049346D /* iVersion.bundle */,
+				F88BC78A1FAA9C370049346D /* iVersion.h */,
+				F88BC78B1FAA9C370049346D /* iVersion.m */,
+			);
+			path = iVersion;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -426,6 +453,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				84459AF91FA99D7000E3A076 /* UMessage.h in Headers */,
+				F88BC78D1FAA9D770049346D /* iVersion.h in Headers */,
+				84AE723D1FA848EE002530AD /* UMessage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +659,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F88BC78C1FAA9D650049346D /* iVersion.m in Sources */,
 				069763761EFA4C760012D367 /* ViewController.m in Sources */,
 				069763731EFA4C760012D367 /* AppDelegate.m in Sources */,
 				069763701EFA4C760012D367 /* main.m in Sources */,

@@ -44,7 +44,8 @@
 		84301C7F1F99990E00F01F8F /* AppListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301C7D1F99990E00F01F8F /* AppListModel.m */; };
 		84301C831F999C2E00F01F8F /* AppModelHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301C811F999C2E00F01F8F /* AppModelHelper.h */; };
 		84301C841F999C2E00F01F8F /* AppModelHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301C821F999C2E00F01F8F /* AppModelHelper.m */; };
-		84459B041FAA0CA500E3A076 /* ic_common_left_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 84459B031FAA0CA300E3A076 /* ic_common_left_back.png */; };
+		84459AD81FA95A6800E3A076 /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84459AD61FA95A6800E3A076 /* libUMessage_Sdk_1.5.0a.a */; };
+		84459AD91FA95A6800E3A076 /* UMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 84459AD71FA95A6800E3A076 /* UMessage.h */; };
 		847206D81F9EE50700A7CE7E /* ic_homeapp_stub.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D71F9EDD2100A7CE7E /* ic_homeapp_stub.png */; };
 		847206D91F9EE50700A7CE7E /* ic_homeapp_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D41F9D85FA00A7CE7E /* ic_homeapp_card.png */; };
 		847206DA1F9EE50700A7CE7E /* ic_homeapp_file.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D51F9D85FA00A7CE7E /* ic_homeapp_file.png */; };
@@ -101,8 +102,8 @@
 		84301C7D1F99990E00F01F8F /* AppListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppListModel.m; sourceTree = "<group>"; };
 		84301C811F999C2E00F01F8F /* AppModelHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppModelHelper.h; sourceTree = "<group>"; };
 		84301C821F999C2E00F01F8F /* AppModelHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppModelHelper.m; sourceTree = "<group>"; };
-		84459AFA1FA99E3500E3A076 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		84459B031FAA0CA300E3A076 /* ic_common_left_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_common_left_back.png; sourceTree = "<group>"; };
+		84459AD61FA95A6800E3A076 /* libUMessage_Sdk_1.5.0a.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUMessage_Sdk_1.5.0a.a; path = Push/libUMessage_Sdk_1.5.0a.a; sourceTree = "<group>"; };
+		84459AD71FA95A6800E3A076 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UMessage.h; path = Push/UMessage.h; sourceTree = "<group>"; };
 		847206D41F9D85FA00A7CE7E /* ic_homeapp_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_card.png; sourceTree = "<group>"; };
 		847206D51F9D85FA00A7CE7E /* ic_homeapp_file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_file.png; sourceTree = "<group>"; };
 		847206D61F9D85FD00A7CE7E /* ic_homeapp_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_search.png; sourceTree = "<group>"; };
@@ -115,6 +116,7 @@
 		F80A8AD01F98224C00E126C6 /* ic_setting_updatepwd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_updatepwd.png; sourceTree = "<group>"; };
 		F80A8AD11F98224C00E126C6 /* ic_setting_loginout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_loginout.png; sourceTree = "<group>"; };
 		F80A8AD21F98224C00E126C6 /* ic_setting_setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_setting.png; sourceTree = "<group>"; };
+		F88BC77E1FA9BFD20049346D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F8C1830B1FA944C10095A91E /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BA311F14C06100D444E6 /* com_eazytec_bpm_lib_common.framework in Frameworks */,
+				84459AD81FA95A6800E3A076 /* libUMessage_Sdk_1.5.0a.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,11 +179,9 @@
 		06C3A40B1F0B630100633543 /* app.home */ = {
 			isa = PBXGroup;
 			children = (
-				84459B031FAA0CA300E3A076 /* ic_common_left_back.png */,
 				84301C751F998D2500F01F8F /* PrefixHeader.pch */,
 				06C3A4361F0C72FB00633543 /* Src */,
 				06C3A4351F0C72EB00633543 /* Supporting Files */,
-				84459AFA1FA99E3500E3A076 /* AppDelegate.h */,
 			);
 			path = app.home;
 			sourceTree = "<group>";
@@ -213,12 +214,14 @@
 		06C3A4361F0C72FB00633543 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				84459AD51FA95A4300E3A076 /* Push */,
 				84AE72221FA702CD002530AD /* Model */,
 				06C6BA4A1F14F1D900D444E6 /* UserHome */,
 				06C6B9F51F14AC3500D444E6 /* Framework */,
 				0686A8501F0C83D300697582 /* Authentication */,
 				06C3A4381F0C732500633543 /* UserHomeApp */,
 				06C6BA5D1F15BAA100D444E6 /* UserHomeSetting */,
+				F88BC77E1FA9BFD20049346D /* AppDelegate.h */,
 			);
 			name = Src;
 			sourceTree = "<group>";
@@ -334,6 +337,15 @@
 			name = Helper;
 			sourceTree = "<group>";
 		};
+		84459AD51FA95A4300E3A076 /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				84459AD61FA95A6800E3A076 /* libUMessage_Sdk_1.5.0a.a */,
+				84459AD71FA95A6800E3A076 /* UMessage.h */,
+			);
+			name = Push;
+			sourceTree = "<group>";
+		};
 		84AE72221FA702CD002530AD /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,6 +372,7 @@
 				84301C831F999C2E00F01F8F /* AppModelHelper.h in Headers */,
 				06C6BA511F14F2EA00D444E6 /* UserHomeNavController.h in Headers */,
 				84301C7A1F99960700F01F8F /* AppModel.h in Headers */,
+				84459AD91FA95A6800E3A076 /* UMessage.h in Headers */,
 				06C6BAF01F160E2600D444E6 /* NSLayoutConstraintOnePixelLine.h in Headers */,
 				06C6BAF61F16F93100D444E6 /* UserHomeAppViewCell.h in Headers */,
 				06C6BA4D1F14F1E200D444E6 /* UserHomeTabController.h in Headers */,
@@ -437,7 +450,6 @@
 				F80A8AD31F98224C00E126C6 /* ic_setting_update.png in Resources */,
 				06C6BB0A1F1743A500D444E6 /* ic_homeapp_image.png in Resources */,
 				F8C1830C1FA944C10095A91E /* version.plist in Resources */,
-				84459B041FAA0CA500E3A076 /* ic_common_left_back.png in Resources */,
 				06C6BB0C1F1743E300D444E6 /* ic_homeapp_filepicker.png in Resources */,
 				06C5A2DA1F26D32A00A189FB /* app.json in Resources */,
 				F80A8AD41F98224C00E126C6 /* ic_setting_updatepwd.png in Resources */,

@@ -10,6 +10,7 @@
 #import "UserAuthViewController.h"
 #import <Small/Small.h>
 #import "PasswordChangeController.h"
+#import "AppDelegate.h"
 @interface UserHomeSettingController ()
 
 @property (weak, nonatomic) IBOutlet UIView *panelView;
@@ -124,10 +125,8 @@
     NSInteger row=indexPath.row;
     if(row==0){
         //在线更新
-//        [iVersion sharedInstance].applicationBundleID = [[NSBundle mainBundle] bundleIdentifier];
-//        [iVersion sharedInstance].updatePriority=iVersionUpdatePriorityMedium;
-//        [iVersion sharedInstance].viewedVersionDetails = YES;
-//        [iVersion sharedInstance].appStoreCountry = @"zh-Hans";
+        AppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
+        [appDelegate checkUPdate];
     }else if (row==1){
         //改密码
         PasswordChangeController *pc=[[PasswordChangeController alloc]init];

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "iVersion.h"
 
 @interface AppDelegate ()
 
@@ -122,6 +123,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
++(void)initialize{
+    [iVersion sharedInstance].applicationBundleID=[[NSBundle mainBundle]  bundleIdentifier];
+    [iVersion sharedInstance].remoteVersionsPlistURL=@"https://58.215.198.210:9997/bpmapp/version.plist";
+    [iVersion sharedInstance].updateURL=[NSURL URLWithString:@"https://58.215.198.210:9997/bpmapp/ios.plist"];
+}
 
 - (void)setAlias:(NSString *)alias {
     
@@ -138,4 +144,8 @@
     
 }
 
+-(void)checkUPdate{
+    [iVersion sharedInstance].delegate = self;
+    [[iVersion sharedInstance] checkForNewVersion];
+}
 @end
