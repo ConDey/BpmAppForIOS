@@ -240,6 +240,12 @@
             }
             titleLabel.text = name;
             numOfDep.text=@"";
+            for(NSDictionary *data in self.selectData){
+                if([data objectForKey:@"id"]==[users objectForKey:@"id"]){
+                    tableCell.accessoryType=UITableViewCellAccessoryCheckmark;
+                }
+            }
+            
         }
     }else{
         if(indexPath.section == 0) {
@@ -265,6 +271,11 @@
                 }
                 titleLabel.text = name;
                 numOfDep.text=@"";
+                for(NSDictionary *data in self.selectData){
+                    if([data objectForKey:@"id"]==[user objectForKey:@"id"]){
+                        tableCell.accessoryType=UITableViewCellAccessoryCheckmark;
+                    }
+                }
             }
         }
         else {
@@ -279,6 +290,11 @@
             }
             titleLabel.text = name;
             numOfDep.text=@"";
+            for(NSDictionary *data in self.selectData){
+                if([data objectForKey:@"id"]==[user objectForKey:@"id"]){
+                    tableCell.accessoryType=UITableViewCellAccessoryCheckmark;
+                }
+            }
         }
     }
     return tableCell;
