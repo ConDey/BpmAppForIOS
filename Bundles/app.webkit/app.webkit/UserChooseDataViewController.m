@@ -27,12 +27,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //导航栏右按钮
-   
+    
     self.rightButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"确认选择" style:UIBarButtonItemStylePlain target:self action:@selector(dataSend)];
     self.navigationItem.rightBarButtonItem=self.rightButtonItem;
     self.isSearch=NO;
     
-   
+    
     //默认选择项
     self.selectData=@[
                       @{@"id":@"zhangsan",
@@ -158,14 +158,13 @@
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:searchName forKey:@"name"];
         [self httpGetRequestWithUrl:HttpProtocolServiceContactUserList params:params progress:nil];
-    }else{
-        NSLog(@"搜索输入为空");
     }
+    
 }
 //解析数据
 - (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
     if(self.isSearch){
-        NSLog(@"解析搜索数据");
+        // NSLog(@"解析搜索数据");
         NSMutableArray *ud=[[NSMutableArray alloc]init];
         ud=[result objectForKey:@"datas"];
         self.search=[[NSArray alloc]initWithArray:ud];
@@ -234,7 +233,11 @@
             
             NSDictionary *users = [self.search objectAtIndex:indexPath.row];
             NSString *name = [users objectForKey:@"fullName"];
-            headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
+            if([name length]>2){
+                headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-3] size:CGSizeMake(40,40)];
+            }else{
+                headImageView.image = [UIImage circleImageWithText:name  size:CGSizeMake(40,40)];
+            }
             titleLabel.text = name;
             numOfDep.text=@"";
         }
@@ -330,7 +333,8 @@
             UILabel *la=[[UILabel alloc]init];
             [header addSubview:la];
             [la mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.bottom.mas_equalTo(0);
+                make.bottom.mas_equalTo(0);
+                make.left.mas_equalTo(10);
                 make.size.mas_equalTo(CGSizeMake(100, 20));
             }];
             la.text=title;
@@ -344,7 +348,8 @@
             [header addSubview:la];
             la.text=@"员工列表";
             [la mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.bottom.mas_equalTo(0);
+                make.bottom.mas_equalTo(0);
+                make.left.mas_equalTo(10);
                 make.size.mas_equalTo(CGSizeMake(100, 20));
             }];
             la.font=FONT_14;
@@ -374,21 +379,28 @@
         BOOL isHas=NO;
         NSDictionary *dic=[self.search objectAtIndex:indexPath.row];
         for(NSDictionary *data in self.selectData){
-            if(data==dic){
+            if([data objectForKey:@"id" ]==[dic objectForKey:@"id" ]){
                 [temp removeObject:data];
                 isHas=YES;
             }
         }
+        
         if(isHas==NO){
             if(self.selectData.count<5){
                 tableCell.accessoryType=UITableViewCellAccessoryCheckmark;
                 NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:self.selectData];
-                self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
+                NSMutableDictionary *addDic=[[NSMutableDictionary alloc]init];
+                [addDic setObject:[dic objectForKey:@"id"] forKey:@"id"];
+                [addDic setObject:[dic objectForKey:@"username"] forKey:@"userName"];
+                [addDic setObject:[dic objectForKey:@"fullName"] forKey:@"fullName"];
+                [addDic setObject:@"search" forKey:@"type"];
+                self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:addDic]];
             }
         }else{
             tableCell.accessoryType=UITableViewCellAccessoryNone;
             self.selectData=[[NSArray alloc]initWithArray:temp];
         }
+        [self.selectColl reloadData];
     }
     else{
         
@@ -398,7 +410,7 @@
                 NSDictionary *deparment = [self.departments objectAtIndex:indexPath.row];//一个部门的信息
                 //增加头部标题信息
                 NSString *name = [deparment objectForKey:@"name"];
-                NSDictionary *dic=[self.departments objectAtIndex:indexPath.row];
+                NSMutableDictionary *dic=[self.departments objectAtIndex:indexPath.row];
                 NSString *dep=[dic objectForKey:@"id"];
                 NSDictionary *addDic=[[NSDictionary alloc]initWithObjectsAndKeys:dep,@"id",name,@"name",nil];
                 NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.depNum];
@@ -417,22 +429,28 @@
                 BOOL isHas=NO;
                 NSDictionary *dic=[self.users objectAtIndex:indexPath.row];
                 for(NSDictionary *data in self.selectData){
-                    if(data==dic){
+                    if([data objectForKey:@"id" ]==[dic objectForKey:@"id" ]){
                         [temp removeObject:data];
                         isHas=YES;
                     }
                 }
                 if(isHas==NO){
                     if(self.selectData.count<5){
+                        NSMutableDictionary *addDic=[[NSMutableDictionary alloc]init];
+                        [addDic setObject:[dic objectForKey:@"id"] forKey:@"id"];
+                        [addDic setObject:[dic objectForKey:@"username"] forKey:@"userName"];
+                        [addDic setObject:[dic objectForKey:@"fullName"] forKey:@"fullName"];
+                        [addDic setObject:@"contact" forKey:@"type"];
                         tableCell.accessoryType=UITableViewCellAccessoryCheckmark;
                         NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:self.selectData];
-                        self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
+                        
+                        self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:addDic]];
                     }
                 }else{
                     tableCell.accessoryType=UITableViewCellAccessoryNone;
                     self.selectData=[[NSArray alloc]initWithArray:temp];
                 }
-                
+                [self.selectColl reloadData];
             }
             
         }else{
@@ -442,28 +460,34 @@
             BOOL isHas=NO;
             NSDictionary *dic=[self.users objectAtIndex:indexPath.row];
             for(NSDictionary *data in self.selectData){
-                if(data==dic){
+                if([data objectForKey:@"id" ]==[dic objectForKey:@"id" ]){
                     [temp removeObject:data];
                     isHas=YES;
                 }
             }
             if(isHas==NO){
                 if(self.selectData.count<5){
+                    NSMutableDictionary *addDic=[[NSMutableDictionary alloc]init];
+                    [addDic setObject:[dic objectForKey:@"id"] forKey:@"id"];
+                    [addDic setObject:[dic objectForKey:@"username"] forKey:@"userName"];
+                    [addDic setObject:[dic objectForKey:@"fullName"] forKey:@"fullName"];
+                    [addDic setObject:@"contact" forKey:@"type"];
                     tableCell.accessoryType=UITableViewCellAccessoryCheckmark;
                     NSMutableArray *temp1=[[NSMutableArray alloc]initWithArray:self.selectData];
-                    self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:dic]];
+                    
+                    self.selectData=[[NSArray alloc]initWithArray:[temp1 arrayByAddingObject:addDic]];
                 }
             }else{
                 tableCell.accessoryType=UITableViewCellAccessoryNone;
                 self.selectData=[[NSArray alloc]initWithArray:temp];
             }
-            
+            [self.selectColl reloadData];
         }
         //部门还是具体人员
     }
     //搜索还是通讯录
     self.selectLabel.text=[NSString stringWithFormat:@"   已选择人员(%lu/5)",self.selectData.count];
-    [self.selectColl reloadData];
+    
     
     
 }
@@ -495,12 +519,16 @@
         }];
         NSDictionary *user =  [self.selectData objectAtIndex:indexPath.row];
         NSString *name = [user objectForKey:@"fullName"];
-        
+        NSString *type=[user objectForKey:@"type"];
         if ([name length] > 2) {
-            selectImg.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
-        } else {
-            selectImg.image = [UIImage circleImageWithText:name size:CGSizeMake(40,40)];
+            if([type isEqualToString:@"search"]){
+                name=[name substringFromIndex:[name length]-3];
+            }else{
+                name=[name substringFromIndex:[name length]-2];
+            }
+            
         }
+        selectImg.image = [UIImage circleImageWithText:name size:CGSizeMake(40,40)];
     }
     if(collectionView==self.selectTitle){
         if(indexPath.row<self.depNum.count){
@@ -548,7 +576,7 @@
     }
     return num;
 }
-
+//点击搜索
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if(collectionView==self.selectColl){
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.selectData];
@@ -572,8 +600,20 @@
 }
 //搜索
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    [self UrlSearch:searchText];
+    
+    if(searchText.length!=0){
+        [self UrlSearch:searchText];
+    }else{
+        self.isSearch=NO;
+        [self UrlData:@""];
+        NSDictionary *dic=[[NSDictionary alloc]initWithObjectsAndKeys:@"",@"id",@"全部",@"name",nil];
+        self.depNum=[[NSArray alloc]initWithObjects:dic, nil];
+        [self.selectTitle reloadData];
+    }
+    
 }
+
+
 
 -(void)dataSend{
     NSMutableArray *data=[[NSMutableArray alloc]init
@@ -590,7 +630,7 @@
         [self.userDelegate sendSelectData:dic1];
     }
     [self.navigationController popViewControllerAnimated:YES];
-
+    
 }
 
 @end
