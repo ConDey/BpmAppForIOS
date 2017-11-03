@@ -37,6 +37,7 @@
 		84AE72151FA6A69D002530AD /* UserDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE72131FA6A69C002530AD /* UserDataResult.m */; };
 		84AE72181FA6A6BB002530AD /* TokenDataResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE72161FA6A6BB002530AD /* TokenDataResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AE72191FA6A6BB002530AD /* TokenDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE72171FA6A6BB002530AD /* TokenDataResult.m */; };
+		F88BD5C91FAC0D640049346D /* ic_delete_hasselect.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD5C81FAC0D640049346D /* ic_delete_hasselect.png */; };
 		F8AFFBF71F9F398700CE74F5 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8AFFC261FA165C100CE74F5 /* ic_right_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC251FA165C000CE74F5 /* ic_right_arrow.png */; };
 		F8AFFCA21FA8003A00CE74F5 /* UserChooseDataViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFCA01FA8003A00CE74F5 /* UserChooseDataViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -78,6 +79,7 @@
 		84AE72131FA6A69C002530AD /* UserDataResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserDataResult.m; sourceTree = "<group>"; };
 		84AE72161FA6A6BB002530AD /* TokenDataResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TokenDataResult.h; sourceTree = "<group>"; };
 		84AE72171FA6A6BB002530AD /* TokenDataResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TokenDataResult.m; sourceTree = "<group>"; };
+		F88BD5C81FAC0D640049346D /* ic_delete_hasselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_delete_hasselect.png; sourceTree = "<group>"; };
 		F8AFFBF61F9F398600CE74F5 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		F8AFFC251FA165C000CE74F5 /* ic_right_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_right_arrow.png; sourceTree = "<group>"; };
 		F8AFFCA01FA8003A00CE74F5 /* UserChooseDataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserChooseDataViewController.h; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 		06C6BB301F185A7A00D444E6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F88BD5C81FAC0D640049346D /* ic_delete_hasselect.png */,
 				F8AFFC251FA165C000CE74F5 /* ic_right_arrow.png */,
 			);
 			name = "Supporting Files";
@@ -292,6 +295,7 @@
 				06C6BBAF1F19045700D444E6 /* css in Resources */,
 				06C6BBB11F19045700D444E6 /* js in Resources */,
 				06C6BBB01F19045700D444E6 /* fonts in Resources */,
+				F88BD5C91FAC0D640049346D /* ic_delete_hasselect.png in Resources */,
 				84459AFE1FA9B82D00E3A076 /* ic_common_left_back.png in Resources */,
 				06C6BBB21F19045700D444E6 /* jswebview.html in Resources */,
 			);

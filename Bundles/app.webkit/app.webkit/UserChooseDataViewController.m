@@ -519,13 +519,16 @@
     if(collectionView==self.selectColl){
         
         UIImageView *selectImg=[[UIImageView alloc]init];
-        UILabel *laX=[[UILabel alloc]init];
-        [selectImg addSubview:laX];
-        [laX mas_makeConstraints:^(MASConstraintMaker *make) {
+        //UILabel *laX=[[UILabel alloc]init];
+        
+        UIImageView *cancelImg=[[UIImageView alloc]init];
+        cancelImg.image=[UIImage imageNamed:@"ic_delete_hasselect.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+        [selectImg addSubview:cancelImg];
+        [cancelImg mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.right.mas_equalTo(0);
-            make.size.mas_equalTo(CGSizeMake(10, 10));
+            make.size.mas_equalTo(CGSizeMake(12, 12));
         }];
-        laX.text=@"X";
+        //laX.text=@"X";
         [collectionCell addSubview:selectImg];
         CGFloat width=(self.selectColl.frame.size.width-10)/5;
         [selectImg mas_makeConstraints:^(MASConstraintMaker *make) {
