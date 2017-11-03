@@ -176,8 +176,11 @@
         cell.createdBy.layer.borderColor=UI_BLUE_COLOR.CGColor;
         cell.createdBy.layer.cornerRadius=4.f;
         cell.createdBy.layer.masksToBounds=YES;
+        cell.createdBy.font=FONT_14;
+        
         //创建时间
         cell.createdTime.textColor=FONT_GRAY_COLOR;
+        cell.createdTime.font=FONT_14;
     }
     //NSLog(@"%lu---%lu",indexPath.row,cell.frame.size.height);
     

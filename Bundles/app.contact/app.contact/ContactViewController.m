@@ -188,7 +188,7 @@
              }
              if(indexPath.row==1){
                  cell.headImageView.image = [UIImage imageNamed:@"ic_contact_local.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
-                 cell.titleLabel.text = @"本地通讯录";
+                 cell.titleLabel.text = @"手机通讯录";
                  
              }
              cell.numOfDep.text=@"";

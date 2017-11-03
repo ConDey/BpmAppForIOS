@@ -130,7 +130,7 @@
     }else if (row==1){
         //改密码
         PasswordChangeController *pc=[[PasswordChangeController alloc]init];
-        [self.navigationController pushViewController: pc animated:true];
+        [self.navigationController pushViewController: pc animated:YES];
     }else if (row==2){
         //退出
         UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"确定退出吗" message:nil preferredStyle:UIAlertControllerStyleAlert];

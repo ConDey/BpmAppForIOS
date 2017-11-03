@@ -60,7 +60,10 @@
     [self createdTableview:currentHeight];
     NSAttributedString * as = [[NSAttributedString alloc] initWithData:[self.noticeDetail.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     [self textContent:as];
-    [self attachDownload];
+    if(self.attachment.count!=0)
+    {
+     [self attachDownload];
+    }
     [self.tableview reloadData];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -91,17 +94,31 @@
         content.text=self.noticeDetail.title;
         content.font=[UIFont boldSystemFontOfSize:17];
     }else {
-        //时间
-        UILabel *content=[[UILabel alloc]init];
-        [cell addSubview:content];
-        [content mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.left.mas_equalTo(10);
-           make.right.mas_equalTo(-10);
-          make.bottom.mas_equalTo(0);
+        //时间和创建者
+        UILabel *contentCreatedBy=[[UILabel alloc]init];
+        [cell addSubview:contentCreatedBy];
+        [contentCreatedBy mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(10);
+            make.width.mas_equalTo(60);
+            make.bottom.mas_equalTo(0);
         }];
-        content.text=self.noticeDetail.createdTime;
-        content.textAlignment=NSTextAlignmentLeft;
-        content.textColor=FONT_GRAY_COLOR;
+        UILabel *contentTime=[[UILabel alloc]init];
+        [cell addSubview:contentTime];
+        [contentTime mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(contentCreatedBy.mas_right).mas_equalTo(10);
+            make.right.mas_equalTo(-10);
+            make.bottom.mas_equalTo(0);
+        }];
+        
+        contentCreatedBy.text=self.noticeDetail.createdBy;
+        contentCreatedBy.textAlignment=NSTextAlignmentLeft;
+        contentCreatedBy.textColor=FONT_GRAY_COLOR;
+        contentCreatedBy.font=FONT_14;
+        
+        contentTime.text=self.noticeDetail.createdTime;
+        contentTime.textAlignment=NSTextAlignmentLeft;
+        contentTime.textColor=FONT_GRAY_COLOR;
+        contentTime.font=FONT_14;
         
     }
     return cell;
@@ -112,7 +129,7 @@
     if(indexPath.row==0){
         ch=currentHeight;
     }else{
-        ch=21;
+        ch=25;
     }
     return ch;
 }
@@ -133,7 +150,7 @@
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(10);
         make.right.left.mas_equalTo(0);
-        make.height.mas_equalTo(height+22);
+        make.height.mas_equalTo(height+26);
     }];
     [self.tableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [self.tableview registerClass:[UITableViewCell class]  forCellReuseIdentifier:@"NoticeDetail"];
@@ -151,7 +168,7 @@
         text.delegate=self;
         text.attributedText=jsString;
         text.font=FONT_16;
-        
+        text.editable=NO;
     }];
     
 }
