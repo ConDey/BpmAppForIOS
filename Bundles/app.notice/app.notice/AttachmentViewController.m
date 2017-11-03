@@ -114,11 +114,11 @@
     NSDictionary *attachDic=[self.attachmentList objectAtIndex:indexPath.row];
     NSString *attachName=[attachDic objectForKey:@"name"];
     NSString *attachId=[attachDic objectForKey:@"id"];
+    //NSString *attachRelativePath=[attachDic objectForKey:@"relativePath"];
     NSString *attachPath=[NSString stringWithFormat:@"%@/external/attachment/down?attachmentId=%@",REQUEST_URL,attachId];
-    EAWebController *eav=[[EAWebController alloc]init];
-    eav.urltitle=attachName;
-    eav.url=attachPath;
-    [self.navigationController pushViewController:eav animated:YES];
+    //NSString *attachPath = [NSString stringWithFormat:@"%@/%@", REQUEST_URL, attachRelativePath];
+    attachPath = [attachPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [Small openUri:[NSString stringWithFormat:@"app.webkit?url=%@&urltitle=%@", attachPath, [NSString encodeString:attachName]] fromController:self];
   
 }
 @end

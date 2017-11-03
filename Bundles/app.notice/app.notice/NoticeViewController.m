@@ -198,7 +198,7 @@
     NSDictionary *notciceData=[self.noticeList objectAtIndex:indexPath.row];
     NSString *nd=[notciceData objectForKey:@"id"];
     NoticeDetailViewController *ndc=[[NoticeDetailViewController alloc]init];
-    ndc.noticeID=nd;
+    ndc.notice_id=nd;
     [self.navigationController pushViewController:ndc animated:YES];
     
 }

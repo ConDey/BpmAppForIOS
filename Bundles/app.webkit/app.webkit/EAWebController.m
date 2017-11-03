@@ -14,13 +14,14 @@
 
 typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL complete);
 
-@interface EAWebController() <LGPhotoPickerViewControllerDelegate, WKNavigationDelegate>
+@interface EAWebController() <LGPhotoPickerViewControllerDelegate>
 {
     NSString *userChooseData;
     NSString *rightBtnCallbackName;
     NSString *backBtnCallbackName;
     CommonCompletionHandler commonHandler;
     Boolean isBindBackBtn;
+    NSString* mfileName;
     
 }
 @property (retain, nonatomic) UIProgressView *progressView;
@@ -61,6 +62,13 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         [request addValue:cookie forHTTPHeaderField:@"token"];
         NSLog(@"%@", request.allHTTPHeaderFields);
 
+//        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//
+//            if (connectionError == nil) {
+//                NSLog(@"%",data.length);
+//            }
+//
+//        }];
         [self.webview loadRequest:request];
     }
 }
@@ -69,6 +77,10 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
     // 在url不为nil时重新加载防止白屏现象
     [webView reload];
+}
+
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+    NSLog(@"Err:%@",error);
 }
 
 - (void)doNavigationLeftBarButtonItemAction:(UIBarButtonItem *)item {
@@ -565,4 +577,20 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         }];
     
 }
+
+#pragma mark 获取指定URL的MIMEType类型
+- (NSString *)mimeType:(NSURL *)url
+{
+    //1NSURLRequest
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    //2NSURLConnection
+    
+    //3 在NSURLResponse里，服务器告诉浏览器用什么方式打开文件。
+    
+    //使用同步方法后去MIMEType
+    NSURLResponse *response = nil;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
+    return response.MIMEType;
+}
+
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface NoticeDetailViewController : EAViewController<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UITextFieldDelegate>
-@property(retain,nonatomic)NSString *noticeID;
+@property(retain,nonatomic)NSString *notice_id;
 
 @end
 

@@ -35,7 +35,7 @@
     self.navDisplay=YES;
     [self setTitleOfNav:@"公告内容"];
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    [params setObject:self.noticeID  forKey:@"noticId"];
+    [params setObject:self.notice_id  forKey:@"noticId"];
     [self httpGetRequestWithUrl:HttpProtocolServiceNoticeDetail  params:params progress:YES];
 }
 
