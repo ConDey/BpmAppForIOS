@@ -53,7 +53,7 @@
     NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading;
     CGRect rect = [attributeString boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, CGFLOAT_MAX) options:options context:nil];
     currentHeight=rect.size.height;
-    NSLog(@"size:%@", NSStringFromCGSize(rect.size));
+   // NSLog(@"size:%@", NSStringFromCGSize(rect.size));
     
     
    
