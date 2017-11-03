@@ -52,5 +52,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>useadditionaldata</string>
 </dict>
 </plist>

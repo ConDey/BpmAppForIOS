@@ -26,7 +26,7 @@
     if (self) {
         id wv;
         if ([[UIDevice currentDevice].systemVersion floatValue] >=8.0) {
-            wv=[[DWKwebview alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+            wv=[[DWKwebview alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height-64)];
         }else{
             wv=[[DUIwebview alloc] initWithFrame:frame];
         }

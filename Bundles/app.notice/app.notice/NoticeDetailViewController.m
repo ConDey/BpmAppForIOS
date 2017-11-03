@@ -178,7 +178,7 @@
     [self.view addSubview:attach];
     [self.view bringSubviewToFront:attach];
     [attach mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(40, 40));
+        make.size.mas_equalTo(CGSizeMake(60, 60));
         make.bottom.mas_equalTo(-40);
         make.right.mas_equalTo(-20);
     }];

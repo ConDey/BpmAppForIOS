@@ -123,7 +123,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-+(void)initialize{
+
++ (void)initialize{
     [iVersion sharedInstance].applicationBundleID=[[NSBundle mainBundle]  bundleIdentifier];
     [iVersion sharedInstance].remoteVersionsPlistURL=@"https://58.215.198.210:9997/bpmapp/version.plist";
     [iVersion sharedInstance].updateURL=[NSURL URLWithString:@"itms-services://?action=download-manifest&url=https://58.215.198.210:9997/bpmapp/ios.plist"];
@@ -144,4 +145,5 @@
     [iVersion sharedInstance].delegate = self;
     [[iVersion sharedInstance] checkForNewVersion];
 }
+
 @end

@@ -96,7 +96,6 @@
         }
     }
     
-    
      attachLabel.text=str;
      attachLabel.font=FONT_12;
     
@@ -110,6 +109,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *attachDic=[self.attachmentList objectAtIndex:indexPath.row];
     NSString *attachName=[attachDic objectForKey:@"name"];

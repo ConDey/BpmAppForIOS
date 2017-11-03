@@ -236,7 +236,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 //选择人员
 -(void)delegate_userChoose:(NSString *_Nonnull)useChooseNum users:(NSString *_Nonnull)userChoose callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler {
     if (userChooseData.length!=0) {
-        NSDictionary *selectUser=[[NSDictionary alloc]initWithObjectsAndKeys:userChoose,@"users",@"true",@"success",@"",@"errorMsg" ,nil];
+        NSDictionary *selectUser=[[NSDictionary alloc]initWithObjectsAndKeys:userChoose,@"users",@(1),@"success",@"",@"errorMsg" ,nil];
         NSData *tempData=[NSJSONSerialization dataWithJSONObject:selectUser options:NSJSONWritingPrettyPrinted error:nil ];
          completionHandler([[NSString alloc]initWithData:tempData encoding:NSUTF8StringEncoding], YES);
     }else {
