@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		06C5A2C51F26CF4D00A189FB /* app.notice.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C5A2C31F26CF4D00A189FB /* app.notice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C5A2D31F26CFA400A189FB /* com_eazytec_bpm_lib_common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C5A2D21F26CFA400A189FB /* com_eazytec_bpm_lib_common.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		8433CCE81FAADA250047FBBE /* ic_download.png in Resources */ = {isa = PBXBuildFile; fileRef = 8433CCE71FAADA210047FBBE /* ic_download.png */; };
 		84459B001FAA0C6D00E3A076 /* ic_common_left_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 84459AFF1FAA0C6C00E3A076 /* ic_common_left_back.png */; };
 		F80A8B561F98B6D600E126C6 /* NoticeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B541F98B6D600E126C6 /* NoticeViewController.h */; };
 		F80A8B571F98B6D600E126C6 /* NoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B551F98B6D600E126C6 /* NoticeViewController.m */; };
@@ -38,7 +37,6 @@
 		06C5A2C31F26CF4D00A189FB /* app.notice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app.notice.h; sourceTree = "<group>"; };
 		06C5A2C41F26CF4D00A189FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06C5A2D21F26CFA400A189FB /* com_eazytec_bpm_lib_common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = com_eazytec_bpm_lib_common.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/BpmApp-eufyfkcxftanxsbzvzzlyyfyzmkq/Build/Products/Debug-iphoneos/com_eazytec_bpm_lib_common.framework"; sourceTree = "<group>"; };
-		8433CCE71FAADA210047FBBE /* ic_download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_download.png; sourceTree = "<group>"; };
 		84459AFF1FAA0C6C00E3A076 /* ic_common_left_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_common_left_back.png; sourceTree = "<group>"; };
 		F80A8B531F98B64D00E126C6 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		F80A8B541F98B6D600E126C6 /* NoticeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoticeViewController.h; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 		06C5A2D81F26D0AF00A189FB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8433CCE71FAADA210047FBBE /* ic_download.png */,
 				F8AFFC811FA7161000CE74F5 /* ic_download_type_apk.png */,
 				F8AFFC831FA7161000CE74F5 /* ic_download_type_doc.png */,
 				F8AFFC881FA7161100CE74F5 /* ic_download_type_img.png */,
@@ -258,7 +255,6 @@
 				F8AFFC8A1FA7161100CE74F5 /* ic_download_type_apk.png in Resources */,
 				F8AFFC901FA7161100CE74F5 /* ic_download_type_xls.png in Resources */,
 				F8AFFC8E1FA7161100CE74F5 /* ic_download_type_txt.png in Resources */,
-				8433CCE81FAADA250047FBBE /* ic_download.png in Resources */,
 				F80A8B6C1F98C54600E126C6 /* NoticeListViewCell.xib in Resources */,
 				F8AFFC911FA7161100CE74F5 /* ic_download_type_img.png in Resources */,
 			);
