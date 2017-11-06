@@ -1,10 +1,12 @@
-//
+
+
+
 //  ContactViewController.m
 //  app.contact
 //
 //  Created by ConDey on 2017/7/12.
 //  Copyright © 2017年 Eazytec. All rights reserved.
-//
+
 #import "ContactViewController.h"
 #import "ContactUserViewController.h"
 #import "ContactSearchController.h"
@@ -36,13 +38,12 @@
     if(self.tabBarController != nil) {
         height = height - TAB_HEIGHT;
     }
-   
+    
     self.grouptableview.delegate    = self;
     self.grouptableview.dataSource  = self;
     
     [self.grouptableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-    [self.grouptableview registerNib:[UINib nibWithNibName:@"ContractTableViewCell" bundle:self.bundle]  forCellReuseIdentifier:@"ContractTableViewCell"];
-    
+    [self.grouptableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ContractTableViewCell"];
     [self.view addSubview:self.grouptableview];
     [self.grouptableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
@@ -118,19 +119,19 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-        if(section == 0) {
-            return 2;
-        }else if(section==1){
-             if (self.departments != nil && [self.departments count] > 0) {
-                return [self.departments count];
-            } else {
-                return [self.users count];
-            }
-        }
-        else {
+    if(section == 0) {
+        return 2;
+    }else if(section==1){
+        if (self.departments != nil && [self.departments count] > 0) {
+            return [self.departments count];
+        } else {
             return [self.users count];
         }
-
+    }
+    else {
+        return [self.users count];
+    }
+    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -156,66 +157,94 @@
         return header;
     }
     
-   
+    
     
 }
 //数据显示
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ContractTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContractTableViewCell" forIndexPath:indexPath];
-    if(cell==nil){
-        cell=[[ContractTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ContractTableViewCell"];
-        
-    }
-         if(indexPath.section==0){
-             if(self.numOfHideSection==1){
-                 if(indexPath.row==0){
-                     cell.headImageView.image = [[UIImage alloc]init];
-                     cell.titleLabel.text = @"";
-                 }
-                 if(indexPath.row==1){
-                     cell.headImageView.image = [[UIImage alloc]init];
-                     cell.titleLabel.text = @"";
-                     
-                 }
-                 cell.numOfDep.text=@"";
-             }else{
-             if(indexPath.row==0){
-                 cell.headImageView.image = [UIImage imageNamed:@"ic_contact_search.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
-                 cell.titleLabel.text = @"人员搜索";
-                 
-
-             }
-             if(indexPath.row==1){
-                 cell.headImageView.image = [UIImage imageNamed:@"ic_contact_local.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
-                 cell.titleLabel.text = @"手机通讯录";
-                 
-             }
-             cell.numOfDep.text=@"";
-             }
-       }else if(indexPath.section == 1) {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContractTableViewCell" forIndexPath:indexPath];
+    if(cell!=nil){
+        for (UIView *view in [cell subviews]) {
+            [view removeFromSuperview];
+            
+        }
+        UILabel *titleLabel=[[UILabel alloc]init];
+        UIImageView *headImageView=[[UIImageView alloc]init];
+        [cell addSubview:titleLabel];
+        [cell addSubview:headImageView];
+        [headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(40, 40));
+            make.left.mas_equalTo(10);
+            make.centerY.mas_equalTo(cell.mas_centerY);
+        }];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(100, 21));
+            make.left.mas_equalTo(headImageView.mas_right).mas_equalTo(10);
+            make.centerY.mas_equalTo(cell.mas_centerY);
+        }];
+        if(indexPath.section==0){
+            if(self.numOfHideSection==1){
+                if(indexPath.row==0){
+                    headImageView.image = [[UIImage alloc]init];
+                    titleLabel.text = @"";
+                    
+                    
+                }
+                if(indexPath.row==1){
+                    headImageView.image = [[UIImage alloc]init];
+                    titleLabel.text = @"";
+                    
+                }
+            }else{
+                if(indexPath.row==0){
+                    headImageView.image = [UIImage imageNamed:@"ic_contact_search.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+                    titleLabel.text = @"人员搜索";
+                    
+                    
+                }
+                if(indexPath.row==1){
+                    headImageView.image = [UIImage imageNamed:@"ic_contact_local.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+                    titleLabel.text = @"手机通讯录";
+                    
+                }
+                
+            }
+        }else if(indexPath.section == 1) {
             if (self.departments != nil && [self.departments count] > 0) {
-                 cell.accessoryType= UITableViewCellAccessoryDisclosureIndicator;
+                UILabel  *numOfDep=[[UILabel alloc]init];
+                [cell addSubview:numOfDep];
+                [numOfDep mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.right.mas_equalTo(-30);
+                    make.top.bottom.mas_equalTo(0);
+                    make.width.mas_equalTo(40);
+                }];
+                numOfDep.textColor=FONT_GRAY_COLOR;
+                numOfDep.font=FONT_14;
+                
+                cell.accessoryType= UITableViewCellAccessoryDisclosureIndicator;
                 // 显示部门
                 Deparment *deparment = [self.departments objectAtIndex:indexPath.row];//一个部门的信息
                 NSString *name = deparment.name;
-                cell.headImageView.image = [UIImage circleImageWithText:[name substringToIndex:1] size:CGSizeMake(40,40)];
-                cell.titleLabel.text = name;
+                headImageView.image = [UIImage circleImageWithText:[name substringToIndex:1] size:CGSizeMake(40,40)];
+                titleLabel.text = name;
                 NSString *num=[NSString stringWithFormat:@"%ld人",deparment.userCount];//一个部门下的人员信息
-                cell.numOfDep.text=num;
+                numOfDep.text=num;
             } else {
                 // 显示员工
                 
                 User *user =  [self.users objectAtIndex:indexPath.row];
                 NSString *name = user.fullName;
-    
+                
                 if ([name length] > 2) {
-                    cell.headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
+                    headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
                 } else {
-                    cell.headImageView.image = [UIImage circleImageWithText:name size:CGSizeMake(40,40)];
+                    headImageView.image = [UIImage circleImageWithText:name size:CGSizeMake(40,40)];
                 }
-                cell.titleLabel.text = name;
-                cell.numOfDep.text=@"";
+                titleLabel.text = name;
+                NSInteger tag=indexPath.row+3;
+                [self addTel:cell callTag:tag];
+                [self addMsg:cell msgTag:tag];
             }
         }
         else {
@@ -223,15 +252,18 @@
             User *user =  [self.users objectAtIndex:indexPath.row];
             NSString *name = user.fullName;
             if ([name length] > 2) {
-                cell.headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
+                headImageView.image = [UIImage circleImageWithText:[name substringFromIndex:[name length]-2] size:CGSizeMake(40,40)];
             } else {
-                cell.headImageView.image = [UIImage circleImageWithText:name size:CGSizeMake(40,40)];
+                headImageView.image = [UIImage circleImageWithText:name size:CGSizeMake(40,40)];
             }
-            cell.titleLabel.text = name;
-            cell.numOfDep.text=@"";
+            titleLabel.text = name;
+            NSInteger tag=indexPath.row+3;
+            [self addTel:cell callTag:tag];
+            [self addMsg:cell msgTag:tag];
         }
-        return  cell;
-
+    }
+    return  cell;
+    
 }
 
 // 点击跳转事件
@@ -249,8 +281,8 @@
             [self presentViewController:cpicker animated:YES completion:nil];
             
         }
-
-      }else if(indexPath.section == 1) {
+        
+    }else if(indexPath.section == 1) {
         if (self.departments != nil && [self.departments count] > 0) {
             
             Deparment *dp = [self.departments objectAtIndex:indexPath.row];
@@ -259,22 +291,22 @@
                 [SVProgressHUD showErrorWithStatus:@"此部门下没有数据"];
             } else {
                 ContactViewController *vc = [[ContactViewController alloc] init];
-                              vc.dep = dp.id;
-                            vc.numOfHideSection=1;
-                                [self.navigationController pushViewController: vc animated:true];
+                vc.dep = dp.id;
+                vc.numOfHideSection=1;
+                [self.navigationController pushViewController: vc animated:true];
             }
             
         } else {
             User *user = [self.users objectAtIndex:indexPath.row];
             ContactUserViewController *vc = [[ContactUserViewController alloc]initWithNibName:@"ContactUserViewController" bundle:self.bundle];
-                        vc.user = user;
+            vc.user = user;
             [self.navigationController pushViewController: vc animated:true];
         }
     }
     else {
         
-       User *user = [self.users objectAtIndex:indexPath.row];
-       
+        User *user = [self.users objectAtIndex:indexPath.row];
+        
         ContactUserViewController *vc = [[ContactUserViewController alloc]initWithNibName:@"ContactUserViewController" bundle:self.bundle];
         vc.user = user;
         
@@ -285,39 +317,103 @@
 //单元格大小和头尾大小
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(self.numOfHideSection==1){
-    if(indexPath.section==0){
-        return 0.01;
-    }else{
-        return 60;
-    }
+        if(indexPath.section==0){
+            return 0.01;
+        }else{
+            return 60;
+        }
     }else{
         return 60;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-        if(section==0){
-            return 0.01;
-        }else{
-            return 50;
-    
+    if(section==0){
+        return 0.01;
+    }else{
+        return 50;
+        
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.01;
 }
 
+
+
+//电话信息按钮
+//电话
+-(void)addTel:(UIView *)cell callTag:(NSInteger)tag{
+    UIButton *call=[[UIButton alloc]init];
+    [cell addSubview:call];
+    [call mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+        make.right.mas_equalTo(-10);
+        make.centerY.mas_equalTo(cell.mas_centerY);
+    }];
+    call.tag=tag;
+    UIImage *ig2=[[UIImage alloc]init];
+    ig2=[UIImage imageNamed:@"ic_contact_way_tel.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+    [call setBackgroundImage:ig2 forState:UIControlStateNormal];
+    [call addTarget:self action:@selector(tapTel:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//信息
+-(void)addMsg:(UIView *)cell msgTag:(NSInteger)tag{
+    
+    UIButton *msg=[[UIButton alloc]init];
+    [cell addSubview:msg];
+    UIImage *ig1=[[UIImage alloc]init];
+    [msg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+        make.right.mas_equalTo(-60);
+        make.centerY.mas_equalTo(cell.mas_centerY);
+    }];
+    msg.tag=tag;
+    ig1=[UIImage imageNamed:@"ic_contact_way_msg.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+    [msg setBackgroundImage:ig1 forState:UIControlStateNormal];
+    [msg addTarget:self action:@selector(tapMsg:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+
+
 #pragma mark - Table view setting
 
 // 自定义TableViewCell分割线, 清除前面15PX的空白
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
+        [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     }
     
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
+        [cell setLayoutMargins:UIEdgeInsetsMake(0, 0, 0, 0)];
     }
 }
 
+//按钮点击事件
+-(void)tapTel:(UIButton *)sender{
+    NSLog(@"tel");
+    NSInteger tag=sender.tag-3;
+    User *user=[self.users objectAtIndex:tag];
+    NSString *mobile=user.mobile;
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel://" stringByAppendingString:mobile]]];
+}
+
+-(void)tapMsg:(UIButton *)sender{
+    NSLog(@"msg");
+    NSInteger tag=sender.tag-3;
+    User *user=[self.users objectAtIndex:tag];
+    NSString *mobile=user.mobile;
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithFormat:@"sms://%@",mobile]]];
+}
+
+
+
+
+
+
+
 @end
+
+
+
