@@ -12,7 +12,9 @@
 #import "PasswordChangeController.h"
 #import "AppDelegate.h"
 @interface UserHomeSettingController ()
-
+{
+    CGFloat cellHeight;
+}
 @property (weak, nonatomic) IBOutlet UIView *panelView;
 
 @property (weak, nonatomic) IBOutlet UILabel *nameTextView;
@@ -26,6 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    cellHeight=55;
     [self.panelView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
         make.top.mas_equalTo(25);
@@ -43,10 +46,14 @@
     self.poTextView.text=[CurrentUser currentUser].userdetails.position;
     
     [self.view addSubview:self.tableview];
+    CGFloat height=cellHeight*4;
+    if(height>SCREEN_HEIGHT-self.panelView.frame.size.height){
+        height=SCREEN_HEIGHT-self.panelView.frame.size.height;
+    }
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(self.panelView.mas_bottom).mas_equalTo(25);
-        make.height.mas_equalTo(180);
+        make.height.mas_equalTo(height);
     }];
     [self.tableview setFrame:CGRectMake(0, self.panelView.bounds.size.height+20, self.view.bounds.size.width, self.view.bounds.size.height-self.panelView.bounds.size.height-20)];
     self.tableview.delegate=self;
@@ -72,7 +79,7 @@
 
 #pragma mark-<UITableViewDelegete,UITableViewDatasource>
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -88,6 +95,9 @@
         picView.image=[UIImage imageNamed:@"ic_setting_updatepwd.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         label.text=@"修改密码";
     }else if (indexPath.row==2){
+        picView.image=[UIImage imageNamed:@"ic_setting_browser.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+        label.text=@"清除缓存";
+    }else{
         picView.image=[UIImage imageNamed:@"ic_setting_loginout.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         label.text=@"退出";
     }
@@ -118,7 +128,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 55;
+    return cellHeight;
 }
 //点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -132,8 +142,22 @@
         PasswordChangeController *pc=[[PasswordChangeController alloc]init];
         [self.navigationController pushViewController: pc animated:YES];
     }else if (row==2){
+        //清除缓存
+        UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"确定清除缓存吗" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *sureOut=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //  清除缓存操作
+            NSLog(@"清除缓存");
+            
+            
+            
+        }];
+        [alert addAction:cancel];
+        [alert addAction:sureOut];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
         //退出
-        UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"确定退出吗" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertOut=[UIAlertController alertControllerWithTitle:@"确定退出吗" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancel=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *sureOut=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [Small setUpWithComplection:^{
@@ -141,9 +165,9 @@
                 [self presentViewController:mainController animated:NO completion:nil];
             }];
         }];
-        [alert addAction:cancel];
-        [alert addAction:sureOut];
-        [self presentViewController:alert animated:YES completion:nil];
+        [alertOut addAction:cancel];
+        [alertOut addAction:sureOut];
+        [self presentViewController:alertOut animated:YES completion:nil];
     }
     
     [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
@@ -157,11 +181,11 @@
 // 自定义TableViewCell分割线, 清除前面15PX的空白
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
+        [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     }
     
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
+        [cell setLayoutMargins:UIEdgeInsetsMake(0, 0, 0, 0)];
     }
 }
 @end
