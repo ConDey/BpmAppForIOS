@@ -161,6 +161,7 @@
     if(cell==nil){
         cell=[[NoticeListViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NoticeList"];
     }
+    
     if(indexPath.row<[self.noticeList count]){
         NSDictionary *noticeData=[self.noticeList objectAtIndex:indexPath.row];
         
@@ -205,16 +206,16 @@
     [self.navigationController pushViewController:ndc animated:YES];
     
 }
-// 自定义TableViewCell分割线, 清除前面15PX的空白
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
-    }
-    
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
+//// 自定义TableViewCell分割线, 清除前面15PX的空白
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+//    }
+//    
+//    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+//        [cell setLayoutMargins:UIEdgeInsetsZero];
+//    }
+//}
 
 
 @end

@@ -169,6 +169,14 @@
             [view removeFromSuperview];
             
         }
+        UIView *singleView=[[UIView alloc]init];//分割线
+        [cell addSubview:singleView];
+        [singleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.top.mas_equalTo(0);
+            make.height.mas_equalTo(0.5);
+        }];
+        singleView.backgroundColor=UI_DIVIDER_COLOR;
         UILabel *titleLabel=[[UILabel alloc]init];
         UIImageView *headImageView=[[UIImageView alloc]init];
         [cell addSubview:titleLabel];
@@ -179,7 +187,7 @@
             make.centerY.mas_equalTo(cell.mas_centerY);
         }];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(100, 21));
+            make.size.mas_equalTo(CGSizeMake(200, 21));
             make.left.mas_equalTo(headImageView.mas_right).mas_equalTo(10);
             make.centerY.mas_equalTo(cell.mas_centerY);
         }];
@@ -206,6 +214,14 @@
                 if(indexPath.row==1){
                     headImageView.image = [UIImage imageNamed:@"ic_contact_local.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
                     titleLabel.text = @"手机通讯录";
+                    UIView *singleBottomView=[[UIView alloc]init];
+                    [cell addSubview:singleBottomView];
+                    [singleBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.left.right.mas_equalTo(0);
+                        make.bottom.mas_equalTo(0);
+                        make.height.mas_equalTo(0.5);
+                    }];
+                    singleBottomView.backgroundColor=UI_DIVIDER_COLOR;
                     
                 }
                 
@@ -216,8 +232,9 @@
                 [cell addSubview:numOfDep];
                 [numOfDep mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.right.mas_equalTo(-30);
-                    make.top.bottom.mas_equalTo(0);
+                    make.bottom.mas_equalTo(0);
                     make.width.mas_equalTo(40);
+                    make.top.mas_equalTo(10);
                 }];
                 numOfDep.textColor=FONT_GRAY_COLOR;
                 numOfDep.font=FONT_14;
@@ -230,6 +247,16 @@
                 titleLabel.text = name;
                 NSString *num=[NSString stringWithFormat:@"%ld人",deparment.userCount];//一个部门下的人员信息
                 numOfDep.text=num;
+                if(indexPath.row==self.departments.count-1){
+                    UIView *singleBottomView=[[UIView alloc]init];
+                    [cell addSubview:singleBottomView];
+                    [singleBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.left.right.mas_equalTo(0);
+                        make.bottom.mas_equalTo(0);
+                        make.height.mas_equalTo(0.5);
+                    }];
+                    singleBottomView.backgroundColor=UI_DIVIDER_COLOR;
+                }
             } else {
                 // 显示员工
                 
@@ -245,6 +272,16 @@
                 NSInteger tag=indexPath.row+3;
                 [self addTel:cell callTag:tag];
                 [self addMsg:cell msgTag:tag];
+                if(indexPath.row==self.users.count-1){
+                    UIView *singleBottomView=[[UIView alloc]init];
+                    [cell addSubview:singleBottomView];
+                    [singleBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.left.right.mas_equalTo(0);
+                        make.bottom.mas_equalTo(0);
+                        make.height.mas_equalTo(0.5);
+                    }];
+                    singleBottomView.backgroundColor=UI_DIVIDER_COLOR;
+                }
             }
         }
         else {
@@ -260,6 +297,16 @@
             NSInteger tag=indexPath.row+3;
             [self addTel:cell callTag:tag];
             [self addMsg:cell msgTag:tag];
+            if(indexPath.row==self.users.count-1){
+                UIView *singleBottomView=[[UIView alloc]init];
+                [cell addSubview:singleBottomView];
+                [singleBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.right.mas_equalTo(0);
+                    make.bottom.mas_equalTo(0);
+                    make.height.mas_equalTo(0.5);
+                }];
+                singleBottomView.backgroundColor=UI_DIVIDER_COLOR;
+            }
         }
     }
     return  cell;
@@ -377,18 +424,6 @@
 
 
 
-#pragma mark - Table view setting
-
-// 自定义TableViewCell分割线, 清除前面15PX的空白
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
-    }
-    
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsMake(0, 0, 0, 0)];
-    }
-}
 
 //按钮点击事件
 -(void)tapTel:(UIButton *)sender{
@@ -406,10 +441,6 @@
     NSString *mobile=user.mobile;
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithFormat:@"sms://%@",mobile]]];
 }
-
-
-
-
 
 
 

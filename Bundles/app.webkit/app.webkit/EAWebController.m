@@ -528,22 +528,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         fileName=[filePath substringWithRange:NSMakeRange(indexOfId+3, 36)];
     }
     }
-    ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
-    NSFileManager * fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:originPath]) {
-        [fileManager createDirectoryAtPath:originPath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-    if ([NSURL URLWithString:filePath]) {
-        // 主要方法
-        [assetLibrary assetForURL:[NSURL URLWithString:filePath] resultBlock:^(ALAsset *asset) {
-            ALAssetRepresentation *rep = [asset defaultRepresentation];
-            Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
-            NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:((unsigned long)rep.size) error:nil];
-            NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
-            [data writeToFile:photoPath atomically:YES];
-            [self uploadImg:fileName withPath:photoPath];
-        } failureBlock:nil];
-    }
+    [self uploadImg:fileName withPath:filePath];
 }
 
 
@@ -581,7 +566,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     
     ListDataResult *result = [[ListDataResult alloc] initWithSuccess:YES withUrls:urls];
     NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
-    //NSLog(@"url----%@",urls);
+    NSLog(@"url----%@",urls);
     commonHandler(resultJson, YES);
 }
 
@@ -641,6 +626,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
         //设置头
        [request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
+   // [request addValue:[NSString stringWithFormat:@"%@.mp4",fileName] forHTTPHeaderField:@"fileName"];
        [request addValue:[NSString stringWithFormat:@"%@.jpg",fileName] forHTTPHeaderField:@"fileName"];
         NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
       [request addValue:cookie forHTTPHeaderField:@"token"];

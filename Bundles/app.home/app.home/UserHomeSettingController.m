@@ -46,6 +46,7 @@
     self.poTextView.text=[CurrentUser currentUser].userdetails.position;
     
     [self.view addSubview:self.tableview];
+    self.tableview.scrollEnabled=NO;
     CGFloat height=cellHeight*4;
     if(height>SCREEN_HEIGHT-self.panelView.frame.size.height){
         height=SCREEN_HEIGHT-self.panelView.frame.size.height;
@@ -59,7 +60,7 @@
     self.tableview.delegate=self;
     self.tableview.dataSource=self;
     [self.tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"HomeSet"];
-    [self.tableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+ //   [self.tableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
   
     
     
@@ -88,6 +89,14 @@
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"HomeSet"];
     UILabel *label=[[UILabel alloc]init];
     UIImageView *picView=[[UIImageView alloc]init];
+    UIView *singleView=[[UIView alloc]init];//分割线
+    [cell addSubview:singleView];
+    [singleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(0);
+        make.height.mas_equalTo(0.5);
+    }];
+    singleView.backgroundColor=UI_DIVIDER_COLOR;
     if(indexPath.row==0){
         picView.image=[UIImage imageNamed:@"ic_setting_update.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         label.text=@"在线更新";
@@ -98,8 +107,17 @@
         picView.image=[UIImage imageNamed:@"ic_setting_browser.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         label.text=@"清除缓存";
     }else{
+        UIView *singleBottomView=[[UIView alloc]init];
+        [cell addSubview:singleBottomView];
+        [singleBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.bottom.mas_equalTo(0);
+            make.height.mas_equalTo(0.5);
+        }];
+        singleBottomView.backgroundColor=UI_DIVIDER_COLOR;
         picView.image=[UIImage imageNamed:@"ic_setting_loginout.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         label.text=@"退出";
+        
     }
     [cell.contentView addSubview:label];
     [cell.contentView addSubview:picView];
@@ -177,16 +195,5 @@
     
 }
 
-
-// 自定义TableViewCell分割线, 清除前面15PX的空白
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
-    }
-    
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsMake(0, 0, 0, 0)];
-    }
-}
 @end
 
