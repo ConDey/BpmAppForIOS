@@ -22,7 +22,9 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     CommonCompletionHandler commonHandler;
     Boolean isBindBackBtn;
     NSString* mfileName;
-    
+    NSString *photoPath;
+    NSString *originPath;
+    BOOL  isSave;
 }
 @property (retain, nonatomic) UIProgressView *progressView;
 @property (retain, nonatomic) WKWebView *wkwebview;
@@ -35,7 +37,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
+    originPath= [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"uploadImage"];
     // 解码
     self.view.backgroundColor = [UIColor whiteColor];
     self.urltitle = [NSString decodeString:self.urltitle];
@@ -517,6 +519,25 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     
 }
 
+//上传文件
+-(void)delegate_uploadFile:(NSString *)filePath callBack:(void (^)(NSString * _Nullable, BOOL))completionHandler{
+    
+    NSString *fileName=[[NSString alloc]init];
+    for(int indexOfId=0;indexOfId<filePath.length-3;indexOfId++){
+    if([[filePath substringWithRange:NSMakeRange(indexOfId, 3)] isEqualToString:@"id="]){
+        fileName=[filePath substringWithRange:NSMakeRange(indexOfId+3, 36)];
+      //  NSLog(@"id为%@",fileName);
+    }
+    }
+   [self imageWithUrl:[NSURL URLWithString:filePath] withFileName:fileName];//写入沙盒
+    if(isSave&&photoPath!=nil){
+        [self getHead:fileName];
+    }
+   
+}
+
+
+
 #pragma mark - LGPhotoPickerViewControllerDelegate
 
 // 选择图片等回调方法
@@ -536,6 +557,12 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
      [fullResolutionImage addObject:fullResolutionImage];
      }
      */
+//    NSMutableArray *originImage = [NSMutableArray array];
+//    for(LGPhotoAssets *photo in assets){
+//        [originImage addObject:photo.originImage];
+//    }
+//    originImgArray=[[NSArray alloc]initWithArray:originImage];
+    
     
     NSMutableArray *urls = [[NSMutableArray alloc] init];
     for (LGPhotoAssets* asset in assets) {
@@ -544,8 +571,33 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     
     ListDataResult *result = [[ListDataResult alloc] initWithSuccess:YES withUrls:urls];
     NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
+    NSLog(@"url----%@",urls);
     commonHandler(resultJson, YES);
 }
+//图片URL
+- (void)imageWithUrl:(NSURL *)url withFileName:(NSString *)fileName
+{
+    ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:originPath]) {
+        [fileManager createDirectoryAtPath:originPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+        if (url) {
+            // 主要方法
+            [assetLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
+                ALAssetRepresentation *rep = [asset defaultRepresentation];
+                Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
+                NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:((unsigned long)rep.size) error:nil];
+                NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+                photoPath = [originPath stringByAppendingPathComponent:fileName];
+                NSLog(@"沙盒路径%@",photoPath);
+                [data writeToFile:photoPath atomically:YES];
+                isSave=YES;
+            } failureBlock:nil];
+        }
+   
+}
+
 
 // 点击 progress 消失
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -592,5 +644,33 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     return response.MIMEType;
 }
+
+-(void)getHead:(NSString *)fileName{
+   
+   NSData *imageData=[NSData dataWithContentsOfFile:photoPath];
+    if(photoPath.length!=0){
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURL *URL = [NSURL URLWithString:[REQUEST_SERVICE_URL stringByAppendingString:@"attachment/upload"]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+        [request setValue:fileName forHTTPHeaderField:@"fileName"];
+        NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
+        [request addValue:cookie forHTTPHeaderField:@"token"];
+//        [request setHTTPBody:imageData];
+//        [request setHTTPMethod:@"GET"];
+    NSURL *filePath = [NSURL fileURLWithPath:photoPath];
+  //  NSLog(@"photoPath===%@",photoPath);
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:filePath progress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSLog(@"Success: %@ %@", response, responseObject);
+        }
+    }];
+    [uploadTask resume];
+    }
+    
+}
+
 
 @end
