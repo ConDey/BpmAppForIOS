@@ -526,10 +526,8 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     for(int indexOfId=0;indexOfId<filePath.length-3;indexOfId++){
     if([[filePath substringWithRange:NSMakeRange(indexOfId, 3)] isEqualToString:@"id="]){
         fileName=[filePath substringWithRange:NSMakeRange(indexOfId+3, 36)];
-      //  NSLog(@"id为%@",fileName);
     }
     }
-  // [self imageWithUrl:[NSURL URLWithString:filePath] withFileName:fileName];//写入沙盒
     ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
     NSFileManager * fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:originPath]) {
@@ -542,9 +540,17 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
             Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
             NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:((unsigned long)rep.size) error:nil];
             NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+            UIImage *image=[UIImage imageWithData:data];
+            //压缩图片
+            CGSize newSize=CGSizeMake(200, 200);
+            UIGraphicsBeginImageContext(newSize);
+            [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+            UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            NSData *dataYS=UIImageJPEGRepresentation(newImage, 0.3);
             photoPath = [originPath stringByAppendingPathComponent:fileName];
-            NSLog(@"沙盒路径%@",photoPath);
-            [data writeToFile:photoPath atomically:YES];
+            //NSLog(@"沙盒路径%@",photoPath);
+            [dataYS writeToFile:photoPath atomically:YES];
             [self uploadImg:fileName withPath:photoPath];
         } failureBlock:nil];
     }
@@ -585,7 +591,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     
     ListDataResult *result = [[ListDataResult alloc] initWithSuccess:YES withUrls:urls];
     NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
-    NSLog(@"url----%@",urls);
+    //NSLog(@"url----%@",urls);
     commonHandler(resultJson, YES);
 }
 
@@ -638,32 +644,39 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 }
 
 -(void)uploadImg:(NSString *)fileName withPath:(NSString *)path{
-
-   NSData *imageData=[NSData dataWithContentsOfFile:path];
-    if(photoPath.length!=0){
+   
+    NSData *imageData=[NSData dataWithContentsOfFile:path];
+    NSLog(@"%@图片",[UIImage imageWithData:imageData]);
+    //http
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSURL *URL = [NSURL URLWithString:[REQUEST_SERVICE_URL stringByAppendingString:@"attachment/upload"]];
+   NSURL *URL = [NSURL URLWithString:[REQUEST_SERVICE_URL stringByAppendingString:@"attachment/upload"]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-        [request setValue:fileName forHTTPHeaderField:@"fileName"];
+        //设置头
+     //[request setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@",fileName] forHTTPHeaderField:@"Content-Type"];
+       [request addValue:fileName forHTTPHeaderField:@"fileName"];
         NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
         [request addValue:cookie forHTTPHeaderField:@"token"];
-//        [request setHTTPBody:imageData];
-//        [request setHTTPMethod:@"GET"];
-    NSURL *filePath = [NSURL URLWithString:path]
-        ;
-  //  NSLog(@"photoPath===%@",photoPath);
-    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:filePath progress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+    
+        [request setHTTPMethod:@"POST"];
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:[NSURL URLWithString:path] progress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (error) {
             NSLog(@"Error: %@", error);
+           
         } else {
             NSLog(@"Success: %@ %@", response, responseObject);
+            
         }
     }];
-    [uploadTask resume];
-    }
+        [uploadTask resume];
+    
+
+    
 
 }
+
+
+
 
 
 @end
