@@ -529,11 +529,25 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
       //  NSLog(@"id为%@",fileName);
     }
     }
-   [self imageWithUrl:[NSURL URLWithString:filePath] withFileName:fileName];//写入沙盒
-    if(isSave&&photoPath!=nil){
-        [self getHead:fileName];
+  // [self imageWithUrl:[NSURL URLWithString:filePath] withFileName:fileName];//写入沙盒
+    ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:originPath]) {
+        [fileManager createDirectoryAtPath:originPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
-   
+    if ([NSURL URLWithString:filePath]) {
+        // 主要方法
+        [assetLibrary assetForURL:[NSURL URLWithString:filePath] resultBlock:^(ALAsset *asset) {
+            ALAssetRepresentation *rep = [asset defaultRepresentation];
+            Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
+            NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:((unsigned long)rep.size) error:nil];
+            NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+            photoPath = [originPath stringByAppendingPathComponent:fileName];
+            NSLog(@"沙盒路径%@",photoPath);
+            [data writeToFile:photoPath atomically:YES];
+            [self uploadImg:fileName withPath:photoPath];
+        } failureBlock:nil];
+    }
 }
 
 
@@ -574,29 +588,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     NSLog(@"url----%@",urls);
     commonHandler(resultJson, YES);
 }
-//图片URL
-- (void)imageWithUrl:(NSURL *)url withFileName:(NSString *)fileName
-{
-    ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
-    NSFileManager * fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:originPath]) {
-        [fileManager createDirectoryAtPath:originPath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-        if (url) {
-            // 主要方法
-            [assetLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
-                ALAssetRepresentation *rep = [asset defaultRepresentation];
-                Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
-                NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:((unsigned long)rep.size) error:nil];
-                NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
-                photoPath = [originPath stringByAppendingPathComponent:fileName];
-                NSLog(@"沙盒路径%@",photoPath);
-                [data writeToFile:photoPath atomically:YES];
-                isSave=YES;
-            } failureBlock:nil];
-        }
-   
-}
+
 
 
 // 点击 progress 消失
@@ -645,9 +637,9 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     return response.MIMEType;
 }
 
--(void)getHead:(NSString *)fileName{
-   
-   NSData *imageData=[NSData dataWithContentsOfFile:photoPath];
+-(void)uploadImg:(NSString *)fileName withPath:(NSString *)path{
+
+   NSData *imageData=[NSData dataWithContentsOfFile:path];
     if(photoPath.length!=0){
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
@@ -658,7 +650,8 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         [request addValue:cookie forHTTPHeaderField:@"token"];
 //        [request setHTTPBody:imageData];
 //        [request setHTTPMethod:@"GET"];
-    NSURL *filePath = [NSURL fileURLWithPath:photoPath];
+    NSURL *filePath = [NSURL URLWithString:path]
+        ;
   //  NSLog(@"photoPath===%@",photoPath);
     NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:filePath progress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (error) {
@@ -669,7 +662,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     }];
     [uploadTask resume];
     }
-    
+
 }
 
 

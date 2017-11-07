@@ -39,4 +39,7 @@
 - (void)delegate_dismissProgress;
 - (void)delegate_bindBackBtnWithcallbackName:(NSString *_Nonnull)callbackName callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
 - (void)delegate_unbindBackBtnWithCallback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
+-(void)delegate_uploadFile:(NSString *_Nonnull)filePath callBack:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
+
+
 @end

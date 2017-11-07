@@ -137,9 +137,12 @@
                 <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="progressCancle()">
                     请求取消
                 </button>
+                <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="uploadFile()">
+                    图片视频文件上传
+                </button>
+                </br>
+                </br>
                 
-                </br>
-                </br>
                 
                 </br>
                 </br>
@@ -314,10 +317,16 @@
                     bpmbridget.call("progressCancel");
                 }
     
+               function uploadFile(){
+                   bpmbridget.call("uploadFile",
+                                   {filePath: "assets-library://asset/asset.JPG?id=ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED&ext=JPG"},
+                                   function(result){ alert(result); }); //这里会输出上传结果
+                    }
+    
                
-               
+               //获取人员选择数据
                function showUserChoose(r,l){
-                   var json = eval('(' + l + ')');//jsons数据
+                       var json = eval('(' + l + ')');//jsons数据
                    bpmbridget.call("userChoose",{selectNum: r, users:json}, function(result){
                                    alert(result);
                                    });
