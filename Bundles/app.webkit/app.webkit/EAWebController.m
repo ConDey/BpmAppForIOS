@@ -55,22 +55,10 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         [self.webview loadRequest:request];
         
     } else {
-        NSURL *url = [NSURL URLWithString:[self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request]; // 清除缓存
-        NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
-        [request addValue:cookie forHTTPHeaderField:@"token"];
-        NSLog(@"%@", request.allHTTPHeaderFields);
-
-//        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-//
-//            if (connectionError == nil) {
-//                NSLog(@"%",data.length);
-//            }
-//
-//        }];
-        [self.webview loadRequest:request];
+        [self commonDownloadWithUrl:self.url isAutoOpen:YES completionHandler:nil];
     }
+    
+    [self commonUpload];
 }
 
 // webview 回调函数
@@ -366,6 +354,17 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     [cameraVC showPickerVc:self];
 }
 
+// 文件下载
+- (void)delegate_fileDownloadWithAttachmentId:(NSString *)attachmentId withFileName:(NSString *)fileName withAutoOpen:(Boolean)isAutoOpen callback:(void (^)(NSString * _Nullable, BOOL))completionHandler{
+    if (attachmentId == nil || fileName == nil) {
+        [SVProgressHUD showWithStatus:@"参数设置错误"];
+    }else {
+        NSString *attachPath=[NSString stringWithFormat:@"%@/external/attachment/down?attachmentId=%@",REQUEST_URL,attachmentId];
+        [self setTitleOfNav:fileName];
+        [self commonDownloadWithUrl:attachPath isAutoOpen:isAutoOpen completionHandler:completionHandler];
+    }
+}
+
 // 当前用户信息
 - (void)delegate_getUserWithCallback:(void (^)(NSString * _Nullable, BOOL))completionHandler {
     UserDetails *userDetail = [[CurrentUser currentUser] userdetails];
@@ -436,6 +435,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 - (void)delegate_showProgress {
     //[SVProgressHUD addGestureToDismiss];
     [SVProgressHUD showWithStatus:@"加载中..."];
+    [SVProgressHUD dismissWithDelay:5.0];
 }
 
 
@@ -591,6 +591,88 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     NSURLResponse *response = nil;
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
     return response.MIMEType;
+}
+
+#pragma mark 通用下载方法
+- (void)commonDownloadWithUrl:(NSString *)fileUrl isAutoOpen:(Boolean)autoOpen completionHandler:(void (^)(NSString * _Nullable, BOOL))completionHandler{
+    
+    NSURL *url = [NSURL URLWithString:[fileUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request]; // 清除缓存
+    NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
+    [request addValue:cookie forHTTPHeaderField:@"token"];
+    
+    // 下载文件
+    NSURLSessionConfiguration *configure = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configure];
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        NSLog(@"file download to %@", [documentsDirectoryURL absoluteString]);
+        return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        BaseDataResult *result;
+        if (error == nil) {
+            if (completionHandler != nil) {
+                result = [[BaseDataResult alloc] initWithSuccess:YES];
+                NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
+                completionHandler(resultJson, YES);
+            }
+            if (autoOpen) {
+                [self.webview loadUrl:[filePath absoluteString]];
+            }
+        }else {
+            if (completionHandler != nil) {
+                result = [[BaseDataResult alloc] initWithSuccess:NO];
+                result.errorMsg = error.description;
+                NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
+                completionHandler(resultJson, YES);
+            }else {
+                [SVProgressHUD showErrorWithStatus:error.description];
+            }
+        }
+    }];
+    [downloadTask resume];
+}
+
+#pragma mark 通用文件上传方法
+- (void)commonUpload {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *server =[NSURL URLWithString:[NSString stringWithFormat:@"%@/external/attachment/upload",REQUEST_URL]];
+    NSURL *filePath = [NSURL fileURLWithPath:@"assets-library://asset/asset.JPG?id=106E99A1-4F6A-45A2-B320-B0AD4A8E8473&ext=JPG"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:server];
+    NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
+    [request addValue:cookie forHTTPHeaderField:@"token"];
+    [request addValue:@"test.jpg" forHTTPHeaderField:@"fileName"];
+    [request addValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
+    
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:filePath progress:^(NSProgress * _Nonnull uploadProgress){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //Update the progress view
+            [_progressView setProgress:uploadProgress.fractionCompleted];
+        });
+        
+    } completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSLog(@"Success: %@ %@", response, responseObject);
+        }
+    }];
+    [uploadTask resume];
+}
+
+//判断文件是否已经在沙盒中已经存在？
+-(BOOL) isFileExist:(NSString *)fileName
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSString *filePath = [path stringByAppendingPathComponent:fileName];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL result = [fileManager fileExistsAtPath:filePath];
+    NSLog(@"这个文件已经存在：%@",result?@"是的":@"不存在");
+    return result;
 }
 
 @end

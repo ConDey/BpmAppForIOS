@@ -127,6 +127,10 @@
         //在线更新
         AppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
         [appDelegate checkUPdate];
+        
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        NSString *cacheSize = [ClearCacheUtils getCacheSizeWithFilePath:[documentsDirectoryURL absoluteString]];
+        NSLog(@"CacheSize: %@",cacheSize);
     }else if (row==1){
         //改密码
         PasswordChangeController *pc=[[PasswordChangeController alloc]init];

@@ -12,6 +12,7 @@
 const static long THREE_MINUTES_MILLS = 180000; // 三分钟
 static NSString* IS_REFRESH_TRUE = @"1";
 static NSString* IS_REFRESH_FALSE = @"0";
+static const NSInteger PAGESIZE = 10;
 
 @interface MsgViewController ()
 
@@ -23,6 +24,9 @@ static NSString* IS_REFRESH_FALSE = @"0";
 @property (nonatomic, assign) Boolean isfirst;
 @property (nonatomic, assign) Boolean isrefresh;
 @property (nonatomic, assign) Boolean needRefresh;
+@property (nonatomic) int unReadpage;
+@property (nonatomic) int readedpage;
+
 
 @property (nonatomic, assign) Boolean isInUnRead; // 在未读界面
 
@@ -83,6 +87,8 @@ static NSString* IS_REFRESH_FALSE = @"0";
     _isrefresh = NO;
     _needRefresh = true;
     _isInUnRead = YES;
+    _unReadpage = 0;
+    _readedpage = 0;
     
     [self loadFromNetwork];
     
@@ -112,10 +118,10 @@ static NSString* IS_REFRESH_FALSE = @"0";
                 //[[FMDBHelper sharedInstance] insetTopicIntoDB:[self getLatestTopics:[messagesModel messages]]];
                 [[FMDBHelper sharedInstance] insertMessageIntoDB:[messagesModel datas]];
                 
-                _datas = [[FMDBHelper sharedInstance] selectMessagesFromDB];
+                _datas = [[FMDBHelper sharedInstance] selectMessagesFromDBByPageIndex:_unReadpage pageSize:PAGESIZE];
                 
             }else {
-                _datas = [[FMDBHelper sharedInstance] selectMessagesFromDB];
+                _datas = [[FMDBHelper sharedInstance] selectMessagesFromDBByPageIndex:_unReadpage pageSize:PAGESIZE];
             }
         }else {
             [SVProgressHUD showErrorWithStatus:messagesModel.errorMsg];
@@ -188,9 +194,9 @@ static NSString* IS_REFRESH_FALSE = @"0";
             [self httpGetRequestWithUrl:HttpProtocolServiceMessageReaded params:dict progress:NO];
             
             if (_isInUnRead) {
-                _datas = [[FMDBHelper sharedInstance] selectMessagesFromDB];
+                _datas = [[FMDBHelper sharedInstance] selectMessagesFromDBByPageIndex:_readedpage pageSize:PAGESIZE];
             }else {
-                _datas = [[FMDBHelper sharedInstance] selectReadedMessagesFromDB];
+                _datas = [[FMDBHelper sharedInstance] selectReadedMessagesFromDBByPageIndex:_readedpage pageSize:PAGESIZE];
             }
             [self.tableView reloadData];
             
@@ -217,6 +223,26 @@ static NSString* IS_REFRESH_FALSE = @"0";
         }
         
     }
+}
+
+// 左划删除代理方法
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // 删除模型
+    MessageModel* model = [_datas objectAtIndex:indexPath.row];
+    [_datas removeObjectAtIndex:indexPath.row];
+    Boolean isSuccess = [[FMDBHelper sharedInstance] deleteMessageFormDBBy:model.msgId];
+    if (isSuccess) {
+        // 刷新
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        [SVProgressHUD showSuccessWithStatus:@"消息删除成功"];
+    }else {
+        [SVProgressHUD showErrorWithStatus:@"消息删除失败"];
+    }
+
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
 }
 
 #pragma mark - 懒加载
@@ -246,6 +272,39 @@ static NSString* IS_REFRESH_FALSE = @"0";
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         [_tableView registerClass:[MessageMainCell class] forCellReuseIdentifier:@"MessageMainCell"];
         [_tableView setShowsVerticalScrollIndicator:NO];
+        _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            if (_isInUnRead) {
+                _unReadpage = 0;
+                _datas = [[FMDBHelper sharedInstance] selectMessagesFromDBByPageIndex:_unReadpage pageSize:PAGESIZE];
+            }else {
+                _readedpage = 0;
+                _datas = [[FMDBHelper sharedInstance] selectReadedMessagesFromDBByPageIndex:_readedpage pageSize:PAGESIZE];
+            }
+            [_tableView reloadData];
+            [_tableView.mj_header endRefreshing];
+        }];
+        _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            if (_isInUnRead) {
+                _unReadpage ++;
+                NSMutableArray *tempDatas = [[FMDBHelper sharedInstance] selectMessagesFromDBByPageIndex:_unReadpage pageSize:PAGESIZE];
+                [_datas addObjectsFromArray:tempDatas];
+                if ([tempDatas count] < 10) {
+                    [_tableView.mj_footer endRefreshingWithNoMoreData];
+                }else {
+                    [_tableView.mj_footer resetNoMoreData];
+                }
+            }else {
+                _readedpage ++;
+                NSMutableArray *tempDatas = [[FMDBHelper sharedInstance] selectReadedMessagesFromDBByPageIndex:_readedpage pageSize:PAGESIZE];
+                [_datas addObjectsFromArray:tempDatas];
+                if ([tempDatas count] < 10) {
+                    [_tableView.mj_footer endRefreshingWithNoMoreData];
+                }else {
+                    [_tableView.mj_footer resetNoMoreData];
+                }
+            }
+            [_tableView reloadData];
+        }];
         
     }
     return _tableView;
@@ -255,10 +314,10 @@ static NSString* IS_REFRESH_FALSE = @"0";
 - (void)sliderBarAction:(NSInteger)index {
     if (index == 0) {
         _isInUnRead = YES;
-        _datas = [[FMDBHelper sharedInstance] selectMessagesFromDB];
+        _datas = [[FMDBHelper sharedInstance] selectMessagesFromDBByPageIndex:_readedpage pageSize:PAGESIZE];
     }else {
         _isInUnRead = NO;
-        _datas = [[FMDBHelper sharedInstance] selectReadedMessagesFromDB];
+        _datas = [[FMDBHelper sharedInstance] selectReadedMessagesFromDBByPageIndex:_readedpage pageSize:PAGESIZE];
     }
     [self.tableView reloadData];
 }

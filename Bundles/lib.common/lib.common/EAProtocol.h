@@ -13,6 +13,8 @@
 static NSString * _Nonnull const REQUEST_CONTENT_TYPE        = @"text/html";
 static NSString * _Nonnull const REQUEST_SERVICE_URL         = @"http://58.215.198.212:8080/external/";
 static NSString * _Nonnull const REQUEST_URL         = @"http://58.215.198.212:8080";
+//static NSString * _Nonnull const REQUEST_SERVICE_URL         = @"http://192.168.133.107:8080/external/";
+//static NSString * _Nonnull const REQUEST_URL         = @"http://192.168.133.107:8080";
 // 登录
 static NSString * _Nonnull const CommonLoginServiceUrl          = @"common/logon";
 // 消息

@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly, strong)NSURLRequest * _Nonnull request;
 @property(nonatomic, readonly, getter=isLoading) BOOL loading;
 @property (nullable, nonatomic, weak,setter=setJavascriptInterfaceObject:) id JavascriptInterfaceObject ;
-@property(nonatomic, weak) id<WKNavigationDelegate> delegate;
 
 - (id _Nullable) getXWebview;
 

@@ -32,6 +32,7 @@ FOUNDATION_EXPORT const unsigned char lib_commonVersionString[];
 #import "TimeUtils.h"
 #import "JsonUtils.h"
 #import "AttachmentUtils.h"
+#import "ClearCacheUtils.h"
 #import "UITableView+Factory.h"
 #import "NSString+EAFoundation.h"
 #import "NSNumber+EAFoundation.h"

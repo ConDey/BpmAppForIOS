@@ -120,6 +120,18 @@
                 </br>
                 </br>
                 
+                <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"
+                    onclick="downloadFile()">
+                    文件下载
+                </button>
+                <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined"
+                    onclick="uploadFile()">
+                    文件上传
+                </button>
+                
+                </br>
+                </br>
+                
                 <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="toastShow()">
                     Toast显示
                 </button >
@@ -157,8 +169,6 @@
         mui.init({
                  swipeBack:true //启用右滑关闭功能
                  });
-                 
-                 var bpmbridget = getJsBridge();
                  
                  function closewindow() {
                      bpmbridget.call("close");
@@ -220,12 +230,12 @@
     
                  // 新建窗口
                  function startWindow() {
-                         bpmbridget.call("startWindow",{url: "https://58.215.198.210:9997/bpmapp/newjswebview.html", title: "hello"});
+                         bpmbridget.call("startWindow",{url: "https://58.215.198.210:9997/bpmapp/newjswebview", title: "hello"});
                  }
     
                  // 新建窗口并结束当前窗口
                  function skipWindow() {
-                         bpmbridget.call("skipWindow",{url: "https://58.215.198.210:9997/bpmapp/newjswebview.html", title: "hello"});
+                         bpmbridget.call("skipWindow",{url: "https://58.215.198.210:9997/bpmapp/newjswebview", title: "hello"});
                  }
     
                 function registerBack() {
@@ -275,6 +285,20 @@
                 // 调用本地相机
                 function getCamera() {
                     bpmbridget.call("getCamera", function(result){
+                                    alert(result);
+                                    });
+                }
+    
+                // 文件下载
+                function downloadFile() {
+                    bpmbridget.call("downloadFile",{attachmentId: "ff8080815f7aae2e015f7bbb33c100cc", attachmentName: "3.xlsx", autoOpen: true}, function(result){
+                                    alert(result);
+                                    });
+                }
+    
+                // 文件上传
+                function uploadFile() {
+                    bpmbridget.call("uploadFile",{filePath: "storage/emulated/0/1.pdf"}, function(result){
                                     alert(result);
                                     });
                 }

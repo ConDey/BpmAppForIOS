@@ -23,11 +23,12 @@
 
 @property (strong, nonatomic) UIImageView *headImageView;
 @property (strong, nonatomic) UIView *dividerOne;
-@property (strong, nonatomic) UIView *dividerSix;
-@property (strong, nonatomic) UILabel *usualAppsLabel;
-@property (strong, nonatomic) UIView *dividerTwo;
-@property (strong, nonatomic) UICollectionView *appsCollectionView;
-@property (strong, nonatomic) UIView *dividerThree;
+// 暂时隐藏常用菜单
+//@property (strong, nonatomic) UIView *dividerSix;
+//@property (strong, nonatomic) UILabel *usualAppsLabel;
+//@property (strong, nonatomic) UIView *dividerTwo;
+//@property (strong, nonatomic) UICollectionView *appsCollectionView;
+//@property (strong, nonatomic) UIView *dividerThree;
 @property (strong, nonatomic) UIView *dividerSeven;
 @property (strong, nonatomic) UILabel *allAppsLabel;
 @property (strong, nonatomic) UIView *dividerFour;
@@ -84,47 +85,47 @@
         make.top.mas_equalTo(self.headImageView.mas_bottom);
     }];
 
-    [self.scrollContainerView addSubview:self.dividerSix];
-    [_dividerSix mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(1);
-        make.left.right.mas_equalTo(self.scrollContainerView);
-        make.top.mas_equalTo(self.dividerOne.mas_bottom).offset(25);
-    }];
+//    [self.scrollContainerView addSubview:self.dividerSix];
+//    [_dividerSix mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_equalTo(1);
+//        make.left.right.mas_equalTo(self.scrollContainerView);
+//        make.top.mas_equalTo(self.dividerOne.mas_bottom).offset(25);
+//    }];
     
     // 常用应用
-    [self.scrollContainerView addSubview:self.usualAppsLabel];
-    [_usualAppsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(40);
-        make.left.right.mas_equalTo(self.scrollContainerView);
-        make.top.mas_equalTo(self.dividerSix.mas_bottom);
-    }];
+//    [self.scrollContainerView addSubview:self.usualAppsLabel];
+//    [_usualAppsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_equalTo(40);
+//        make.left.right.mas_equalTo(self.scrollContainerView);
+//        make.top.mas_equalTo(self.dividerSix.mas_bottom);
+//    }];
 
-    [self.scrollContainerView addSubview:self.dividerTwo];
-    [_dividerTwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(1);
-        make.left.right.mas_equalTo(self.scrollContainerView);
-        make.top.mas_equalTo(self.usualAppsLabel.mas_bottom);
-    }];
+//    [self.scrollContainerView addSubview:self.dividerTwo];
+//    [_dividerTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_equalTo(1);
+//        make.left.right.mas_equalTo(self.scrollContainerView);
+//        make.top.mas_equalTo(self.usualAppsLabel.mas_bottom);
+//    }];
 
-    [self.scrollContainerView addSubview:self.appsCollectionView];
-    [_appsCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.scrollContainerView);
-        make.top.mas_equalTo(self.dividerTwo.mas_bottom);
-        //make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
-    }];
+//    [self.scrollContainerView addSubview:self.appsCollectionView];
+//    [_appsCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.mas_equalTo(self.scrollContainerView);
+//        make.top.mas_equalTo(self.dividerTwo.mas_bottom);
+//        //make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
+//    }];
 
-    [self.scrollContainerView addSubview:self.dividerThree];
-    [_dividerThree mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(1);
-        make.left.right.mas_equalTo(self.scrollContainerView);
-        make.top.mas_equalTo(self.appsCollectionView.mas_bottom);
-    }];
+//    [self.scrollContainerView addSubview:self.dividerThree];
+//    [_dividerThree mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_equalTo(1);
+//        make.left.right.mas_equalTo(self.scrollContainerView);
+//        make.top.mas_equalTo(self.appsCollectionView.mas_bottom);
+//    }];
     
     [self.scrollContainerView addSubview:self.dividerSeven];
     [_dividerSeven mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
         make.left.right.mas_equalTo(self.scrollContainerView);
-        make.top.mas_equalTo(self.dividerThree.mas_bottom).offset(25);
+        make.top.mas_equalTo(self.dividerOne.mas_bottom).offset(25);
     }];
 
     // 全部应用
@@ -174,10 +175,10 @@
     
     [self httpGetRequestWithUrl:HttpProtocolServiceCommonConfig params:dict progress:YES];
     
-    NSDictionary* appDict = @{
-                              @"commonUse" : @YES,
-                              };
-    [self httpGetRequestWithUrl:HttpProtocolServiceAppMenuList params:appDict progress:YES];
+//  NSDictionary* appDict = @{
+//                              @"commonUse" : @YES,
+//                              };
+    //[self httpGetRequestWithUrl:HttpProtocolServiceAppMenuList params:appDict progress:YES];
     
     NSDictionary* appAllDict = @{
                               @"commonUse" : @"",
@@ -227,18 +228,18 @@
         
     }
     
-    if (name == HttpProtocolServiceAppMenuList) {
-        
-        AppListModel* appsModel = [AppListModel mj_objectWithKeyValues:result];
-        if (appsModel.success) {
-            _apps = [AppModelHelper createBpmAppByDatas:appsModel.apps];
-        }
-        // 更新高度
-        [self.appsCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
-        }];
-        [self.appsCollectionView reloadData];
-    }
+//    if (name == HttpProtocolServiceAppMenuList) {
+//
+//        AppListModel* appsModel = [AppListModel mj_objectWithKeyValues:result];
+//        if (appsModel.success) {
+//            _apps = [AppModelHelper createBpmAppByDatas:appsModel.apps];
+//        }
+//        // 更新高度
+//        [self.appsCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
+//        }];
+//        [self.appsCollectionView reloadData];
+//    }
     
     if (name == HttpProtocolServiceAppMenuAllList) {
         
@@ -264,15 +265,16 @@
     
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     
-    if (collectionView == _appsCollectionView) {
-
-        if (indexPath.row >= [self.apps count]) {
-            [cell setBackgroundColor:[UIColor whiteColor]];
-        }else {
-            [cell setBackgroundColor:UI_BK_COLOR];
-        }
-    }else {
-        
+//    if (collectionView == _appsCollectionView) {
+//
+//        if (indexPath.row >= [self.apps count]) {
+//            [cell setBackgroundColor:[UIColor whiteColor]];
+//        }else {
+//            [cell setBackgroundColor:UI_BK_COLOR];
+//        }
+//    }else {
+    if (_allAppsCollectionView) {
+    
         if (indexPath.row >= [self.allApps count]) {
             [cell setBackgroundColor:[UIColor whiteColor]];
         }else {
@@ -290,13 +292,14 @@
     
     EAApp *app;
     
-    if (collectionView == _appsCollectionView) {
-        // 空白的cell直接return掉
-        if (indexPath.row >= [self.apps count]) {
-            return;
-        }
-        app = [self.apps objectAtIndex:indexPath.row];
-    }else {
+//    if (collectionView == _appsCollectionView) {
+//        // 空白的cell直接return掉
+//        if (indexPath.row >= [self.apps count]) {
+//            return;
+//        }
+//        app = [self.apps objectAtIndex:indexPath.row];
+//    }else {
+    if (collectionView == _allAppsCollectionView) {
         // 空白的cell直接return掉
         if (indexPath.row >= [self.allApps count]) {
             return;
@@ -328,18 +331,20 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (collectionView == self.appsCollectionView) {
-        if(self.apps == nil) {
-            return 0;
-        }
-        return [self appscountdisplay:self.apps];
-    
-    }else {
+//    if (collectionView == self.appsCollectionView) {
+//        if(self.apps == nil) {
+//            return 0;
+//        }
+//        return [self appscountdisplay:self.apps];
+//
+//    }else {
+    if (collectionView == self.allAppsCollectionView) {
         if(self.allApps == nil) {
             return 0;
         }
         return [self appscountdisplay:self.allApps];
     }
+    return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -348,23 +353,23 @@
 
     UIImage* defaultMsgIcon = [UIImage imageNamed:@"ic_homeapp_stub" inBundle:self.bundle compatibleWithTraitCollection:nil];
     
-    if (collectionView == self.appsCollectionView) {
-        if (indexPath.row >= [self.apps count]) {
-            cell.titleLabel.text = @"";
-            cell.imageView.image = nil;
-        } else {
-            EAApp *app = [self.apps objectAtIndex:indexPath.row];
-            if (app != nil) {
-                cell.titleLabel.text = app.displayName;
-                if (app.imageUrlType == ImageUrlTypeInner) {
-                    
-                    cell.imageView.image = [UIImage imageNamed:app.imageUrl inBundle:self.bundle compatibleWithTraitCollection:nil];
-                }else {
-                    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", REQUEST_URL, app.imageUrl]] placeholderImage:defaultMsgIcon];
-                }
-            }
-        }
-    }
+//    if (collectionView == self.appsCollectionView) {
+//        if (indexPath.row >= [self.apps count]) {
+//            cell.titleLabel.text = @"";
+//            cell.imageView.image = nil;
+//        } else {
+//            EAApp *app = [self.apps objectAtIndex:indexPath.row];
+//            if (app != nil) {
+//                cell.titleLabel.text = app.displayName;
+//                if (app.imageUrlType == ImageUrlTypeInner) {
+//
+//                    cell.imageView.image = [UIImage imageNamed:app.imageUrl inBundle:self.bundle compatibleWithTraitCollection:nil];
+//                }else {
+//                    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", REQUEST_URL, app.imageUrl]] placeholderImage:defaultMsgIcon];
+//                }
+//            }
+//        }
+//    }
     
     if (collectionView == self.allAppsCollectionView) {
         if (indexPath.row >= [self.allApps count]) {
@@ -433,17 +438,17 @@
     return _headImageView;
 }
 
-- (UILabel*)usualAppsLabel {
-    if (_usualAppsLabel == nil) {
-        _usualAppsLabel = [[UILabel alloc] init];
-        _usualAppsLabel.text = @"   常用应用";
-        _usualAppsLabel.font = [UIFont systemFontOfSize:15];
-        _usualAppsLabel.textAlignment = UITextAlignmentLeft;
-        _usualAppsLabel.backgroundColor = [UIColor whiteColor];
-        
-    }
-    return _usualAppsLabel;
-}
+//- (UILabel*)usualAppsLabel {
+//    if (_usualAppsLabel == nil) {
+//        _usualAppsLabel = [[UILabel alloc] init];
+//        _usualAppsLabel.text = @"   常用应用";
+//        _usualAppsLabel.font = [UIFont systemFontOfSize:15];
+//        _usualAppsLabel.textAlignment = UITextAlignmentLeft;
+//        _usualAppsLabel.backgroundColor = [UIColor whiteColor];
+//
+//    }
+//    return _usualAppsLabel;
+//}
 
 - (UILabel*)allAppsLabel {
     if (_allAppsLabel == nil) {
@@ -465,21 +470,21 @@
     return _dividerOne;
 }
 
-- (UIView*)dividerTwo{
-    if (_dividerTwo == nil) {
-        _dividerTwo = [[UIView alloc] init];
-        _dividerTwo.backgroundColor = UI_GRAY_COLOR;
-    }
-    return _dividerTwo;
-}
-
-- (UIView*)dividerThree{
-    if (_dividerThree == nil) {
-        _dividerThree = [[UIView alloc] init];
-        _dividerThree.backgroundColor = UI_GRAY_COLOR;
-    }
-    return _dividerThree;
-}
+//- (UIView*)dividerTwo{
+//    if (_dividerTwo == nil) {
+//        _dividerTwo = [[UIView alloc] init];
+//        _dividerTwo.backgroundColor = UI_GRAY_COLOR;
+//    }
+//    return _dividerTwo;
+//}
+//
+//- (UIView*)dividerThree{
+//    if (_dividerThree == nil) {
+//        _dividerThree = [[UIView alloc] init];
+//        _dividerThree.backgroundColor = UI_GRAY_COLOR;
+//    }
+//    return _dividerThree;
+//}
 
 - (UIView*)dividerFour{
     if (_dividerFour == nil) {
@@ -497,13 +502,13 @@
     return _dividerFive;
 }
 
-- (UIView*)dividerSix{
-    if (_dividerSix == nil) {
-        _dividerSix = [[UIView alloc] init];
-        _dividerSix.backgroundColor = UI_GRAY_COLOR;
-    }
-    return _dividerSix;
-}
+//- (UIView*)dividerSix{
+//    if (_dividerSix == nil) {
+//        _dividerSix = [[UIView alloc] init];
+//        _dividerSix.backgroundColor = UI_GRAY_COLOR;
+//    }
+//    return _dividerSix;
+//}
 
 - (UIView*)dividerSeven{
     if (_dividerSeven == nil) {
@@ -513,24 +518,24 @@
     return _dividerSeven;
 }
 
-- (UICollectionView*)appsCollectionView {
-    if (_appsCollectionView == nil) {
-        
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = CGSizeMake(100, 100);
-        flowLayout.minimumInteritemSpacing = 1;
-        flowLayout.minimumLineSpacing = 2;
-        
-        _appsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
-        _appsCollectionView.delegate = self;
-        _appsCollectionView.dataSource = self;
-        _appsCollectionView.backgroundColor = UI_GRAY_COLOR;
-        
-        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-        [self.appsCollectionView registerNib:[UINib nibWithNibName:@"UserHomeAppViewCell" bundle:bundle]forCellWithReuseIdentifier:@"UserHomeAppViewCell"];
-    }
-    return _appsCollectionView;
-}
+//- (UICollectionView*)appsCollectionView {
+//    if (_appsCollectionView == nil) {
+//
+//        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+//        flowLayout.itemSize = CGSizeMake(100, 100);
+//        flowLayout.minimumInteritemSpacing = 1;
+//        flowLayout.minimumLineSpacing = 2;
+//
+//        _appsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+//        _appsCollectionView.delegate = self;
+//        _appsCollectionView.dataSource = self;
+//        _appsCollectionView.backgroundColor = UI_GRAY_COLOR;
+//
+//        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+//        [self.appsCollectionView registerNib:[UINib nibWithNibName:@"UserHomeAppViewCell" bundle:bundle]forCellWithReuseIdentifier:@"UserHomeAppViewCell"];
+//    }
+//    return _appsCollectionView;
+//}
 
 - (UICollectionView*)allAppsCollectionView {
     if (_allAppsCollectionView == nil) {

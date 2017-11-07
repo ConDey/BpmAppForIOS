@@ -478,22 +478,24 @@ static FMDBHelper *_instance;
     }
 }
 
-- (NSMutableArray<MessageModel*>*)selectMessagesFromDB {
+- (NSMutableArray<MessageModel*>*)selectMessagesFromDBByPageIndex:(int)pageIndex pageSize:(int)pageSize; {
     NSString* username = [[[CurrentUser currentUser] userdetails] username];
+    int index = pageSize*pageIndex;
     NSMutableString* selectMsgSql = [[NSMutableString alloc] initWithString:@"select * from "];
     [selectMsgSql appendString:FMDBMessageTableName];
-    [selectMsgSql appendString:@" where username == ? and isread == '0' order by gmtCreate desc"];
-    FMResultSet* result = [self.database executeQuery:selectMsgSql, username];
+    [selectMsgSql appendString:@" where username == '%@' and isread == '0' order by gmtCreate desc limit %@ offset %@"];
+    FMResultSet* result = [self.database executeQuery:[NSString stringWithFormat:selectMsgSql, username, [NSString stringWithFormat:@"%d", pageSize], [NSString stringWithFormat:@"%d", index]]];
     
     return [self convertWithMessageResult:result];
 }
 
-- (NSMutableArray<MessageModel*>*)selectReadedMessagesFromDB {
+- (NSMutableArray<MessageModel*>*)selectReadedMessagesFromDBByPageIndex:(int)pageIndex pageSize:(int)pageSize {
     NSString* username = [[[CurrentUser currentUser] userdetails] username];
+    int index = pageSize*pageIndex;
     NSMutableString* selectMsgSql = [[NSMutableString alloc] initWithString:@"select * from "];
     [selectMsgSql appendString:FMDBMessageTableName];
-    [selectMsgSql appendString:@" where username == ? and isread == '1' order by gmtCreate desc"];
-    FMResultSet* result = [self.database executeQuery:selectMsgSql, username];
+    [selectMsgSql appendString:@" where username == '%@' and isread == '1' order by gmtCreate desc limit %@ offset %@"];
+    FMResultSet* result = [self.database executeQuery:[NSString stringWithFormat:selectMsgSql, username, [NSString stringWithFormat:@"%d", pageSize], [NSString stringWithFormat:@"%d", index]]];
     
     return [self convertWithMessageResult:result];
 }
@@ -508,14 +510,25 @@ static FMDBHelper *_instance;
     NSLog(@"Update_Read_State_Info: %hhu", result);
 }
 
-- (NSMutableArray<MessageModel*>*)selectMessageByPage:(NSString*)topicId pageIndex:(int)pageIndex pageSize:(int)pageSize {
+- (NSMutableArray<MessageModel*>*)selectMessageByPageIndex:(int)pageIndex pageSize:(int)pageSize {
     NSString* username = [[[CurrentUser currentUser] userdetails] username];
     
     NSMutableString* sql = [[NSMutableString alloc] initWithString:@"select * from "];
     [sql appendString:FMDBMessageTableName];
-    [sql appendString:@" where topic == '%@' and username == '%@' order by gmtCreate desc limit %@ , %@"];
-    FMResultSet* result = [self.database executeQuery:[NSString stringWithFormat:sql, topicId, username, [NSString stringWithFormat:@"%d", pageIndex], [NSString stringWithFormat:@"%d", pageSize]]];
+    [sql appendString:@" where username == '%@' order by gmtCreate desc limit %@ , %@"];
+    FMResultSet* result = [self.database executeQuery:[NSString stringWithFormat:sql, username, [NSString stringWithFormat:@"%d", pageIndex], [NSString stringWithFormat:@"%d", pageSize]]];
     return [self convertWithMessageResult:result];
+}
+
+- (Boolean)deleteMessageFormDBBy:(NSString*)msgId {
+    NSString* username = [[[CurrentUser currentUser] userdetails] username];
+    
+    NSMutableString *sql = [[NSMutableString alloc] initWithString:@"delete from "];
+    [sql appendString:FMDBMessageTableName];
+    [sql appendString:@" where username == ? and message_id == ? "];
+    Boolean result = [self.database executeUpdate:sql, username, msgId];
+    NSLog(@"Delete_msg: %hhu", result);
+    return result;
 }
 
 // 根据当前messageId来查询message

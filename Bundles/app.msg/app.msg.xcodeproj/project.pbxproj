@@ -25,6 +25,8 @@
 		06C6BACB1F15C39000D444E6 /* MsgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgViewController.h; sourceTree = "<group>"; };
 		06C6BACC1F15C39000D444E6 /* MsgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgViewController.m; sourceTree = "<group>"; };
 		06F809C21F26358C000872C4 /* Small.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Small.framework; path = "../../Frameworks/build/Debug-iphoneos/Small.framework"; sourceTree = "<group>"; };
+		84108EA21FB0494A00627148 /* ImageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModel.h; sourceTree = "<group>"; };
+		84108EA31FB0494A00627148 /* ImageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageModel.m; sourceTree = "<group>"; };
 		84301ABC1F95DE7D00F01F8F /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		84301AE71F95F98F00F01F8F /* MessageMainCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageMainCell.h; sourceTree = "<group>"; };
 		84301AE81F95F98F00F01F8F /* MessageMainCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageMainCell.m; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				84301AF91F9621A500F01F8F /* Supporting Files */,
 				06C6BA6B1F15C09300D444E6 /* app.msg.h */,
 				06C6BA6C1F15C09300D444E6 /* Info.plist */,
+				84108EA41FB0494A00627148 /* Model */,
 				84301ABC1F95DE7D00F01F8F /* PrefixHeader.pch */,
 			);
 			path = app.msg;
@@ -90,6 +93,16 @@
 				84301AD01F95E75800F01F8F /* View */,
 			);
 			name = Src;
+			sourceTree = "<group>";
+		};
+		84108EA41FB0494A00627148 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84108EA21FB0494A00627148 /* ImageModel.h */,
+				84108EA31FB0494A00627148 /* ImageModel.m */,
+			);
+			name = Model;
+			path = app.home;
 			sourceTree = "<group>";
 		};
 		84301AD01F95E75800F01F8F /* View */ = {

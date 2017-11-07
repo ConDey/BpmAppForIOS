@@ -37,6 +37,8 @@
 		06C6BB021F17164500D444E6 /* ic_homeapp_process.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB011F17164500D444E6 /* ic_homeapp_process.png */; };
 		06C6BB0A1F1743A500D444E6 /* ic_homeapp_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB091F1743A500D444E6 /* ic_homeapp_image.png */; };
 		06C6BB0C1F1743E300D444E6 /* ic_homeapp_filepicker.png in Resources */ = {isa = PBXBuildFile; fileRef = 06C6BB0B1F1743E300D444E6 /* ic_homeapp_filepicker.png */; };
+		84108EA71FB04B6900627148 /* ImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84108EA51FB04B6800627148 /* ImageModel.m */; };
+		84108EA81FB04B6900627148 /* ImageModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84108EA61FB04B6900627148 /* ImageModel.h */; };
 		84301C761F998D2600F01F8F /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 84301C751F998D2500F01F8F /* PrefixHeader.pch */; };
 		84301C7A1F99960700F01F8F /* AppModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301C781F99960700F01F8F /* AppModel.h */; };
 		84301C7B1F99960700F01F8F /* AppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301C791F99960700F01F8F /* AppModel.m */; };
@@ -48,8 +50,6 @@
 		847206D91F9EE50700A7CE7E /* ic_homeapp_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D41F9D85FA00A7CE7E /* ic_homeapp_card.png */; };
 		847206DA1F9EE50700A7CE7E /* ic_homeapp_file.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D51F9D85FA00A7CE7E /* ic_homeapp_file.png */; };
 		847206DB1F9EE50700A7CE7E /* ic_homeapp_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 847206D61F9D85FD00A7CE7E /* ic_homeapp_search.png */; };
-		84AE72251FA70372002530AD /* ImageModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE72231FA7036F002530AD /* ImageModel.h */; };
-		84AE72261FA70373002530AD /* ImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE72241FA7036F002530AD /* ImageModel.m */; };
 		F80A8ACD1F98224100E126C6 /* PasswordChangeController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8ACB1F98224100E126C6 /* PasswordChangeController.h */; };
 		F80A8ACE1F98224100E126C6 /* PasswordChangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8ACC1F98224100E126C6 /* PasswordChangeController.m */; };
 		F80A8AD31F98224C00E126C6 /* ic_setting_update.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8ACF1F98224C00E126C6 /* ic_setting_update.png */; };
@@ -94,6 +94,8 @@
 		06C6BB091F1743A500D444E6 /* ic_homeapp_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_image.png; sourceTree = "<group>"; };
 		06C6BB0B1F1743E300D444E6 /* ic_homeapp_filepicker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_filepicker.png; sourceTree = "<group>"; };
 		06F809C41F263593000872C4 /* Small.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Small.framework; path = "../../Frameworks/build/Debug-iphoneos/Small.framework"; sourceTree = "<group>"; };
+		84108EA51FB04B6800627148 /* ImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageModel.m; path = app.home/ImageModel.m; sourceTree = SOURCE_ROOT; };
+		84108EA61FB04B6900627148 /* ImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageModel.h; path = app.home/ImageModel.h; sourceTree = SOURCE_ROOT; };
 		84301C751F998D2500F01F8F /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		84301C781F99960700F01F8F /* AppModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppModel.h; sourceTree = "<group>"; };
 		84301C791F99960700F01F8F /* AppModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppModel.m; sourceTree = "<group>"; };
@@ -105,8 +107,6 @@
 		847206D51F9D85FA00A7CE7E /* ic_homeapp_file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_file.png; sourceTree = "<group>"; };
 		847206D61F9D85FD00A7CE7E /* ic_homeapp_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_search.png; sourceTree = "<group>"; };
 		847206D71F9EDD2100A7CE7E /* ic_homeapp_stub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_stub.png; sourceTree = "<group>"; };
-		84AE72231FA7036F002530AD /* ImageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModel.h; sourceTree = "<group>"; };
-		84AE72241FA7036F002530AD /* ImageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageModel.m; sourceTree = "<group>"; };
 		F80A8ACB1F98224100E126C6 /* PasswordChangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordChangeController.h; sourceTree = "<group>"; };
 		F80A8ACC1F98224100E126C6 /* PasswordChangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeController.m; sourceTree = "<group>"; };
 		F80A8ACF1F98224C00E126C6 /* ic_setting_update.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_update.png; sourceTree = "<group>"; };
@@ -337,10 +337,11 @@
 		84AE72221FA702CD002530AD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				84AE72231FA7036F002530AD /* ImageModel.h */,
-				84AE72241FA7036F002530AD /* ImageModel.m */,
+				84108EA61FB04B6900627148 /* ImageModel.h */,
+				84108EA51FB04B6800627148 /* ImageModel.m */,
 			);
 			name = Model;
+			path = ../../app.msg/app.msg/app.home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,7 +356,7 @@
 				F80A8ACD1F98224100E126C6 /* PasswordChangeController.h in Headers */,
 				06C6BAD71F15CA3600D444E6 /* UserHomeAppController.h in Headers */,
 				84301C7E1F99990E00F01F8F /* AppListModel.h in Headers */,
-				84AE72251FA70372002530AD /* ImageModel.h in Headers */,
+				84108EA81FB04B6900627148 /* ImageModel.h in Headers */,
 				06C6BADC1F15CB3600D444E6 /* UserHomeSettingController.h in Headers */,
 				84301C831F999C2E00F01F8F /* AppModelHelper.h in Headers */,
 				06C6BA511F14F2EA00D444E6 /* UserHomeNavController.h in Headers */,
@@ -466,7 +467,7 @@
 				F80A8ACE1F98224100E126C6 /* PasswordChangeController.m in Sources */,
 				84301C841F999C2E00F01F8F /* AppModelHelper.m in Sources */,
 				06C6BA4E1F14F1E200D444E6 /* UserHomeTabController.m in Sources */,
-				84AE72261FA70373002530AD /* ImageModel.m in Sources */,
+				84108EA71FB04B6900627148 /* ImageModel.m in Sources */,
 				06C6BAF71F16F93100D444E6 /* UserHomeAppViewCell.m in Sources */,
 				06C6BAED1F1603CF00D444E6 /* EAApp.m in Sources */,
 				84301C7B1F99960700F01F8F /* AppModel.m in Sources */,

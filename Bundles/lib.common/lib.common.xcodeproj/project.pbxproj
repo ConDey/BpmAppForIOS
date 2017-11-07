@@ -94,6 +94,8 @@
 		06C6BA491F14C42700D444E6 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C6BA3E1F14C42700D444E6 /* SVRadialGradientLayer.m */; };
 		06C6BB071F173D9000D444E6 /* UIView+Layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C6BB051F173D9000D444E6 /* UIView+Layout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C6BB081F173D9000D444E6 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C6BB061F173D9000D444E6 /* UIView+Layout.m */; };
+		84108EAB1FB19B2700627148 /* ClearCacheUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 84108EA91FB19B2600627148 /* ClearCacheUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84108EAC1FB19B2700627148 /* ClearCacheUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84108EAA1FB19B2600627148 /* ClearCacheUtils.m */; };
 		84301A801F95D74800F01F8F /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301A6A1F95D74600F01F8F /* MASConstraint.m */; };
 		84301A811F95D74800F01F8F /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 84301A6B1F95D74600F01F8F /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84301A821F95D74800F01F8F /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 84301A6C1F95D74600F01F8F /* MASViewConstraint.m */; };
@@ -377,6 +379,8 @@
 		06C6BA3E1F14C42700D444E6 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
 		06C6BB051F173D9000D444E6 /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
 		06C6BB061F173D9000D444E6 /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
+		84108EA91FB19B2600627148 /* ClearCacheUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClearCacheUtils.h; sourceTree = "<group>"; };
+		84108EAA1FB19B2600627148 /* ClearCacheUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClearCacheUtils.m; sourceTree = "<group>"; };
 		84301A6A1F95D74600F01F8F /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
 		84301A6B1F95D74600F01F8F /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
 		84301A6C1F95D74600F01F8F /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
@@ -1011,6 +1015,8 @@
 				84AE716D1FA2C5B0002530AD /* JsonUtils.m */,
 				84AE721E1FA6FB7B002530AD /* AttachmentUtils.h */,
 				84AE721F1FA6FB7B002530AD /* AttachmentUtils.m */,
+				84108EA91FB19B2600627148 /* ClearCacheUtils.h */,
+				84108EAA1FB19B2600627148 /* ClearCacheUtils.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1453,6 +1459,7 @@
 				84AE71E21FA42325002530AD /* ZLCameraImageView.h in Headers */,
 				84AE71E31FA42325002530AD /* ZLCameraView.h in Headers */,
 				84AE72201FA6FB7C002530AD /* AttachmentUtils.h in Headers */,
+				84108EAB1FB19B2700627148 /* ClearCacheUtils.h in Headers */,
 				84AE71E41FA42326002530AD /* ZLCameraViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1631,6 +1638,7 @@
 				F8AFFBBA1F9D947700CE74F5 /* MJRefreshBackGifFooter.m in Sources */,
 				F8AFFBAA1F9D947700CE74F5 /* MJRefreshAutoFooter.m in Sources */,
 				84301C501F9978BE00F01F8F /* UIImage+GIF.m in Sources */,
+				84108EAC1FB19B2700627148 /* ClearCacheUtils.m in Sources */,
 				F8AFFBC21F9D947700CE74F5 /* MJRefreshNormalHeader.m in Sources */,
 				F8AFFBD01F9D947700CE74F5 /* UIView+MJExtension.m in Sources */,
 				063455361F1CA4EE00F1BEF8 /* MJFoundation.m in Sources */,

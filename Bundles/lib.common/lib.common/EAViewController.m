@@ -236,7 +236,6 @@
              else {
                  if (progress) {
                      [SVProgressHUD showErrorWithStatus:[result objectForKey:@"errorMsg"]];
-                     
                  }
              }
              [self didFinishHttpRequest:name];
