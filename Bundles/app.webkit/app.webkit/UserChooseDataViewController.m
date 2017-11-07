@@ -213,6 +213,14 @@
     [tableCell addSubview:titleLabel];
     [tableCell addSubview:headImageView];
     [tableCell addSubview:numOfDep];
+    UIView *singleView=[[UIView alloc]init];//分割线
+    [tableCell addSubview:singleView];
+    [singleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(0);
+        make.height.mas_equalTo(0.5);
+    }];
+    singleView.backgroundColor=UI_DIVIDER_COLOR;
     [headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(40, 40));
         make.left.mas_equalTo(10);
@@ -245,7 +253,16 @@
                     tableCell.accessoryType=UITableViewCellAccessoryCheckmark;
                 }
             }
-            
+            if(indexPath.row==self.search.count-1){
+                UIView *singleBottomView=[[UIView alloc]init];
+                [tableCell addSubview:singleBottomView];
+                [singleBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.right.mas_equalTo(0);
+                    make.bottom.mas_equalTo(0);
+                    make.height.mas_equalTo(0.5);
+                }];
+                singleBottomView.backgroundColor=UI_DIVIDER_COLOR;
+            }
         }
     }else{
         if(indexPath.section == 0) {
@@ -258,6 +275,16 @@
                 titleLabel.text = name;
                 NSString *num=[NSString stringWithFormat:@"%@人",[deparment objectForKey:@"userCount"]];//一个部门下的人员信息
                 numOfDep.text=num;
+                if(indexPath.row==self.departments.count-1){
+                    UIView *singleBottomView=[[UIView alloc]init];
+                    [tableCell addSubview:singleBottomView];
+                    [singleBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.left.right.mas_equalTo(0);
+                        make.bottom.mas_equalTo(0);
+                        make.height.mas_equalTo(0.5);
+                    }];
+                    singleBottomView.backgroundColor=UI_DIVIDER_COLOR;
+                }
             } else {
                 // 显示员工
                 
@@ -275,6 +302,16 @@
                     if([data objectForKey:@"id"]==[user objectForKey:@"id"]){
                         tableCell.accessoryType=UITableViewCellAccessoryCheckmark;
                     }
+                }
+                if(indexPath.row==self.users.count-1){
+                    UIView *singleBottomView=[[UIView alloc]init];
+                    [tableCell addSubview:singleBottomView];
+                    [singleBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.left.right.mas_equalTo(0);
+                        make.bottom.mas_equalTo(0);
+                        make.height.mas_equalTo(0.5);
+                    }];
+                    singleBottomView.backgroundColor=UI_DIVIDER_COLOR;
                 }
             }
         }
@@ -294,6 +331,16 @@
                 if([data objectForKey:@"id"]==[user objectForKey:@"id"]){
                     tableCell.accessoryType=UITableViewCellAccessoryCheckmark;
                 }
+            }
+            if(indexPath.row==self.users.count-1){
+                UIView *singleBottomView=[[UIView alloc]init];
+                [tableCell addSubview:singleBottomView];
+                [singleBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.right.mas_equalTo(0);
+                    make.bottom.mas_equalTo(0);
+                    make.height.mas_equalTo(0.5);
+                }];
+                singleBottomView.backgroundColor=UI_DIVIDER_COLOR;
             }
         }
     }

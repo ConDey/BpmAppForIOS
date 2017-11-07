@@ -55,6 +55,7 @@ static EAProtocol *_instance;
     manager.requestSerializer                         = [AFHTTPRequestSerializer serializer];
     manager.responseSerializer                        = [AFHTTPResponseSerializer serializer];
     
+    
     if ([NSString isEqualToString:url origin:@"common/logon"] || [NSString isEqualToString:url origin:@"common/config"]) {
         [manager.requestSerializer setValue:[CurrentUser defaultToken] forHTTPHeaderField:@"token"];
     }else {
@@ -77,6 +78,7 @@ static EAProtocol *_instance;
                                                     AppMenuListServiceUrl,
                                                     AppMenuAllListServiceUrl,
                                                     CommonConfigServiceUrl,
+                                                    AttachmentUploadUrl,
                            nil];
     }
     return _webServiceUrls;

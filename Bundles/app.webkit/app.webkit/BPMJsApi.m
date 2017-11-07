@@ -154,4 +154,11 @@
     }
 }
 
+- (void)uploadFile:(NSDictionary *)args :(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
+    if (self.delegate != nil) {
+        [self.delegate delegate_uploadFile:[args objectForKey:@"filePath"] callBack:completionHandler];
+    }
+}
+
+
 @end

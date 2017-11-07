@@ -161,6 +161,7 @@
     if(cell==nil){
         cell=[[NoticeListViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NoticeList"];
     }
+    
     if(indexPath.row<[self.noticeList count]){
         NSDictionary *noticeData=[self.noticeList objectAtIndex:indexPath.row];
         
@@ -182,13 +183,11 @@
         cell.createdTime.textColor=FONT_GRAY_COLOR;
         cell.createdTime.font=FONT_14;
     }
-    //NSLog(@"%lu---%lu",indexPath.row,cell.frame.size.height);
+  
     
     return cell;
 }
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return self.cellHeight;
-//}
+
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return self.cellHeight;

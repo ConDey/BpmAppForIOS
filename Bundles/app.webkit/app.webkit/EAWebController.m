@@ -22,7 +22,9 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     CommonCompletionHandler commonHandler;
     Boolean isBindBackBtn;
     NSString* mfileName;
-    
+    NSString *photoPath;
+    NSString *originPath;
+    BOOL  isSave;
 }
 @property (retain, nonatomic) UIProgressView *progressView;
 @property (retain, nonatomic) WKWebView *wkwebview;
@@ -35,7 +37,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
+    originPath= [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"uploadImage"];
     // 解码
     self.view.backgroundColor = [UIColor whiteColor];
     self.urltitle = [NSString decodeString:self.urltitle];
@@ -517,6 +519,20 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     
 }
 
+//上传文件
+-(void)delegate_uploadFile:(NSString *)filePath callBack:(void (^)(NSString * _Nullable, BOOL))completionHandler{
+    
+    NSString *fileName=[[NSString alloc]init];
+    for(int indexOfId=0;indexOfId<filePath.length-3;indexOfId++){
+    if([[filePath substringWithRange:NSMakeRange(indexOfId, 3)] isEqualToString:@"id="]){
+        fileName=[filePath substringWithRange:NSMakeRange(indexOfId+3, 36)];
+    }
+    }
+    [self uploadImg:fileName withPath:filePath];
+}
+
+
+
 #pragma mark - LGPhotoPickerViewControllerDelegate
 
 // 选择图片等回调方法
@@ -536,6 +552,12 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
      [fullResolutionImage addObject:fullResolutionImage];
      }
      */
+//    NSMutableArray *originImage = [NSMutableArray array];
+//    for(LGPhotoAssets *photo in assets){
+//        [originImage addObject:photo.originImage];
+//    }
+//    originImgArray=[[NSArray alloc]initWithArray:originImage];
+    
     
     NSMutableArray *urls = [[NSMutableArray alloc] init];
     for (LGPhotoAssets* asset in assets) {
@@ -544,8 +566,11 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     
     ListDataResult *result = [[ListDataResult alloc] initWithSuccess:YES withUrls:urls];
     NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
+    NSLog(@"url----%@",urls);
     commonHandler(resultJson, YES);
 }
+
+
 
 // 点击 progress 消失
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -635,32 +660,31 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 }
 
 #pragma mark 通用文件上传方法
-- (void)commonUpload {
+-(void)uploadImg:(NSString *)fileName withPath:(NSString *)path{
+    //上传文件
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
-    NSURL *server =[NSURL URLWithString:[NSString stringWithFormat:@"%@/external/attachment/upload",REQUEST_URL]];
-    NSURL *filePath = [NSURL fileURLWithPath:@"assets-library://asset/asset.JPG?id=106E99A1-4F6A-45A2-B320-B0AD4A8E8473&ext=JPG"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:server];
+    NSURL *URL = [NSURL URLWithString:[REQUEST_SERVICE_URL stringByAppendingString:@"attachment/upload"]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    //设置头
+    [request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
+    // [request addValue:[NSString stringWithFormat:@"%@.mp4",fileName] forHTTPHeaderField:@"fileName"];
+    [request addValue:[NSString stringWithFormat:@"%@.jpg",fileName] forHTTPHeaderField:@"fileName"];
     NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
     [request addValue:cookie forHTTPHeaderField:@"token"];
-    [request addValue:@"test.jpg" forHTTPHeaderField:@"fileName"];
-    [request addValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
-    
-    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:filePath progress:^(NSProgress * _Nonnull uploadProgress){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            //Update the progress view
-            [_progressView setProgress:uploadProgress.fractionCompleted];
-        });
-        
-    } completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+    //POST
+    [request setHTTPMethod:@"POST"];
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:[NSURL fileURLWithPath:path] progress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (error) {
             NSLog(@"Error: %@", error);
+            
         } else {
             NSLog(@"Success: %@ %@", response, responseObject);
+            
         }
     }];
     [uploadTask resume];
+    
 }
 
 //判断文件是否已经在沙盒中已经存在？

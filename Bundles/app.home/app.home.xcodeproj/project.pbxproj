@@ -57,6 +57,7 @@
 		F80A8AD51F98224C00E126C6 /* ic_setting_loginout.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8AD11F98224C00E126C6 /* ic_setting_loginout.png */; };
 		F80A8AD61F98224C00E126C6 /* ic_setting_setting.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8AD21F98224C00E126C6 /* ic_setting_setting.png */; };
 		F88BD5BE1FAB2B280049346D /* ic_common_left_back.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD5BD1FAB2B270049346D /* ic_common_left_back.png */; };
+		F88BD5F51FB006500049346D /* ic_setting_browser.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD5F41FB006500049346D /* ic_setting_browser.png */; };
 		F8C1830C1FA944C10095A91E /* version.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8C1830B1FA944C10095A91E /* version.plist */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +116,7 @@
 		F80A8AD21F98224C00E126C6 /* ic_setting_setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_setting.png; sourceTree = "<group>"; };
 		F88BC77E1FA9BFD20049346D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F88BD5BD1FAB2B270049346D /* ic_common_left_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_common_left_back.png; sourceTree = "<group>"; };
+		F88BD5F41FB006500049346D /* ic_setting_browser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_browser.png; sourceTree = "<group>"; };
 		F8C1830B1FA944C10095A91E /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -186,6 +188,7 @@
 		06C3A4351F0C72EB00633543 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F88BD5F41FB006500049346D /* ic_setting_browser.png */,
 				F88BD5BD1FAB2B270049346D /* ic_common_left_back.png */,
 				847206D71F9EDD2100A7CE7E /* ic_homeapp_stub.png */,
 				847206D41F9D85FA00A7CE7E /* ic_homeapp_card.png */,
@@ -438,6 +441,7 @@
 				F80A8AD31F98224C00E126C6 /* ic_setting_update.png in Resources */,
 				06C6BB0A1F1743A500D444E6 /* ic_homeapp_image.png in Resources */,
 				F8C1830C1FA944C10095A91E /* version.plist in Resources */,
+				F88BD5F51FB006500049346D /* ic_setting_browser.png in Resources */,
 				F88BD5BE1FAB2B280049346D /* ic_common_left_back.png in Resources */,
 				06C6BB0C1F1743E300D444E6 /* ic_homeapp_filepicker.png in Resources */,
 				06C5A2DA1F26D32A00A189FB /* app.json in Resources */,

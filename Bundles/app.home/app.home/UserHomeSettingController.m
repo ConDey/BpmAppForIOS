@@ -12,7 +12,9 @@
 #import "PasswordChangeController.h"
 #import "AppDelegate.h"
 @interface UserHomeSettingController ()
-
+{
+    CGFloat cellHeight;
+}
 @property (weak, nonatomic) IBOutlet UIView *panelView;
 
 @property (weak, nonatomic) IBOutlet UILabel *nameTextView;
@@ -26,6 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    cellHeight=55;
     [self.panelView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
         make.top.mas_equalTo(25);
@@ -43,16 +46,21 @@
     self.poTextView.text=[CurrentUser currentUser].userdetails.position;
     
     [self.view addSubview:self.tableview];
+    self.tableview.scrollEnabled=NO;
+    CGFloat height=cellHeight*4;
+    if(height>SCREEN_HEIGHT-self.panelView.frame.size.height){
+        height=SCREEN_HEIGHT-self.panelView.frame.size.height;
+    }
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(self.panelView.mas_bottom).mas_equalTo(25);
-        make.height.mas_equalTo(180);
+        make.height.mas_equalTo(height);
     }];
     [self.tableview setFrame:CGRectMake(0, self.panelView.bounds.size.height+20, self.view.bounds.size.width, self.view.bounds.size.height-self.panelView.bounds.size.height-20)];
     self.tableview.delegate=self;
     self.tableview.dataSource=self;
     [self.tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"HomeSet"];
-    [self.tableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+ //   [self.tableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
   
     
     
@@ -72,7 +80,7 @@
 
 #pragma mark-<UITableViewDelegete,UITableViewDatasource>
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -81,6 +89,14 @@
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"HomeSet"];
     UILabel *label=[[UILabel alloc]init];
     UIImageView *picView=[[UIImageView alloc]init];
+    UIView *singleView=[[UIView alloc]init];//分割线
+    [cell addSubview:singleView];
+    [singleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.top.mas_equalTo(0);
+        make.height.mas_equalTo(0.5);
+    }];
+    singleView.backgroundColor=UI_DIVIDER_COLOR;
     if(indexPath.row==0){
         picView.image=[UIImage imageNamed:@"ic_setting_update.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         label.text=@"在线更新";
@@ -88,8 +104,20 @@
         picView.image=[UIImage imageNamed:@"ic_setting_updatepwd.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         label.text=@"修改密码";
     }else if (indexPath.row==2){
+        picView.image=[UIImage imageNamed:@"ic_setting_browser.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+        label.text=@"清除缓存";
+    }else{
+        UIView *singleBottomView=[[UIView alloc]init];
+        [cell addSubview:singleBottomView];
+        [singleBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.bottom.mas_equalTo(0);
+            make.height.mas_equalTo(0.5);
+        }];
+        singleBottomView.backgroundColor=UI_DIVIDER_COLOR;
         picView.image=[UIImage imageNamed:@"ic_setting_loginout.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         label.text=@"退出";
+        
     }
     [cell.contentView addSubview:label];
     [cell.contentView addSubview:picView];
@@ -118,7 +146,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 55;
+    return cellHeight;
 }
 //点击事件
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -136,8 +164,22 @@
         PasswordChangeController *pc=[[PasswordChangeController alloc]init];
         [self.navigationController pushViewController: pc animated:YES];
     }else if (row==2){
+        //清除缓存
+        UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"确定清除缓存吗" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *sureOut=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //  清除缓存操作
+            NSLog(@"清除缓存");
+            
+            
+            
+        }];
+        [alert addAction:cancel];
+        [alert addAction:sureOut];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
         //退出
-        UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"确定退出吗" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertOut=[UIAlertController alertControllerWithTitle:@"确定退出吗" message:nil preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancel=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *sureOut=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [Small setUpWithComplection:^{
@@ -145,9 +187,9 @@
                 [self presentViewController:mainController animated:NO completion:nil];
             }];
         }];
-        [alert addAction:cancel];
-        [alert addAction:sureOut];
-        [self presentViewController:alert animated:YES completion:nil];
+        [alertOut addAction:cancel];
+        [alertOut addAction:sureOut];
+        [self presentViewController:alertOut animated:YES completion:nil];
     }
     
     [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
@@ -157,16 +199,5 @@
     
 }
 
-
-// 自定义TableViewCell分割线, 清除前面15PX的空白
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-    
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
 @end
 
