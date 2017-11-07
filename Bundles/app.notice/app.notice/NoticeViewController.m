@@ -183,13 +183,11 @@
         cell.createdTime.textColor=FONT_GRAY_COLOR;
         cell.createdTime.font=FONT_14;
     }
-    //NSLog(@"%lu---%lu",indexPath.row,cell.frame.size.height);
+  
     
     return cell;
 }
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return self.cellHeight;
-//}
+
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return self.cellHeight;
@@ -206,16 +204,16 @@
     [self.navigationController pushViewController:ndc animated:YES];
     
 }
-//// 自定义TableViewCell分割线, 清除前面15PX的空白
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-//        [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
-//    }
-//    
-//    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-//        [cell setLayoutMargins:UIEdgeInsetsZero];
-//    }
-//}
+// 自定义TableViewCell分割线, 清除前面15PX的空白
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
 
 
 @end
