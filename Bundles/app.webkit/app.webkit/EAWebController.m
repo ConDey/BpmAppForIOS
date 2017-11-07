@@ -540,17 +540,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
             Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
             NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:((unsigned long)rep.size) error:nil];
             NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
-            UIImage *image=[UIImage imageWithData:data];
-            //压缩图片
-            CGSize newSize=CGSizeMake(200, 200);
-            UIGraphicsBeginImageContext(newSize);
-            [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-            UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            NSData *dataYS=UIImageJPEGRepresentation(newImage, 0.3);
-            photoPath = [originPath stringByAppendingPathComponent:fileName];
-            //NSLog(@"沙盒路径%@",photoPath);
-            [dataYS writeToFile:photoPath atomically:YES];
+            [data writeToFile:photoPath atomically:YES];
             [self uploadImg:fileName withPath:photoPath];
         } failureBlock:nil];
     }
@@ -644,22 +634,19 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 }
 
 -(void)uploadImg:(NSString *)fileName withPath:(NSString *)path{
-   
-    NSData *imageData=[NSData dataWithContentsOfFile:path];
-    NSLog(@"%@图片",[UIImage imageWithData:imageData]);
-    //http
+   //上传文件
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
    NSURL *URL = [NSURL URLWithString:[REQUEST_SERVICE_URL stringByAppendingString:@"attachment/upload"]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
         //设置头
-     //[request setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@",fileName] forHTTPHeaderField:@"Content-Type"];
-       [request addValue:fileName forHTTPHeaderField:@"fileName"];
+       [request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
+       [request addValue:[NSString stringWithFormat:@"%@.jpg",fileName] forHTTPHeaderField:@"fileName"];
         NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
-        [request addValue:cookie forHTTPHeaderField:@"token"];
-    
+      [request addValue:cookie forHTTPHeaderField:@"token"];
+       //POST
         [request setHTTPMethod:@"POST"];
-    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:[NSURL URLWithString:path] progress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:[NSURL fileURLWithPath:path] progress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (error) {
             NSLog(@"Error: %@", error);
            
@@ -670,9 +657,6 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     }];
         [uploadTask resume];
     
-
-    
-
 }
 
 
