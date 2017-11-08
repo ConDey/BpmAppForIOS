@@ -43,6 +43,9 @@
     if ([fileType isEqualToString:@"MOV"]) {
         return @"mov";
     }
+    if ([fileType isEqualToString:@"PNG"]) {
+        return @"png";
+    }
     if ([fileType isEqualToString:@"DOC"]) {
         return @"doc";
     }

@@ -259,7 +259,7 @@
                 }
             } else {
                 // 显示员工
-                
+                cell.accessoryType=UITableViewCellAccessoryNone;
                 User *user =  [self.users objectAtIndex:indexPath.row];
                 NSString *name = user.fullName;
                 
@@ -286,6 +286,7 @@
         }
         else {
             // 显示员工
+            cell.accessoryType=UITableViewCellAccessoryNone;
             User *user =  [self.users objectAtIndex:indexPath.row];
             NSString *name = user.fullName;
             if ([name length] > 2) {
