@@ -562,6 +562,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
             //缓存地址
             photoPath = [originPath stringByAppendingPathComponent:fileName];
             [data writeToFile:photoPath atomically:YES];
+            //NSLog(@"图片数据--%@",data);
             //post
             [self uploadImg:[NSString stringWithFormat:@"%@.%@",fileName,suffix] withPath:photoPath];
             }
