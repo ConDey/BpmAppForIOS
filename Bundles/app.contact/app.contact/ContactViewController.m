@@ -42,7 +42,6 @@
     self.grouptableview.delegate    = self;
     self.grouptableview.dataSource  = self;
     
-    [self.grouptableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [self.grouptableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ContractTableViewCell"];
     [self.view addSubview:self.grouptableview];
     [self.grouptableview mas_makeConstraints:^(MASConstraintMaker *make) {
