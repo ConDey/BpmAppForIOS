@@ -730,7 +730,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
             
         } else {
             NSLog(@"Success: %@ %@", response, responseObject);
-            //commonHandler(responseObject, YES);
+            commonHandler([responseObject mj_JSONString], YES);
             
         }
     }];
