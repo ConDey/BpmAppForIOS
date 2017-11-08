@@ -569,9 +569,17 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
             Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
             NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:((unsigned long)rep.size) error:nil];
             NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+            //压缩图片
+            UIImage *image=[UIImage imageWithData:data];
+            CGSize newSize=CGSizeMake(1020, 1020);
+            UIGraphicsBeginImageContext(newSize);
+            [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+            UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            NSData *dataYS=UIImageJPEGRepresentation(newImage, 0.3);
             //缓存地址
             photoPath = [originPath stringByAppendingPathComponent:fileName];
-            [data writeToFile:photoPath atomically:YES];
+            [dataYS writeToFile:photoPath atomically:YES];
             //NSLog(@"图片数据--%@",data);
             //post
             [self uploadImg:[NSString stringWithFormat:@"%@.%@",fileName,suffix] withPath:photoPath];
