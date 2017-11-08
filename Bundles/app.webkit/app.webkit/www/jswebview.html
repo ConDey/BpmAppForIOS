@@ -296,11 +296,18 @@
                                     });
                 }
     
-                // 文件上传
+                // 文件上传    
                 function uploadFile(){
+                    //bpmbridget.call("uploadFile",
+                    //  {filePath: "assets-library://asset/asset.PNG?id=9AFECF23-7EFB-4298-899A-DE8ABC962E6C&ext=PNG"},
+                    //  function(result){ alert(result); }); //真机
                     bpmbridget.call("uploadFile",
-                                    {filePath: "assets-library://asset/asset.JPG?id=ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED&ext=JPG"},
-                                    function(result){ alert(result); }); //这里会输出上传结果
+                                    {filePath: "assets-library://asset/asset.JPG?id=938C8A75-9F22-4DEB-A611-E8D0E17802BC&ext=JPG"},
+                                    function(result){ alert(result); }); //真机2
+                                    
+                                    // bpmbridget.call("uploadFile",
+                                    // {filePath: "assets-library://asset/asset.JPG?id=ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED&ext=JPG"},
+                                    //function(result){ alert(result); }); //模拟器这里会输出上传结果
                                     // bpmbridget.call("uploadFile",{filePath: " assets-library://asset/asset.MOV?id=660B6832-B1DD-4561-87CD-9255B92B57FF&ext=MOV"},
                                     //  function(result){ alert(result); });
                                     

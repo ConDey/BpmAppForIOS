@@ -60,6 +60,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         [self commonDownloadWithUrl:self.url isAutoOpen:@"YES" completionHandler:nil];
     }
     
+   
 }
 
 // webview 回调函数
@@ -531,6 +532,24 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         [self uploadImg:[NSString stringWithFormat:@"%@.%@",fileName, [AttachmentUtils convertUpperToLow:[filePathArr lastObject]]] withPath:filePath];
     }else {
         [SVProgressHUD showErrorWithStatus:@"文件路径非本地文件"];
+    }
+    ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:originPath]) {
+        [fileManager createDirectoryAtPath:originPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    if ([NSURL URLWithString:filePath]) {
+        // 主要方法
+        [assetLibrary assetForURL:[NSURL URLWithString:filePath] resultBlock:^(ALAsset *asset) {
+            ALAssetRepresentation *rep = [asset defaultRepresentation];
+            Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
+            NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:((unsigned long)rep.size) error:nil];
+            NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+            photoPath = [originPath stringByAppendingPathComponent:fileName];
+            //NSLog(@"沙盒路径%@",photoPath);
+            [data writeToFile:photoPath atomically:YES];
+            [self uploadImg:fileName withPath:photoPath];
+        } failureBlock:nil];
     }
 }
 
