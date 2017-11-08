@@ -30,4 +30,38 @@
     }
 }
 
++ (NSString *)convertUpperToLow:(NSString *)fileType {
+    if ([fileType isEqualToString:@"JPG"]) {
+        return @"jpg";
+    }
+    if ([fileType isEqualToString:@"JPEG"]) {
+        return @"jpeg";
+    }
+    if ([fileType isEqualToString:@"HEIC"]) {
+        return @"jpg";
+    }
+    if ([fileType isEqualToString:@"MOV"]) {
+        return @"mov";
+    }
+    if ([fileType isEqualToString:@"DOC"]) {
+        return @"doc";
+    }
+    if ([fileType isEqualToString:@"DOCX"]) {
+        return @"docx";
+    }
+    if ([fileType isEqualToString:@"XLSX"]) {
+        return @"xlsx";
+    }
+    if ([fileType isEqualToString:@"XLS"]) {
+        return @"xls";
+    }
+    if ([fileType isEqualToString:@"PDF"]) {
+        return @"pdf";
+    }
+    if ([fileType isEqualToString:@"TXT"]) {
+        return @"txt";
+    }
+    return @"";
+}
+
 @end

@@ -14,6 +14,8 @@
 @interface UserHomeSettingController ()
 {
     CGFloat cellHeight;
+    NSString *cacheSize;
+    NSURL *documentsDirectoryURL;
 }
 @property (weak, nonatomic) IBOutlet UIView *panelView;
 
@@ -22,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *departmentTextView;
 
 @property (weak, nonatomic) IBOutlet UILabel *poTextView;
+
+@property (nonatomic, strong) UILabel *cacheSizeLabel;
 @end
 
 @implementation UserHomeSettingController
@@ -61,8 +65,9 @@
     self.tableview.dataSource=self;
     [self.tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"HomeSet"];
  //   [self.tableview setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
-  
     
+    // 监听通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveTheVersionNotification) name:@"iversion" object:nil];
     
 }
 
@@ -76,6 +81,10 @@
     
     self.navDisplay = YES;
     [self setTitleOfNav:@"设置"];
+    
+    documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+    cacheSize = [ClearCacheUtils getCacheSizeWithFilePath:[documentsDirectoryURL absoluteString]];
+    [self.tableview reloadData];
 }
 
 #pragma mark-<UITableViewDelegete,UITableViewDatasource>
@@ -106,6 +115,28 @@
     }else if (indexPath.row==2){
         picView.image=[UIImage imageNamed:@"ic_setting_browser.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
         label.text=@"清除缓存";
+        
+        if (_cacheSizeLabel == nil) {
+            _cacheSizeLabel=[[UILabel alloc]init];
+            if (cacheSize == nil) {
+                cacheSize = @"0M";
+            }
+            _cacheSizeLabel.text=cacheSize;
+            _cacheSizeLabel.font=FONT_14;
+            _cacheSizeLabel.textColor=FONT_GRAY_COLOR;
+            [_cacheSizeLabel sizeToFit];
+            [cell.contentView addSubview:_cacheSizeLabel];
+            [_cacheSizeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.mas_equalTo(cell.contentView);
+                make.right.mas_equalTo(cell.contentView.mas_right).offset(-20);
+            }];
+        }else {
+            if (cacheSize == nil) {
+                cacheSize = @"0M";
+            }
+            _cacheSizeLabel.text=cacheSize;
+        }
+        
     }else{
         UIView *singleBottomView=[[UIView alloc]init];
         [cell addSubview:singleBottomView];
@@ -155,10 +186,7 @@
         //在线更新
         AppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
         [appDelegate checkUPdate];
-        
-        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-        NSString *cacheSize = [ClearCacheUtils getCacheSizeWithFilePath:[documentsDirectoryURL absoluteString]];
-        NSLog(@"CacheSize: %@",cacheSize);
+    
     }else if (row==1){
         //改密码
         PasswordChangeController *pc=[[PasswordChangeController alloc]init];
@@ -169,9 +197,13 @@
         UIAlertAction *cancel=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *sureOut=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             //  清除缓存操作
-            NSLog(@"清除缓存");
-            
-            
+            if ([ClearCacheUtils  clearCacheWithFilePath:[documentsDirectoryURL absoluteString]]){
+                [SVProgressHUD showSuccessWithStatus:@"缓存清除成功"];
+                cacheSize = [ClearCacheUtils getCacheSizeWithFilePath:[documentsDirectoryURL absoluteString]];
+                [self.tableview reloadData];
+            }else {
+                [SVProgressHUD showSuccessWithStatus:@"缓存清除失败"];
+            }
             
         }];
         [alert addAction:cancel];
@@ -194,9 +226,13 @@
     
     [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
     
-    
-    
-    
+}
+
+- (void)receiveTheVersionNotification {
+    UIAlertController *versionInfo=[UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前版本已是最新版本。版本号：%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey]] message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel=[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel handler:nil];
+    [versionInfo addAction:cancel];
+    [self presentViewController:versionInfo animated:YES completion:nil];
 }
 
 @end

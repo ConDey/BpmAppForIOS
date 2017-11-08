@@ -146,4 +146,9 @@
     [[iVersion sharedInstance] checkForNewVersion];
 }
 
+- (void)iVersionDidNotDetectNewVersion {
+    // 发出通知
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"iversion" object:nil];
+}
+
 @end

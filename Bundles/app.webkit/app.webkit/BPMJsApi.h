@@ -30,7 +30,7 @@
 - (void)delegate_skipWindowWithUrl:(NSString *_Nonnull)url title:(NSString *_Nonnull)title;
 - (void)delegate_getLocalImagesWithMaxNum:(int)maxNum callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
 - (void)delegate_getLocalVideosWithMaxNum:(int)maxNum callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
-- (void)delegate_fileDownloadWithAttachmentId:(NSString *_Nonnull)attachmentId withFileName:(NSString *_Nonnull)fileName withAutoOpen:(Boolean)isAutoOpen callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
+- (void)delegate_fileDownloadWithAttachmentId:(NSString *_Nonnull)attachmentId withFileName:(NSString *_Nonnull)fileName withAutoOpen:(NSString *)isAutoOpen callback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
 - (void)delegate_getCameraWithCallback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
 - (void)delegate_getUserWithCallback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;
 - (void)delegate_getTokenWithCallback:(void (^ _Nonnull)(NSString * _Nullable result,BOOL complete))completionHandler;

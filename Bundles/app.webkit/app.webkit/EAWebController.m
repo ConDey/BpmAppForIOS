@@ -57,10 +57,9 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         [self.webview loadRequest:request];
         
     } else {
-        [self commonDownloadWithUrl:self.url isAutoOpen:YES completionHandler:nil];
+        [self commonDownloadWithUrl:self.url isAutoOpen:@"YES" completionHandler:nil];
     }
     
-    [self commonUpload];
 }
 
 // webview 回调函数
@@ -357,7 +356,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 }
 
 // 文件下载
-- (void)delegate_fileDownloadWithAttachmentId:(NSString *)attachmentId withFileName:(NSString *)fileName withAutoOpen:(Boolean)isAutoOpen callback:(void (^)(NSString * _Nullable, BOOL))completionHandler{
+- (void)delegate_fileDownloadWithAttachmentId:(NSString *)attachmentId withFileName:(NSString *)fileName withAutoOpen:(NSString *)isAutoOpen callback:(void (^)(NSString * _Nullable, BOOL))completionHandler{
     if (attachmentId == nil || fileName == nil) {
         [SVProgressHUD showWithStatus:@"参数设置错误"];
     }else {
@@ -437,7 +436,6 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 - (void)delegate_showProgress {
     //[SVProgressHUD addGestureToDismiss];
     [SVProgressHUD showWithStatus:@"加载中..."];
-    [SVProgressHUD dismissWithDelay:5.0];
 }
 
 
@@ -522,13 +520,18 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 //上传文件
 -(void)delegate_uploadFile:(NSString *)filePath callBack:(void (^)(NSString * _Nullable, BOOL))completionHandler{
     
-    NSString *fileName=[[NSString alloc]init];
-    for(int indexOfId=0;indexOfId<filePath.length-3;indexOfId++){
-    if([[filePath substringWithRange:NSMakeRange(indexOfId, 3)] isEqualToString:@"id="]){
-        fileName=[filePath substringWithRange:NSMakeRange(indexOfId+3, 36)];
+    commonHandler = completionHandler;
+    NSURL *filePathUrl = [NSURL fileURLWithPath:filePath];
+    NSString *fileName = [filePathUrl.path lastPathComponent];
+    NSArray *filePathArr = nil;
+    if ([filePath containsString:@"="]) {
+        filePathArr = [filePath componentsSeparatedByString:@"="];
     }
+    if ([filePathArr count] > 0) {
+        [self uploadImg:[NSString stringWithFormat:@"%@.%@",fileName, [AttachmentUtils convertUpperToLow:[filePathArr lastObject]]] withPath:filePath];
+    }else {
+        [SVProgressHUD showErrorWithStatus:@"文件路径非本地文件"];
     }
-    [self uploadImg:fileName withPath:filePath];
 }
 
 
@@ -619,7 +622,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 }
 
 #pragma mark 通用下载方法
-- (void)commonDownloadWithUrl:(NSString *)fileUrl isAutoOpen:(Boolean)autoOpen completionHandler:(void (^)(NSString * _Nullable, BOOL))completionHandler{
+- (void)commonDownloadWithUrl:(NSString *)fileUrl isAutoOpen:(NSString *)autoOpen completionHandler:(void (^)(NSString * _Nullable, BOOL))completionHandler{
     
     NSURL *url = [NSURL URLWithString:[fileUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -631,7 +634,9 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     NSURLSessionConfiguration *configure = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configure];
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        NSURL *documentsDirectoryURL = [NSURL URLWithString:[ NSSearchPathForDirectoriesInDomains ( NSDocumentDirectory , NSUserDomainMask , YES ) objectAtIndex : 0 ]];
+
+        //NSURL *documentsDirectoryURL = [NSURL URLWithString:NSTemporaryDirectory()];
         NSLog(@"file download to %@", [documentsDirectoryURL absoluteString]);
         return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
@@ -642,7 +647,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
                 NSString* resultJson = [JsonUtils dictionaryToJson:result.mj_keyValues];
                 completionHandler(resultJson, YES);
             }
-            if (autoOpen) {
+            if ([autoOpen isEqualToString:@"YES"]) {
                 [self.webview loadUrl:[filePath absoluteString]];
             }
         }else {
@@ -669,7 +674,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     //设置头
     [request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
     // [request addValue:[NSString stringWithFormat:@"%@.mp4",fileName] forHTTPHeaderField:@"fileName"];
-    [request addValue:[NSString stringWithFormat:@"%@.jpg",fileName] forHTTPHeaderField:@"fileName"];
+    [request addValue:fileName forHTTPHeaderField:@"fileName"];
     NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
     [request addValue:cookie forHTTPHeaderField:@"token"];
     //POST
@@ -680,6 +685,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
             
         } else {
             NSLog(@"Success: %@ %@", response, responseObject);
+            commonHandler(responseObject, YES);
             
         }
     }];

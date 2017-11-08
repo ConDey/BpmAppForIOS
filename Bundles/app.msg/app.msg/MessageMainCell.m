@@ -60,7 +60,7 @@
     if (_msgContent == nil) {
         _msgContent = [[UILabel alloc] init];
         _msgContent.font = FONT_14;
-        _msgContent.textColor = FONT_GRAY_COLOR;
+        _msgContent.textColor = UI_BLACK_COLOR;
         _msgContent.numberOfLines = 0;
         [self.contentView addSubview:_msgContent];
         [_msgContent mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -77,7 +77,7 @@
     if (_msgTime == nil) {
         _msgTime = [[UILabel alloc] init];
         _msgTime.font = FONT_12;
-        _msgTime.textColor = FONT_GRAY_COLOR;
+        _msgTime.textColor = UI_BLACK_COLOR;
         _msgTime.numberOfLines = 1;
         _msgTime.textAlignment = UITextAlignmentRight;
         [self.contentView addSubview:_msgTime];

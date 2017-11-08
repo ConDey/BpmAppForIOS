@@ -12,4 +12,5 @@
 
 + (Boolean)isCanOpenFileType:(NSString *)url;
 
++ (NSString *)convertUpperToLow:(NSString *)fileType;
 @end

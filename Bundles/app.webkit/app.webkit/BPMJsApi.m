@@ -96,7 +96,7 @@
 // 下载文件
 - (void)downloadFile:(NSDictionary *)args :(void (^)(NSString * _Nullable result,BOOL complete))completionHandler {
     if (self.delegate != nil) {
-        [self.delegate delegate_fileDownloadWithAttachmentId:(NSString *)[args objectForKey:@"attachmentId"] withFileName:(NSString *)[args objectForKey:@"attachmentName"] withAutoOpen:(Boolean)[args objectForKey:@"autoOpen"] callback:completionHandler];
+        [self.delegate delegate_fileDownloadWithAttachmentId:(NSString *)[args objectForKey:@"attachmentId"] withFileName:(NSString *)[args objectForKey:@"attachmentName"] withAutoOpen:(NSString *)[args objectForKey:@"autoOpen"] callback:completionHandler];
     }
 }
 

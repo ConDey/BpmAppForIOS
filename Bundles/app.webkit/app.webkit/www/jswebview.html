@@ -149,9 +149,6 @@
                 <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="progressCancle()">
                     请求取消
                 </button>
-                <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="uploadFile()">
-                    图片视频文件上传
-                </button>
                 </br>
                 </br>
                 
@@ -294,17 +291,21 @@
     
                 // 文件下载
                 function downloadFile() {
-                    bpmbridget.call("downloadFile",{attachmentId: "ff8080815f7aae2e015f7bbb33c100cc", attachmentName: "3.xlsx", autoOpen: true}, function(result){
+                    bpmbridget.call("downloadFile",{attachmentId: "ff8080815f7aae2e015f7bbb33c100cc", attachmentName: "3.xlsx", autoOpen: "YES"}, function(result){
                                     alert(result);
                                     });
                 }
     
                 // 文件上传
-                function uploadFile() {
-                    bpmbridget.call("uploadFile",{filePath: "storage/emulated/0/1.pdf"}, function(result){
-                                    alert(result);
-                                    });
+                function uploadFile(){
+                    bpmbridget.call("uploadFile",
+                                    {filePath: "assets-library://asset/asset.JPG?id=ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED&ext=JPG"},
+                                    function(result){ alert(result); }); //这里会输出上传结果
+                                    // bpmbridget.call("uploadFile",{filePath: " assets-library://asset/asset.MOV?id=660B6832-B1DD-4561-87CD-9255B92B57FF&ext=MOV"},
+                                    //  function(result){ alert(result); });
+                                    
                 }
+
     
                 //Toast显示  toastType有五种类型：info,success,error,warning,normal
                 function toastShow() {
@@ -340,15 +341,6 @@
                 function progressCancel(){
                     bpmbridget.call("progressCancel");
                 }
-    
-               function uploadFile(){
-                      bpmbridget.call("uploadFile",
-                                   {filePath: "assets-library://asset/asset.JPG?id=ED7AC36B-A150-4C38-BB8C-B6D696F4F2ED&ext=JPG"},
-                                   function(result){ alert(result); }); //这里会输出上传结果
-                  // bpmbridget.call("uploadFile",{filePath: " assets-library://asset/asset.MOV?id=660B6832-B1DD-4561-87CD-9255B92B57FF&ext=MOV"},
-                                                 //  function(result){ alert(result); });
-                                  
-                    }
     
                
                //获取人员选择数据
