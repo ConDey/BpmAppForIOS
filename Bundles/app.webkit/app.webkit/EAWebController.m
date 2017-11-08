@@ -536,12 +536,9 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
    commonHandler = completionHandler;
 
     NSString *fileName=[[NSString alloc]init];
-    for(int indexOfId=0;indexOfId<filePath.length-3;indexOfId++){
-        if([[filePath substringWithRange:NSMakeRange(indexOfId, 3)] isEqualToString:@"id="]){
-            fileName=[filePath substringWithRange:NSMakeRange(indexOfId+3, 36)];
-        }
-    }
-    
+    NSURL *url=[NSURL URLWithString:filePath];
+    fileName=[[url lastPathComponent] stringByDeletingPathExtension];
+
     //写入沙盒
     ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
     NSFileManager * fileManager = [NSFileManager defaultManager];
@@ -569,6 +566,10 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
             Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
             NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:((unsigned long)rep.size) error:nil];
             NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+            if(data.length==0){
+                [SVProgressHUD showErrorWithStatus:@"该路径下文件不存在"];
+                return;
+            }
             //压缩图片
             UIImage *image=[UIImage imageWithData:data];
             CGSize newSize=CGSizeMake(1020, 1020);
@@ -584,7 +585,9 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
             //post
             [self uploadImg:[NSString stringWithFormat:@"%@.%@",fileName,suffix] withPath:photoPath];
             }
-         failureBlock:nil];
+                     failureBlock:^(NSError *error) {
+                         NSLog(@"error:%@",error);
+                     }];
     }
 }
 
