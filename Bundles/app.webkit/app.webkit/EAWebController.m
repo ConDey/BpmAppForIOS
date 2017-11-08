@@ -25,6 +25,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     NSString *photoPath;
     NSString *originPath;
     BOOL  isSave;
+    NSString *suffix;//文件上传的后缀
 }
 @property (retain, nonatomic) UIProgressView *progressView;
 @property (retain, nonatomic) WKWebView *wkwebview;
@@ -37,6 +38,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    suffix=@".jpg";
     originPath= [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"uploadImage"];
     // 解码
     self.view.backgroundColor = [UIColor whiteColor];
@@ -531,35 +533,49 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
 //上传文件
 -(void)delegate_uploadFile:(NSString *)filePath callBack:(void (^)(NSString * _Nullable, BOOL))completionHandler{
     
-    commonHandler = completionHandler;
-    NSURL *filePathUrl = [NSURL fileURLWithPath:filePath];
-    NSString *fileName = [filePathUrl.path lastPathComponent];
-    NSArray *filePathArr = nil;
-    if ([filePath containsString:@"="]) {
-        filePathArr = [filePath componentsSeparatedByString:@"="];
+   commonHandler = completionHandler;
+
+    NSString *fileName=[[NSString alloc]init];
+    for(int indexOfId=0;indexOfId<filePath.length-3;indexOfId++){
+        if([[filePath substringWithRange:NSMakeRange(indexOfId, 3)] isEqualToString:@"id="]){
+            fileName=[filePath substringWithRange:NSMakeRange(indexOfId+3, 36)];
+        }
     }
-    if ([filePathArr count] > 0) {
-        [self uploadImg:[NSString stringWithFormat:@"%@.%@",fileName, [AttachmentUtils convertUpperToLow:[filePathArr lastObject]]] withPath:filePath];
-    }else {
-        [SVProgressHUD showErrorWithStatus:@"文件路径非本地文件"];
-    }
+    
+    //写入沙盒
     ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
     NSFileManager * fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:originPath]) {
         [fileManager createDirectoryAtPath:originPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     if ([NSURL URLWithString:filePath]) {
+        
         // 主要方法
         [assetLibrary assetForURL:[NSURL URLWithString:filePath] resultBlock:^(ALAsset *asset) {
+           // NSLog(@"%@",filePath);
+            //后缀suffix
+            suffix=[[NSString alloc]init];
+            NSArray *filePathArr = nil;
+            if ([filePath containsString:@"="]) {
+                filePathArr = [filePath componentsSeparatedByString:@"="];
+            }
+            if ([filePathArr count] > 0) {
+                suffix=[AttachmentUtils convertUpperToLow:[filePathArr lastObject]];
+               // NSLog(@"houzhui-%@",suffix);
+            }
+            
+            //获取图片数据
             ALAssetRepresentation *rep = [asset defaultRepresentation];
             Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
             NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:((unsigned long)rep.size) error:nil];
             NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+            //缓存地址
             photoPath = [originPath stringByAppendingPathComponent:fileName];
-            //NSLog(@"沙盒路径%@",photoPath);
             [data writeToFile:photoPath atomically:YES];
-            [self uploadImg:fileName withPath:photoPath];
-        } failureBlock:nil];
+            //post
+            [self uploadImg:[NSString stringWithFormat:@"%@.%@",fileName,suffix] withPath:photoPath];
+            }
+         failureBlock:nil];
     }
 }
 
@@ -699,7 +715,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURL *URL = [NSURL URLWithString:[REQUEST_SERVICE_URL stringByAppendingString:@"attachment/upload"]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
     //设置头
     [request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
     // [request addValue:[NSString stringWithFormat:@"%@.mp4",fileName] forHTTPHeaderField:@"fileName"];
@@ -714,14 +730,14 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
             
         } else {
             NSLog(@"Success: %@ %@", response, responseObject);
-            commonHandler(responseObject, YES);
+            //commonHandler(responseObject, YES);
             
         }
     }];
     [uploadTask resume];
     
 }
-
+  
 //判断文件是否已经在沙盒中已经存在？
 -(BOOL) isFileExist:(NSString *)fileName
 {
