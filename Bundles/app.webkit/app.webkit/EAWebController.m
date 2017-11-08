@@ -57,10 +57,19 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         [self.webview loadRequest:request];
         
     } else {
-        [self commonDownloadWithUrl:self.url isAutoOpen:@"YES" completionHandler:nil];
+        if ([self.url containsString:@"/external/attachment/down?attachmentId="]) {
+            // 附件下载
+            [self commonDownloadWithUrl:self.url isAutoOpen:@"YES" completionHandler:nil];
+        }else {
+            NSURL *url = [NSURL URLWithString:[self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+            [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request]; // 清除缓存
+            NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
+            [request addValue:cookie forHTTPHeaderField:@"token"];
+            [self.webview loadRequest:request];
+        }
     }
     
-   
 }
 
 // webview 回调函数
@@ -362,8 +371,9 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
         [SVProgressHUD showWithStatus:@"参数设置错误"];
     }else {
         NSString *attachPath=[NSString stringWithFormat:@"%@/external/attachment/down?attachmentId=%@",REQUEST_URL,attachmentId];
-        [self setTitleOfNav:fileName];
-        [self commonDownloadWithUrl:attachPath isAutoOpen:isAutoOpen completionHandler:completionHandler];
+//        [self setTitleOfNav:fileName];
+//        [self commonDownloadWithUrl:attachPath isAutoOpen:isAutoOpen completionHandler:completionHandler];
+        [Small openUri:[NSString stringWithFormat:@"app.webkit?url=%@&urltitle=%@", attachPath, [NSString encodeString:fileName]] fromController:self];
     }
 }
 
@@ -653,7 +663,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
     NSURLSessionConfiguration *configure = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configure];
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        NSURL *documentsDirectoryURL = [NSURL URLWithString:[ NSSearchPathForDirectoriesInDomains ( NSDocumentDirectory , NSUserDomainMask , YES ) objectAtIndex : 0 ]];
+        NSURL *documentsDirectoryURL = [NSURL fileURLWithPath:[ NSSearchPathForDirectoriesInDomains ( NSDocumentDirectory , NSUserDomainMask , YES ) objectAtIndex : 0 ]];
 
         //NSURL *documentsDirectoryURL = [NSURL URLWithString:NSTemporaryDirectory()];
         NSLog(@"file download to %@", [documentsDirectoryURL absoluteString]);
@@ -667,7 +677,7 @@ typedef void (^ CommonCompletionHandler)(NSString * _Nullable result,BOOL comple
                 completionHandler(resultJson, YES);
             }
             if ([autoOpen isEqualToString:@"YES"]) {
-                [self.webview loadUrl:[filePath absoluteString]];
+                [self.webview loadFile:filePath];
             }
         }else {
             if (completionHandler != nil) {

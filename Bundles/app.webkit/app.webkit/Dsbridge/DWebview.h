@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (id _Nullable) getXWebview;
 
 - (void)loadUrl: (NSString *) url;
+- (void)loadFile:(NSURL *)fileUrl;
 - (void)loadRequest:(NSURLRequest * )request;
 - (void)loadHTMLString:(NSString *)string baseURL:(NSURL *)baseURL;
 - (void)loadData:(NSData *)data MIMEType:(NSString *)MIMEType textEncodingName:(NSString *)textEncodingName baseURL:(NSURL *)baseURL;

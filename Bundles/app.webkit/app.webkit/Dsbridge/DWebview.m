@@ -50,6 +50,14 @@
     }
 }
 
+- (void)loadFile:(NSURL *)fileUrl {
+    if([webview isKindOfClass:[DUIwebview class]]){
+        NSURLRequest *request = [NSURLRequest requestWithURL:fileUrl];
+        [(DUIwebview *)webview loadRequest:request];
+    }else{
+        [(DWKwebview *)webview loadFileURL:fileUrl allowingReadAccessToURL:fileUrl];
+    }
+}
 
 
 - (void)loadHTMLString:(NSString *)string baseURL:(NSURL *)baseURL
