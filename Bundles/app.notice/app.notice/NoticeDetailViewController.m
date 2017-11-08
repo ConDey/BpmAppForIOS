@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,16 +53,16 @@
     NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading;
     CGRect rect = [attributeString boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, CGFLOAT_MAX) options:options context:nil];
     currentHeight=rect.size.height;
-   // NSLog(@"size:%@", NSStringFromCGSize(rect.size));
+    // NSLog(@"size:%@", NSStringFromCGSize(rect.size));
     
     
-   
+    
     [self createdTableview:currentHeight];
     NSAttributedString * as = [[NSAttributedString alloc] initWithData:[self.noticeDetail.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     [self textContent:as];
     if(self.attachment.count!=0)
     {
-     [self attachDownload];
+        [self attachDownload];
     }
     [self.tableview reloadData];
 }
@@ -71,7 +71,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 2;
-} 
+}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"NoticeDetail"];
     if(cell!=nil){
@@ -79,7 +79,7 @@
             [view removeFromSuperview];
         }
     }
-    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     if(indexPath.row==0){
         //标题
         UILabel *content=[[UILabel alloc]init];
@@ -146,7 +146,8 @@
     self.tableview.delegate=self;
     self.tableview.dataSource=self;
     [self.view addSubview:self.tableview];
-   // self.tableview.backgroundColor=[UIColor blueColor];
+    self.tableview.scrollEnabled=NO;
+    // self.tableview.backgroundColor=[UIColor blueColor];
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(10);
         make.right.left.mas_equalTo(0);
