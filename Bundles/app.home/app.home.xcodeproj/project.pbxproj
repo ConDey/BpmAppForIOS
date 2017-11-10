@@ -58,6 +58,11 @@
 		F80A8AD61F98224C00E126C6 /* ic_setting_setting.png in Resources */ = {isa = PBXBuildFile; fileRef = F80A8AD21F98224C00E126C6 /* ic_setting_setting.png */; };
 		F88BD5BE1FAB2B280049346D /* ic_common_left_back.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD5BD1FAB2B270049346D /* ic_common_left_back.png */; };
 		F88BD5F51FB006500049346D /* ic_setting_browser.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD5F41FB006500049346D /* ic_setting_browser.png */; };
+		F88BD66E1FB534DF0049346D /* UserHomeChangeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F88BD66C1FB534DF0049346D /* UserHomeChangeViewController.h */; };
+		F88BD66F1FB534DF0049346D /* UserHomeChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BD66D1FB534DF0049346D /* UserHomeChangeViewController.m */; };
+		F88BD6731FB551300049346D /* ic_homeapp_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD6701FB5512C0049346D /* ic_homeapp_delete.png */; };
+		F88BD6741FB551300049346D /* ic_homeapp_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD6711FB5512D0049346D /* ic_homeapp_selected.png */; };
+		F88BD6751FB551300049346D /* ic_homeapp_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD6721FB551300049346D /* ic_homeapp_unselected.png */; };
 		F8C1830C1FA944C10095A91E /* version.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8C1830B1FA944C10095A91E /* version.plist */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +122,11 @@
 		F88BC77E1FA9BFD20049346D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F88BD5BD1FAB2B270049346D /* ic_common_left_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_common_left_back.png; sourceTree = "<group>"; };
 		F88BD5F41FB006500049346D /* ic_setting_browser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_setting_browser.png; sourceTree = "<group>"; };
+		F88BD66C1FB534DF0049346D /* UserHomeChangeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserHomeChangeViewController.h; sourceTree = "<group>"; };
+		F88BD66D1FB534DF0049346D /* UserHomeChangeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserHomeChangeViewController.m; sourceTree = "<group>"; };
+		F88BD6701FB5512C0049346D /* ic_homeapp_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_delete.png; sourceTree = "<group>"; };
+		F88BD6711FB5512D0049346D /* ic_homeapp_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_selected.png; sourceTree = "<group>"; };
+		F88BD6721FB551300049346D /* ic_homeapp_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_unselected.png; sourceTree = "<group>"; };
 		F8C1830B1FA944C10095A91E /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -188,6 +198,9 @@
 		06C3A4351F0C72EB00633543 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F88BD6701FB5512C0049346D /* ic_homeapp_delete.png */,
+				F88BD6711FB5512D0049346D /* ic_homeapp_selected.png */,
+				F88BD6721FB551300049346D /* ic_homeapp_unselected.png */,
 				F88BD5F41FB006500049346D /* ic_setting_browser.png */,
 				F88BD5BD1FAB2B270049346D /* ic_common_left_back.png */,
 				847206D71F9EDD2100A7CE7E /* ic_homeapp_stub.png */,
@@ -279,6 +292,8 @@
 				06C6BAD51F15CA3600D444E6 /* UserHomeAppController.h */,
 				06C6BAD61F15CA3600D444E6 /* UserHomeAppController.m */,
 				06C6BAE71F1601F300D444E6 /* UserHomeAppController.xib */,
+				F88BD66C1FB534DF0049346D /* UserHomeChangeViewController.h */,
+				F88BD66D1FB534DF0049346D /* UserHomeChangeViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -355,6 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06C6BAEC1F1603CF00D444E6 /* EAApp.h in Headers */,
+				F88BD66E1FB534DF0049346D /* UserHomeChangeViewController.h in Headers */,
 				84301C761F998D2600F01F8F /* PrefixHeader.pch in Headers */,
 				F80A8ACD1F98224100E126C6 /* PasswordChangeController.h in Headers */,
 				06C6BAD71F15CA3600D444E6 /* UserHomeAppController.h in Headers */,
@@ -443,7 +459,9 @@
 				F8C1830C1FA944C10095A91E /* version.plist in Resources */,
 				F88BD5F51FB006500049346D /* ic_setting_browser.png in Resources */,
 				F88BD5BE1FAB2B280049346D /* ic_common_left_back.png in Resources */,
+				F88BD6751FB551300049346D /* ic_homeapp_unselected.png in Resources */,
 				06C6BB0C1F1743E300D444E6 /* ic_homeapp_filepicker.png in Resources */,
+				F88BD6741FB551300049346D /* ic_homeapp_selected.png in Resources */,
 				06C5A2DA1F26D32A00A189FB /* app.json in Resources */,
 				F80A8AD41F98224C00E126C6 /* ic_setting_updatepwd.png in Resources */,
 				06C6BAE81F1601F300D444E6 /* UserHomeAppController.xib in Resources */,
@@ -454,6 +472,7 @@
 				06C6BAFE1F17160F00D444E6 /* ic_homeapp_contact.png in Resources */,
 				061A909A1F1F4F1100B7C227 /* ic_setting_default_photo.png in Resources */,
 				F80A8AD61F98224C00E126C6 /* ic_setting_setting.png in Resources */,
+				F88BD6731FB551300049346D /* ic_homeapp_delete.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +483,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F88BD66F1FB534DF0049346D /* UserHomeChangeViewController.m in Sources */,
 				06C6BAF11F160E2600D444E6 /* NSLayoutConstraintOnePixelLine.m in Sources */,
 				0686A8971F0CB23D00697582 /* UserAuthViewController.m in Sources */,
 				84301C7F1F99990E00F01F8F /* AppListModel.m in Sources */,

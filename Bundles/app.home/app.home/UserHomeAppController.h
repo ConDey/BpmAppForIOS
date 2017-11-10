@@ -7,6 +7,6 @@
 //
 
 
-@interface UserHomeAppController : EAViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate>
+@interface UserHomeAppController : EAViewController<UICollectionViewDataSource,UIGestureRecognizerDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate>
 
 @end
