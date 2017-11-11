@@ -580,7 +580,16 @@
     if(sender.state==UIGestureRecognizerStateEnded){
         [self.allAppsCollectionView endInteractiveMovement];
     }
+}         
+
+-(void)doNavigationLeftBarButtonItemAction:(UIBarButtonItem *)item{
+    if(self.delegate!=nil){
+        [self.delegate appChange:self.apps];
+        [self.delegate allAppChange:self.allApps];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 
 

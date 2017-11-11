@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Eazytec. All rights reserved.
 //
 
-
-@interface UserHomeAppController : EAViewController<UICollectionViewDataSource,UIGestureRecognizerDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate>
+#import "UserHomeChangeViewController.h"
+@interface UserHomeAppController : EAViewController<UICollectionViewDataSource,UIGestureRecognizerDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UserHomeAppChangeDelegate>
 
 @end

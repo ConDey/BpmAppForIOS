@@ -5,7 +5,7 @@
 //  Created by ConDey on 2017/7/12.
 //  Copyright © 2017年 Eazytec. All rights reserved.
 //
-#import "UserHomeChangeViewController.h"
+
 #import "UserHomeAppController.h"
 #import "UserHomeAppViewCell.h"
 #import "EAApp.h"
@@ -571,6 +571,7 @@
         NSMutableArray *all=[[NSMutableArray alloc]initWithArray:self.allApps];
         uhc.apps=common;
         uhc.allApps=all;
+        uhc.delegate=self;
         [self.navigationController pushViewController:uhc animated:YES];
         
     }];
@@ -580,6 +581,17 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+//app修改
+-(void)allAppChange:(NSArray *)allApp{
+    self.allApps=[[NSMutableArray alloc]initWithArray:allApp];
+    [self.allAppsCollectionView reloadData];
+    [self.appsCollectionView reloadData];
+}
+-(void)appChange:(NSArray *)app{
+    self.apps=[[NSMutableArray alloc]initWithArray:app];
+    [self.allAppsCollectionView reloadData];
+    [self.appsCollectionView reloadData];
+}
 
 
 @end
