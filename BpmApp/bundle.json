@@ -27,6 +27,10 @@
                 {
                  "uri": "app.msg",
                  "pkg": "com.eazytec.bpm.app.msg"
+                },
+                {
+                "uri": "app.calendar",
+                "pkg": "com.eazytec.bpm.app.calendar"
                 }
                ]
 }

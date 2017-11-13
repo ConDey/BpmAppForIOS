@@ -46,6 +46,7 @@
 		84459B2F1FAA223A00E3A076 /* checkbox_pic2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84459B1B1FAA223900E3A076 /* checkbox_pic2@2x.png */; };
 		F88BC78C1FAA9D650049346D /* iVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BC78B1FAA9C370049346D /* iVersion.m */; };
 		F88BC78D1FAA9D770049346D /* iVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = F88BC78A1FAA9C370049346D /* iVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F88BD8271FB92D210049346D /* com_eazytec_bpm_app_calendar.framework in Resources */ = {isa = PBXBuildFile; fileRef = F88BD8241FB92C770049346D /* com_eazytec_bpm_app_calendar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +155,20 @@
 			remoteGlobalIDString = 06C6BA8D1F15C0D200D444E6;
 			remoteInfo = app.contact;
 		};
+		F88BD8231FB92C770049346D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F88BD81F1FB92C770049346D /* app.calendar.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F88BD7331FB69D7B0049346D;
+			remoteInfo = app.calendar;
+		};
+		F88BD8251FB92D190049346D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F88BD81F1FB92C770049346D /* app.calendar.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F88BD7321FB69D7B0049346D;
+			remoteInfo = app.calendar;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -216,6 +231,7 @@
 		F88BC7891FAA9C370049346D /* iVersion.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iVersion.bundle; sourceTree = "<group>"; };
 		F88BC78A1FAA9C370049346D /* iVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iVersion.h; sourceTree = "<group>"; };
 		F88BC78B1FAA9C370049346D /* iVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iVersion.m; sourceTree = "<group>"; };
+		F88BD81F1FB92C770049346D /* app.calendar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = app.calendar.xcodeproj; path = Bundles/app.calendar/app.calendar.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +251,7 @@
 		062618881EFA52D200F1EF72 /* Bundles */ = {
 			isa = PBXGroup;
 			children = (
+				F88BD81F1FB92C770049346D /* app.calendar.xcodeproj */,
 				06F809B21F263532000872C4 /* lib.common.xcodeproj */,
 				06C5A2CB1F26CF4D00A189FB /* app.notice.xcodeproj */,
 				06F809AC1F26352C000872C4 /* app.webkit.xcodeproj */,
@@ -444,6 +461,14 @@
 			path = iVersion;
 			sourceTree = "<group>";
 		};
+		F88BD8201FB92C770049346D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F88BD8241FB92C770049346D /* com_eazytec_bpm_app_calendar.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -472,6 +497,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F88BD8261FB92D190049346D /* PBXTargetDependency */,
 				06361BFE1F0F5D6100B1D545 /* PBXTargetDependency */,
 				06F809B91F263549000872C4 /* PBXTargetDependency */,
 				06C5A2D51F26CFBD00A189FB /* PBXTargetDependency */,
@@ -518,6 +544,10 @@
 			productRefGroup = 0697636C1EFA4C760012D367 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = F88BD8201FB92C770049346D /* Products */;
+					ProjectRef = F88BD81F1FB92C770049346D /* app.calendar.xcodeproj */;
+				},
 				{
 					ProductGroup = 06F809501F2634FC000872C4 /* Products */;
 					ProjectRef = 06F8094F1F2634FC000872C4 /* app.contact.xcodeproj */;
@@ -611,6 +641,13 @@
 			remoteRef = 06F809B61F263532000872C4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		F88BD8241FB92C770049346D /* com_eazytec_bpm_app_calendar.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = com_eazytec_bpm_app_calendar.framework;
+			remoteRef = F88BD8231FB92C770049346D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -625,6 +662,7 @@
 				84459B1E1FAA223A00E3A076 /* broswerPic2.jpg in Resources */,
 				84459B251FAA223A00E3A076 /* paizhao@2x.png in Resources */,
 				0686A8921F0CAE0100697582 /* bundle.json in Resources */,
+				F88BD8271FB92D210049346D /* com_eazytec_bpm_app_calendar.framework in Resources */,
 				0697637E1EFA4C760012D367 /* LaunchScreen.storyboard in Resources */,
 				84459B261FAA223A00E3A076 /* xiang.png in Resources */,
 				84459B281FAA223A00E3A076 /* broswerPic0.jpg in Resources */,
@@ -701,6 +739,11 @@
 			isa = PBXTargetDependency;
 			name = app.contact;
 			targetProxy = 06F809C01F263558000872C4 /* PBXContainerItemProxy */;
+		};
+		F88BD8261FB92D190049346D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = app.calendar;
+			targetProxy = F88BD8251FB92D190049346D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
