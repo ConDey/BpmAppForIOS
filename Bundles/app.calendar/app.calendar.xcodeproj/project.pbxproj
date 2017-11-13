@@ -8,12 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		F88BD8631FB939F40049346D /* app_calendar.h in Headers */ = {isa = PBXBuildFile; fileRef = F88BD8611FB939F40049346D /* app_calendar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F88BD8D11FB964D30049346D /* TestViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F88BD8CF1FB964D30049346D /* TestViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F88BD8D21FB964D30049346D /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BD8D01FB964D30049346D /* TestViewController.m */; };
+		F88BD8D41FB965C20049346D /* com_eazytec_bpm_lib_common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F88BD8D51FB965C20049346D /* com_eazytec_bpm_lib_common.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F88BD85E1FB939F40049346D /* com_eazytec_bpm_app_calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = com_eazytec_bpm_app_calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F88BD8611FB939F40049346D /* app_calendar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app_calendar.h; sourceTree = "<group>"; };
 		F88BD8621FB939F40049346D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F88BD8CF1FB964D30049346D /* TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		F88BD8D01FB964D30049346D /* TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		F88BD8D51FB965C20049346D /* com_eazytec_bpm_lib_common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = com_eazytec_bpm_lib_common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F88BD8D61FB967D30049346D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F88BD8D41FB965C20049346D /* com_eazytec_bpm_lib_common.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +40,7 @@
 			children = (
 				F88BD8601FB939F40049346D /* app.calendar */,
 				F88BD85F1FB939F40049346D /* Products */,
+				F88BD8D31FB965C20049346D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -48,8 +57,19 @@
 			children = (
 				F88BD8611FB939F40049346D /* app_calendar.h */,
 				F88BD8621FB939F40049346D /* Info.plist */,
+				F88BD8CF1FB964D30049346D /* TestViewController.h */,
+				F88BD8D01FB964D30049346D /* TestViewController.m */,
+				F88BD8D61FB967D30049346D /* PrefixHeader.pch */,
 			);
 			path = app.calendar;
+			sourceTree = "<group>";
+		};
+		F88BD8D31FB965C20049346D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F88BD8D51FB965C20049346D /* com_eazytec_bpm_lib_common.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -60,6 +80,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F88BD8631FB939F40049346D /* app_calendar.h in Headers */,
+				F88BD8D11FB964D30049346D /* TestViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F88BD8D21FB964D30049346D /* TestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +279,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/app.calendar/PrefixHeader.pch";
 				INFOPLIST_FILE = app.calendar/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -278,6 +301,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/app.calendar/PrefixHeader.pch";
 				INFOPLIST_FILE = app.calendar/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
