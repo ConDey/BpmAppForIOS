@@ -20,6 +20,7 @@
     self.view.backgroundColor=[UIColor yellowColor];
     //导航栏右按钮
     self.rightButtom=[[UIBarButtonItem alloc]initWithTitle:@"确认选择" style:UIBarButtonItemStylePlain target:self action:@selector(addNewCalendar:)];
+    [self.rightButtom setTintColor:UI_BLUE_COLOR];
     self.navigationItem.rightBarButtonItem=self.rightButtom;
     
     

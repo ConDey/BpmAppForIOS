@@ -8,6 +8,6 @@
 
 
 
-@interface NewCalendarViewController : EAViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate>
+@interface NewCalendarViewController : EAViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
 @end
