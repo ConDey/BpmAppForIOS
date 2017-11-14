@@ -7,7 +7,7 @@
 //
 
 #import "CalendarViewController.h"
-
+#import "NewCalendarViewController.h"
 @interface CalendarViewController ()
 @property(nonatomic,retain)UIBarButtonItem *rightButtom;
 @property(nonatomic,retain)UICollectionView *calendarDataView;
@@ -40,8 +40,8 @@
 
 -(void)addNewCalendar:(UIButton *)button{
     NSLog(@"新增日程");
-    //NewCalendarViewController *anc=[[NewCalendarViewController alloc]init];
-    //[self.navigationController pushViewController:anc animated:YES];
+    NewCalendarViewController *anc=[[NewCalendarViewController alloc]init];
+    [self.navigationController pushViewController:anc animated:YES];
 }
 
 

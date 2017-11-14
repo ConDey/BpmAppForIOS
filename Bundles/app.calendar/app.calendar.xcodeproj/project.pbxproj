@@ -14,6 +14,10 @@
 		F88BD8FC1FBA7EAF0049346D /* ic_common_left_back.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD8F51FBA7EAF0049346D /* ic_common_left_back.png */; };
 		F88BD9231FBA85750049346D /* CalendarViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F88BD9211FBA85750049346D /* CalendarViewController.h */; };
 		F88BD9241FBA85750049346D /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BD9221FBA85750049346D /* CalendarViewController.m */; };
+		F88BD9281FBA898B0049346D /* NewCalendarViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F88BD9261FBA898B0049346D /* NewCalendarViewController.h */; };
+		F88BD9291FBA898B0049346D /* NewCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BD9271FBA898B0049346D /* NewCalendarViewController.m */; };
+		F88BD92C1FBA8A050049346D /* NewCalendarModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F88BD92A1FBA8A050049346D /* NewCalendarModel.h */; };
+		F88BD92D1FBA8A050049346D /* NewCalendarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BD92B1FBA8A050049346D /* NewCalendarModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +31,10 @@
 		F88BD8F51FBA7EAF0049346D /* ic_common_left_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_common_left_back.png; sourceTree = "<group>"; };
 		F88BD9211FBA85750049346D /* CalendarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		F88BD9221FBA85750049346D /* CalendarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		F88BD9261FBA898B0049346D /* NewCalendarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewCalendarViewController.h; sourceTree = "<group>"; };
+		F88BD9271FBA898B0049346D /* NewCalendarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewCalendarViewController.m; sourceTree = "<group>"; };
+		F88BD92A1FBA8A050049346D /* NewCalendarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewCalendarModel.h; sourceTree = "<group>"; };
+		F88BD92B1FBA8A050049346D /* NewCalendarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewCalendarModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +69,7 @@
 		F88BD8601FB939F40049346D /* app.calendar */ = {
 			isa = PBXGroup;
 			children = (
+				F88BD9251FBA89570049346D /* NewCalendar */,
 				F88BD9201FBA85460049346D /* Calendar */,
 				F88BD8F51FBA7EAF0049346D /* ic_common_left_back.png */,
 				F88BD8611FB939F40049346D /* app_calendar.h */,
@@ -89,6 +98,17 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		F88BD9251FBA89570049346D /* NewCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				F88BD9261FBA898B0049346D /* NewCalendarViewController.h */,
+				F88BD9271FBA898B0049346D /* NewCalendarViewController.m */,
+				F88BD92A1FBA8A050049346D /* NewCalendarModel.h */,
+				F88BD92B1FBA8A050049346D /* NewCalendarModel.m */,
+			);
+			path = NewCalendar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -96,6 +116,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F88BD9281FBA898B0049346D /* NewCalendarViewController.h in Headers */,
+				F88BD92C1FBA8A050049346D /* NewCalendarModel.h in Headers */,
 				F88BD9231FBA85750049346D /* CalendarViewController.h in Headers */,
 				F88BD8631FB939F40049346D /* app_calendar.h in Headers */,
 				F88BD8D11FB964D30049346D /* TestViewController.h in Headers */,
@@ -172,6 +194,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F88BD9241FBA85750049346D /* CalendarViewController.m in Sources */,
+				F88BD9291FBA898B0049346D /* NewCalendarViewController.m in Sources */,
+				F88BD92D1FBA8A050049346D /* NewCalendarModel.m in Sources */,
 				F88BD8D21FB964D30049346D /* TestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
