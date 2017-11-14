@@ -36,7 +36,8 @@ static NSString * _Nonnull const AppMenuAllListServiceUrl       = @"menu/list";
 static NSString * _Nonnull const CommonConfigServiceUrl         = @"common/config";
 //文件上传
 static NSString * _Nonnull const AttachmentUploadUrl            =@"attachment/upload";
-
+//日程安排
+static NSString * _Nonnull const ScheduleSaveServiceUrl           =@"schedule/save";
 // 服务名称枚举
 typedef NS_ENUM(NSInteger, HttpProtocolServiceName) {
     // 枚举成员
@@ -53,6 +54,7 @@ typedef NS_ENUM(NSInteger, HttpProtocolServiceName) {
     HttpProtocolServiceAppMenuAllList       = 10,
     HttpProtocolServiceCommonConfig         = 11,
     HttpProtocolServiceAttachmentUpload     = 12,
+    HttpProtocolServiceScheduleSave         = 13,
 };
 
 @interface EAProtocol : NSObject
