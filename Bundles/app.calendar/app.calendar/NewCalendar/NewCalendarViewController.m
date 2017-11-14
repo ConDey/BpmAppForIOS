@@ -11,22 +11,24 @@
 @interface NewCalendarViewController ()
 {
     CGFloat dsHeight;
+    UIButton  *saveButton;
 }
-@property(nonatomic,retain)UILabel *divider;//事件描述前的分割线
 @property(nonatomic,retain)UILabel *descriptionLabel;//事件描述
-
-@property(nonatomic,retain)NewCalendarModel *calendar;
-
 
 @property(nonatomic,retain)UITextField *eventId;
 @property(nonatomic,retain)UITextField *eventName;
 @property(nonatomic,retain)NSString *eventType;
 @property(nonatomic,retain)UITextField *location;
-@property(nonatomic,retain)UITextField *eventDescription;
+@property(nonatomic,retain)UITextView *eventDescription;
 @property(nonatomic,retain)UITextField *startDate;
 @property(nonatomic,retain)UITextField *startTime;
 @property(nonatomic,retain)UITextField *endDate;
 @property(nonatomic,retain)UITextField *endTime;
+//时间选择器
+@property(nonatomic,retain)NSData *minStartDate;
+@property(nonatomic,retain)NSData *maxStartDate;
+@property(nonatomic,retain)NSData *minEndDate;
+@property(nonatomic,retain)NSData *maxEndDate;
 @end
 
 @implementation NewCalendarViewController
@@ -34,21 +36,57 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.eventType=@"临时";
-    dsHeight=30;
+    if(self.eventDescription.text.length==0){
+        self.eventDescription=[[UITextView alloc]init];
+    }
+    self.eventDescription.delegate=self;
+    
     [self.view addSubview:self.tableview];
     self.tableview.delegate=self;
     self.tableview.dataSource=self;
     [self.view addSubview:self.tableview];
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
-        make.height.mas_equalTo(SCREEN_HEIGHT);
+        make.height.mas_equalTo(250);
     }];
     
     self.tableview.backgroundColor=[UIColor whiteColor];
-    // self.tableview.scrollEnabled=NO;
-    // self.tableview.estimatedRowHeight=100;
-    // self.tableview.rowHeight=UITableViewAutomaticDimension;
     [self.tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Calendar"];
+    //具体描述
+   
+    UILabel *title=[[UILabel alloc]init];
+    [self.view addSubview:title];
+    [self.view addSubview:self.eventDescription];
+    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(0);
+        make.height.mas_equalTo(30);
+        make.left.mas_equalTo(0);
+        make.top.mas_equalTo(self.tableview.mas_bottom).mas_equalTo(2);
+    }];
+     [self.eventDescription mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(title.mas_bottom);
+         make.height.mas_equalTo(30);
+            make.left.mas_equalTo(0);
+            make.right.mas_equalTo(0);
+        }];
+        self.eventDescription.layer.borderWidth=2;
+        title.text=@"  事件描述:";
+        title.font=FONT_14;
+        title.textAlignment=NSTextAlignmentLeft;
+        title.backgroundColor=[UIColor whiteColor];
+        //保存按钮
+        saveButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        [self.view addSubview:saveButton];
+        [saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.eventDescription.mas_bottom).mas_equalTo(20);
+            make.width.mas_equalTo(80);
+            make.height.mas_equalTo(30);
+            make.centerX.mas_equalTo(self.view.mas_centerX);
+        }];
+        [saveButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+        [saveButton setBackgroundColor: UI_BLUE_COLOR];
+        [saveButton setTitle:@"保存" forState:UIControlStateNormal];
+        saveButton.titleLabel.textColor=[UIColor whiteColor];
     
     
 }
@@ -67,14 +105,12 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 7;
+    return 5;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row==5){
-        return dsHeight+50;
-    }else{
+
         return 50;
-    }
+    
 }
 
 
@@ -91,31 +127,25 @@
     [singleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(0);
-        make.height.mas_equalTo(0.5);
+        make.height.mas_equalTo(1);
     }];
     singleView.backgroundColor=UI_DIVIDER_COLOR;
     //事件名称
     UILabel *titleLabel=[[UILabel alloc]init];
     [cell addSubview:titleLabel];
-    if(indexPath.row==5){
-        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(SCREEN_WIDTH-10);
-            make.height.mas_equalTo(30);
-            make.left.mas_equalTo(10);
-            make.top.mas_equalTo(10);
-        }];
-    }else{
-        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+     [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(80);
-            make.height.mas_equalTo(60);
-            make.left.mas_equalTo(10);
+            make.height.mas_equalTo(50);
+            make.left.mas_equalTo(0);
             make.centerY.mas_equalTo(cell.mas_centerY);
         }];
-    }
+    
     titleLabel.font=FONT_14;
     titleLabel.textAlignment=NSTextAlignmentLeft;
     if(indexPath.row==0){
+        if(self.eventName.text.length==0){
         self.eventName=[[UITextField alloc]init];
+        }
         self.eventName.delegate=self;
         [cell addSubview:self.eventName];
         [self.eventName mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -123,7 +153,7 @@
             make.centerY.mas_equalTo(cell.mas_centerY);
             make.size.mas_equalTo(CGSizeMake(200, 60));
         }];
-        titleLabel.text=@"事件名称:";
+        titleLabel.text=@"  事件名称:";
         self.eventName.placeholder=@"请填写事件名称";
         
     }else if (indexPath.row==1){
@@ -135,8 +165,10 @@
             make.centerY.mas_equalTo(cell.mas_centerY);
             make.size.mas_equalTo(CGSizeMake(200, 60));
         }];
-        titleLabel.text=@"开始时间:";
+        titleLabel.text=@"  开始时间:";
         self.startDate.placeholder=@"点击选择";
+        UITapGestureRecognizer *tapStart=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapStartTime:)];
+        [self.startDate addGestureRecognizer:tapStart];
     }else if (indexPath.row==2){
         self.endDate=[[UITextField alloc]init];
         self.endDate.delegate=self;
@@ -146,11 +178,12 @@
             make.centerY.mas_equalTo(cell.mas_centerY);
             make.size.mas_equalTo(CGSizeMake(200, 60));
         }];
-        titleLabel.text=@"结束时间:";
+        titleLabel.text=@"  结束时间:";
         self.endDate.placeholder=@"点击选择";
-        
+        UITapGestureRecognizer *tapEnd=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapEndTime:)];
+        [self.endDate addGestureRecognizer:tapEnd];
     }else if (indexPath.row==3){
-        titleLabel.text=@"事件类型:";
+        titleLabel.text=@"  事件类型:";
         UILabel *typeLabel=[[UILabel alloc]init];
         [cell addSubview:typeLabel];
         [typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -159,7 +192,7 @@
             make.size.mas_equalTo(CGSizeMake(200, 60));
         }];
         typeLabel.text=self.eventType;
-        
+        typeLabel.font=FONT_14;
         //右侧选择类型按钮
         UIImage *image=[UIImage imageNamed:@"ic_common_left_back.png"];
         UIButton *selectTypeBt=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -179,8 +212,10 @@
         
         
         
-    }else if (indexPath.row==4){
+    }else {
+        if(self.location.text.length==0){
         self.location=[[UITextField alloc]init];
+        }
         self.location.delegate=self;
         [cell addSubview:self.location];
         [self.location mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -188,39 +223,9 @@
             make.centerY.mas_equalTo(cell.mas_centerY);
             make.size.mas_equalTo(CGSizeMake(200, 60));
         }];
-        titleLabel.text=@"事件地点:";
-        self.location.placeholder=@"请填写事件名称";
+        titleLabel.text=@"  事件地点:";
+        self.location.placeholder=@"请填写事件地点";
         
-    }else if(indexPath.row==5) {
-        self.eventDescription=[[UITextField alloc]init];
-        self.eventDescription.delegate=self;
-        [cell addSubview:self.eventDescription];
-        [self.eventDescription mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(titleLabel.mas_bottom);
-            make.height.mas_equalTo(dsHeight);
-            make.left.mas_equalTo(10);
-            make.right.mas_equalTo(-10);
-        }];
-        //titleLabel.layer.borderWidth=1;
-        //self.eventDescription.layer.borderWidth=2;
-        titleLabel.text=@"事件描述:";
-        self.eventDescription.placeholder=@"时间描述";
-        
-    }else{
-        //保存按钮
-        UIButton  *saveButton=[UIButton buttonWithType:UIButtonTypeCustom];
-        [cell addSubview:saveButton];
-        [saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(5);
-            make.bottom.mas_equalTo(0);
-            make.centerX.mas_equalTo(cell.mas_centerX);
-            make.centerY.mas_equalTo(cell.mas_centerY);
-            make.width.mas_equalTo(80);
-        }];
-        [saveButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
-        [saveButton setBackgroundColor: UI_BLUE_COLOR];
-        [saveButton setTitle:@"保存" forState:UIControlStateNormal];
-        saveButton.titleLabel.textColor=[UIColor whiteColor];
     }
     
     
@@ -229,38 +234,13 @@
 }
 
 //文本开始编辑
--(void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if (textField==self.eventName) {
-        self.calendar.eventName=self.eventName.text;
-    }else if(textField==self.startDate){
-        self.calendar.startDate=self.startDate.text;
-    }else if(textField==self.endDate){
-        self.calendar.endDate=self.endDate.text;
-    }else if(textField==self.eventDescription){
-        //根据具体的文本大小设置cell大小
-        NSString *str = self.eventDescription.text;
-        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:str];
-        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-        style.lineSpacing = 10;
-        UIFont *font = [UIFont systemFontOfSize:17];
-        [attributeString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
-        [attributeString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, str.length)];
-        NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading;
-        CGRect rect = [attributeString boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, CGFLOAT_MAX) options:options context:nil];
-        if(rect.size.height>dsHeight){
-            dsHeight=rect.size.height+50;
-        }
-        self.calendar.Description=self.eventDescription.text;
-        [self.tableview reloadData];
-        self.calendar.Description=self.eventDescription.text;
-        NSLog(@"描述%@",self.calendar.Description);
-    }else if(textField==self.location){
-        self.location.text=self.calendar.location;
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if(textField==self.startDate||textField==self.endDate){
+        return NO;
+    }else{
+        return YES;
     }
-    
-    
-    
 }
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
     return YES;
@@ -274,6 +254,9 @@
 -(void)save:(UIButton *)bt{
     if(self.eventName.text.length!=0&&self.eventType.length!=0&&self.location.text.length!=0&&self.eventDescription.text.length!=0&&self.startDate.text.length!=0&&self.startTime.text.length!=0&&self.endDate.text.length!=0&&self.endTime.text.length!=0){
         [self sendNewCalendar];
+    }else{
+        NSLog(@"输入不完整");
+        NSLog(@"%@-%@-%@-%@-%@-%@-%@-%@",self.eventName.text,self.eventType,self.startDate.text,self.startTime.text,self.eventDescription.text,self.endDate.text,self.endTime.text,self.location.text);
     }
 }
 
@@ -310,6 +293,71 @@
     }]];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+
+
+// 文本发生改变
+//计算文本大小
+- (float) heightForTextView: (UITextView *)textView WithText: (NSString *) strText{
+    CGSize constraint = CGSizeMake(textView.contentSize.width , CGFLOAT_MAX);
+    CGRect size = [strText boundingRectWithSize:constraint
+                                        options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
+                                     attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14]}
+                                        context:nil];
+    float textHeight = size.size.height + 22.0;
+    return textHeight;
+}
+//更改文本区域高度
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    CGRect frame = textView.frame;
+    CGRect frameSave =saveButton.frame;
+    float height;
+    if ([text isEqual:@""]) {
+        
+        if (![textView.text isEqualToString:@""]) {
+            
+            height = [ self heightForTextView:textView WithText:[textView.text substringToIndex:[textView.text length] - 1]];
+            
+        }else{
+            
+            height = [ self heightForTextView:textView WithText:textView.text];
+        }
+    }else{
+        
+        height = [self heightForTextView:textView WithText:[NSString stringWithFormat:@"%@%@",textView.text,text]];
+    }
+    
+    frame.size.height = height;
+    frameSave.origin.y=frame.origin.y+height+20;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        textView.frame = frame;
+        saveButton.frame=frameSave;
+        
+    } completion:nil];
+    
+    return YES;
+}
+
+
+
+//时间选择器
+//选择开始时间
+-(void)tapStartTime:(UITapGestureRecognizer *)sender{
+    NSLog(@"选择开始时间");
+    UIDatePicker *start=[[UIDatePicker alloc]init];
+    start.datePickerMode=UIDatePickerModeDateAndTime;
+    
+   
+    [self.view addSubview:start];
+}
+//选择结束时间
+-(void)tapEndTime:(UITapGestureRecognizer *)sender{
+    NSLog(@"选择结束时间");
+}
+
 
 
 @end
