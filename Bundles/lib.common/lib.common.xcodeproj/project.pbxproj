@@ -240,6 +240,15 @@
 		84AE71FE1FA423D1002530AD /* ZLCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE71C81FA422CF002530AD /* ZLCameraViewController.m */; };
 		84AE72201FA6FB7C002530AD /* AttachmentUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 84AE721E1FA6FB7B002530AD /* AttachmentUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84AE72211FA6FB7C002530AD /* AttachmentUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AE721F1FA6FB7B002530AD /* AttachmentUtils.m */; };
+		84D751471FBAB6B4003F91E4 /* UITabBarItem+PPBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D7513E1FBAB6B3003F91E4 /* UITabBarItem+PPBadgeView.m */; };
+		84D751481FBAB6B4003F91E4 /* UIView+PPBadgeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D7513F1FBAB6B3003F91E4 /* UIView+PPBadgeView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84D751491FBAB6B4003F91E4 /* UIBarButtonItem+PPBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D751401FBAB6B3003F91E4 /* UIBarButtonItem+PPBadgeView.m */; };
+		84D7514A1FBAB6B4003F91E4 /* UIView+PPBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D751411FBAB6B3003F91E4 /* UIView+PPBadgeView.m */; };
+		84D7514B1FBAB6B4003F91E4 /* PPBadgeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D751421FBAB6B3003F91E4 /* PPBadgeView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84D7514C1FBAB6B4003F91E4 /* PPBadgeLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D751431FBAB6B3003F91E4 /* PPBadgeLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84D7514D1FBAB6B4003F91E4 /* UITabBarItem+PPBadgeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D751441FBAB6B3003F91E4 /* UITabBarItem+PPBadgeView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84D7514E1FBAB6B4003F91E4 /* PPBadgeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D751451FBAB6B3003F91E4 /* PPBadgeLabel.m */; };
+		84D7514F1FBAB6B4003F91E4 /* UIBarButtonItem+PPBadgeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 84D751461FBAB6B4003F91E4 /* UIBarButtonItem+PPBadgeView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8AFFBA91F9D947700CE74F5 /* MJRefreshAutoFooter.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFB7C1F9D947700CE74F5 /* MJRefreshAutoFooter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8AFFBAA1F9D947700CE74F5 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFB7D1F9D947700CE74F5 /* MJRefreshAutoFooter.m */; };
 		F8AFFBAB1F9D947700CE74F5 /* MJRefreshBackFooter.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFB7E1F9D947700CE74F5 /* MJRefreshBackFooter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -552,6 +561,15 @@
 		84AE71C81FA422CF002530AD /* ZLCameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZLCameraViewController.m; sourceTree = "<group>"; };
 		84AE721E1FA6FB7B002530AD /* AttachmentUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachmentUtils.h; sourceTree = "<group>"; };
 		84AE721F1FA6FB7B002530AD /* AttachmentUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachmentUtils.m; sourceTree = "<group>"; };
+		84D7513E1FBAB6B3003F91E4 /* UITabBarItem+PPBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITabBarItem+PPBadgeView.m"; path = "BadgeView/UITabBarItem+PPBadgeView.m"; sourceTree = "<group>"; };
+		84D7513F1FBAB6B3003F91E4 /* UIView+PPBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+PPBadgeView.h"; path = "BadgeView/UIView+PPBadgeView.h"; sourceTree = "<group>"; };
+		84D751401FBAB6B3003F91E4 /* UIBarButtonItem+PPBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+PPBadgeView.m"; path = "BadgeView/UIBarButtonItem+PPBadgeView.m"; sourceTree = "<group>"; };
+		84D751411FBAB6B3003F91E4 /* UIView+PPBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+PPBadgeView.m"; path = "BadgeView/UIView+PPBadgeView.m"; sourceTree = "<group>"; };
+		84D751421FBAB6B3003F91E4 /* PPBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PPBadgeView.h; path = BadgeView/PPBadgeView.h; sourceTree = "<group>"; };
+		84D751431FBAB6B3003F91E4 /* PPBadgeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PPBadgeLabel.h; path = BadgeView/PPBadgeLabel.h; sourceTree = "<group>"; };
+		84D751441FBAB6B3003F91E4 /* UITabBarItem+PPBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITabBarItem+PPBadgeView.h"; path = "BadgeView/UITabBarItem+PPBadgeView.h"; sourceTree = "<group>"; };
+		84D751451FBAB6B3003F91E4 /* PPBadgeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PPBadgeLabel.m; path = BadgeView/PPBadgeLabel.m; sourceTree = "<group>"; };
+		84D751461FBAB6B4003F91E4 /* UIBarButtonItem+PPBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+PPBadgeView.h"; path = "BadgeView/UIBarButtonItem+PPBadgeView.h"; sourceTree = "<group>"; };
 		F8AFFB7C1F9D947700CE74F5 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		F8AFFB7D1F9D947700CE74F5 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		F8AFFB7E1F9D947700CE74F5 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -911,6 +929,7 @@
 		84301AC61F95E36D00F01F8F /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				84D7513D1FBAB698003F91E4 /* BadgeView */,
 				84301AC71F95E50500F01F8F /* FDSlideBar */,
 			);
 			name = Component;
@@ -1218,6 +1237,22 @@
 			path = ZLCamera;
 			sourceTree = "<group>";
 		};
+		84D7513D1FBAB698003F91E4 /* BadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				84D751431FBAB6B3003F91E4 /* PPBadgeLabel.h */,
+				84D751451FBAB6B3003F91E4 /* PPBadgeLabel.m */,
+				84D751421FBAB6B3003F91E4 /* PPBadgeView.h */,
+				84D751461FBAB6B4003F91E4 /* UIBarButtonItem+PPBadgeView.h */,
+				84D751401FBAB6B3003F91E4 /* UIBarButtonItem+PPBadgeView.m */,
+				84D751441FBAB6B3003F91E4 /* UITabBarItem+PPBadgeView.h */,
+				84D7513E1FBAB6B3003F91E4 /* UITabBarItem+PPBadgeView.m */,
+				84D7513F1FBAB6B3003F91E4 /* UIView+PPBadgeView.h */,
+				84D751411FBAB6B3003F91E4 /* UIView+PPBadgeView.m */,
+			);
+			name = BadgeView;
+			sourceTree = "<group>";
+		};
 		F8AFFB7A1F9D947700CE74F5 /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -1455,6 +1490,11 @@
 				84459AEB1FA98A1200E3A076 /* MessageModel.h in Headers */,
 				84459AE71FA98A1200E3A076 /* MessageTopicModel.h in Headers */,
 				84459ADE1FA989F800E3A076 /* FMDBHelper.h in Headers */,
+				84D7514B1FBAB6B4003F91E4 /* PPBadgeView.h in Headers */,
+				84D751481FBAB6B4003F91E4 /* UIView+PPBadgeView.h in Headers */,
+				84D7514D1FBAB6B4003F91E4 /* UITabBarItem+PPBadgeView.h in Headers */,
+				84D7514C1FBAB6B4003F91E4 /* PPBadgeLabel.h in Headers */,
+				84D7514F1FBAB6B4003F91E4 /* UIBarButtonItem+PPBadgeView.h in Headers */,
 				84459AE91FA98A1200E3A076 /* MessageListModel.h in Headers */,
 				84AE71E21FA42325002530AD /* ZLCameraImageView.h in Headers */,
 				84AE71E31FA42325002530AD /* ZLCameraView.h in Headers */,
@@ -1550,6 +1590,7 @@
 				84AE71ED1FA423D1002530AD /* LGPhotoAssets.m in Sources */,
 				84AE71EE1FA423D1002530AD /* LGPhotoPickerDatas.m in Sources */,
 				84AE71EF1FA423D1002530AD /* LGPhotoPickerGroup.m in Sources */,
+				84D751471FBAB6B4003F91E4 /* UITabBarItem+PPBadgeView.m in Sources */,
 				84AE71F01FA423D1002530AD /* LGPhotoPickerAssetsViewController.m in Sources */,
 				84AE71F11FA423D1002530AD /* LGPhotoPickerGroupViewController.m in Sources */,
 				84AE71F21FA423D1002530AD /* LGPhotoPickerViewController.m in Sources */,
@@ -1584,6 +1625,7 @@
 				0634553C1F1CA4EE00F1BEF8 /* MJPropertyType.m in Sources */,
 				06C6BA471F14C42700D444E6 /* SVProgressHUD.m in Sources */,
 				84301AAB1F95DACD00F01F8F /* FMResultSet.m in Sources */,
+				84D751491FBAB6B4003F91E4 /* UIBarButtonItem+PPBadgeView.m in Sources */,
 				F8AFFBC81F9D947700CE74F5 /* MJRefreshConst.m in Sources */,
 				063455461F1CA4EE00F1BEF8 /* NSString+MJExtension.m in Sources */,
 				06C6B9DA1F14A65100D444E6 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -1610,6 +1652,7 @@
 				06C6B9DC1F14A65100D444E6 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				06C6B9E81F14A65100D444E6 /* UIWebView+AFNetworking.m in Sources */,
 				F8AFFBAE1F9D947700CE74F5 /* MJRefreshComponent.m in Sources */,
+				84D7514E1FBAB6B4003F91E4 /* PPBadgeLabel.m in Sources */,
 				F8AFFBB61F9D947700CE74F5 /* MJRefreshAutoNormalFooter.m in Sources */,
 				84301C571F9978BE00F01F8F /* SDWebImageDownloader.m in Sources */,
 				F8AFFBB21F9D947700CE74F5 /* MJRefreshHeader.m in Sources */,
@@ -1623,6 +1666,7 @@
 				063455401F1CA4EE00F1BEF8 /* NSObject+MJCoding.m in Sources */,
 				F8AFFBB01F9D947700CE74F5 /* MJRefreshFooter.m in Sources */,
 				06C6B9C71F14A65100D444E6 /* AFHTTPSessionManager.m in Sources */,
+				84D7514A1FBAB6B4003F91E4 /* UIView+PPBadgeView.m in Sources */,
 				84301C481F9978BE00F01F8F /* SDWebImageDecoder.m in Sources */,
 				84301C5C1F99798D00F01F8F /* BaseModel.m in Sources */,
 				84301A851F95D74800F01F8F /* View+MASAdditions.m in Sources */,

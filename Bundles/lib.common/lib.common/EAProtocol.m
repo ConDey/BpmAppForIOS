@@ -80,6 +80,7 @@ static EAProtocol *_instance;
                                                     CommonConfigServiceUrl,
                                                     AttachmentUploadUrl,
                                                     ScheduleSaveServiceUrl,
+                                                    AppMenuBadgeServiceUrl,
                            nil];
     }
     return _webServiceUrls;

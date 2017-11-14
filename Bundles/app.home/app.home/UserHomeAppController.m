@@ -12,11 +12,15 @@
 #import "AppListModel.h"
 #import "AppModelHelper.h"
 #import "ImageModel.h"
+#import "BadgeModel.h"
 
 @interface UserHomeAppController ()
 
 @property (nonatomic,retain) NSMutableArray *apps;
 @property (nonatomic,retain) NSMutableArray *allApps;
+
+// badge
+@property (nonatomic,retain) NSDictionary *badgeDict;
 
 @property (nonatomic,retain) UIScrollView *scrollView;
 @property (nonatomic,retain) UIView *scrollContainerView; //Masonry下Scrollview的过渡视图
@@ -45,6 +49,7 @@
     // 初始化数据
     self.apps = [[NSMutableArray alloc]init];
     self.allApps = [[NSMutableArray alloc] init];
+    self.badgeDict = [[NSDictionary alloc] init];
     
     [self initView];
     [self initData];
@@ -59,6 +64,9 @@
     
     self.navDisplay = YES;
     [self setTitleOfNav:@"应用"];
+    
+    // 重复刷新
+    [self httpGetRequestWithUrl:HttpProtocolServiceAppMenuBadge params:nil progress:YES];
     
 }
 
@@ -184,6 +192,7 @@
                               @"commonUse" : @"",
                               };
     [self httpGetRequestWithUrl:HttpProtocolServiceAppMenuAllList params:appAllDict progress:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -252,6 +261,18 @@
            make.height.mas_equalTo([self appscountdisplay:self.allApps] / 4  *  (100 + ONE_PX));
        }];
         [self.allAppsCollectionView reloadData];
+    }
+    
+    if (name == HttpProtocolServiceAppMenuBadge) {
+        
+        BadgeModel *badgeModel = [BadgeModel mj_objectWithKeyValues:result];
+        if (badgeModel.success) {
+            _badgeDict = badgeModel.datas;
+            [self.appsCollectionView reloadData];
+            [self.allAppsCollectionView reloadData];
+        }else {
+            [SVProgressHUD showErrorWithStatus:@"获取未读消息数失败"];
+        }
     }
 }
 
@@ -351,7 +372,10 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSString *appId = @"";
+    
     UserHomeAppViewCell *cell = (UserHomeAppViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"UserHomeAppViewCell" forIndexPath:indexPath];
+    [cell.imageView pp_addBadgeWithNumber:0];
     
     UIImage* defaultMsgIcon = [UIImage imageNamed:@"ic_homeapp_stub" inBundle:self.bundle compatibleWithTraitCollection:nil];
     
@@ -361,6 +385,7 @@
             cell.imageView.image = nil;
         } else {
             EAApp *app = [self.apps objectAtIndex:indexPath.row];
+            appId = app.appId;
             if (app != nil) {
                 cell.titleLabel.text = app.displayName;
                 if (app.imageUrlType == ImageUrlTypeInner) {
@@ -379,6 +404,7 @@
             cell.imageView.image = nil;
         } else {
             EAApp *app = [self.allApps objectAtIndex:indexPath.row];
+            appId = app.appId;
             if (app != nil) {
                 cell.titleLabel.text = app.displayName;
                 if (app.imageUrlType == ImageUrlTypeInner) {
@@ -390,6 +416,13 @@
             }
         }
     }
+    
+    // badge
+    if ([_badgeDict objectForKey:appId]) {
+        int badgeNum = [[_badgeDict objectForKey:appId] intValue];
+        [cell.imageView pp_addBadgeWithNumber:badgeNum];
+    }
+    
     //长按操作
     UILongPressGestureRecognizer *longPress=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(jumpToEdit:)];
     [cell addGestureRecognizer:longPress];

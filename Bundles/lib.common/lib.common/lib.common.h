@@ -25,6 +25,7 @@ FOUNDATION_EXPORT const unsigned char lib_commonVersionString[];
 #import "FDSlideBar.h"
 #import "MJRefresh.h"
 #import "LGPhoto.h"
+#import "PPBadgeView.h"
 
 #import "EAViewController.h"
 #import "BaseTableViewCell.h"

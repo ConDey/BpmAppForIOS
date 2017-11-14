@@ -22,22 +22,24 @@ static NSString * _Nonnull const MessageListServiceUrl          = @"msg/list";
 static NSString * _Nonnull const MessageReadedServiceUrl        = @"msg/setInternalMessageReaded";
 // 通讯录
 static NSString * _Nonnull const ContactDepartServiceUrl        = @"department/listByParentId";
-static NSString * _Nonnull const ContactUserDetailServiceUrl        = @"user/detail";
-static NSString * _Nonnull const ContactUserListServiceUrl      =@"user/list";
+static NSString * _Nonnull const ContactUserDetailServiceUrl    = @"user/detail";
+static NSString * _Nonnull const ContactUserListServiceUrl      = @"user/list";
 //修改密码
-static NSString * _Nonnull const PasswordChangeServiceUrl       =@"password/change";
+static NSString * _Nonnull const PasswordChangeServiceUrl       = @"password/change";
 //通知公告
-static NSString * _Nonnull const ContactNoticeDetailServiceUrl      =@"notice/detail";
-static NSString * _Nonnull const ContactNoticeListServiceUrl      =@"notice/list";
+static NSString * _Nonnull const ContactNoticeDetailServiceUrl  = @"notice/detail";
+static NSString * _Nonnull const ContactNoticeListServiceUrl    = @"notice/list";
 //App菜单列表
 static NSString * _Nonnull const AppMenuListServiceUrl          = @"menu/list";
 static NSString * _Nonnull const AppMenuAllListServiceUrl       = @"menu/list";
 // 全局配置
 static NSString * _Nonnull const CommonConfigServiceUrl         = @"common/config";
 //文件上传
-static NSString * _Nonnull const AttachmentUploadUrl            =@"attachment/upload";
+static NSString * _Nonnull const AttachmentUploadUrl            = @"attachment/upload";
 //日程安排
-static NSString * _Nonnull const ScheduleSaveServiceUrl           =@"schedule/save";
+static NSString * _Nonnull const ScheduleSaveServiceUrl         = @"schedule/save";
+//应用角标
+static NSString * _Nonnull const AppMenuBadgeServiceUrl         = @"menu/badge";
 // 服务名称枚举
 typedef NS_ENUM(NSInteger, HttpProtocolServiceName) {
     // 枚举成员
@@ -55,6 +57,7 @@ typedef NS_ENUM(NSInteger, HttpProtocolServiceName) {
     HttpProtocolServiceCommonConfig         = 11,
     HttpProtocolServiceAttachmentUpload     = 12,
     HttpProtocolServiceScheduleSave         = 13,
+    HttpProtocolServiceAppMenuBadge         = 14,
 };
 
 @interface EAProtocol : NSObject
