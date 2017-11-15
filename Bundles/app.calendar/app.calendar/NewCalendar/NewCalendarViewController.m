@@ -13,12 +13,21 @@
 {
     CGFloat dsHeight;
     UIButton  *saveButton;
-    BOOL isFeb;//是不是二月
-    BOOL isFour;//是不是闰年
-    BOOL isThirtyOne;//是不是31日，是为31
-    BOOL isThirty;
     UIView *pickerAll;
     BOOL isStart;
+    NSString *titleYear;
+    NSString *titleMon;
+    NSString *titleDay;
+    NSString *titleHour;
+    NSString *titleMin;
+    //当前时间
+    NSInteger second;
+    NSInteger year;
+    NSInteger month;
+    NSInteger day;
+    NSInteger hour;
+    NSInteger minute;
+    BOOL isSelectTime;
 }
 @property(nonatomic,retain)UILabel *descriptionLabel;//事件描述
 
@@ -59,21 +68,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    isThirtyOne=YES;
     self.eventType=@"临时";
     if(self.eventDescription.text.length==0){
         self.eventDescription=[[UITextView alloc]init];
     }
-    //选择器
-    pickerAll=[[UIView alloc]init];
-    [self.view addSubview:pickerAll];
-    [pickerAll mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
-        make.bottom.mas_equalTo(0);
-        make.height.mas_equalTo(230);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-    }];
-    pickerAll.backgroundColor=[UIColor whiteColor];
+   
     
     
     self.eventDescription.delegate=self;
@@ -106,7 +105,7 @@
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
     }];
-    self.eventDescription.layer.borderWidth=2;
+   // self.eventDescription.layer.borderWidth=2;
     title.text=@"  事件描述:";
     title.font=FONT_14;
     title.textAlignment=NSTextAlignmentLeft;
@@ -293,7 +292,7 @@
         [self sendNewCalendar];
     }else{
         NSLog(@"输入不完整");
-        NSLog(@"%@-%@-%@-%@-%@--%@",self.eventName.text,self.eventType,self.startDate.text,self.eventDescription.text,self.endDate.text,self.location.text);
+        NSLog(@"%@-%@-%@-%@-%@--%@-%@-%@-%@",self.eventName.text,self.eventType,self.eventEndDate,self.eventEndTime,self.eventStartDate,self.eventStartTime,self.eventDescription.text,self.endDate.text,self.location.text);
     }
 }
 
@@ -384,29 +383,153 @@
 //选择开始时间
 -(void)tapStartTime:(UITapGestureRecognizer *)sender{
     NSLog(@"选择开始时间");
+    //选择器
+    pickerAll=[[UIView alloc]init];
+    [self.view addSubview:pickerAll];
+    [pickerAll mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(230);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+    }];
+    pickerAll.backgroundColor=[UIColor whiteColor];
     isStart=YES;
+    isSelectTime=NO;
     pickerAll.hidden=NO;
+    [self beginningTime];
     [self addPickerDataYearAndMinAndHourAndMon];
     [self addTimePicker];
-    [self addPickerDataDay:1 withEnd:30];
+    [self beginningTimeWithXY];
+   
+    
 }
 //选择结束时间
 -(void)tapEndTime:(UITapGestureRecognizer *)sender{
     isStart=NO;
+    //选择器
+    pickerAll=[[UIView alloc]init];
+    [self.view addSubview:pickerAll];
+    [pickerAll mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(230);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+    }];
+    pickerAll.backgroundColor=[UIColor whiteColor];
     pickerAll.hidden=NO;
+    [self beginningTime];
     [self addPickerDataYearAndMinAndHourAndMon];
     [self addTimePicker];
-    [self addPickerDataDay:1 withEnd:30];
-    [self.pickerView1 selectRow:5 inComponent:0 animated:YES];
-    [self.pickerView1 selectRow:56 inComponent:1 animated:YES];
-    [self.pickerView1 selectRow:12 inComponent:2 animated:YES];
-    [self.pickerView2 selectRow:3 inComponent:0 animated:YES];
-    [self.pickerView2 selectRow:78 inComponent:1 animated:YES];
+    [self beginningTimeWithXY];
+
+    
 }
+//时间选择器时间初始化
+-(void)beginningTime{
+    NSDate*date = [NSDate date];
+    NSCalendar*calendar = [NSCalendar currentCalendar];
+    NSDateComponents*comps;
+    // 年月日获得
+    comps =[calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |NSDayCalendarUnit)
+                       fromDate:date];
+     year = [comps year];
+     month = [comps month];
+     day = [comps day];
+    titleYear=[NSString stringWithFormat:@"%ld年",year];
+    titleMon=[NSString stringWithFormat:@"%ld月",month];
+    titleDay=[NSString stringWithFormat:@"%ld日",day];
+    //当前的时分秒获得
+    comps =[calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit |NSSecondCalendarUnit)
+                       fromDate:date];
+     hour = [comps hour];
+     minute = [comps minute];
+    second=[comps second];
+    titleHour=[NSString stringWithFormat:@"%ld时",hour];
+    titleMin=[NSString stringWithFormat:@"%ld分",minute];
+    
+        if(month==1||month==3||month==5||month==7||month==8||month==10||month==12)
+    {
+        [self addPickerDataDay:1 withEnd:31];
+    }else if (month==4||month==6||month==9||month==11){
+        [self addPickerDataDay:1 withEnd:30];
+    }else if(month==2){
+        if(year%4==0){
+            [self addPickerDataDay:1 withEnd:29];
+        }else{
+            [self addPickerDataDay:1 withEnd:28];
+        }
+    }
+    
+   
+}
+
+-(void)beginningTimeWithXY{
+    //初始位置
+    [self.pickerView1 selectRow:self.year.count*20+year-2011 inComponent:0 animated:NO];
+    [self.pickerView1 selectRow:self.mon.count*20+month-1 inComponent:1 animated:NO];
+    [self.pickerView1 selectRow:self.day.count*20+day-1 inComponent:2 animated:NO];
+    [self.pickerView2 selectRow:self.hour.count*20+hour inComponent:0 animated:NO];
+    [self.pickerView2 selectRow:self.min.count*20+minute inComponent:1 animated:NO];
+    if(!isSelectTime){
+        if(isStart){
+            self.eventStartDate=[NSString stringWithFormat:@"%ld-%ld-%ld",year,month,day];
+            self.eventStartTime=[NSString stringWithFormat:@"%ld:%ld",hour,minute];
+        }else{
+            self.eventEndDate=[NSString stringWithFormat:@"%ld-%ld-%ld",year,month,day];
+            self.eventEndTime=[NSString stringWithFormat:@"%ld:%ld",hour,minute];
+        }
+        
+    }
+}
+
+
 
 //时间选择器界面
 -(void)addTimePicker{
+    //显示当前时间
+    self.currentTimeLabel=[[UILabel alloc]init];
+   // self.currentTimeLabel.backgroundColor=UI_BLUE_COLOR;
+    [pickerAll addSubview:self.currentTimeLabel];
+    [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-10);
+        make.top.mas_equalTo(0);
+        make.height.mas_equalTo(39);
+        make.width.mas_equalTo(150);
+    }];
+    NSDate *cd = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+    NSString *DateTime = [formatter stringFromDate:cd];
+
     
+    self.currentTimeLabel.textAlignment=NSTextAlignmentRight;
+    self.currentTimeLabel.text=DateTime;
+    self.currentTimeLabel.font=FONT_14;
+    //标题
+    self.titleLabel=[[UILabel alloc]init];
+    //self.titleLabel.backgroundColor=UI_BLUE_COLOR;
+    [pickerAll addSubview:self.titleLabel];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(10);
+        make.top.mas_equalTo(0);
+        make.height.mas_equalTo(39);
+        make.width.mas_equalTo(150);
+    }];
+    self.titleLabel.textAlignment=NSTextAlignmentLeft;
+    self.titleLabel.text=@"选择计划时间";
+    self.titleLabel.font=FONT_14;
+    //分割线1
+    UIView *singleView1=[[UIView alloc]init];
+    [pickerAll addSubview:singleView1];
+    [singleView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.currentTimeLabel.mas_bottom);
+        make.height.mas_equalTo(1);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.left.mas_equalTo(0);
+    }];
+    singleView1.backgroundColor=UI_DIVIDER_COLOR;
     //2个选择器
     self.pickerView1=[[UIPickerView alloc]init];
     self.pickerView2=[[UIPickerView alloc]init];
@@ -415,13 +538,13 @@
     [self.pickerView1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
         make.bottom.mas_equalTo(-40);
-        make.height.mas_equalTo(150);
+        make.top.mas_equalTo(singleView1.mas_bottom);
         make.width.mas_equalTo(SCREEN_WIDTH*3/5);
     }];
     [self.pickerView2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(0);
         make.bottom.mas_equalTo(-40);
-        make.height.mas_equalTo(150);
+        make.top.mas_equalTo(singleView1.mas_bottom);
         make.width.mas_equalTo(SCREEN_WIDTH*2/5);
     }];
     //    self.pickerView2.layer.borderWidth=2;
@@ -431,47 +554,34 @@
     self.pickerView1.dataSource=self;
     self.pickerView2.delegate=self;
     self.pickerView2.dataSource=self;
-    //选择器初始位置
-    
-    
-    
-    
-    //显示当前时间
-    self.currentTimeLabel=[[UILabel alloc]init];
-    self.currentTimeLabel.backgroundColor=UI_BLUE_COLOR;
-    [pickerAll addSubview:self.currentTimeLabel];
-    [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-10);
-        make.top.mas_equalTo(0);
-        make.height.mas_equalTo(40);
-        make.width.mas_equalTo(150);
+    //初始位置
+    [self.pickerView1 selectRow:8000 inComponent:0 animated:NO];
+    [self.pickerView1 selectRow:8000 inComponent:1 animated:NO];
+    [self.pickerView1 selectRow:8000 inComponent:2 animated:NO];
+    [self.pickerView2 selectRow:8000 inComponent:0 animated:NO];
+    [self.pickerView2 selectRow:8000 inComponent:1 animated:NO];
+    //分割线2
+    UIView *singleView2=[[UIView alloc]init];//分割线
+    [pickerAll addSubview:singleView2];
+    [singleView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.pickerView1.mas_bottom);
+        make.height.mas_equalTo(1);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.left.mas_equalTo(0);
     }];
-    self.currentTimeLabel.textAlignment=NSTextAlignmentRight;
-    self.currentTimeLabel.text=@"2017-11-14 20:11:03";
-    self.currentTimeLabel.font=FONT_14;
-    //标题
-    self.titleLabel=[[UILabel alloc]init];
-    self.titleLabel.backgroundColor=UI_BLUE_COLOR;
-    [pickerAll addSubview:self.titleLabel];
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(10);
-        make.top.mas_equalTo(0);
-        make.height.mas_equalTo(40);
-        make.width.mas_equalTo(150);
-    }];
-    self.titleLabel.textAlignment=NSTextAlignmentLeft;
-    self.titleLabel.text=@"选择计划时间";
-    self.titleLabel.font=FONT_14;
+    singleView2.backgroundColor=UI_DIVIDER_COLOR;
+   
+    
     //取消按钮
     UIButton *cancel=[UIButton buttonWithType:UIButtonTypeCustom];
     [pickerAll addSubview:cancel];
     [cancel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(10);
         make.bottom.mas_equalTo(-5);
-        make.height.mas_equalTo(38);
+        make.top.mas_equalTo(singleView2.mas_bottom);
         make.width.mas_equalTo(SCREEN_WIDTH/2-11);
     }];
-    [cancel setBackgroundColor: UI_BLUE_COLOR];
+    [cancel setTitleColor:UI_GRAY_COLOR forState:UIControlStateNormal];
     [cancel setTitle:@"取消" forState:UIControlStateNormal];
     [cancel addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
     //返回日期
@@ -480,29 +590,44 @@
     [date mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-10);
         make.bottom.mas_equalTo(-5);
-        make.height.mas_equalTo(38);
+         make.top.mas_equalTo(singleView2.mas_bottom);
         make.width.mas_equalTo(SCREEN_WIDTH/2-11);
     }];
-    [date setBackgroundColor: UI_BLUE_COLOR];
+    
+    [date setTitleColor:UI_GRAY_COLOR forState:UIControlStateNormal];
     [date setTitle:@"确定" forState:UIControlStateNormal];
     [date addTarget:self action:@selector(selectDate:) forControlEvents:UIControlEventTouchUpInside];
+    //分割线3
+    UIView *singleView3=[[UIView alloc]init];//分割线
+    [pickerAll addSubview:singleView3];
+    [singleView3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(pickerAll.mas_centerX);
+        make.bottom.mas_equalTo(-4);
+        make.height.mas_equalTo(30);
+        make.width.mas_equalTo(1);
+    }];
+    singleView3.backgroundColor=UI_DIVIDER_COLOR;
     
 }
 //返回时间选择结果或者取消
 -(void)selectDate:(UIButton *)bt{
     if(isStart){
-        self.startDate.text=[NSString stringWithFormat:@"%@ %@",self.eventStartDate,self.eventStartTime];
+        self.startDate.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventStartDate,self.eventStartTime,second];
     }else{
-        self.endDate.text=[NSString stringWithFormat:@"%@ %@",self.eventEndDate,self.eventEndTime];
+        self.endDate.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventEndDate,self.eventEndTime,second];
     }
     pickerAll.hidden=YES;
 }
 -(void)cancel:(UIButton *)bt{
     pickerAll.hidden=YES;
     if(isStart){
+        if(self.startDate.text==nil){
         self.startDate.text=@"";
+        }
     }else{
+        if(self.endDate.text==nil){
         self.endDate.text=@"";
+        }
     }
 }
 
@@ -514,28 +639,28 @@
         [temp addObject:[NSString stringWithFormat:@"%d年",yearInt]];
         self.year=[[NSArray alloc]initWithArray:temp];
     }
-    NSLog(@"++++%@",self.year);
+   // NSLog(@"++++%@",self.year);
     //时
     for(int hourInt=0;hourInt<24;hourInt++){
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.hour];
         [temp addObject:[NSString stringWithFormat:@"%d时",hourInt]];
         self.hour=[[NSArray alloc]initWithArray:temp];
     }
-    NSLog(@"++++%@",self.hour);
+    //NSLog(@"++++%@",self.hour);
     //分
     for(int minInt=0;minInt<60;minInt++){
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.min];
         [temp addObject:[NSString stringWithFormat:@"%d分",minInt]];
         self.min=[[NSArray alloc]initWithArray:temp];
     }
-    NSLog(@"++++%@",self.min);
+    //NSLog(@"++++%@",self.min);
     //月
     for(int monInt=1;monInt<13;monInt++){
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.mon];
         [temp addObject:[NSString stringWithFormat:@"%d月",monInt]];
         self.mon=[[NSArray alloc]initWithArray:temp];
     }
-    NSLog(@"++++%@",self.mon);
+   // NSLog(@"++++%@",self.mon);
 }
 //时间选择器数据-月日
 -(void)addPickerDataDay:(int)count withEnd:(int)end{
@@ -602,43 +727,77 @@
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    NSString *titleYear=[self pickerView:self.pickerView1 titleForRow:row forComponent:0];
-    NSString *titleMon=[self pickerView:self.pickerView1 titleForRow:row forComponent:1];
-    NSString *titleDay=[self pickerView:self.pickerView1 titleForRow:row forComponent:2];
-    NSString *titleHour=[self pickerView:self.pickerView2 titleForRow:row forComponent:0];
-    NSString *titleMin=[self pickerView:self.pickerView2 titleForRow:row forComponent:1];
-    NSString *yearNum=[titleYear substringToIndex:[titleYear length]-1];
-    NSString *monNum=[titleYear substringToIndex:[titleMon length]-1];
-    NSString *dayNum=[titleYear substringToIndex:[titleDay length]-1];
-    NSString *hourNum=[titleYear substringToIndex:[titleHour length]-1];
-    NSString *minNum=[titleYear substringToIndex:[titleMin length]-1];
+    isSelectTime=YES;
+    NSString *yearNum;
+    NSString *monNum;
+    NSString *dayNum;
+    NSString *hourNum;
+    NSString *minNum;
+    if(pickerView==self.pickerView1&&component==0){
+        NSString *title=[self pickerView:pickerView titleForRow:row forComponent:component];
+        if(title!=nil){
+            titleYear=title;
+        }
+       
+    }else if (pickerView==self.pickerView1&&component==1){
+        NSString *title=[self pickerView:pickerView titleForRow:row forComponent:component];
+        if(title!=nil){
+            titleMon=title;
+        }
+    }else if (pickerView==self.pickerView1&&component==2){
+        NSString *title= [self pickerView:pickerView titleForRow:row forComponent:component];
+        if(title!=nil){
+            titleDay=title;
+        }
+    }else if (pickerView==self.pickerView2&&component==0){
+        NSString *title=[self pickerView:pickerView titleForRow:row forComponent:component];
+        if(title!=nil){
+            titleHour=title;
+        }
+    }else if (pickerView==self.pickerView2&&component==1){
+        NSString *title=[self pickerView:pickerView titleForRow:row forComponent:component];
+        if(title!=nil){
+            titleMin=title;
+        }
+    }
+     yearNum=[titleYear substringToIndex:[titleYear length]-1];
+     monNum=[titleMon substringToIndex:[titleMon length]-1];
+     dayNum=[titleDay substringToIndex:[titleDay length]-1];
+     hourNum=[titleHour substringToIndex:[titleHour length]-1];
+     minNum=[titleMin substringToIndex:[titleMin length]-1];
+    
+    
+     NSLog(@"%@-%@-%@-%@-%@",yearNum,monNum,dayNum,hourNum,minNum);
     if(isStart){
         self.eventStartDate=[NSString stringWithFormat:@"%@-%@-%@",yearNum,monNum,dayNum];
         self.eventStartTime=[NSString stringWithFormat:@"%@:%@:12",hourNum,minNum];
     }else{
         self.eventEndDate=[NSString stringWithFormat:@"%@-%@-%@",yearNum,monNum,dayNum];
-        self.eventEndTime=[NSString stringWithFormat:@"%@:%@:12",hourNum,minNum];
+        self.eventEndTime=[NSString stringWithFormat:@"%@:%@",hourNum,minNum];
     }
     int yearInt=[yearNum intValue];
     int monInt=[monNum intValue];
-    
+    self.day=[[NSArray alloc]init];
     if(monInt==1||monInt==3||monInt==5||monInt==7||monInt==8||monInt==10||monInt==12){
         [self addPickerDataDay:1 withEnd:31];
+        [self.pickerView1 reloadComponent:2];
+       
     }else if(monInt==4||monInt==6||monInt==9||monInt==11){
         [self addPickerDataDay:1 withEnd:30];
         [self.pickerView1 reloadComponent:2];
+       
     }else{
         if(yearInt%4==0){
             [self addPickerDataDay:1 withEnd:28];
             [self.pickerView1 reloadComponent:2];
+          
         }else{
             [self addPickerDataDay:1 withEnd:29];
             [self.pickerView1 reloadComponent:2];
+           
         }
     }
-    [self.pickerView1 reloadAllComponents];
-    [self.pickerView2 reloadAllComponents];
-    // [self.pickerView1 reloadComponent:2];
+
 }
 
 
