@@ -7,7 +7,7 @@
 //
 
 
-
-@interface CalendarViewController : EAViewController
+#import "JTCalendar.h"
+@interface CalendarViewController : EAViewController<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate>
 
 @end
