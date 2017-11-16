@@ -7,7 +7,7 @@
 //
 
 #import "NewCalendarViewController.h"
-#import "NewCalendarModel.h"
+
 
 @interface NewCalendarViewController ()
 {
@@ -31,7 +31,7 @@
 }
 @property(nonatomic,retain)UILabel *descriptionLabel;//事件描述
 
-@property(nonatomic,retain)UITextField *eventId;
+
 @property(nonatomic,retain)UITextField *eventName;
 @property(nonatomic,retain)NSString *eventType;
 @property(nonatomic,retain)UITextField *location;
@@ -123,7 +123,6 @@
     [saveButton setBackgroundColor: UI_BLUE_COLOR];
     [saveButton setTitle:@"保存" forState:UIControlStateNormal];
     saveButton.titleLabel.textColor=[UIColor whiteColor];
-    
     
 }
 
@@ -292,7 +291,7 @@
         [self sendNewCalendar];
     }else{
         NSLog(@"输入不完整");
-        NSLog(@"%@-%@-%@-%@-%@--%@-%@-%@-%@",self.eventName.text,self.eventType,self.eventEndDate,self.eventEndTime,self.eventStartDate,self.eventStartTime,self.eventDescription.text,self.endDate.text,self.location.text);
+       // NSLog(@"%@-%@-%@-%@-%@--%@-%@-%@-%@",self.eventName.text,self.eventType,self.eventEndDate,self.eventEndTime,self.eventStartDate,self.eventStartTime,self.eventDescription.text,self.endDate.text,self.location.text);
     }
 }
 
@@ -300,7 +299,11 @@
 -(void)sendNewCalendar{
     
     NSMutableDictionary *paramas=[[NSMutableDictionary alloc]init];
+    if(self.eventId.length==0){
     [paramas setObject:@"" forKey:@"id"];
+    }else{
+    [paramas setObject:self.eventId forKey:@"id"];
+    }
     [paramas setObject:self.eventName.text forKey:@"eventName"];
     [paramas setObject:self.eventType forKey:@"eventType"];
     [paramas setObject:self.location.text forKey:@"location"];
@@ -309,6 +312,7 @@
     [paramas setObject:self.eventStartTime forKey:@"startTime"];
     [paramas setObject:self.eventEndDate forKey:@"endDate"];
     [paramas setObject:self.eventEndTime forKey:@"endTime"];
+    NSLog(@"parmas--%@",paramas);
     [self httpGetRequestWithUrl:HttpProtocolServiceScheduleSave params:paramas progress:nil];
 }
 
@@ -554,12 +558,7 @@
     self.pickerView1.dataSource=self;
     self.pickerView2.delegate=self;
     self.pickerView2.dataSource=self;
-    //初始位置
-    [self.pickerView1 selectRow:8000 inComponent:0 animated:NO];
-    [self.pickerView1 selectRow:8000 inComponent:1 animated:NO];
-    [self.pickerView1 selectRow:8000 inComponent:2 animated:NO];
-    [self.pickerView2 selectRow:8000 inComponent:0 animated:NO];
-    [self.pickerView2 selectRow:8000 inComponent:1 animated:NO];
+    
     //分割线2
     UIView *singleView2=[[UIView alloc]init];//分割线
     [pickerAll addSubview:singleView2];
@@ -767,7 +766,7 @@
      minNum=[titleMin substringToIndex:[titleMin length]-1];
     
     
-     NSLog(@"%@-%@-%@-%@-%@",yearNum,monNum,dayNum,hourNum,minNum);
+   //  NSLog(@"%@-%@-%@-%@-%@",yearNum,monNum,dayNum,hourNum,minNum);
     if(isStart){
         self.eventStartDate=[NSString stringWithFormat:@"%@-%@-%@",yearNum,monNum,dayNum];
         self.eventStartTime=[NSString stringWithFormat:@"%@:%@:12",hourNum,minNum];

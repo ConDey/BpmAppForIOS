@@ -8,7 +8,7 @@
 
 #import "CalendarViewController.h"
 #import "NewCalendarViewController.h"
-
+#import "NewCalendarViewController.h"
 @interface CalendarViewController ()
 {
     //当前时间
@@ -23,12 +23,16 @@
     //日程数据
     NSMutableArray *calendarArray;
     NSDictionary *calendarDictionary;
+    //选中日期编号
+    NSInteger selectedNum;
+    CGPoint point1;
+    CGPoint point2;
 }
 @property(nonatomic,retain)UIBarButtonItem *rightButtom;
 @property(nonatomic,retain)UICollectionView *calendarDataView;
 @property(nonatomic,retain)UILabel *calendarTitleLabel;
-
-
+@property(nonatomic,retain)NSString *eventDate;
+@property(nonatomic,retain)NSMutableArray *eventDetailDataArray;
 
 @end
 
@@ -36,7 +40,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.view.backgroundColor=[UIColor yellowColor];
+   // self.eventDetailDataArray=[[NSMutableArray alloc]initWithObjects:@"1",@"2", nil];
+    
     //导航栏右按钮
     self.rightButtom=[[UIBarButtonItem alloc]initWithTitle:@"确认选择" style:UIBarButtonItemStylePlain target:self action:@selector(addNewCalendar:)];
     [self.rightButtom setTintColor:UI_BLUE_COLOR];
@@ -48,9 +53,16 @@
     [self showTimeLabel];
     //数据
     [self createdCalendarData];
+    selectedNum=weekDay-1;
     //日历表
     [self showCalendarTableView];
+    //显示日程安排
+    CGFloat y=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+100;
+    [self scheduleListView:y];
     
+    
+    
+    //[self.calendarTitleLabel addGestureRecognizer:panToChange];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -129,10 +141,7 @@
         }
         
     }
-    calendarDictionary=[[NSDictionary alloc]initWithObjectsAndKeys:[NSString stringWithFormat:@"%d",year],@"year",[NSString stringWithFormat:@"%d",month],@"month",calendarArray,@"day", nil];
-    
-    
-    
+    calendarDictionary=[[NSDictionary alloc]initWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",year],@"year",[NSString stringWithFormat:@"%ld",month],@"month",calendarArray,@"day", nil];
     
 }
 
@@ -150,10 +159,11 @@
         make.top.mas_equalTo(0);
         make.height.mas_equalTo(40);
     }];
-    self.calendarTitleLabel.backgroundColor=[UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:0.7];
+    self.calendarTitleLabel.backgroundColor=[UIColor colorWithRed:102.0/255.0 green:94.0/255.0 blue:98.0/255.0 alpha:0.7];
     self.calendarTitleLabel.textAlignment=NSTextAlignmentCenter;
     self.calendarTitleLabel.textColor=[UIColor whiteColor];
     self.calendarTitleLabel.text=[NSString stringWithFormat:@"%ld-%ld-%ld",year,month,day];
+    self.eventDate=[NSString stringWithFormat:@"%ld-%ld-%ld",year,month,day];
 }
 //日历
 -(void)showCalendarTableView{
@@ -169,10 +179,12 @@
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH));
         make.left.mas_equalTo(0);
     }];
-    self.calendarDataView.backgroundColor=[UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:0.7];
+    self.calendarDataView.backgroundColor=[UIColor colorWithRed:102.0/255.0 green:94.0/255.0 blue:98.0/255.0 alpha:0.7];
     self.calendarDataView.delegate=self;
     self.calendarDataView.dataSource=self;
     [self.calendarDataView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"calendarData"];
+    self.calendarDataView.scrollEnabled=NO;
+    
     //滑动操作
     //左滑
     UISwipeGestureRecognizer *leftSwipe=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(leftSwipe:)];
@@ -182,6 +194,11 @@
     UISwipeGestureRecognizer *rightSwipe=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(rightSwipe:)];
     rightSwipe.direction=UISwipeGestureRecognizerDirectionRight;
     [self.calendarDataView addGestureRecognizer:rightSwipe];
+//    //下滑
+//    UIPanGestureRecognizer *panToDown=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panDown:)];
+//    panToDown.delegate=self;
+//    [self.calendarDataView addGestureRecognizer:panToDown];
+    
 }
 //新增按钮
 -(void)addNewCalendar:(UIButton *)button{
@@ -214,10 +231,9 @@
         make.centerX.mas_equalTo(cell.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
-    date.backgroundColor=[UIColor colorWithRed:105.0/255.0 green:105.0/255.0 blue:105.0/255.0 alpha:0.7];
     date.textAlignment=NSTextAlignmentCenter;
     date.font=FONT_14;
-    date.textColor=[UIColor whiteColor];
+    //date.textColor=[UIColor whiteColor];
     if(indexPath.section==0){
         NSInteger row=indexPath.row;
         if(row==0){
@@ -238,7 +254,31 @@
     }
     
     if(indexPath.section==1){
-      //  NSArray *arr=[calendarDictionary objectForKey:@"day"];
+         NSInteger dayNumOfMonth=[self howManyDaysInThisYear:year withMonth:month];
+        if(weekDay==0){
+            if(indexPath.row<dayNumOfMonth){
+                date.textColor=[UIColor whiteColor];
+            }else{
+                date.textColor=[UIColor colorWithRed:76.0/255.0 green:81.0/255.0 blue:96.0/255.0 alpha:1];
+            }
+            
+        }else{
+            if(indexPath.row>=weekDay-1&&indexPath.row<dayNumOfMonth+weekDay-1){
+               date.textColor=[UIColor whiteColor];
+               }else{
+                date.textColor=[UIColor colorWithRed:76.0/255.0 green:81.0/255.0 blue:96.0/255.0 alpha:1];
+                }
+            
+        }
+
+        
+        if(indexPath.row==selectedNum){
+            date.backgroundColor=[UIColor colorWithRed:115.0/255.0 green:122.0/255.0 blue:131.0/255.0 alpha:0.7];
+            date.layer.cornerRadius=20;
+            date.layer.masksToBounds=YES;
+        }else{
+        date.backgroundColor=[UIColor clearColor];
+        }
         date.text=[calendarArray objectAtIndex:indexPath.row];
     }
     
@@ -270,8 +310,13 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section==1){
+        selectedNum=indexPath.row;
         self.calendarTitleLabel.text=[NSString stringWithFormat:@"%ld-%ld-%@",year,month,[calendarArray objectAtIndex:indexPath.row]];
+        self.eventDate=[NSString stringWithFormat:@"%ld-%ld-%@",year,month,[calendarArray objectAtIndex:indexPath.row]];
+        [self.calendarDataView reloadData];
     }
+    [self requestEventData:self.eventDate];
+    
 }
 
 
@@ -284,25 +329,22 @@
     }
     day=1;
     self.calendarTitleLabel.text=[NSString stringWithFormat:@"%ld-%ld-%ld",year,month,day];
-    
-     NSLog(@"qianWeek%ld",weekDay);
-    
+    self.eventDate=[NSString stringWithFormat:@"%ld-%ld-1",year,month];
     NSDate *now = [NSDate date];
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *comps = [cal
-                               components:NSYearCalendarUnit | NSMonthCalendarUnit
+                               components:NSCalendarUnitYear | NSCalendarUnitMonth
                                fromDate:now];
-   // NSLog(@"前年月日--%ld_%ld_%ld",[comps year],[comps month],[comps day]);
     comps.year=year;
     comps.month=month;
     comps.day = 1;
     NSDate *firstDay = [cal dateFromComponents:comps];
-   // NSLog(@"hou年月日--%ld_%ld_%ld",[comps year],[comps month],[comps day]);
-    
     [self getWeekDayOFFirstData:firstDay];
     [self createdCalendarData];
     [self.calendarDataView reloadData];
-    NSLog(@"houWeek%ld",weekDay);
+    
+    [self requestEventData:self.eventDate];
+    
     
 }
 -(void)rightSwipe:(UISwipeGestureRecognizer *)sender{
@@ -313,24 +355,202 @@
         
     }
     day=1;
-     NSLog(@"qian%ld",weekDay);
+   self.eventDate=[NSString stringWithFormat:@"%ld-%ld-1",year,month];
     NSDate *now = [NSDate date];
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *comps = [cal
-                               components:NSYearCalendarUnit | NSMonthCalendarUnit
+                               components:NSCalendarUnitYear | NSCalendarUnitMonth
                                fromDate:now];
-   //  NSLog(@"前年月日--%ld_%ld_%d",[comps year],[comps month],[comps day]);
     comps.year=year;
     comps.month=month;
     comps.day = 1;
     NSDate *firstDay = [cal dateFromComponents:comps];
-  //  NSLog(@"hou年月日--%ld_%ld_%ld",[comps year],[comps month],[comps day]);
     [self getWeekDayOFFirstData:firstDay];
     [self createdCalendarData];
     [self.calendarDataView reloadData];
     self.calendarTitleLabel.text=[NSString stringWithFormat:@"%ld-%ld-%ld",year,month,day];
-    NSLog(@"hiou%ld",weekDay);
+    
+    [self requestEventData:self.eventDate];
+   
 }
+
+
+
+
+
+-(void)scheduleListView:(CGFloat)y{
+    self.tableview=[[UITableView alloc]init];
+    [self.view addSubview:self.tableview];
+    [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(SCREEN_HEIGHT-y);
+        make.bottom.left.right.mas_equalTo(0);
+    }];
+    self.tableview.delegate=self;
+    self.tableview.dataSource=self;
+   // self.tableview.backgroundColor=[UIColor yellowColor];
+    
+    [self.tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"event"];
+    self.tableview.scrollEnabled=NO;
+    point1=CGPointMake(0, 0);
+    point2=CGPointMake(0, 0);
+    [self requestEventData:self.eventDate];
+    
+    UIPanGestureRecognizer *panToChange=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(pan:)];
+    panToChange.delegate=self;
+    [self.view addGestureRecognizer:panToChange];
+    
+}
+
+
+-(void)requestEventData:(NSString *)date{
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    [params setObject:date forKey:@"date"];
+    [self httpGetRequestWithUrl:HttpProtocolServiceScheduleList params:params progress:YES];
+}
+
+#pragma <UITableViewDelegate,UITableViewDataSource>
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(self.eventDetailDataArray.count==0){
+        return 1;
+    }else{
+     return self.eventDetailDataArray.count;
+    }
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"event"];
+    if(cell!=nil){
+        for(UIView *view in [cell subviews]){
+            [view removeFromSuperview];
+        }
+    }
+    if(self.eventDetailDataArray.count==0){
+        UILabel *titleLabel=[[UILabel alloc]init];
+        [cell addSubview:titleLabel];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+        }];
+        titleLabel.text=@"没有日程";
+        titleLabel.textAlignment=NSTextAlignmentCenter;
+    }else{
+    UIView *singleView=[[UIView alloc]init];//分割线
+    [cell addSubview:singleView];
+    [singleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+        make.height.mas_equalTo(0.5);
+    }];
+    singleView.backgroundColor=UI_DIVIDER_COLOR;
+    UILabel *titleLabel=[[UILabel alloc]init];
+    UILabel *beginTimeLabel=[[UILabel alloc]init];
+    UILabel *endTimeLabel=[[UILabel alloc]init];
+    UILabel *typeLabel=[[UILabel alloc]init];
+    UIImageView *headImageView=[[UIImageView alloc]init];
+    [cell addSubview:titleLabel];
+    [cell addSubview:headImageView];
+    [cell addSubview:beginTimeLabel];
+    [cell addSubview:endTimeLabel];
+    [cell addSubview:typeLabel];
+    [headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+        make.left.mas_equalTo(10);
+        make.top.mas_equalTo(10);
+    }];
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(200, 21));
+        make.left.mas_equalTo(headImageView.mas_right).mas_equalTo(10);
+        make.top.mas_equalTo(10);
+    }];
+    
+    [beginTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(200, 21));
+        make.left.mas_equalTo(headImageView.mas_right).mas_equalTo(10);
+        make.top.mas_equalTo(titleLabel.mas_bottom).mas_equalTo(10);
+    }];
+    [endTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(200, 21));
+        make.left.mas_equalTo(headImageView.mas_right).mas_equalTo(10);
+        make.top.mas_equalTo(beginTimeLabel.mas_bottom).mas_equalTo(10);
+    }];
+    [typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(200, 21));
+        make.left.mas_equalTo(headImageView.mas_right).mas_equalTo(10);
+        make.top.mas_equalTo(endTimeLabel.mas_bottom).mas_equalTo(10);;
+    }];
+    //文字类型
+    headImageView.image=[UIImage imageNamed:@"ic_event_list.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+        beginTimeLabel.textColor=FONT_GRAY_COLOR;
+        endTimeLabel.textColor=FONT_GRAY_COLOR;
+        typeLabel.textColor=FONT_GRAY_COLOR;
+        titleLabel.font=FONT_14;
+        beginTimeLabel.font=FONT_14;
+        endTimeLabel.font=FONT_14;
+        typeLabel.font=FONT_14;
+    if(indexPath.row<self.eventDetailDataArray.count){
+        NSDictionary *dic=[self.eventDetailDataArray objectAtIndex:indexPath.row];
+        titleLabel.text=[dic objectForKey:@"eventName"];
+        beginTimeLabel.text=[NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"startDate"],[dic objectForKey:@"startTime"]];
+        endTimeLabel.text=[NSString stringWithFormat:@"%@ %@",[dic objectForKey:@"endDate"],[dic objectForKey:@"endTime"]];;
+        typeLabel.text=[dic objectForKey:@"eventTypeName"];
+    }
+    }
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 150;
+}
+//点击修改
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *dic=[self.eventDetailDataArray objectAtIndex:indexPath.row];
+    NSString *currentEventId=[dic objectForKey:@"id"];
+    NewCalendarViewController *cnc=[[NewCalendarViewController alloc]init];
+    cnc.eventId=currentEventId;
+    cnc.eventDetail=dic;
+    [self.navigationController pushViewController:cnc animated:YES];
+}
+
+
+
+//解析获得的日程数据
+-(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
+    NSLog(@"result;%@",result);
+    self.eventDetailDataArray=[[NSMutableArray alloc]init];
+    self.eventDetailDataArray=[result objectForKey:@"datas"];
+    [self.tableview reloadData];
+}
+
+
+-(void)pan:(UIPanGestureRecognizer *)pan{
+    if(pan.state==UIGestureRecognizerStateBegan){
+     point1=[pan locationInView:self.view];
+    }
+    if(pan.state==UIGestureRecognizerStateChanged){
+      point2=[pan locationInView:self.view];
+    }
+    if(pan.state==UIGestureRecognizerStateEnded){
+        if((point1.y-point2.y)>100){
+            [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(SCREEN_HEIGHT-200);
+            }];
+            self.tableview.scrollEnabled=YES;
+            
+        }else{
+        CGFloat z=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+100;
+            [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(SCREEN_HEIGHT-z);
+            }];
+            
+        }
+    }
+    NSLog(@"%lf-%lf",point1.y,point2.y);
+}
+
 
 
 
