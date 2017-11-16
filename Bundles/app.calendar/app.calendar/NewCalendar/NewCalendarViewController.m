@@ -68,13 +68,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.eventType=@"临时";
-    if(self.eventDescription.text.length==0){
-        self.eventDescription=[[UITextView alloc]init];
-    }
-   
     
     
+    self.eventDescription=[[UITextView alloc]init];
     self.eventDescription.delegate=self;
     
     [self.view addSubview:self.tableview];
@@ -101,7 +97,7 @@
     }];
     [self.eventDescription mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(title.mas_bottom);
-        make.height.mas_equalTo(30);
+        make.height.mas_equalTo(55);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
     }];
@@ -124,7 +120,54 @@
     [saveButton setTitle:@"保存" forState:UIControlStateNormal];
     saveButton.titleLabel.textColor=[UIColor whiteColor];
     
+    if(self.eventId.length!=0){
+        [self requestDataById];
+    }else{
+        self.eventType=@"临时";
+    }
 }
+
+
+//根据id请求数据
+-(void)requestDataById{
+    AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
+    NSURL *URL = [NSURL URLWithString:[REQUEST_SERVICE_URL stringByAppendingString:@"schedule/detail"]];
+
+     NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
+    [manager.requestSerializer setValue:cookie forHTTPHeaderField:@"token"];
+    
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    [params setObject:self.eventId forKey:@"id"];
+    [manager GET:[NSString stringWithFormat:@"%@",URL] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        self.eventName.text=[responseObject objectForKey:@"eventName"];
+        self.eventType=[responseObject objectForKey:@"eventTypeName"];
+        self.location.text=[responseObject objectForKey:@"location"];
+        self.eventDescription.text=[responseObject objectForKey:@"description"];
+        self.eventStartDate=[responseObject objectForKey:@"startDate"];
+        self.eventStartTime=[responseObject objectForKey:@"startTime"];
+        
+        self.eventEndDate=[responseObject objectForKey:@"endDate"];
+        self.eventEndTime=[responseObject objectForKey:@"endTime"];
+        
+        
+        self.startDate.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventStartDate,self.eventStartTime,second];
+        self.endDate.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventEndDate,self.eventEndTime,second];
+        
+        
+        
+        NSLog(@"name---%@",[responseObject objectForKey:@"eventName"]);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+
+
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -157,6 +200,7 @@
             
         }
     }
+     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     UIView *singleView=[[UIView alloc]init];//分割线
     [cell addSubview:singleView];
     [singleView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -180,6 +224,7 @@
     if(indexPath.row==0){
         if(self.eventName.text.length==0){
             self.eventName=[[UITextField alloc]init];
+            self.eventName.placeholder=@"请填写事件名称";
         }
         self.eventName.delegate=self;
         [cell addSubview:self.eventName];
@@ -189,10 +234,13 @@
             make.size.mas_equalTo(CGSizeMake(200, 60));
         }];
         titleLabel.text=@"  事件名称:";
-        self.eventName.placeholder=@"请填写事件名称";
+       
         
     }else if (indexPath.row==1){
+        if(self.startDate.text.length==0){
         self.startDate=[[UITextField alloc]init];
+            self.startDate.placeholder=@"点击选择";
+        }
         self.startDate.delegate=self;
         [cell addSubview:self.startDate];
         [self.startDate mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -201,11 +249,14 @@
             make.size.mas_equalTo(CGSizeMake(200, 60));
         }];
         titleLabel.text=@"  开始时间:";
-        self.startDate.placeholder=@"点击选择";
+        
         UITapGestureRecognizer *tapStart=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapStartTime:)];
         [self.startDate addGestureRecognizer:tapStart];
     }else if (indexPath.row==2){
+        if(self.endDate.text.length==0){
         self.endDate=[[UITextField alloc]init];
+        self.endDate.placeholder=@"点击选择";
+        }
         self.endDate.delegate=self;
         [cell addSubview:self.endDate];
         [self.endDate mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -214,10 +265,11 @@
             make.size.mas_equalTo(CGSizeMake(200, 60));
         }];
         titleLabel.text=@"  结束时间:";
-        self.endDate.placeholder=@"点击选择";
+        
         UITapGestureRecognizer *tapEnd=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapEndTime:)];
         [self.endDate addGestureRecognizer:tapEnd];
     }else if (indexPath.row==3){
+        cell.selectionStyle=UITableViewCellSelectionStyleDefault;
         titleLabel.text=@"  事件类型:";
         UILabel *typeLabel=[[UILabel alloc]init];
         [cell addSubview:typeLabel];
@@ -228,28 +280,12 @@
         }];
         typeLabel.text=self.eventType;
         typeLabel.font=FONT_14;
-        //右侧选择类型按钮
-        UIImage *image=[UIImage imageNamed:@"ic_common_left_back.png"];
-        UIButton *selectTypeBt=[UIButton buttonWithType:UIButtonTypeCustom];
-        
-        //   selectTypeBt.backgroundColor=[UIColor blueColor];
-        [selectTypeBt setBackgroundImage:image forState:UIControlStateNormal];
-        
-        
-        
-        [cell addSubview:selectTypeBt];
-        [selectTypeBt mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(cell.mas_centerY);
-            make.size.mas_equalTo(CGSizeMake(30, 30));
-            make.right.mas_equalTo(-5);
-        }];
-        [selectTypeBt addTarget:self action:@selector(selectType:) forControlEvents:UIControlEventTouchUpInside];
-        
         
         
     }else {
         if(self.location.text.length==0){
             self.location=[[UITextField alloc]init];
+             self.location.placeholder=@"请填写事件地点";
         }
         self.location.delegate=self;
         [cell addSubview:self.location];
@@ -259,14 +295,36 @@
             make.size.mas_equalTo(CGSizeMake(200, 60));
         }];
         titleLabel.text=@"  事件地点:";
-        self.location.placeholder=@"请填写事件地点";
+       
         
     }
     
     
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+   
     return cell;
 }
+
+//点击选择类别
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row==3){
+        UIAlertController *alert=[[UIAlertController alloc]init];
+        [alert addAction:[UIAlertAction actionWithTitle:@"临时" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            self.eventType=@"临时";
+            [self.tableview reloadData];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"会议" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            self.eventType=@"会议";
+            [self.tableview reloadData];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"旅行" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            self.eventType=@"旅行";
+            [self.tableview reloadData];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+
 
 //文本开始编辑
 
@@ -313,26 +371,23 @@
     [paramas setObject:self.eventEndDate forKey:@"endDate"];
     [paramas setObject:self.eventEndTime forKey:@"endTime"];
     NSLog(@"parmas--%@",paramas);
-    [self httpGetRequestWithUrl:HttpProtocolServiceScheduleSave params:paramas progress:nil];
+    
+    AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
+    NSURL *URL = [NSURL URLWithString:[REQUEST_SERVICE_URL stringByAppendingString:@"schedule/detail"]];
+    
+    NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
+    [manager.requestSerializer setValue:cookie forHTTPHeaderField:@"token"];
+    
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    [manager POST:[NSString stringWithFormat:@"%@",URL] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
+    
+   
 }
 
-//选择类别
--(void)selectType:(UIButton *)button{
-    UIAlertController *alert=[[UIAlertController alloc]init];
-    [alert addAction:[UIAlertAction actionWithTitle:@"临时" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        self.eventType=@"临时";
-        [self.tableview reloadData];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"会议" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        self.eventType=@"会议";
-        [self.tableview reloadData];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"旅行" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        self.eventType=@"旅行";
-        [self.tableview reloadData];
-    }]];
-    [self presentViewController:alert animated:YES completion:nil];
-}
 
 
 
@@ -769,7 +824,7 @@
    //  NSLog(@"%@-%@-%@-%@-%@",yearNum,monNum,dayNum,hourNum,minNum);
     if(isStart){
         self.eventStartDate=[NSString stringWithFormat:@"%@-%@-%@",yearNum,monNum,dayNum];
-        self.eventStartTime=[NSString stringWithFormat:@"%@:%@:12",hourNum,minNum];
+        self.eventStartTime=[NSString stringWithFormat:@"%@:%@",hourNum,minNum];
     }else{
         self.eventEndDate=[NSString stringWithFormat:@"%@-%@-%@",yearNum,monNum,dayNum];
         self.eventEndTime=[NSString stringWithFormat:@"%@:%@",hourNum,minNum];

@@ -519,7 +519,7 @@
 
 //解析获得的日程数据
 -(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
-    NSLog(@"result;%@",result);
+   // NSLog(@"result;%@",result);
     self.eventDetailDataArray=[[NSMutableArray alloc]init];
     self.eventDetailDataArray=[result objectForKey:@"datas"];
     [self.tableview reloadData];
