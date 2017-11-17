@@ -17,6 +17,10 @@
 		F88BD9281FBA898B0049346D /* NewCalendarViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F88BD9261FBA898B0049346D /* NewCalendarViewController.h */; };
 		F88BD9291FBA898B0049346D /* NewCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88BD9271FBA898B0049346D /* NewCalendarViewController.m */; };
 		F88BD9AD1FBD314E0049346D /* ic_event_list.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD9AC1FBD314E0049346D /* ic_event_list.png */; };
+		F88BD9DB1FBE8DC30049346D /* ic_btn_change.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD9DA1FBE8DC20049346D /* ic_btn_change.png */; };
+		F88BD9DF1FBE8DD60049346D /* ic_btn_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD9DE1FBE8DD60049346D /* ic_btn_delete.png */; };
+		F88BD9E21FBE8E700049346D /* ic_btn_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD9E01FBE8E700049346D /* ic_btn_delete.png */; };
+		F88BD9E31FBE8E710049346D /* ic_btn_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD9E11FBE8E700049346D /* ic_btn_delete.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		F88BD9261FBA898B0049346D /* NewCalendarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewCalendarViewController.h; sourceTree = "<group>"; };
 		F88BD9271FBA898B0049346D /* NewCalendarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewCalendarViewController.m; sourceTree = "<group>"; };
 		F88BD9AC1FBD314E0049346D /* ic_event_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_event_list.png; sourceTree = "<group>"; };
+		F88BD9DA1FBE8DC20049346D /* ic_btn_change.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_btn_change.png; sourceTree = "<group>"; };
+		F88BD9DE1FBE8DD60049346D /* ic_btn_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_btn_delete.png; sourceTree = "<group>"; };
+		F88BD9E01FBE8E700049346D /* ic_btn_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_btn_delete.png; sourceTree = "<group>"; };
+		F88BD9E11FBE8E700049346D /* ic_btn_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_btn_delete.png; path = ../../../../../../Downloads/ic_btn_delete.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +75,10 @@
 		F88BD8601FB939F40049346D /* app.calendar */ = {
 			isa = PBXGroup;
 			children = (
+				F88BD9DE1FBE8DD60049346D /* ic_btn_delete.png */,
+				F88BD9DA1FBE8DC20049346D /* ic_btn_change.png */,
+				F88BD9E01FBE8E700049346D /* ic_btn_delete.png */,
+				F88BD9E11FBE8E700049346D /* ic_btn_delete.png */,
 				F88BD9AC1FBD314E0049346D /* ic_event_list.png */,
 				F88BD9251FBA89570049346D /* NewCalendar */,
 				F88BD9201FBA85460049346D /* Calendar */,
@@ -179,6 +191,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F88BD9AD1FBD314E0049346D /* ic_event_list.png in Resources */,
+				F88BD9E31FBE8E710049346D /* ic_btn_delete.png in Resources */,
+				F88BD9E21FBE8E700049346D /* ic_btn_delete.png in Resources */,
+				F88BD9DF1FBE8DD60049346D /* ic_btn_delete.png in Resources */,
+				F88BD9DB1FBE8DC30049346D /* ic_btn_change.png in Resources */,
 				F88BD8FC1FBA7EAF0049346D /* ic_common_left_back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
