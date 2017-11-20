@@ -512,7 +512,6 @@
     NSString *currentEventId=[dic objectForKey:@"id"];
     NewCalendarViewController *cnc=[[NewCalendarViewController alloc]init];
     cnc.eventId=currentEventId;
-    cnc.eventDetail=dic;
     [self.navigationController pushViewController:cnc animated:YES];
 }
 
@@ -549,7 +548,7 @@
             
         }
     }
-    NSLog(@"%lf-%lf",point1.y,point2.y);
+   // NSLog(@"%lf-%lf",point1.y,point2.y);
 }
 
 

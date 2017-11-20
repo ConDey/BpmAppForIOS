@@ -13,5 +13,5 @@
 
 
 @property(nonatomic,retain)NSString *eventId;
-@property(nonatomic,retain)NSDictionary *eventDetail;
+
 @end

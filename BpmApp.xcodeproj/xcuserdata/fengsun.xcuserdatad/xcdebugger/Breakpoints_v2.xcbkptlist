@@ -22,16 +22,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bundles/app.calendar/app.calendar/NewCalendar/NewCalendarViewController.m"
-            timestampString = "532829482.24517"
+            timestampString = "532841349.720535"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "670"
-            endingLineNumber = "670"
-            landmarkName = "-textViewDidChange:"
+            startingLineNumber = "1025"
+            endingLineNumber = "1025"
+            landmarkName = "-selectDate:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

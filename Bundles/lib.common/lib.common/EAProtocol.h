@@ -44,8 +44,8 @@ static NSString * _Nonnull const AppMenuBadgeServiceUrl         = @"menu/badge";
 static NSString * _Nonnull const ScheduleListServiceUrl         = @"schedule/list";
 //日程详情
 static NSString * _Nonnull const ScheduleDetailServiceUrl         = @"schedule/detail";
-
-
+//日程种类
+static NSString * _Nonnull const ScheduleTypeListServiceUrl         = @"schedule/typeList";
 
 // 服务名称枚举
 typedef NS_ENUM(NSInteger, HttpProtocolServiceName) {
@@ -67,6 +67,7 @@ typedef NS_ENUM(NSInteger, HttpProtocolServiceName) {
     HttpProtocolServiceAppMenuBadge         = 14,
     HttpProtocolServiceScheduleList         = 15,
     HttpProtocolServiceScheduleDetail       = 16,
+    HttpProtocolServiceScheduletypeList       = 16,
 };
 
 @interface EAProtocol : NSObject

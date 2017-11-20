@@ -83,6 +83,7 @@ static EAProtocol *_instance;
                                                     AppMenuBadgeServiceUrl,
                                                     ScheduleListServiceUrl,
                                                     ScheduleDetailServiceUrl,
+                                                    ScheduleTypeListServiceUrl,
                            nil];
     }
     return _webServiceUrls;
