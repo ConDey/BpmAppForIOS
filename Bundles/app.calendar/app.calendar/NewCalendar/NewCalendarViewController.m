@@ -106,6 +106,7 @@
 -(void)newAddScene{
    
     [self.view addSubview:self.tableview];
+    self.tableview.scrollEnabled=YES;
     self.tableview.delegate=self;
     self.tableview.dataSource=self;
     [self.view addSubview:self.tableview];
@@ -228,7 +229,7 @@
             height=[self accountHeight:self.location];
             [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height+20] atIndex:4];
             height=[self accountHeight:self.eventDescription];
-            [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height+53] atIndex:5];
+            [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height*2/3+53] atIndex:5];
             
             [heightOfCellWithId insertObject:@"100" atIndex:6];
             NSLog(@"原始%@",responseObject);
@@ -250,7 +251,7 @@
     }else{
     NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:str];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    style.lineSpacing = 20;
+    style.lineSpacing = 35;
     UIFont *font = [UIFont systemFontOfSize:14];
     [attributeString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
     [attributeString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, str.length)];
@@ -348,7 +349,7 @@
             [self.eventNameField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
                 make.width.mas_equalTo(SCREEN_WIDTH-110);
-                make.top.mas_equalTo(10);
+                make.top.mas_equalTo(14);
                 make.bottom.mas_equalTo(-10);
             }];
             titleLabel.text=@"  事件名称:";
@@ -367,7 +368,7 @@
             [self.startDateField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
                 make.right.mas_equalTo(-10);
-                make.top.mas_equalTo(10);
+                make.top.mas_equalTo(14);
                 make.bottom.mas_equalTo(-10);
             }];
             titleLabel.text=@"  开始时间:";
@@ -387,7 +388,7 @@
             [self.endDateField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
                 make.right.mas_equalTo(-10);
-                make.top.mas_equalTo(10);
+                make.top.mas_equalTo(14);
                 make.bottom.mas_equalTo(-10);
             }];
             titleLabel.text=@"  结束时间:";
@@ -422,7 +423,7 @@
             [self.locationField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
                 make.right.mas_equalTo(-10);
-                make.top.mas_equalTo(10);
+                make.top.mas_equalTo(14);
                 make.bottom.mas_equalTo(-10);
             }];
             titleLabel.text=@"  事件地点:";
@@ -572,6 +573,7 @@
 //点击选择类别
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row==3){
+        pickerAll.hidden=YES;
         UIAlertController *alert=[[UIAlertController alloc]init];
         for(NSDictionary *dc in self.typeListArray){
             NSString *st=[dc objectForKey:@"name"];
@@ -615,6 +617,7 @@
     [params setObject:self.eventId forKey:@"id"];
     [manager GET:[NSString stringWithFormat:@"%@",URL] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@",responseObject);
+        [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
@@ -632,9 +635,11 @@
         }
     }
     
+    AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
+    NSURL *URL = [NSURL URLWithString:[REQUEST_SERVICE_URL stringByAppendingString:@"schedule/save"]];
     
-    
-    
+    NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
+    [manager.requestSerializer setValue:cookie forHTTPHeaderField:@"token"];
     NSMutableDictionary *paramas=[[NSMutableDictionary alloc]init];
     if(self.eventId.length!=0){
         [paramas setObject:self.eventId forKey:@"id"];
@@ -642,51 +647,43 @@
     if(self.eventName==nil){
         NSLog(@"日程名不能为空");
     }else{
-    [paramas setObject:self.eventName forKey:@"eventName"];
+        [paramas setObject:self.eventName forKey:@"eventName"];
     }
     [paramas setObject:type forKey:@"eventType"];
     if(self.location==nil){
-    [paramas setObject:@"" forKey:@"location"];
+        [paramas setObject:@"" forKey:@"location"];
     }else{
-    [paramas setObject:self.location forKey:@"location"];
+        [paramas setObject:self.location forKey:@"location"];
     }
     if(self.eventDescription==nil){
         [paramas setObject:@"" forKey:@"description"];
     }else{
-    [paramas setObject:self.eventDescription forKey:@"description"];
+        [paramas setObject:self.eventDescription forKey:@"description"];
     }
     if(self.eventStartDate==nil){
         NSLog(@"开始日期不能为空");
     }else{
-    [paramas setObject:self.eventStartDate forKey:@"startDate"];
+        [paramas setObject:self.eventStartDate forKey:@"startDate"];
     }
     if(self.eventStartTime==nil){
         NSLog(@"开始时间不能为空");
     }else{
-    [paramas setObject:self.eventStartTime forKey:@"startTime"];
+        [paramas setObject:self.eventStartTime forKey:@"startTime"];
     }
     if(self.eventEndDate==nil){
         NSLog(@"结束日期不能为空");
     }else{
-    [paramas setObject:self.eventEndDate forKey:@"endDate"];
+        [paramas setObject:self.eventEndDate forKey:@"endDate"];
     }
     if(self.eventEndTime==nil){
         NSLog(@"结束时间不能为空");
     }else{
-    [paramas setObject:self.eventEndTime forKey:@"endTime"];
+        [paramas setObject:self.eventEndTime forKey:@"endTime"];
     }
     NSLog(@"parmas--%@",paramas);
-    
-    AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
-    NSURL *URL = [NSURL URLWithString:[REQUEST_SERVICE_URL stringByAppendingString:@"schedule/save"]];
-    
-    NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
-    [manager.requestSerializer setValue:cookie forHTTPHeaderField:@"token"];
-    
-    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    [manager POST:[NSString stringWithFormat:@"%@",URL] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:[NSString stringWithFormat:@"%@",URL] parameters:paramas progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@",responseObject);
-     //[self.navigationController popViewControllerAnimated:YES];
+       [self.navigationController popViewControllerAnimated:YES];
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
@@ -700,6 +697,7 @@
 
 // 文本发生改变
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    pickerAll.hidden=YES;
     if([textView.text isEqualToString:@"点击选择"]||[textView.text isEqualToString:@"请填写事件名称"]||[textView.text isEqualToString:@"请填写事件地点"]||[textView.text isEqualToString:@"事件描述"]){
         textView.text=@"";
     }
@@ -758,7 +756,7 @@
     }else if (textView==self.locationField){
             [heightOfCellWithId replaceObjectAtIndex:4 withObject:[NSString stringWithFormat:@"%f",height+20]];
     }else if(textView==self.eventDescriptionView){
-            [heightOfCellWithId replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%f",height+53]];
+            [heightOfCellWithId replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%f",height*2/3+53]];
     }
  
     frame.size.height = height;
@@ -1019,9 +1017,17 @@
 //返回时间选择结果或者取消
 -(void)selectDate:(UIButton *)bt{
     if(isStart){
+        if(second<10){
+        self.startDateField.text=[NSString stringWithFormat:@"%@ %@:0%ld",self.eventStartDate,self.eventStartTime,second];
+        }else{
         self.startDateField.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventStartDate,self.eventStartTime,second];
+        }
     }else{
-        self.endDateField.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventEndDate,self.eventEndTime,second];
+        if(second<10){
+        self.endDateField.text=[NSString stringWithFormat:@"%@ %@:0%ld",self.eventEndDate,self.eventEndTime,second];
+        }else{
+          self.endDateField.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventEndDate,self.eventEndTime,second];
+        }
     }
     pickerAll.hidden=YES;
 }

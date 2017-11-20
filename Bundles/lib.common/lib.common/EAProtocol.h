@@ -67,7 +67,7 @@ typedef NS_ENUM(NSInteger, HttpProtocolServiceName) {
     HttpProtocolServiceAppMenuBadge         = 14,
     HttpProtocolServiceScheduleList         = 15,
     HttpProtocolServiceScheduleDetail       = 16,
-    HttpProtocolServiceScheduletypeList       = 16,
+    HttpProtocolServiceScheduleTypeList     = 17,
 };
 
 @interface EAProtocol : NSObject
