@@ -27,7 +27,7 @@
     NSInteger selectedNum;
     CGPoint point1;
     CGPoint point2;
-    
+   
 }
 @property(nonatomic,retain)UIBarButtonItem *rightButtom;
 @property(nonatomic,retain)UICollectionView *calendarDataView;
@@ -42,7 +42,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // self.eventDetailDataArray=[[NSMutableArray alloc]initWithObjects:@"1",@"2", nil];
+    
     
     //导航栏右按钮
     self.rightButtom=[[UIBarButtonItem alloc]initWithTitle:@"确认选择" style:UIBarButtonItemStylePlain target:self action:@selector(addNewCalendar:)];
@@ -535,8 +535,9 @@
     }
     if(pan.state==UIGestureRecognizerStateEnded){
         if((point1.y-point2.y)>100){
+            CGFloat h=self.calendarTitleLabel.origin.y+self.calendarTitleLabel.frame.size.height+SCREEN_WIDTH/7*3+5;
             [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(SCREEN_HEIGHT-200);
+                make.height.mas_equalTo(SCREEN_HEIGHT-h);
             }];
             self.tableview.scrollEnabled=YES;
             
@@ -548,7 +549,7 @@
             
         }
     }
-    // NSLog(@"%lf-%lf",point1.y,point2.y);
+   
 }
 
 

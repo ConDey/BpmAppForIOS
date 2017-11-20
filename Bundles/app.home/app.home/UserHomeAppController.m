@@ -91,7 +91,15 @@
         make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.headImageView.mas_bottom);
     }];
-
+   //滚动条
+    
+    
+    
+    
+    
+    
+    
+    
     [self.scrollContainerView addSubview:self.dividerSix];
     [_dividerSix mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
@@ -201,23 +209,7 @@
 }
 
 
-//- (NSMutableArray *)createAppsFromJson {
-//
-//    NSMutableArray *arrays = [[NSMutableArray alloc]init];
-//
-//    NSData *JSONData = [NSData dataWithContentsOfFile:[self.bundle pathForResource:@"app" ofType:@"json"]];
-//    NSMutableDictionary *dataArray = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
-//
-//    NSArray *apps = [dataArray objectForKey:@"apps"];
-//
-//    if (apps != nil) {
-//        for (int index = 0; index < [apps count] ; index ++) {
-//            NSDictionary *appdict = [apps objectAtIndex:index];
-//            [arrays addObject:[[EAApp alloc]initWithDict:appdict]];
-//        }
-//    }
-//    return arrays;
-//}
+
 
 #pragma mark - network
 - (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {

@@ -35,6 +35,8 @@
     BOOL isSelectTime;
     //各部分高度
     NSMutableArray *heightOfCellWithId;
+    //textView限制字数
+    CGFloat length;
 }
 
 
@@ -81,7 +83,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    length=255;
     heightOfCellWithId=[[NSMutableArray alloc]initWithObjects:@"60",@"60",@"60",@"60",@"60",@"100",@"100", nil];
     
     
@@ -256,8 +258,14 @@
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         style.lineSpacing = 10;
         UIFont *font = [UIFont systemFontOfSize:14];
-        [attributeString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
-        [attributeString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, str.length)];
+        CGFloat le=0;
+        if(str.length>length){
+            le=length;
+        }else{
+            le=str.length;
+        }
+        [attributeString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, le)];
+        [attributeString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, le)];
         NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading;
         CGRect rect = [attributeString boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-120, CGFLOAT_MAX) options:options context:nil];
         if(rect.size.height>40){
@@ -727,15 +735,26 @@
 }
 -(void)textViewDidChange:(UITextView *)textView{
     if(textView==self.eventNameField){
+        if(textView.text.length>length){
+           self.eventName=[self.eventNameField.text substringToIndex:254];
+        }else{
         self.eventName=self.eventNameField.text;
+        }
     }
     if(textView==self.locationField){
-        self.location=self.locationField.text;
+        if(textView.text.length>length){
+            self.location=[self.locationField.text substringToIndex:254];
+        }else{
+          self.location=self.locationField.text;
+        }
     }
     if(textView==self.eventDescriptionView){
+        if(textView.text.length>length){
+        self.eventDescription=[self.eventDescriptionView.text substringToIndex:254];
+        }else{
         self.eventDescription=self.eventDescriptionView.text;
     }
-    
+    }
     CGRect frame = textView.frame;
     CGFloat oldHeight=frame.size.height;
     if(oldHeight<40){
@@ -770,11 +789,6 @@
     [self.tableview beginUpdates];
     [self.tableview endUpdates];
     textView.frame= frame;
-    
-    
-    
-    
-    
     
 }
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView{
