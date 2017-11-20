@@ -33,17 +33,19 @@
     NSInteger hour;
     NSInteger minute;
     BOOL isSelectTime;
+    //各部分高度
+    NSMutableArray *heightOfCellWithId;
 }
-@property(nonatomic,retain)UILabel *descriptionLabel;//事件描述
+
 
 @property(nonatomic,retain)NSMutableArray *typeList;
 
-@property(nonatomic,retain)UITextField *eventNameField;
+@property(nonatomic,retain)UITextView *eventNameField;
 @property(nonatomic,retain)NSString *eventType;
-@property(nonatomic,retain)UITextField *locationField;
+@property(nonatomic,retain)UITextView *locationField;
 @property(nonatomic,retain)UITextView *eventDescriptionView;
-@property(nonatomic,retain)UITextField *startDateField;
-@property(nonatomic,retain)UITextField *endDateField;
+@property(nonatomic,retain)UITextView *startDateField;
+@property(nonatomic,retain)UITextView *endDateField;
 
 //
 @property(nonatomic,retain)NSString *eventName;
@@ -78,14 +80,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    heightOfCellWithId=[[NSMutableArray alloc]initWithObjects:@"60",@"60",@"60",@"60",@"60",@"100", nil];
+    
+    
     [self requestDataById];
     saveButton.hidden=NO;
     updateButton.hidden=YES;
     if(self.eventId.length!=0){
         saveButton.hidden=YES;
         self.showDataTableView.hidden=NO;
-        self.eventDescriptionView.hidden=YES;
-        self.descriptionLabel.hidden=YES;
+        
     }else{
         [self newAddScene];
         deleteButton.hidden=YES;
@@ -93,53 +98,28 @@
         self.tableview.hidden=NO;
         self.showDataTableView.hidden=YES;
         self.eventType=@"临时";
-        self.eventDescriptionView.hidden=NO;
+        
     }
 }
 //新建界面
 -(void)newAddScene{
-    self.eventDescriptionView=[[UITextView alloc]init];
-    self.eventDescriptionView.delegate=self;
-    
+   
     [self.view addSubview:self.tableview];
     self.tableview.delegate=self;
     self.tableview.dataSource=self;
     [self.view addSubview:self.tableview];
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
-        make.height.mas_equalTo(300);
+        make.height.mas_equalTo(380);
     }];
     
     self.tableview.backgroundColor=[UIColor whiteColor];
     [self.tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Calendar"];
-    //具体描述
-    
-    self.descriptionLabel=[[UILabel alloc]init];
-    [self.view addSubview:self.descriptionLabel];
-    [self.view addSubview:self.eventDescriptionView];
-    [self.descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(0);
-        make.height.mas_equalTo(30);
-        make.left.mas_equalTo(0);
-        make.top.mas_equalTo(self.tableview.mas_bottom).mas_equalTo(2);
-    }];
-    [self.eventDescriptionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.descriptionLabel.mas_bottom);
-        make.height.mas_equalTo(55);
-        make.left.mas_equalTo(0);
-        make.right.mas_equalTo(0);
-    }];
-    self.eventDescriptionView.text=self.eventDescription;
-    
-    self.descriptionLabel.text=@"  事件描述:";
-    self.descriptionLabel.font=FONT_14;
-    self.descriptionLabel.textAlignment=NSTextAlignmentLeft;
-    self.descriptionLabel.backgroundColor=[UIColor whiteColor];
     //保存按钮
     saveButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:saveButton];
     [saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.eventDescriptionView.mas_bottom).mas_equalTo(20);
+        make.top.mas_equalTo(self.tableview.mas_bottom).mas_equalTo(20);
         make.width.mas_equalTo(80);
         make.height.mas_equalTo(30);
         make.centerX.mas_equalTo(self.view.mas_centerX);
@@ -153,7 +133,7 @@
     updateButton=[UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:updateButton];
     [updateButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.eventDescriptionView.mas_bottom).mas_equalTo(20);
+        make.top.mas_equalTo(self.tableview.mas_bottom).mas_equalTo(20);
         make.width.mas_equalTo(80);
         make.height.mas_equalTo(30);
         make.centerX.mas_equalTo(self.view.mas_centerX);
@@ -168,12 +148,16 @@
 -(void)showEventScene{
     self.showDataTableView=[[UITableView alloc]init];
     
+    CGFloat h=0;
+    for(NSString *ht in heightOfCellWithId){
+        h=h+[ht floatValue];
+    }
     self.showDataTableView.delegate=self;
     self.showDataTableView.dataSource=self;
     [self.view addSubview:self.showDataTableView];
     [self.showDataTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(300);
+        make.height.mas_equalTo(h);
         make.top.mas_equalTo(0);
     }];
     self.showDataTableView.backgroundColor=[UIColor whiteColor];
@@ -257,6 +241,22 @@
             
             self.startDateField.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventStartDate,self.eventStartTime,second];
             self.endDateField.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventEndDate,self.eventEndTime,second];
+            heightOfCellWithId=[[NSMutableArray alloc]init];
+            CGFloat height=[self accountHeight:self.eventName];
+            [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height] atIndex:0];
+            height=[self accountHeight:self.startDateField.text];
+             [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height] atIndex:1];
+            height=[self accountHeight:self.endDateField.text];
+            [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height] atIndex:2];
+            height=[self accountHeight:self.eventType];
+            [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height] atIndex:3];
+            height=[self accountHeight:self.location];
+            [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height] atIndex:4];
+            height=[self accountHeight:self.eventDescription];
+            [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height] atIndex:5];
+            
+            NSLog(@"%@",heightOfCellWithId);
+            
             
             [self showEventScene];//显示数据
             
@@ -267,7 +267,31 @@
     }
 }
 
-
+-(CGFloat)accountHeight:(NSString *)text{
+    NSString *str =text;
+    if(text.length==0){
+        return 60;
+    }else{
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:str];
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.lineSpacing = 10;
+    UIFont *font = [UIFont systemFontOfSize:14];
+    [attributeString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
+    [attributeString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, str.length)];
+    NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading;
+    CGRect rect = [attributeString boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-100, CGFLOAT_MAX) options:options context:nil];
+    if(rect.size.height>40){
+        //初始默认textView的高度为40，cell高度为20
+        if([text isEqualToString:self.eventDescription]){
+            return rect.size.height+50;
+        }else{
+        return rect.size.height+20;
+        }
+    }else{
+        return 60;
+    }
+    }
+}
 
 
 
@@ -292,16 +316,12 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if(tableView==self.tableview){
-        return 5;
-    }else{
+   
         return 6;
-    }
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return 60;
-    
+        return [[heightOfCellWithId objectAtIndex:indexPath.row] floatValue];
 }
 
 
@@ -330,59 +350,68 @@
         [cell addSubview:titleLabel];
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(80);
-            make.height.mas_equalTo(50);
-            make.left.mas_equalTo(0);
-            make.centerY.mas_equalTo(cell.mas_centerY);
+            make.height.mas_equalTo(40);
+            make.left.mas_equalTo(10);
+            make.top.mas_equalTo(10);
         }];
         
         titleLabel.font=FONT_14;
         titleLabel.textAlignment=NSTextAlignmentLeft;
         if(indexPath.row==0){
-            self.eventNameField=[[UITextField alloc]init];
+            self.eventNameField=[[UITextView alloc]init];
             self.eventNameField.delegate=self;
+            self.eventNameField.font=FONT_14;
+            self.eventNameField.scrollEnabled=NO;
             [cell addSubview:self.eventNameField];
             [self.eventNameField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
-                make.centerY.mas_equalTo(cell.mas_centerY);
-                make.height.mas_equalTo( 60);
                 make.right.mas_equalTo(0);
+                make.top.mas_equalTo(10);
+                make.bottom.mas_equalTo(-10);
             }];
             titleLabel.text=@"  事件名称:";
             if(self.eventName.length==0){
-                self.eventNameField.placeholder=@"请填写事件名称";
+                self.eventNameField.text=@"请填写事件名称";
+                self.eventNameField.textColor=FONT_GRAY_COLOR;
             }else{
                 self.eventNameField.text=self.eventName;
             }
             
         }else if (indexPath.row==1){
-            self.startDateField=[[UITextField alloc]init];
+            self.startDateField=[[UITextView alloc]init];
             self.startDateField.delegate=self;
+            self.startDateField.font=FONT_14;
             [cell addSubview:self.startDateField];
             [self.startDateField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
-                make.centerY.mas_equalTo(cell.mas_centerY);
-                make.size.mas_equalTo(CGSizeMake(200, 60));
+                make.right.mas_equalTo(0);
+                make.top.mas_equalTo(10);
+                make.bottom.mas_equalTo(-10);
             }];
             titleLabel.text=@"  开始时间:";
             if(self.eventStartDate.length==0&&self.eventStartTime.length==0){
-                self.startDateField.placeholder=@"点击选择";
+                self.startDateField.text=@"点击选择";
+                self.startDateField.textColor=FONT_GRAY_COLOR;
             }else{
                 self.startDateField.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventStartDate,self.eventStartTime,second];
             }
             UITapGestureRecognizer *tapStart=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapStartTime:)];
             [self.startDateField addGestureRecognizer:tapStart];
         }else if (indexPath.row==2){
-            self.endDateField=[[UITextField alloc]init];
+            self.endDateField=[[UITextView alloc]init];
             self.endDateField.delegate=self;
+            self.endDateField.font=FONT_14;
             [cell addSubview:self.endDateField];
             [self.endDateField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
-                make.centerY.mas_equalTo(cell.mas_centerY);
-                make.size.mas_equalTo(CGSizeMake(200, 60));
+                make.right.mas_equalTo(0);
+                make.top.mas_equalTo(10);
+                make.bottom.mas_equalTo(-10);
             }];
             titleLabel.text=@"  结束时间:";
             if(self.eventEndDate.length==0&&self.eventEndTime.length==0){
-                self.endDateField.placeholder=@"点击选择";
+                self.endDateField.text=@"点击选择";
+                self.endDateField.textColor=FONT_GRAY_COLOR;
             }else{
                 self.endDateField.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventEndDate,self.eventEndTime,second];
             }
@@ -395,28 +424,55 @@
             [cell addSubview:typeLabel];
             [typeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
-                make.centerY.mas_equalTo(cell.mas_centerY);
-                make.size.mas_equalTo(CGSizeMake(200, 60));
+                make.right.mas_equalTo(0);
+                make.top.mas_equalTo(10);
+                make.bottom.mas_equalTo(-10);
             }];
             typeLabel.text=self.eventType;
             typeLabel.font=FONT_14;
             
-            
-        }else {
-            self.locationField=[[UITextField alloc]init];
+        }else if(indexPath.row==4){
+            self.locationField=[[UITextView alloc]init];
             self.locationField.delegate=self;
+            self.locationField.font=FONT_14;
+            self.locationField.scrollEnabled=NO;
             [cell addSubview:self.locationField];
             [self.locationField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
-                make.centerY.mas_equalTo(cell.mas_centerY);
-                make.size.mas_equalTo(CGSizeMake(200, 60));
+                make.right.mas_equalTo(0);
+                make.top.mas_equalTo(10);
+                make.bottom.mas_equalTo(-10);
             }];
             titleLabel.text=@"  事件地点:";
             if(self.location.length==0){
-                self.locationField.placeholder=@"请填写事件地点";
+                self.locationField.text=@"请填写事件地点";
+                self.locationField.textColor=FONT_GRAY_COLOR;
             }else{
                 self.locationField.text=self.location;
             }
+        }else{
+            self.eventDescriptionView=[[UITextView alloc]init];
+            self.eventDescriptionView.delegate=self;
+            self.eventDescriptionView.font=FONT_14;
+            self.eventDescriptionView.scrollEnabled=NO;
+            [titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(28);
+            }];
+            [cell addSubview:self.eventDescriptionView];
+            [self.eventDescriptionView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(10);
+                make.right.mas_equalTo(-10);
+                make.top.mas_equalTo(titleLabel.mas_bottom).mas_equalTo(5);
+                make.bottom.mas_equalTo(-10);
+            }];
+            titleLabel.text=@"  事件描述:";
+            if(self.eventDescription.length==0){
+                self.eventDescriptionView.text=@"事件描述";
+                self.eventDescriptionView.textColor=FONT_GRAY_COLOR;
+            }else{
+                self.eventDescriptionView.text=self.eventDescription;
+            }
+            
         }
     }
     
@@ -439,10 +495,10 @@
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(80);
             make.left.mas_equalTo(10);
-            make.bottom.mas_equalTo(0);
+            make.bottom.mas_equalTo(-10);
             make.top.mas_equalTo(10);
         }];
-        
+        titleLabel.numberOfLines=0;
         titleLabel.font=FONT_14;
         titleLabel.textAlignment=NSTextAlignmentLeft;
         //事件内容
@@ -452,9 +508,10 @@
             make.right.mas_equalTo(0);
             make.top.mas_equalTo(10);
             make.left.mas_equalTo(titleLabel.mas_right).mas_offset(10);
-            make.bottom.mas_equalTo(0);
+            make.bottom.mas_equalTo(-10);
         }];
         contentLabel.font=FONT_14;
+        contentLabel.numberOfLines=0;
         contentLabel.textAlignment=NSTextAlignmentLeft;
         if(indexPath.row==0){
             titleLabel.text=@"  事件名称:";
@@ -523,31 +580,9 @@
 
 
 
-//文本开始编辑
-
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    if(textField==self.startDateField||textField==self.endDateField){
-        return NO;
-    }else{
-        return YES;
-    }
-}
--(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
-    return YES;
-}
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
-}
-
 //点击保存和更新
 -(void)save:(UIButton *)bt{
-    if(self.eventNameField.text.length!=0&&self.startDateField.text.length!=0&&self.endDateField.text.length!=0){
-        [self sendNewCalendar];
-    }else{
-        NSLog(@"输入不完整");
-        // NSLog(@"%@-%@-%@-%@-%@--%@-%@-%@-%@",self.eventName.text,self.eventType,self.eventEndDate,self.eventEndTime,self.eventStartDate,self.eventStartTime,self.eventDescription.text,self.endDate.text,self.location.text);
-    }
+   [self sendNewCalendar];
 }
 
 //点击修改
@@ -559,14 +594,24 @@
     saveButton.hidden=YES;
     deleteButton.hidden=YES;
     editButton.hidden=YES;
-    self.eventDescriptionView.hidden=NO;
-    self.descriptionLabel.hidden=NO;
     [self.tableview reloadData];
 }
 
 //点击删除
 -(void)deleteEvent:(UIButton *)button{
-    NSLog(@"删除操作");
+    AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
+    NSURL *URL = [NSURL URLWithString:[REQUEST_SERVICE_URL stringByAppendingString:@"schedule/delete"]];
+    
+    NSString *cookie = [NSString stringWithFormat:@"%@",[CurrentUser currentUser].token];
+    [manager.requestSerializer setValue:cookie forHTTPHeaderField:@"token"];
+    
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    [params setObject:self.eventId forKey:@"id"];
+    [manager GET:[NSString stringWithFormat:@"%@",URL] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 
@@ -610,47 +655,110 @@
 
 
 // 文本发生改变
-//计算文本大小
-- (float) heightForTextView: (UITextView *)textView WithText: (NSString *) strText{
-    CGSize constraint = CGSizeMake(textView.contentSize.width , CGFLOAT_MAX);
-    CGRect size = [strText boundingRectWithSize:constraint
-                                        options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
-                                     attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14]}
-                                        context:nil];
-    float textHeight = size.size.height + 22.0;
-    return textHeight;
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    if([textView.text isEqualToString:@"点击选择"]||[textView.text isEqualToString:@"请填写事件名称"]||[textView.text isEqualToString:@"请填写事件地点"]||[textView.text isEqualToString:@"事件描述"]){
+        textView.text=@"";
+    }
+    return YES;
 }
+-(void)textViewDidChange:(UITextView *)textView{
+    if(textView==self.eventNameField){
+     self.eventName=self.eventNameField.text;
+    }
+    if(textView==self.locationField){
+    self.location=self.locationField.text;
+    }
+    if(textView==self.eventDescriptionView){
+    self.eventDescription=self.eventDescriptionView.text;
+    }
+    //[self.tableview reloadData];
+    [self.tableview beginUpdates];
+}
+-(BOOL)textViewShouldEndEditing:(UITextView *)textView{
+    
+    return YES;
+}
+-(void)textViewDidEndEditing:(UITextView *)textView{
+    [self.tableview beginUpdates];
+    [self.tableview reloadData];
+     [self.tableview endUpdates];
+}
+
 //更改文本区域高度
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    CGRect frame = textView.frame;
-    CGRect frameSave =saveButton.frame;
-    float height;
-    if ([text isEqual:@""]) {
-        
-        if (![textView.text isEqualToString:@""]) {
-            
-            height = [ self heightForTextView:textView WithText:[textView.text substringToIndex:[textView.text length] - 1]];
-            
-        }else{
-            
-            height = [ self heightForTextView:textView WithText:textView.text];
-        }
-    }else{
-        
-        height = [self heightForTextView:textView WithText:[NSString stringWithFormat:@"%@%@",textView.text,text]];
+    if(textView==self.eventNameField){
+        self.eventName=self.eventNameField.text;
+    }
+    if(textView==self.locationField){
+        self.location=self.locationField.text;
+    }
+    if(textView==self.eventDescriptionView){
+        self.eventDescription=self.eventDescriptionView.text;
     }
     
+    
+    CGRect frame = textView.frame;
+    CGFloat oldHeight=frame.size.height;
+    if(oldHeight<40){
+        oldHeight=40;
+    }
+    CGRect frameSave =saveButton.frame;
+    float height=[self accountHeight:textView.text];
+    if(textView==self.eventNameField){
+        if(text){
+            [heightOfCellWithId replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%f",height]];
+        }
+    }else if(textView==self.startDateField){
+        if(text){
+            [heightOfCellWithId replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%f",height]];
+        }
+    }else if (textView==self.endDateField){
+        if(text){
+            [heightOfCellWithId replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%f",height]];
+        }
+    }else if (textView==self.locationField){
+        if(text){
+            [heightOfCellWithId replaceObjectAtIndex:4 withObject:[NSString stringWithFormat:@"%f",height]];
+        }
+    }else if(textView==self.eventDescriptionView){
+        if(text){
+            [heightOfCellWithId replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%f",height]];
+        }
+    }
+    if(textView==self.eventDescriptionView){
+        height=height-40;
+    }else{
+        height=height-20;
+    }
+ 
     frame.size.height = height;
-    frameSave.origin.y=frame.origin.y+height+20;
+    if(height>oldHeight){
+        frameSave.origin.y=frameSave.origin.y+height-oldHeight;
+    }
+    
+
+    
+    
+    CGFloat h=0;
+    for(NSString *ht in heightOfCellWithId){
+        h=h+[ht floatValue];
+    }
+    NSLog(@"输入%@",heightOfCellWithId);
+    
     
     [UIView animateWithDuration:0.5 animations:^{
-        
-        textView.frame = frame;
+        [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(h);
+        }];
+        textView.frame= frame;
         saveButton.frame=frameSave;
         updateButton.frame=frameSave;
+        
+       
     } completion:nil];
     
+  
     return YES;
 }
 

@@ -27,6 +27,7 @@
     NSInteger selectedNum;
     CGPoint point1;
     CGPoint point2;
+    
 }
 @property(nonatomic,retain)UIBarButtonItem *rightButtom;
 @property(nonatomic,retain)UICollectionView *calendarDataView;
@@ -57,7 +58,7 @@
     //日历表
     [self showCalendarTableView];
     //显示日程安排
-    CGFloat y=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+100;
+    CGFloat y=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+20;
     [self scheduleListView:y];
     
     
@@ -541,7 +542,7 @@
             self.tableview.scrollEnabled=YES;
             
         }else{
-        CGFloat z=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+100;
+        CGFloat z=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+20;
             [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(SCREEN_HEIGHT-z);
             }];
