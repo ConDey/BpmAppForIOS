@@ -104,7 +104,7 @@
 }
 //新建界面
 -(void)newAddScene{
-   
+    
     [self.view addSubview:self.tableview];
     self.tableview.scrollEnabled=YES;
     self.tableview.delegate=self;
@@ -127,6 +127,9 @@
     CGFloat h=0;
     for(NSString *ht in heightOfCellWithId){
         h=h+[ht floatValue];
+    }
+    if(h>SCREEN_HEIGHT-80){
+        h=SCREEN_HEIGHT-80;
     }
     self.showDataTableView.delegate=self;
     self.showDataTableView.dataSource=self;
@@ -221,7 +224,7 @@
             CGFloat height=[self accountHeight:self.eventName];
             [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height+20] atIndex:0];
             height=[self accountHeight:self.startDateField.text];
-             [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height+20] atIndex:1];
+            [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height+20] atIndex:1];
             height=[self accountHeight:self.endDateField.text];
             [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height+20] atIndex:2];
             height=[self accountHeight:self.eventType];
@@ -229,7 +232,7 @@
             height=[self accountHeight:self.location];
             [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height+20] atIndex:4];
             height=[self accountHeight:self.eventDescription];
-            [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height] atIndex:5];
+            [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height+20] atIndex:5];
             
             
             NSLog(@"原始%@",responseObject);
@@ -249,22 +252,22 @@
     if(text.length==0){
         return 40;
     }else{
-    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:str];
-    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    style.lineSpacing = 10;
-    UIFont *font = [UIFont systemFontOfSize:14];
-    [attributeString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
-    [attributeString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, str.length)];
-    NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading;
-    CGRect rect = [attributeString boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-120, CGFLOAT_MAX) options:options context:nil];
-    if(rect.size.height>40){
-        //初始默认textView的高度为40，cell高度为20
-        NSLog(@"文字高度：%f",rect.size.height);
-        return rect.size.height;
-        
-    }else{
-        return 40;
-    }
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:str];
+        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+        style.lineSpacing = 10;
+        UIFont *font = [UIFont systemFontOfSize:14];
+        [attributeString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
+        [attributeString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, str.length)];
+        NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading;
+        CGRect rect = [attributeString boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-120, CGFLOAT_MAX) options:options context:nil];
+        if(rect.size.height>40){
+            //初始默认textView的高度为40，cell高度为20
+            NSLog(@"文字高度：%f",rect.size.height);
+            return rect.size.height;
+            
+        }else{
+            return 40;
+        }
     }
 }
 
@@ -294,7 +297,7 @@
 -(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
     self.typeListArray=[[NSArray alloc]init];
     self.typeListArray=[result objectForKey:@"datas"];
-   // NSLog(@"typeData-%@",result);
+    // NSLog(@"typeData-%@",result);
 }
 
 
@@ -309,12 +312,12 @@
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-        NSLog(@"高度--%@",heightOfCellWithId);
+    NSLog(@"高度--%@",heightOfCellWithId);
     if(tableView==self.tableview){
         return [[heightOfCellWithId objectAtIndex:indexPath.row] floatValue];
     }else{
         return [[heightOfCellWithId objectAtIndex:indexPath.row] floatValue];
-
+        
     }
 }
 
@@ -330,14 +333,14 @@
     if(tableView==self.tableview){
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         if(indexPath.row<7){
-        UIView *singleView=[[UIView alloc]init];//分割线
-        [cell addSubview:singleView];
-        [singleView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(0);
-            make.height.mas_equalTo(1);
-        }];
-        singleView.backgroundColor=UI_DIVIDER_COLOR;
+            UIView *singleView=[[UIView alloc]init];//分割线
+            [cell addSubview:singleView];
+            [singleView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.mas_equalTo(0);
+                make.top.mas_equalTo(0);
+                make.height.mas_equalTo(1);
+            }];
+            singleView.backgroundColor=UI_DIVIDER_COLOR;
         }
         //事件名称
         UILabel *titleLabel=[[UILabel alloc]init];
@@ -375,7 +378,7 @@
             self.startDateField=[[UITextView alloc]init];
             self.startDateField.delegate=self;
             self.startDateField.font=FONT_14;
-
+            
             [cell addSubview:self.startDateField];
             [self.startDateField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
@@ -589,10 +592,10 @@
         UIAlertController *alert=[[UIAlertController alloc]init];
         for(NSDictionary *dc in self.typeListArray){
             NSString *st=[dc objectForKey:@"name"];
-        [alert addAction:[UIAlertAction actionWithTitle:st style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            self.eventType=st;
-            [self.tableview reloadData];
-        }]];
+            [alert addAction:[UIAlertAction actionWithTitle:st style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                self.eventType=st;
+                [self.tableview reloadData];
+            }]];
         }
         [self presentViewController:alert animated:YES completion:nil];
     }
@@ -602,7 +605,7 @@
 
 //点击保存和更新
 -(void)save:(UIButton *)bt{
-   [self sendNewCalendar];
+    [self sendNewCalendar];
 }
 
 //点击修改
@@ -702,11 +705,11 @@
     NSLog(@"parmas--%@",paramas);
     [manager POST:[NSString stringWithFormat:@"%@",URL] parameters:paramas progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@",responseObject);
-       [self.navigationController popViewControllerAnimated:YES];
-
+        [self.navigationController popViewControllerAnimated:YES];
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
-       
+        
         
     }];
     
@@ -724,13 +727,13 @@
 }
 -(void)textViewDidChange:(UITextView *)textView{
     if(textView==self.eventNameField){
-     self.eventName=self.eventNameField.text;
+        self.eventName=self.eventNameField.text;
     }
     if(textView==self.locationField){
-    self.location=self.locationField.text;
+        self.location=self.locationField.text;
     }
     if(textView==self.eventDescriptionView){
-    self.eventDescription=self.eventDescriptionView.text;
+        self.eventDescription=self.eventDescriptionView.text;
     }
     
     CGRect frame = textView.frame;
@@ -761,22 +764,18 @@
         frame.size.height = height;
         
     }
-    CGFloat h=0;
-    for(NSString *ht in heightOfCellWithId){
-        h=h+[ht floatValue];
-    }
-        [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(h);
-        }];
-        [self.tableview beginUpdates];
-        [self.tableview endUpdates];
-        textView.frame= frame;
-  
+    [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(SCREEN_HEIGHT-80);
+    }];
+    [self.tableview beginUpdates];
+    [self.tableview endUpdates];
+    textView.frame= frame;
     
     
     
     
-   
+    
+    
 }
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView{
     [self.tableview reloadData];
@@ -800,9 +799,9 @@
         self.eventDescription=self.eventDescriptionView.text;
     }
     
-   
     
-  
+    
+    
     return YES;
 }
 
@@ -899,13 +898,44 @@
     [self.pickerView1 selectRow:self.day.count*20+day-1 inComponent:2 animated:NO];
     [self.pickerView2 selectRow:self.hour.count*20+hour inComponent:0 animated:NO];
     [self.pickerView2 selectRow:self.min.count*20+minute inComponent:1 animated:NO];
+    NSString *y=@"";
+    NSString *mo=@"";
+    NSString *d=@"";
+    NSString *h=@"";
+    NSString *mi=@"";
+    if(year<10){
+        y=[NSString stringWithFormat:@"0%ld",year];
+    }else{
+        y=[NSString stringWithFormat:@"%ld",year];
+    }
+    if(month<10){
+        mo=[NSString stringWithFormat:@"0%ld",month];
+    }else{
+        mo=[NSString stringWithFormat:@"%ld",month];
+    }
+    if(day<10){
+        d=[NSString stringWithFormat:@"0%ld",day];
+    }else{
+        d=[NSString stringWithFormat:@"%ld",day];
+    }
+    if(hour<10){
+        h=[NSString stringWithFormat:@"0%ld",hour];
+    }else{
+        h=[NSString stringWithFormat:@"%ld",hour];
+    }
+    if(minute<10){
+        mi=[NSString stringWithFormat:@"0%ld",minute];
+    }else{
+        mi=[NSString stringWithFormat:@"%ld",minute];
+    }
+    
     if(!isSelectTime){
         if(isStart){
-            self.eventStartDate=[NSString stringWithFormat:@"%ld-%ld-%ld",year,month,day];
-            self.eventStartTime=[NSString stringWithFormat:@"%ld:%ld",hour,minute];
+            self.eventStartDate=[NSString stringWithFormat:@"%@-%@-%@",y,mo,d];
+            self.eventStartTime=[NSString stringWithFormat:@"%@:%@",h,mi];
         }else{
-            self.eventEndDate=[NSString stringWithFormat:@"%ld-%ld-%ld",year,month,day];
-            self.eventEndTime=[NSString stringWithFormat:@"%ld:%ld",hour,minute];
+            self.eventEndDate=[NSString stringWithFormat:@"%@-%@-%@",y,mo,d];
+            self.eventEndTime=[NSString stringWithFormat:@"%@:%@",h,mi];
         }
         
     }
@@ -1037,15 +1067,15 @@
 -(void)selectDate:(UIButton *)bt{
     if(isStart){
         if(second<10){
-        self.startDateField.text=[NSString stringWithFormat:@"%@ %@:0%ld",self.eventStartDate,self.eventStartTime,second];
+            self.startDateField.text=[NSString stringWithFormat:@"%@ %@:0%ld",self.eventStartDate,self.eventStartTime,second];
         }else{
-        self.startDateField.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventStartDate,self.eventStartTime,second];
+            self.startDateField.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventStartDate,self.eventStartTime,second];
         }
     }else{
         if(second<10){
-        self.endDateField.text=[NSString stringWithFormat:@"%@ %@:0%ld",self.eventEndDate,self.eventEndTime,second];
+            self.endDateField.text=[NSString stringWithFormat:@"%@ %@:0%ld",self.eventEndDate,self.eventEndTime,second];
         }else{
-          self.endDateField.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventEndDate,self.eventEndTime,second];
+            self.endDateField.text=[NSString stringWithFormat:@"%@ %@:%ld",self.eventEndDate,self.eventEndTime,second];
         }
     }
     pickerAll.hidden=YES;
@@ -1069,9 +1099,9 @@
     for(int yearInt=2011;yearInt<2023;yearInt++){
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.year];
         if(yearInt<10){
-           [temp addObject:[NSString stringWithFormat:@"%d年",yearInt]];
+            [temp addObject:[NSString stringWithFormat:@"%d年",yearInt]];
         }else{
-        [temp addObject:[NSString stringWithFormat:@"%d年",yearInt]];
+            [temp addObject:[NSString stringWithFormat:@"%d年",yearInt]];
         }
         self.year=[[NSArray alloc]initWithArray:temp];
     }
@@ -1079,18 +1109,18 @@
     for(int hourInt=0;hourInt<24;hourInt++){
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.hour];
         if(hourInt<10){
-           [temp addObject:[NSString stringWithFormat:@"0%d时",hourInt]];
+            [temp addObject:[NSString stringWithFormat:@"0%d时",hourInt]];
         }else{
-        [temp addObject:[NSString stringWithFormat:@"%d时",hourInt]];
+            [temp addObject:[NSString stringWithFormat:@"%d时",hourInt]];
         }
         self.hour=[[NSArray alloc]initWithArray:temp];
     }
- 
+    
     //分
     for(int minInt=0;minInt<60;minInt++){
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.min];
         if(minInt<10){
-           [temp addObject:[NSString stringWithFormat:@"0%d分",minInt]];
+            [temp addObject:[NSString stringWithFormat:@"0%d分",minInt]];
         }else{
             [temp addObject:[NSString stringWithFormat:@"%d分",minInt]];
         }
@@ -1101,13 +1131,13 @@
     for(int monInt=1;monInt<13;monInt++){
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.mon];
         if(monInt<10){
-         [temp addObject:[NSString stringWithFormat:@"0%d月",monInt]];
+            [temp addObject:[NSString stringWithFormat:@"0%d月",monInt]];
         }else{
-        [temp addObject:[NSString stringWithFormat:@"%d月",monInt]];
+            [temp addObject:[NSString stringWithFormat:@"%d月",monInt]];
         }
         self.mon=[[NSArray alloc]initWithArray:temp];
     }
-   
+    
 }
 //时间选择器数据-月日
 -(void)addPickerDataDay:(int)count withEnd:(int)end{
@@ -1115,9 +1145,9 @@
     for(int dayInt=count;dayInt<=end;dayInt++){
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.day];
         if(dayInt<10){
-          [temp addObject:[NSString stringWithFormat:@"0%d日",dayInt]];
+            [temp addObject:[NSString stringWithFormat:@"0%d日",dayInt]];
         }else{
-        [temp addObject:[NSString stringWithFormat:@"%d日",dayInt]];
+            [temp addObject:[NSString stringWithFormat:@"%d日",dayInt]];
         }
         self.day=[[NSArray alloc]initWithArray:temp];
     }
@@ -1195,7 +1225,7 @@
         if(title!=nil){
             titleMon=title;
         }
-         [self.pickerView1 selectRow:day+60*self.day.count inComponent:2 animated:NO];
+        [self.pickerView1 selectRow:day+60*self.day.count inComponent:2 animated:NO];
     }else if (pickerView==self.pickerView1&&component==2){
         NSString *title= [self pickerView:pickerView titleForRow:row forComponent:component];
         if(title!=nil){
@@ -1251,10 +1281,10 @@
     
     if(pickerView==self.pickerView1){
         if(component==0){
-             [self.pickerView1 selectRow:day+60*self.day.count-1 inComponent:2 animated:NO];
+            [self.pickerView1 selectRow:day+60*self.day.count-1 inComponent:2 animated:NO];
         }
         if(component==1){
-             [self.pickerView1 selectRow:day+60*self.day.count-1 inComponent:2 animated:NO];
+            [self.pickerView1 selectRow:day+60*self.day.count-1 inComponent:2 animated:NO];
             
         }
     }
