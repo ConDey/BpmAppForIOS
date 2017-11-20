@@ -229,9 +229,9 @@
             height=[self accountHeight:self.location];
             [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height+20] atIndex:4];
             height=[self accountHeight:self.eventDescription];
-            [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height*2/3+53] atIndex:5];
+            [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height] atIndex:5];
             
-            [heightOfCellWithId insertObject:@"100" atIndex:6];
+            
             NSLog(@"原始%@",responseObject);
             
             
@@ -251,7 +251,7 @@
     }else{
     NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:str];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    style.lineSpacing = 35;
+    style.lineSpacing = 10;
     UIFont *font = [UIFont systemFontOfSize:14];
     [attributeString addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
     [attributeString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, str.length)];
@@ -259,6 +259,7 @@
     CGRect rect = [attributeString boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-120, CGFLOAT_MAX) options:options context:nil];
     if(rect.size.height>40){
         //初始默认textView的高度为40，cell高度为20
+        NSLog(@"文字高度：%f",rect.size.height);
         return rect.size.height;
         
     }else{
@@ -293,7 +294,7 @@
 -(void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name{
     self.typeListArray=[[NSArray alloc]init];
     self.typeListArray=[result objectForKey:@"datas"];
-    NSLog(@"typeData-%@",result);
+   // NSLog(@"typeData-%@",result);
 }
 
 
@@ -301,10 +302,20 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(tableView==self.tableview){
         return 7;
+    }else{
+        return 6;
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+        NSLog(@"高度--%@",heightOfCellWithId);
+    if(tableView==self.tableview){
         return [[heightOfCellWithId objectAtIndex:indexPath.row] floatValue];
+    }else{
+        return [[heightOfCellWithId objectAtIndex:indexPath.row] floatValue];
+
+    }
 }
 
 
@@ -344,7 +355,7 @@
             self.eventNameField=[[UITextView alloc]init];
             self.eventNameField.delegate=self;
             self.eventNameField.font=FONT_14;
-            self.eventNameField.scrollEnabled=NO;
+            self.eventNameField.textAlignment=NSTextAlignmentLeft;
             [cell addSubview:self.eventNameField];
             [self.eventNameField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
@@ -364,6 +375,7 @@
             self.startDateField=[[UITextView alloc]init];
             self.startDateField.delegate=self;
             self.startDateField.font=FONT_14;
+
             [cell addSubview:self.startDateField];
             [self.startDateField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
@@ -418,7 +430,7 @@
             self.locationField=[[UITextView alloc]init];
             self.locationField.delegate=self;
             self.locationField.font=FONT_14;
-            self.locationField.scrollEnabled=NO;
+            self.locationField.textAlignment=NSTextAlignmentLeft;
             [cell addSubview:self.locationField];
             [self.locationField mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(titleLabel.mas_right).mas_equalTo(10);
@@ -437,7 +449,7 @@
             self.eventDescriptionView=[[UITextView alloc]init];
             self.eventDescriptionView.delegate=self;
             self.eventDescriptionView.font=FONT_14;
-            self.eventDescriptionView.scrollEnabled=NO;
+            self.eventDescriptionView.textAlignment=NSTextAlignmentLeft;
             [titleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(28);
             }];
@@ -518,9 +530,9 @@
         [cell addSubview:contentLabel];
         [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(0);
-            make.top.mas_equalTo(10);
-            make.left.mas_equalTo(titleLabel.mas_right).mas_offset(10);
             make.bottom.mas_equalTo(-10);
+            make.left.mas_equalTo(titleLabel.mas_right).mas_offset(10);
+            make.top.mas_equalTo(titleLabel.mas_top);
         }];
         contentLabel.font=FONT_14;
         contentLabel.numberOfLines=0;
@@ -595,6 +607,13 @@
 
 //点击修改
 -(void)editEvent:(UIButton *)button{
+    NSString *st=[heightOfCellWithId objectAtIndex:5];
+    CGFloat h=[st floatValue];
+    h=h/3*2+53;
+    [heightOfCellWithId replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%f",h]];
+    [heightOfCellWithId insertObject:@"100" atIndex:6];
+    
+    
     [self newAddScene];
     self.showDataTableView.hidden=YES;
     self.tableview.hidden=NO;
@@ -713,8 +732,51 @@
     if(textView==self.eventDescriptionView){
     self.eventDescription=self.eventDescriptionView.text;
     }
-    [self.tableview beginUpdates];
-    [self.tableview endUpdates];
+    
+    CGRect frame = textView.frame;
+    CGFloat oldHeight=frame.size.height;
+    if(oldHeight<40){
+        oldHeight=40;
+    }
+    float height=[self accountHeight:textView.text];
+    if(height>oldHeight){
+        if(textView==self.eventNameField){
+            [heightOfCellWithId replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%f",height+20]];
+        }else if(textView==self.startDateField){
+            [heightOfCellWithId replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%f",height+20]];
+        }else if (textView==self.endDateField){
+            [heightOfCellWithId replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%f",height+20]];
+        }else if (textView==self.locationField){
+            [heightOfCellWithId replaceObjectAtIndex:4 withObject:[NSString stringWithFormat:@"%f",height+20]];
+        }else if(textView==self.eventDescriptionView){
+            if(height>60){
+                height=height*2/3;
+            }else{
+                height=47;
+            }
+            [heightOfCellWithId replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%f",height+53]];
+            
+        }
+        
+        frame.size.height = height;
+        
+    }
+    CGFloat h=0;
+    for(NSString *ht in heightOfCellWithId){
+        h=h+[ht floatValue];
+    }
+        [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(h);
+        }];
+        [self.tableview beginUpdates];
+        [self.tableview endUpdates];
+        textView.frame= frame;
+  
+    
+    
+    
+    
+   
 }
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView{
     [self.tableview reloadData];
@@ -739,49 +801,6 @@
     }
     
    
-    CGRect frame = textView.frame;
-    CGFloat oldHeight=frame.size.height;
-    if(oldHeight<40){
-        oldHeight=40;
-    }
-    //CGRect frameSave =saveButton.frame;
-    float height=[self accountHeight:textView.text];
-    if(height>oldHeight){
-    if(textView==self.eventNameField){
-            [heightOfCellWithId replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"%f",height+20]];
-    }else if(textView==self.startDateField){
-            [heightOfCellWithId replaceObjectAtIndex:1 withObject:[NSString stringWithFormat:@"%f",height+20]];
-    }else if (textView==self.endDateField){
-            [heightOfCellWithId replaceObjectAtIndex:2 withObject:[NSString stringWithFormat:@"%f",height+20]];
-    }else if (textView==self.locationField){
-            [heightOfCellWithId replaceObjectAtIndex:4 withObject:[NSString stringWithFormat:@"%f",height+20]];
-    }else if(textView==self.eventDescriptionView){
-            [heightOfCellWithId replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%f",height*2/3+53]];
-    }
- 
-    frame.size.height = height;
-   
-    }
-
-    
-    
-    CGFloat h=0;
-    for(NSString *ht in heightOfCellWithId){
-        h=h+[ht floatValue];
-    }
-    NSLog(@"输入%@",heightOfCellWithId);
-    
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(h);
-        }];
-        textView.frame= frame;
-//        saveButton.frame=frameSave;
-//        updateButton.frame=frameSave;
-        
-       
-    } completion:nil];
     
   
     return YES;
