@@ -66,6 +66,8 @@
 		F88BD6741FB551300049346D /* ic_homeapp_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD6711FB5512D0049346D /* ic_homeapp_selected.png */; };
 		F88BD6751FB551300049346D /* ic_homeapp_unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD6721FB551300049346D /* ic_homeapp_unselected.png */; };
 		F8C1830C1FA944C10095A91E /* version.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8C1830B1FA944C10095A91E /* version.plist */; };
+		F8E78D151FC3B0AC008637B9 /* notice_show.png in Resources */ = {isa = PBXBuildFile; fileRef = F8E78D141FC3B0AC008637B9 /* notice_show.png */; };
+		F8E78D161FC3CDDF008637B9 /* com_eazytec_bpm_app_notice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8E78D171FC3CDDF008637B9 /* com_eazytec_bpm_app_notice.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +134,8 @@
 		F88BD6711FB5512D0049346D /* ic_homeapp_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_selected.png; sourceTree = "<group>"; };
 		F88BD6721FB551300049346D /* ic_homeapp_unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_homeapp_unselected.png; sourceTree = "<group>"; };
 		F8C1830B1FA944C10095A91E /* version.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = version.plist; sourceTree = "<group>"; };
+		F8E78D141FC3B0AC008637B9 /* notice_show.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notice_show.png; sourceTree = "<group>"; };
+		F8E78D171FC3CDDF008637B9 /* com_eazytec_bpm_app_notice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = com_eazytec_bpm_app_notice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8E78D161FC3CDDF008637B9 /* com_eazytec_bpm_app_notice.framework in Frameworks */,
 				06C6BA311F14C06100D444E6 /* com_eazytec_bpm_lib_common.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +207,7 @@
 		06C3A4351F0C72EB00633543 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F8E78D141FC3B0AC008637B9 /* notice_show.png */,
 				F88BD6701FB5512C0049346D /* ic_homeapp_delete.png */,
 				F88BD6711FB5512D0049346D /* ic_homeapp_selected.png */,
 				F88BD6721FB551300049346D /* ic_homeapp_unselected.png */,
@@ -256,6 +262,7 @@
 		06C3A4721F0C7BA400633543 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8E78D171FC3CDDF008637B9 /* com_eazytec_bpm_app_notice.framework */,
 				06F809C41F263593000872C4 /* Small.framework */,
 				06C6BA301F14C06100D444E6 /* com_eazytec_bpm_lib_common.framework */,
 			);
@@ -461,6 +468,7 @@
 				06C6BB021F17164500D444E6 /* ic_homeapp_process.png in Resources */,
 				06C6BAF81F16F93100D444E6 /* UserHomeAppViewCell.xib in Resources */,
 				061A90961F1E2E5800B7C227 /* UserHomeSettingController.xib in Resources */,
+				F8E78D151FC3B0AC008637B9 /* notice_show.png in Resources */,
 				F80A8AD31F98224C00E126C6 /* ic_setting_update.png in Resources */,
 				06C6BB0A1F1743A500D444E6 /* ic_homeapp_image.png in Resources */,
 				F8C1830C1FA944C10095A91E /* version.plist in Resources */,

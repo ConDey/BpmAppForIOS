@@ -7,6 +7,6 @@
 //
 
 #import "UserHomeChangeViewController.h"
-@interface UserHomeAppController : EAViewController<UICollectionViewDataSource,UIGestureRecognizerDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UserHomeAppChangeDelegate>
+@interface UserHomeAppController : EAViewController<UICollectionViewDataSource,UIGestureRecognizerDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UserHomeAppChangeDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @end

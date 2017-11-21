@@ -15,9 +15,13 @@
 #import "BadgeModel.h"
 
 @interface UserHomeAppController ()
-
+{
+    NSTimer *timer;
+    NSInteger row;
+}
 @property (nonatomic,retain) NSMutableArray *apps;
 @property (nonatomic,retain) NSMutableArray *allApps;
+@property (nonatomic,retain) NSMutableArray *fiveNotice;
 
 // badge
 @property (nonatomic,retain) NSDictionary *badgeDict;
@@ -51,23 +55,35 @@
     self.allApps = [[NSMutableArray alloc] init];
     self.badgeDict = [[NSDictionary alloc] init];
     
-    [self initView];
+    
+  
     [self initData];
+    [self initView];
+    self.tableview.backgroundColor=[UIColor whiteColor];
    // [self.apps addObjectsFromArray:[self createAppsFromJson]];
     [self.appsCollectionView reloadData];
     [self.allAppsCollectionView reloadData];
+    [self.tableview reloadData];
+    [self.tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+    row=1;
+    [self noticeJumpToNext];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    
+    [timer setFireDate:[NSDate distantPast]];
     self.navDisplay = YES;
     [self setTitleOfNav:@"应用"];
     
     // 重复刷新
     [self httpGetRequestWithUrl:HttpProtocolServiceAppMenuBadge params:nil progress:YES];
     
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:YES];
+    [timer setFireDate:[NSDate distantFuture]];
 }
 
 - (void)initView {
@@ -92,19 +108,22 @@
         make.top.mas_equalTo(self.headImageView.mas_bottom);
     }];
    //滚动条
-    
-    
-    
-    
-    
-    
-    
+    [self.scrollContainerView addSubview:self.tableview];
+    [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
+       make.top.mas_equalTo(self.dividerOne.mas_bottom);
+       make.height.mas_equalTo(50);
+       make.left.right.mas_equalTo(self.scrollContainerView);
+    }];
+    self.tableview.delegate=self;
+    self.tableview.dataSource=self;
+   
+    [self.tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"notice"];
     
     [self.scrollContainerView addSubview:self.dividerSix];
     [_dividerSix mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
         make.left.right.mas_equalTo(self.scrollContainerView);
-        make.top.mas_equalTo(self.dividerOne.mas_bottom).offset(25);
+        make.top.mas_equalTo(self.tableview.mas_bottom);
         
     }];
     
@@ -200,6 +219,12 @@
                               @"commonUse" : @"",
                               };
     [self httpGetRequestWithUrl:HttpProtocolServiceAppMenuAllList params:appAllDict progress:YES];
+    
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    [params setObject:@"" forKey:@"title"];
+    [params setObject:@"1" forKey:@"pageNo"];
+    [params setObject:[NSString stringWithFormat:@"5"] forKey:@"pageSize"];
+    [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
 
 }
 
@@ -266,6 +291,12 @@
             [SVProgressHUD showErrorWithStatus:@"获取未读消息数失败"];
         }
     }
+    
+    if(name==HttpProtocolServiceNoticeList){
+        self.fiveNotice=[result objectForKey:@"datas"];
+    }
+    
+    
 }
 
 #pragma mark - CollectionViewDelegate
@@ -586,6 +617,10 @@
     return _allAppsCollectionView;
 }
 
+
+
+
+
 //长按跳转编辑界面
 -(void)jumpToEdit:(UILongPressGestureRecognizer *)sender{
     NSString *home=@"想调整菜单应用，去“菜单设置”进行编辑";
@@ -617,6 +652,71 @@
     [self.allAppsCollectionView reloadData];
     [self.appsCollectionView reloadData];
 }
+
+//滚动条内容
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 5;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"notice"];
+    if(cell!=nil){
+        for (UIView *view in [cell subviews]) {
+            [view removeFromSuperview];
+            
+        }
+    }
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    cell.backgroundColor=[UIColor clearColor];
+        UILabel *titleLabel=[[UILabel alloc]init];
+        UIImageView *cellImageView=[[UIImageView alloc]init];
+        [cell addSubview:titleLabel];
+        [cell addSubview:cellImageView];
+        [cellImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(25, 25));
+            make.left.mas_equalTo(10);
+            make.centerY.mas_equalTo(cell.mas_centerY);
+        }];
+        cellImageView.image=[UIImage imageNamed:@"notice_show.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(250, 21));
+            make.left.mas_equalTo(cellImageView.mas_right).mas_equalTo(10);
+            make.centerY.mas_equalTo(cell.mas_centerY);
+        }];
+    NSDictionary *dic=[self.fiveNotice objectAtIndex:indexPath.row];
+    titleLabel.text=[dic objectForKey:@"title"];
+    [titleLabel setTintColor:[UIColor whiteColor]];
+    //titleLabel.textColor=[UIColor redColor];
+    titleLabel.font=FONT_14;
+    return cell;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return  50;
+}
+//公告滚动
+-(void)noticeJumpToNext{
+    
+    timer=[NSTimer scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        if(row>=5){
+            row=0;
+            [self.tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+        }else{
+            [self.tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+            row++;
+        }
+    }];
+}
+//点击事件
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *notciceData=[self.fiveNotice objectAtIndex:indexPath.row];
+    NSString *nd=[notciceData objectForKey:@"id"];
+    NoticeDetailViewController *ndc=[[NoticeDetailViewController alloc]init];
+    ndc.notice_id=nd;
+    [self.navigationController pushViewController:ndc animated:YES];
+}
+
 
 
 @end

@@ -15,5 +15,5 @@ FOUNDATION_EXPORT double app_noticeVersionNumber;
 FOUNDATION_EXPORT const unsigned char app_noticeVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <app_notice/PublicHeader.h>
-
+#import "NoticeDetailViewController.h"
 

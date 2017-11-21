@@ -10,17 +10,17 @@
 		06C5A2C51F26CF4D00A189FB /* app.notice.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C5A2C31F26CF4D00A189FB /* app.notice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06C5A2D31F26CFA400A189FB /* com_eazytec_bpm_lib_common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C5A2D21F26CFA400A189FB /* com_eazytec_bpm_lib_common.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		84459B001FAA0C6D00E3A076 /* ic_common_left_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 84459AFF1FAA0C6C00E3A076 /* ic_common_left_back.png */; };
-		F80A8B561F98B6D600E126C6 /* NoticeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B541F98B6D600E126C6 /* NoticeViewController.h */; };
+		F80A8B561F98B6D600E126C6 /* NoticeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B541F98B6D600E126C6 /* NoticeViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F80A8B571F98B6D600E126C6 /* NoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B551F98B6D600E126C6 /* NoticeViewController.m */; };
-		F80A8B601F98C33400E126C6 /* NoticeDetailViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B5E1F98C33400E126C6 /* NoticeDetailViewController.h */; };
+		F80A8B601F98C33400E126C6 /* NoticeDetailViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B5E1F98C33400E126C6 /* NoticeDetailViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F80A8B611F98C33400E126C6 /* NoticeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B5F1F98C33400E126C6 /* NoticeDetailViewController.m */; };
-		F80A8B641F98C3E200E126C6 /* NoticeDetailModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B621F98C3E200E126C6 /* NoticeDetailModel.h */; };
+		F80A8B641F98C3E200E126C6 /* NoticeDetailModel.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B621F98C3E200E126C6 /* NoticeDetailModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F80A8B651F98C3E200E126C6 /* NoticeDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B631F98C3E200E126C6 /* NoticeDetailModel.m */; };
-		F80A8B6A1F98C54600E126C6 /* NoticeListViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B671F98C54600E126C6 /* NoticeListViewCell.h */; };
+		F80A8B6A1F98C54600E126C6 /* NoticeListViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F80A8B671F98C54600E126C6 /* NoticeListViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F80A8B6B1F98C54600E126C6 /* NoticeListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F80A8B681F98C54600E126C6 /* NoticeListViewCell.m */; };
 		F80A8B6C1F98C54600E126C6 /* NoticeListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F80A8B691F98C54600E126C6 /* NoticeListViewCell.xib */; };
 		F88BD58D1FAAFE990049346D /* ic_download.png in Resources */ = {isa = PBXBuildFile; fileRef = F88BD58C1FAAFE990049346D /* ic_download.png */; };
-		F8AFFC6C1FA700C500CE74F5 /* AttachmentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFC6A1FA700C500CE74F5 /* AttachmentViewController.h */; };
+		F8AFFC6C1FA700C500CE74F5 /* AttachmentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F8AFFC6A1FA700C500CE74F5 /* AttachmentViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8AFFC6D1FA700C500CE74F5 /* AttachmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AFFC6B1FA700C500CE74F5 /* AttachmentViewController.m */; };
 		F8AFFC891FA7161100CE74F5 /* ic_download_type_ppt.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC801FA7161000CE74F5 /* ic_download_type_ppt.png */; };
 		F8AFFC8A1FA7161100CE74F5 /* ic_download_type_apk.png in Resources */ = {isa = PBXBuildFile; fileRef = F8AFFC811FA7161000CE74F5 /* ic_download_type_apk.png */; };
@@ -182,8 +182,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8AFFC6C1FA700C500CE74F5 /* AttachmentViewController.h in Headers */,
-				F80A8B641F98C3E200E126C6 /* NoticeDetailModel.h in Headers */,
 				06C5A2C51F26CF4D00A189FB /* app.notice.h in Headers */,
+				F80A8B641F98C3E200E126C6 /* NoticeDetailModel.h in Headers */,
 				F80A8B601F98C33400E126C6 /* NoticeDetailViewController.h in Headers */,
 				F80A8B561F98B6D600E126C6 /* NoticeViewController.h in Headers */,
 				F80A8B6A1F98C54600E126C6 /* NoticeListViewCell.h in Headers */,
