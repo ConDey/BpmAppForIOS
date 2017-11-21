@@ -320,7 +320,7 @@
     }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"高度--%@",heightOfCellWithId);
+  //  NSLog(@"高度--%@",heightOfCellWithId);
     if(tableView==self.tableview){
         return [[heightOfCellWithId objectAtIndex:indexPath.row] floatValue];
     }else{
@@ -473,7 +473,7 @@
             }];
             titleLabel.text=@"  事件描述:";
             if(self.eventDescription.length==0){
-                self.eventDescriptionView.text=@"事件描述";
+                self.eventDescriptionView.text=@"事件描述(限制字数为255)";
                 self.eventDescriptionView.textColor=FONT_GRAY_COLOR;
             }else{
                 self.eventDescriptionView.text=self.eventDescription;
@@ -483,9 +483,11 @@
             //titleLabel.text=@"";
             //保存按钮
             saveButton=[UIButton buttonWithType:UIButtonTypeCustom];
+            saveButton.layer.cornerRadius=10;
+            saveButton.clipsToBounds=YES;
             [cell addSubview:saveButton];
             [saveButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.mas_equalTo(-10);
+                make.bottom.mas_equalTo(-20);
                 make.width.mas_equalTo(80);
                 make.height.mas_equalTo(30);
                 make.left.mas_equalTo(SCREEN_WIDTH/2-40);
@@ -497,9 +499,11 @@
             
             //更新按钮
             updateButton=[UIButton buttonWithType:UIButtonTypeCustom];
+            updateButton.layer.cornerRadius=10;
+            updateButton.clipsToBounds=YES;
             [cell addSubview:updateButton];
             [updateButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.mas_equalTo(-10);
+                make.bottom.mas_equalTo(-20);
                 make.width.mas_equalTo(80);
                 make.height.mas_equalTo(30);
                 make.left.mas_equalTo(SCREEN_WIDTH/2-40);
