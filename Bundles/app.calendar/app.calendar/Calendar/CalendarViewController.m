@@ -60,7 +60,7 @@
     [self showCalendarTableView];
     //显示日程安排
     CGFloat y=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+20;
-    [self scheduleListView:y];
+    [self scheduleListView];
     
     
     
@@ -112,9 +112,9 @@
     NSCalendar *calendarFirst=[[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierPersian];
     NSDateComponents *components=[calendarFirst components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond|NSCalendarUnitWeekday fromDate:data];
     weekDay=[components weekday];
-    if(weekDay==7){
-        weekDay=0;
-    }
+    //if(weekDay==7){
+   // weekDay=0;
+   // }
     //范围1-7
 }
 //日历数据
@@ -123,11 +123,14 @@
     calendarArray=[[NSMutableArray alloc]init];
     NSInteger dayNumOfMonth=[self howManyDaysInThisYear:year withMonth:month];
     NSInteger count=[self howManyDaysInThisYear:year withMonth:month-1]-weekDay+2;
+    if(month==1){
+        count=[self howManyDaysInThisYear:year-1 withMonth:12]-weekDay+2;
+    }
     if(weekDay==0){
         for(int i=0;i<dayNumOfMonth;i++){
             [calendarArray insertObject:[NSString stringWithFormat:@"%d",i+1] atIndex:i];
         }
-        for(int j=dayNumOfMonth;j<42;j++){
+        for(int j=dayNumOfMonth;j<49;j++){
             [calendarArray insertObject:[NSString stringWithFormat:@"%d",j-weekDay-dayNumOfMonth+1] atIndex:j];
         }
     }else{
@@ -138,7 +141,7 @@
         for(int i=weekDay-1;i<dayNumOfMonth+weekDay-1;i++){
             [calendarArray insertObject:[NSString stringWithFormat:@"%d",i-weekDay+2] atIndex:i];
         }
-        for(int j=dayNumOfMonth+weekDay-1;j<42;j++){
+        for(int j=dayNumOfMonth+weekDay-1;j<49;j++){
             [calendarArray insertObject:[NSString stringWithFormat:@"%d",j-weekDay-dayNumOfMonth+2] atIndex:j];
         }
         
@@ -178,7 +181,7 @@
     [self.view addSubview:self.calendarDataView];
     [self.calendarDataView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.calendarTitleLabel.mas_bottom);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH*8/7));
         make.left.mas_equalTo(0);
     }];
     self.calendarDataView.backgroundColor=[UIColor colorWithRed:102.0/255.0 green:94.0/255.0 blue:98.0/255.0 alpha:0.7];
@@ -213,7 +216,7 @@
     if(section==0){
         return 7;
     }else{
-        return 42;
+        return 49;
     }
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -286,21 +289,21 @@
 }
 //获取某年某月的天数
 - (NSInteger)howManyDaysInThisYear:(NSInteger)year withMonth:(NSInteger)month{
-    if((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12))
+    if((month == 1)||(month == 3)||(month == 5)||(month == 7)||(month == 8)||(month == 10)||(month == 12))
         return 31 ;
     
-    if((month == 4) || (month == 6) || (month == 9) || (month == 11))
+    if((month == 4)||(month == 6)||(month == 9)||(month == 11))
         return 30;
     
-    if((year % 4 == 1) || (year % 4 == 2) || (year % 4 == 3))
+    if((year%4==1)||(year%4==2)||(year%4==3))
     {
         return 28;
     }
     
-    if(year % 400 == 0)
+    if(year%400 == 0)
         return 29;
     
-    if(year % 100 == 0)
+    if(year%100== 0)
         return 28;
     
     return 29;
@@ -377,9 +380,10 @@
 
 
 
--(void)scheduleListView:(CGFloat)y{
+-(void)scheduleListView{
     self.tableview=[[UITableView alloc]init];
     [self.view addSubview:self.tableview];
+    CGFloat y=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+20;
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(SCREEN_HEIGHT-y);
         make.bottom.left.right.mas_equalTo(0);
