@@ -175,6 +175,7 @@
             cell.status.textColor=[UIColor redColor];
         }else{
             cell.status.text=@"";
+            cell.status.layer.borderWidth=0;
         }
         cell.noticeTitle.text=[noticeData objectForKey:@"title"];
         cell.createdBy.text=[noticeData objectForKey:@"createdBy"];

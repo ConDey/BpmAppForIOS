@@ -83,6 +83,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor=[UIColor whiteColor];
     length=255;
     heightOfCellWithId=[[NSMutableArray alloc]initWithObjects:@"60",@"60",@"60",@"60",@"60",@"100",@"100", nil];
     
@@ -524,7 +525,7 @@
         [cell addSubview:singleView1];
         [singleView1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
-            make.top.mas_equalTo(0);
+            make.bottom.mas_equalTo(0);
             make.height.mas_equalTo(1);
         }];
         singleView1.backgroundColor=UI_DIVIDER_COLOR;
@@ -732,7 +733,7 @@
 // 文本发生改变
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
     pickerAll.hidden=YES;
-    if([textView.text isEqualToString:@"点击选择"]||[textView.text isEqualToString:@"请填写事件名称"]||[textView.text isEqualToString:@"请填写事件地点"]||[textView.text isEqualToString:@"事件描述"]){
+    if([textView.text isEqualToString:@"点击选择"]||[textView.text isEqualToString:@"请填写事件名称"]||[textView.text isEqualToString:@"请填写事件地点"]||[textView.text isEqualToString:@"事件描述(限制字数为255)"]){
         textView.text=@"";
     }
     return YES;
@@ -1144,7 +1145,6 @@
         }
         self.min=[[NSArray alloc]initWithArray:temp];
     }
-    //NSLog(@"++++%@",self.min);
     //月
     for(int monInt=1;monInt<13;monInt++){
         NSMutableArray *temp=[[NSMutableArray alloc]initWithArray:self.mon];
