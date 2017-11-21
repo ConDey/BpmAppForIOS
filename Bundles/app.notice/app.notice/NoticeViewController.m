@@ -164,7 +164,18 @@
     
     if(indexPath.row<[self.noticeList count]){
         NSDictionary *noticeData=[self.noticeList objectAtIndex:indexPath.row];
-        
+        NSString *status=[noticeData objectForKey:@"status"];
+        if([status isEqualToString:@"0"]){
+            cell.status.text=@"未读";
+            cell.status.layer.borderWidth=1;
+            cell.status.layer.borderColor=[UIColor redColor].CGColor;
+            cell.status.font=FONT_14;
+            cell.status.layer.cornerRadius=4.f;
+            cell.status.layer.masksToBounds=YES;
+            cell.status.textColor=[UIColor redColor];
+        }else{
+            cell.status.text=@"";
+        }
         cell.noticeTitle.text=[noticeData objectForKey:@"title"];
         cell.createdBy.text=[noticeData objectForKey:@"createdBy"];
         cell.createdTime.text=[noticeData objectForKey:@"createdTime"];

@@ -90,4 +90,24 @@
     return _msgTime;
 }
 
+-(UIImageView *)msgNoData{
+    if(_msgNoData==nil){
+        _msgNoData=[[UIImageView alloc]init];
+        _msgNoData.contentMode=UIViewContentModeCenter;
+        [self.contentView addSubview:_msgNoData];
+        [_msgNoData mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(SCREEN_WIDTH);
+            make.left.mas_equalTo(0);
+            make.top.mas_equalTo(0);
+            make.height.mas_equalTo(500);
+        }];
+    }
+    return _msgNoData;
+}
+
+
+
+
+
+
 @end

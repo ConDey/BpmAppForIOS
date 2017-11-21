@@ -50,6 +50,8 @@ static const NSInteger PAGESIZE = 10;
         make.right.left.bottom.mas_equalTo(self.view);
     }];
     
+    
+    
     // 监听通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveTheRemoteNotification) name:@"umeng" object:nil];
     
@@ -141,14 +143,22 @@ static const NSInteger PAGESIZE = 10;
 #pragma mark - tableview
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if([_datas count]==0){
+        return 1;
+    }else{
     return [_datas count];
+    }
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageMainCell* cell = [tableView dequeueReusableCellWithIdentifier:@"MessageMainCell"];
+    if(cell!=nil){
+        cell=[[MessageMainCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MessageMainCell"];
+    }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.msgIcon.image = nil;
-    
+    if(_datas.count!=0){
+        cell.msgNoData=nil;
     MessageModel* model = [_datas objectAtIndex:indexPath.row];
     if (model.title != nil) {
         cell.msgTitle.text = model.title;
@@ -170,6 +180,18 @@ static const NSInteger PAGESIZE = 10;
          cell.msgIcon.image = defaultMsgIcon;
     }else {
         [cell.msgIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [REQUEST_SERVICE_URL substringWithRange:NSMakeRange(0, [REQUEST_SERVICE_URL length]-1)],model.topicIcon]] placeholderImage:defaultMsgIcon];
+    }
+    }else{
+        cell.msgIcon=nil;
+        cell.msgTime=nil;
+        cell.msgTitle=nil;
+        cell.msgContent=nil;
+//        UIImageView *back=[[UIImageView alloc]init];
+//        [back setSize:self.tableView.frame.size];
+//        back.image=[UIImage imageNamed:@"ic_msg_nodata.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+//        cell.msgNoData=back;
+        cell.msgNoData.image=[UIImage imageNamed:@"ic_msg_nodata.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+
     }
     
     return cell;

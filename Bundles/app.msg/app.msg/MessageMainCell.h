@@ -14,5 +14,6 @@
 @property (nonatomic, strong) UILabel* msgTitle;
 @property (nonatomic, strong) UILabel* msgContent;
 @property (nonatomic, strong) UILabel* msgTime;
+@property (nonatomic, strong) UIImageView* msgNoData;
 
 @end

@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *noticeTitle;
 @property (weak, nonatomic) IBOutlet UILabel *createdBy;
 @property (weak, nonatomic) IBOutlet UILabel *createdTime;
+@property (weak, nonatomic) IBOutlet UILabel *status;
 
 
 
