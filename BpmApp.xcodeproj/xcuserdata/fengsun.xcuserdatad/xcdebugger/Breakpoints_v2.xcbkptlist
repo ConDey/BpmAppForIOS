@@ -51,5 +51,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bundles/app.calendar/app.calendar/Calendar/CalendarViewController.m"
+            timestampString = "533022495.13263"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "567"
+            endingLineNumber = "567"
+            landmarkName = "-pan:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bundles/app.calendar/app.calendar/Calendar/CalendarViewController.m"
+            timestampString = "533022495.134423"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "571"
+            endingLineNumber = "571"
+            landmarkName = "-pan:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CalendarViewController pan:]"
+                  moduleName = "com_eazytec_bpm_app_calendar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fengsun/Documents/2017-11-22/BpmAppForIOS/Bundles/app.calendar/app.calendar/Calendar/CalendarViewController.m"
+                  timestampString = "533021945.502984"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "571"
+                  endingLineNumber = "571"
+                  offsetFromSymbolStart = "1389">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__30-[CalendarViewController pan:]_block_invoke"
+                  moduleName = "com_eazytec_bpm_app_calendar"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fengsun/Documents/2017-11-22/BpmAppForIOS/Bundles/app.calendar/app.calendar/Calendar/CalendarViewController.m"
+                  timestampString = "533021945.506131"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "572"
+                  endingLineNumber = "572"
+                  offsetFromSymbolStart = "47">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

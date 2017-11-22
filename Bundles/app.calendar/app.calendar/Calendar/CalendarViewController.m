@@ -270,7 +270,7 @@
         }
         
         
-        if(indexPath.row==selectedNum){
+        if(indexPath.row==selectedNum+weekDay-2){
             date.backgroundColor=[UIColor colorWithRed:115.0/255.0 green:122.0/255.0 blue:131.0/255.0 alpha:0.7];
             date.layer.cornerRadius=20;
             date.layer.masksToBounds=YES;
@@ -312,7 +312,7 @@
         NSInteger dayNumOfMonth=[self howManyDaysInThisYear:year withMonth:month];
         if(weekDay==0){
             if(indexPath.row<dayNumOfMonth){
-                selectedNum=indexPath.row;
+                selectedNum=indexPath.row-weekDay+2;
                 self.calendarTitleLabel.text=[NSString stringWithFormat:@"%ld-%ld-%@",year,month,[calendarArray objectAtIndex:indexPath.row]];
                 self.eventDate=[NSString stringWithFormat:@"%ld-%ld-%@",year,month,[calendarArray objectAtIndex:indexPath.row]];
                 [self.calendarDataView reloadData];
@@ -320,7 +320,7 @@
             
         }else{
             if(indexPath.row>=weekDay-1&&indexPath.row<dayNumOfMonth+weekDay-1){
-                selectedNum=indexPath.row;
+                selectedNum=indexPath.row-weekDay+2;
                 self.calendarTitleLabel.text=[NSString stringWithFormat:@"%ld-%ld-%@",year,month,[calendarArray objectAtIndex:indexPath.row]];
                 self.eventDate=[NSString stringWithFormat:@"%ld-%ld-%@",year,month,[calendarArray objectAtIndex:indexPath.row]];
                 [self.calendarDataView reloadData];
@@ -339,6 +339,7 @@
 
 //日历滑动
 -(void)leftSwipe:(UISwipeGestureRecognizer *)sender{
+    selectedNum=1;
     month++;
     if(month>12){
         year++;
@@ -365,6 +366,7 @@
     
 }
 -(void)rightSwipe:(UISwipeGestureRecognizer *)sender{
+    selectedNum=1;
     month--;
     if(month<1){
         year--;
@@ -398,7 +400,7 @@
 -(void)scheduleListView{
     self.tableview=[[UITableView alloc]init];
     [self.view addSubview:self.tableview];
-    CGFloat y=self.calendarDataView.frame.size.height+self.calendarDataView.origin.y+20;
+    CGFloat y=SCREEN_WIDTH*8/7+40+20;//标题高度+日历高度+间隔
    // NSLog(@"高度-%f-%f",self.calendarDataView.frame.size.height,self.calendarTitleLabel.frame.size.height);
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(SCREEN_HEIGHT-y);
@@ -556,18 +558,29 @@
     }
     if(pan.state==UIGestureRecognizerStateEnded){
         if((point1.y-point2.y)>100){
-            CGFloat h=self.calendarTitleLabel.origin.y+self.calendarTitleLabel.frame.size.height+SCREEN_WIDTH/7*3+5;
+            NSInteger count=0;
+            if((selectedNum-2+weekDay+7)%7==0){
+                count=(selectedNum+7+weekDay-2)/7;
+            }else{
+                count=(selectedNum+7+weekDay-2)/7+1;
+            }
+            self.calendarDataView.contentOffset=CGPointMake(0, (count-1)*SCREEN_WIDTH/7);
+            
+            //CGFloat h=self.calendarTitleLabel.origin.y+self.calendarTitleLabel.frame.size.height+SCREEN_WIDTH/7*3+5+(7-count)*SCREEN_WIDTH/7;
+             CGFloat h=40+SCREEN_WIDTH/7*2;
             [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(SCREEN_HEIGHT-h);
             }];
             self.tableview.scrollEnabled=YES;
             
+            
+            
         }else{
-            CGFloat z=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+20;
-           // NSLog(@"高度-%f-%f",self.calendarDataView.frame.size.height,self.calendarTitleLabel.frame.size.height);
+            CGFloat z=SCREEN_WIDTH*8/7+40+20;
             [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(SCREEN_HEIGHT-z);
             }];
+            self.calendarDataView.contentOffset=CGPointMake(0, 0);
             
         }
     }
