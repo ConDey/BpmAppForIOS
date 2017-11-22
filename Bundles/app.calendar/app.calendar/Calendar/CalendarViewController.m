@@ -579,10 +579,14 @@
     if(pan.state==UIGestureRecognizerStateEnded){
         if((point1.y-point2.y)>100){
             NSInteger count=0;
-            if((selectedNum-2+weekDay)%7==0){
-                count=(selectedNum+weekDay-2)/7;
+            if((selectedNum-2+weekDay+1)%7==0){
+                //indexPath.row+1
+                count=(selectedNum+weekDay-2+1)/7;
+                if(count==0){
+                    count=1;
+                }
             }else{
-                count=(selectedNum+weekDay-2)/7+1;
+                count=(selectedNum+weekDay-2+1)/7+1;
             }
             self.calendarDataView.contentOffset=CGPointMake(0, (count-1)*SCREEN_WIDTH/7);
             
