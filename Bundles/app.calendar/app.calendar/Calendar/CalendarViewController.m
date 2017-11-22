@@ -31,6 +31,7 @@
 }
 @property(nonatomic,retain)UIBarButtonItem *rightButtom;
 @property(nonatomic,retain)UICollectionView *calendarDataView;
+@property(nonatomic,retain)UICollectionView *weekDataView;
 @property(nonatomic,retain)UILabel *calendarTitleLabel;
 @property(nonatomic,retain)NSString *eventDate;
 @property(nonatomic,retain)NSMutableArray *eventDetailDataArray;
@@ -176,7 +177,7 @@
     flow.minimumInteritemSpacing=0;
     flow.itemSize=CGSizeMake(SCREEN_WIDTH/7, SCREEN_WIDTH/7);
     flow.sectionInset=UIEdgeInsetsMake(0, 0, 0, 0);
-    self.calendarDataView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, SCREEN_WIDTH*8/7) collectionViewLayout:flow];
+    self.calendarDataView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, 40+SCREEN_WIDTH/7, SCREEN_WIDTH, SCREEN_WIDTH*8/7) collectionViewLayout:flow];
     [self.view addSubview:self.calendarDataView];
 
     self.calendarDataView.backgroundColor=[UIColor colorWithRed:102.0/255.0 green:94.0/255.0 blue:98.0/255.0 alpha:0.7];
@@ -196,6 +197,23 @@
     [self.calendarDataView addGestureRecognizer:self.rightSwipe];
     
     
+    //日期
+    UICollectionViewFlowLayout *flow1=[[UICollectionViewFlowLayout alloc]init];
+    flow1.minimumLineSpacing=0;
+    flow1.minimumInteritemSpacing=0;
+    flow1.itemSize=CGSizeMake(SCREEN_WIDTH/7, SCREEN_WIDTH/7);
+    flow1.sectionInset=UIEdgeInsetsMake(0, 0, 0, 0);
+    self.weekDataView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, SCREEN_WIDTH/7) collectionViewLayout:flow1];
+    [self.view addSubview:self.weekDataView];
+    
+    self.weekDataView.backgroundColor=[UIColor colorWithRed:102.0/255.0 green:94.0/255.0 blue:98.0/255.0 alpha:0.7];
+    self.weekDataView.delegate=self;
+    self.weekDataView.dataSource=self;
+    [self.weekDataView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"calendarData"];
+    self.weekDataView.scrollEnabled=NO;
+    
+    
+    
 }
 //新增按钮
 -(void)addNewCalendar:(UIButton *)button{
@@ -206,14 +224,16 @@
 }
 //日历界面设置
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 2;
+    return 1;
 }
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    if(section==0){
-        return 7;
+    NSInteger t=0;
+    if(collectionView==self.weekDataView){
+       t= 7;
     }else{
-        return 49;
+    t= 42;
     }
+    return t;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"calendarData" forIndexPath:indexPath];
@@ -232,7 +252,7 @@
     date.textAlignment=NSTextAlignmentCenter;
     date.font=FONT_14;
     //date.textColor=[UIColor whiteColor];
-    if(indexPath.section==0){
+    if(collectionView==self.weekDataView){
         NSInteger row=indexPath.row;
         if(row==0){
             date.text=@"日";
@@ -251,7 +271,7 @@
         }
     }
     
-    if(indexPath.section==1){
+    if(collectionView==self.calendarDataView){
         NSInteger dayNumOfMonth=[self howManyDaysInThisYear:year withMonth:month];
         if(weekDay==0){
             if(indexPath.row<dayNumOfMonth){
@@ -307,7 +327,7 @@
 
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section==1){
+    if(collectionView==self.calendarDataView){
         
         NSInteger dayNumOfMonth=[self howManyDaysInThisYear:year withMonth:month];
         if(weekDay==0){
@@ -559,15 +579,15 @@
     if(pan.state==UIGestureRecognizerStateEnded){
         if((point1.y-point2.y)>100){
             NSInteger count=0;
-            if((selectedNum-2+weekDay+7)%7==0){
-                count=(selectedNum+7+weekDay-2)/7;
+            if((selectedNum-2+weekDay)%7==0){
+                count=(selectedNum+weekDay-2)/7;
             }else{
-                count=(selectedNum+7+weekDay-2)/7+1;
+                count=(selectedNum+weekDay-2)/7+1;
             }
             self.calendarDataView.contentOffset=CGPointMake(0, (count-1)*SCREEN_WIDTH/7);
             
             //CGFloat h=self.calendarTitleLabel.origin.y+self.calendarTitleLabel.frame.size.height+SCREEN_WIDTH/7*3+5+(7-count)*SCREEN_WIDTH/7;
-             CGFloat h=40+SCREEN_WIDTH/7*2;
+             CGFloat h=40+SCREEN_WIDTH/7*3;
             [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(SCREEN_HEIGHT-h);
             }];
