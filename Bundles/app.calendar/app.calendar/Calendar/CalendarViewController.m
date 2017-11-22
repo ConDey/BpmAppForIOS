@@ -59,7 +59,6 @@
     //日历表
     [self showCalendarTableView];
     //显示日程安排
-    //CGFloat y=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+20;
     [self scheduleListView];
     
     
@@ -177,13 +176,9 @@
     flow.minimumInteritemSpacing=0;
     flow.itemSize=CGSizeMake(SCREEN_WIDTH/7, SCREEN_WIDTH/7);
     flow.sectionInset=UIEdgeInsetsMake(0, 0, 0, 0);
-    self.calendarDataView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, SCREEN_WIDTH) collectionViewLayout:flow];
+    self.calendarDataView=[[UICollectionView alloc]initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, SCREEN_WIDTH*8/7) collectionViewLayout:flow];
     [self.view addSubview:self.calendarDataView];
-    [self.calendarDataView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.calendarTitleLabel.mas_bottom);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH*8/7));
-        make.left.mas_equalTo(0);
-    }];
+
     self.calendarDataView.backgroundColor=[UIColor colorWithRed:102.0/255.0 green:94.0/255.0 blue:98.0/255.0 alpha:0.7];
     self.calendarDataView.delegate=self;
     self.calendarDataView.dataSource=self;
@@ -402,7 +397,8 @@
 -(void)scheduleListView{
     self.tableview=[[UITableView alloc]init];
     [self.view addSubview:self.tableview];
-    CGFloat y=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+20;
+    CGFloat y=self.calendarDataView.frame.size.height+self.calendarDataView.origin.y+20;
+   // NSLog(@"高度-%f-%f",self.calendarDataView.frame.size.height,self.calendarTitleLabel.frame.size.height);
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(SCREEN_HEIGHT-y);
         make.bottom.left.right.mas_equalTo(0);
@@ -566,6 +562,7 @@
             
         }else{
             CGFloat z=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+20;
+           // NSLog(@"高度-%f-%f",self.calendarDataView.frame.size.height,self.calendarTitleLabel.frame.size.height);
             [self.tableview mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(SCREEN_HEIGHT-z);
             }];
