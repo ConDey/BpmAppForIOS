@@ -45,7 +45,7 @@
     
     
     //导航栏右按钮
-    self.rightButtom=[[UIBarButtonItem alloc]initWithTitle:@"确认选择" style:UIBarButtonItemStylePlain target:self action:@selector(addNewCalendar:)];
+    self.rightButtom=[[UIBarButtonItem alloc]initWithTitle:@"新增日程" style:UIBarButtonItemStylePlain target:self action:@selector(addNewCalendar:)];
     [self.rightButtom setTintColor:UI_BLUE_COLOR];
     self.navigationItem.rightBarButtonItem=self.rightButtom;
     
@@ -55,11 +55,11 @@
     [self showTimeLabel];
     //数据
     [self createdCalendarData];
-    selectedNum=weekDay-1;
+    selectedNum=day;
     //日历表
     [self showCalendarTableView];
     //显示日程安排
-    CGFloat y=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+20;
+    //CGFloat y=self.calendarDataView.frame.size.height+self.calendarTitleLabel.frame.size.height+20;
     [self scheduleListView];
     
     
@@ -312,10 +312,29 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section==1){
-        selectedNum=indexPath.row;
-        self.calendarTitleLabel.text=[NSString stringWithFormat:@"%ld-%ld-%@",year,month,[calendarArray objectAtIndex:indexPath.row]];
-        self.eventDate=[NSString stringWithFormat:@"%ld-%ld-%@",year,month,[calendarArray objectAtIndex:indexPath.row]];
-        [self.calendarDataView reloadData];
+        
+        NSInteger dayNumOfMonth=[self howManyDaysInThisYear:year withMonth:month];
+        if(weekDay==0){
+            if(indexPath.row<dayNumOfMonth){
+                selectedNum=indexPath.row;
+                self.calendarTitleLabel.text=[NSString stringWithFormat:@"%ld-%ld-%@",year,month,[calendarArray objectAtIndex:indexPath.row]];
+                self.eventDate=[NSString stringWithFormat:@"%ld-%ld-%@",year,month,[calendarArray objectAtIndex:indexPath.row]];
+                [self.calendarDataView reloadData];
+            }
+            
+        }else{
+            if(indexPath.row>=weekDay-1&&indexPath.row<dayNumOfMonth+weekDay-1){
+                selectedNum=indexPath.row;
+                self.calendarTitleLabel.text=[NSString stringWithFormat:@"%ld-%ld-%@",year,month,[calendarArray objectAtIndex:indexPath.row]];
+                self.eventDate=[NSString stringWithFormat:@"%ld-%ld-%@",year,month,[calendarArray objectAtIndex:indexPath.row]];
+                [self.calendarDataView reloadData];
+            }
+            
+        }
+        
+        
+        
+      
     }
     [self requestEventData:self.eventDate];
     
