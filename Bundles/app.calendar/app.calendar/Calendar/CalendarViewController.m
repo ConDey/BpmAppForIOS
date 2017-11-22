@@ -7,7 +7,7 @@
 //
 
 #import "CalendarViewController.h"
-#import "NewCalendarViewController.h"
+
 #import "NewCalendarViewController.h"
 @interface CalendarViewController ()
 {
@@ -201,6 +201,7 @@
 -(void)addNewCalendar:(UIButton *)button{
     NSLog(@"新增日程");
     NewCalendarViewController *anc=[[NewCalendarViewController alloc]init];
+    anc.delegete=self;
     [self.navigationController pushViewController:anc animated:YES];
 }
 //日历界面设置
@@ -531,6 +532,7 @@
     NSString *currentEventId=[dic objectForKey:@"id"];
     NewCalendarViewController *cnc=[[NewCalendarViewController alloc]init];
     cnc.eventId=currentEventId;
+    cnc.delegete=self;
     [self.navigationController pushViewController:cnc animated:YES];
 }
 
@@ -572,7 +574,10 @@
    
 }
 
-
+-(void)calendarListReload{
+    [self requestEventData:self.eventDate];
+    [self.tableview reloadData];
+}
 
 
 @end

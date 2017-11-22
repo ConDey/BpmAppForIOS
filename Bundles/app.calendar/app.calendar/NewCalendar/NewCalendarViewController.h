@@ -7,11 +7,15 @@
 //
 
 
-
-@interface NewCalendarViewController : EAViewController<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
-
-
+@protocol calendarDataDelegete;
+@interface NewCalendarViewController :EAViewController
+<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
 @property(nonatomic,retain)NSString *eventId;
+@property(nonatomic,retain)id<calendarDataDelegete> delegete;
+@end
 
+
+@protocol calendarDataDelegete<NSObject>
+-(void) calendarListReload;
 @end

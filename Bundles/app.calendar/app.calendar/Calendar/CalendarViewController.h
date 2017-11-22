@@ -7,7 +7,7 @@
 //
 
 
-
-@interface CalendarViewController : EAViewController<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate>
+#import "NewCalendarViewController.h"
+@interface CalendarViewController : EAViewController<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate,calendarDataDelegete>
 
 @end

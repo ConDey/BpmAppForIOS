@@ -238,12 +238,12 @@
             [heightOfCellWithId insertObject:[NSString stringWithFormat:@"%f",height+20] atIndex:5];
             
             
-            NSLog(@"原始%@",responseObject);
+           // NSLog(@"原始%@",responseObject);
             
             
             [self showEventScene];//显示数据
             
-            NSLog(@"name---%@",[responseObject objectForKey:@"eventName"]);
+           // NSLog(@"name---%@",[responseObject objectForKey:@"eventName"]);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error);
         }];
@@ -271,7 +271,7 @@
         CGRect rect = [attributeString boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-120, CGFLOAT_MAX) options:options context:nil];
         if(rect.size.height>40){
             //初始默认textView的高度为40，cell高度为20
-            NSLog(@"文字高度：%f",rect.size.height);
+           // NSLog(@"文字高度：%f",rect.size.height);
             return rect.size.height;
             
         }else{
@@ -651,7 +651,10 @@
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     [params setObject:self.eventId forKey:@"id"];
     [manager GET:[NSString stringWithFormat:@"%@",URL] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
+        NSLog(@"删除%@",responseObject);
+        if(self.delegete!=nil){
+            [self.delegete calendarListReload];
+        }
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error);
@@ -718,6 +721,11 @@
     NSLog(@"parmas--%@",paramas);
     [manager POST:[NSString stringWithFormat:@"%@",URL] parameters:paramas progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@",responseObject);
+        
+        if(self.delegete!=nil){
+            [self.delegete calendarListReload];
+        }
+        
         [self.navigationController popViewControllerAnimated:YES];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
