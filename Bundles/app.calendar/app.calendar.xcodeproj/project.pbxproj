@@ -164,7 +164,7 @@
 				TargetAttributes = {
 					F88BD85D1FB939F40049346D = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -329,7 +329,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4KU6JMLAYK;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -338,12 +339,14 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/app.calendar/PrefixHeader.pch";
 				INFOPLIST_FILE = app.calendar/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eazytec.bpm.app.calendar;
 				PRODUCT_MODULE_NAME = com_eazytec_bpm_app_calendar;
 				PRODUCT_NAME = com_eazytec_bpm_app_calendar;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -351,7 +354,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4KU6JMLAYK;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -360,12 +364,14 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/app.calendar/PrefixHeader.pch";
 				INFOPLIST_FILE = app.calendar/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eazytec.bpm.app.calendar;
 				PRODUCT_MODULE_NAME = com_eazytec_bpm_app_calendar;
 				PRODUCT_NAME = com_eazytec_bpm_app_calendar;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
