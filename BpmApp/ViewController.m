@@ -21,6 +21,7 @@
     
     UIImageView *bgimageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bg"]];
     bgimageview.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    //bgimageview.frame = CGRectMake(0, 0, 1125, 2436);
     [self.view addSubview:bgimageview];
     
     [Small setBaseUri:@"http://"];
