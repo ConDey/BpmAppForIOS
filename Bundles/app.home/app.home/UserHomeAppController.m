@@ -641,14 +641,9 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-//app修改
--(void)allAppChange:(NSArray *)allApp{
-    self.allApps=[[NSMutableArray alloc]initWithArray:allApp];
-    [self.allAppsCollectionView reloadData];
-    [self.appsCollectionView reloadData];
-}
--(void)appChange:(NSArray *)app{
-    self.apps=[[NSMutableArray alloc]initWithArray:app];
+
+-(void)appChange{
+    [self initData];
     [self.allAppsCollectionView reloadData];
     [self.appsCollectionView reloadData];
 }

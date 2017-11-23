@@ -16,6 +16,7 @@
 {
     NSMutableArray *selectOfAll;
     UILongPressGestureRecognizer *longPress;
+    
 }
 @property (nonatomic,retain) UIScrollView *scrollView;
 @property (nonatomic,retain) UIView *scrollContainerView; //Masonry下Scrollview的过渡视图
@@ -159,32 +160,7 @@
 
 #pragma mark - network
 - (void)didAnalysisRequestResultWithData:(NSDictionary *)result andService:(HttpProtocolServiceName)name {
-    
-    if (name == HttpProtocolServiceAppMenuList) {
-        
-        AppListModel* appsModel = [AppListModel mj_objectWithKeyValues:result];
-        if (appsModel.success) {
-            _apps = [AppModelHelper createBpmAppByDatas:appsModel.apps];
-        }
-        // 更新高度
-        [self.appsCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
-        }];
-        [self.appsCollectionView reloadData];
-    }
-    
-    if (name == HttpProtocolServiceAppMenuAllList) {
-        
-        AppListModel* allAppsModel = [AppListModel mj_objectWithKeyValues:result];
-        if (allAppsModel.success) {
-            _allApps = [AppModelHelper createBpmAppByDatas:allAppsModel.apps];
-        }
-        // 更新高度
-        [self.allAppsCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo([self appscountdisplay:self.allApps] / 4  *  (100 + ONE_PX));
-        }];
-        [self.allAppsCollectionView reloadData];
-    }
+    NSLog(@"结果--%@",result);
 }
 
 #pragma mark - CollectionViewDelegate
@@ -224,9 +200,13 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
  
     if (collectionView == _appsCollectionView) {
+        EAApp *app = [self.apps objectAtIndex:indexPath.row];
+        if(app!=nil){
         [self.apps removeObjectAtIndex:indexPath.row];
+        [self meunSetCommon:app.appId WithIsCommon:@"false"];
          [self.appsCollectionView reloadData];
         [self.allAppsCollectionView reloadData];
+        }
     }
     
     if(collectionView==_allAppsCollectionView){
@@ -245,6 +225,8 @@
                 if(!isSelected){
                     NSInteger count=[self.apps count];
                     [self.apps insertObject:[self.allApps objectAtIndex:indexPath.row] atIndex:count];
+                    
+                    [self meunSetCommon:app.appId WithIsCommon:@"true"];
                 }
             }
         
@@ -567,7 +549,6 @@
     CGPoint sourcePoint;
     NSIndexPath *sourcePath;
     CGPoint destinPoint;
-    NSIndexPath *destinPath;
     if(sender.state==UIGestureRecognizerStateBegan){
     sourcePoint=[sender locationInView:self.allAppsCollectionView];
     sourcePath=[self.allAppsCollectionView indexPathForItemAtPoint:sourcePoint];
@@ -584,13 +565,19 @@
 
 -(void)doNavigationLeftBarButtonItemAction:(UIBarButtonItem *)item{
     if(self.delegate!=nil){
-        [self.delegate appChange:self.apps];
-        [self.delegate allAppChange:self.allApps];
+        [self.delegate appChange];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
+//设置常用菜单
+-(void)meunSetCommon:(NSString *)meunId WithIsCommon:(NSString *)isCommon{
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    [params setObject:meunId forKey:@"id"];
+    [params setObject:isCommon forKey:@"commonUse"];
+    [self httpGetRequestWithUrl:HttpProtocolServiceAppMenuSetCommon  params:params progress:NO];
+    
+}
 
 
 

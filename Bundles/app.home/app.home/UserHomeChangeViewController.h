@@ -18,6 +18,6 @@
 
 @protocol UserHomeAppChangeDelegate<NSObject>
 
--(void)appChange:(NSArray *)app;
--(void)allAppChange:(NSArray *)allApp;
+-(void)appChange;
+//-(void)allAppChange:(NSArray *)allApp;
 @end
