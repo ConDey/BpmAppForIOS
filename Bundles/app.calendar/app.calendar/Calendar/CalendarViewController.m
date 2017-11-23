@@ -608,7 +608,7 @@
                 make.height.mas_equalTo(SCREEN_HEIGHT-z);
             }];
             self.calendarDataView.contentOffset=CGPointMake(0, 0);
-            
+             self.tableview.scrollEnabled=NO;
         }
     }
    

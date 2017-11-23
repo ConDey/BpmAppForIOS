@@ -178,6 +178,7 @@
     UIButton *attach=[[UIButton alloc]init];
     [self.view addSubview:attach];
     [self.view bringSubviewToFront:attach];
+    
     [attach mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(60, 60));
         make.bottom.mas_equalTo(-40);
@@ -186,6 +187,7 @@
     UIImage *btImg=[UIImage imageNamed:@"ic_download.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
     attach.backgroundColor=[UIColor whiteColor];
     [attach setBackgroundImage:btImg forState:UIControlStateNormal];
+    attach.alpha=0.5;
     [attach addTarget:self action:@selector(tapAttachment:) forControlEvents:UIControlEventTouchUpInside];
 }
 
