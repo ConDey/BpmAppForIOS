@@ -97,7 +97,7 @@
     [_appsCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.dividerTwo.mas_bottom);
-        make.height.mas_equalTo(1.5 *  (100 + ONE_PX));
+         make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
     }];
     self.appsCollectionView.backgroundColor=LIGHT_GRAY_COLOR;
     
@@ -204,6 +204,9 @@
         if(app!=nil){
         [self.apps removeObjectAtIndex:indexPath.row];
         [self meunSetCommon:app.appId WithIsCommon:@"false"];
+            [self.appsCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+                 make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
+            }];
          [self.appsCollectionView reloadData];
         [self.allAppsCollectionView reloadData];
         }
@@ -225,7 +228,9 @@
                 if(!isSelected){
                     NSInteger count=[self.apps count];
                     [self.apps insertObject:[self.allApps objectAtIndex:indexPath.row] atIndex:count];
-                    
+                    [self.appsCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+                        make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
+                    }];
                     [self meunSetCommon:app.appId WithIsCommon:@"true"];
                 }
             }
