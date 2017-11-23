@@ -127,22 +127,22 @@
         count=[self howManyDaysInThisYear:year-1 withMonth:12]-weekDay+2;
     }
     if(weekDay==0){
-        for(int i=0;i<dayNumOfMonth;i++){
-            [calendarArray insertObject:[NSString stringWithFormat:@"%d",i+1] atIndex:i];
+        for(NSInteger i=0;i<dayNumOfMonth;i++){
+            [calendarArray insertObject:[NSString stringWithFormat:@"%ld",i+1] atIndex:i];
         }
-        for(int j=dayNumOfMonth;j<49;j++){
-            [calendarArray insertObject:[NSString stringWithFormat:@"%d",j-weekDay-dayNumOfMonth+1] atIndex:j];
+        for(NSInteger j=dayNumOfMonth;j<49;j++){
+            [calendarArray insertObject:[NSString stringWithFormat:@"%ld",j-weekDay-dayNumOfMonth+1] atIndex:j];
         }
     }else{
-        for(int v=0;v<weekDay-1;v++){
-            [calendarArray insertObject:[NSString stringWithFormat:@"%d",count] atIndex:v];
+        for(NSInteger  v=0;v<weekDay-1;v++){
+            [calendarArray insertObject:[NSString stringWithFormat:@"%ld",count] atIndex:v];
             count++;
         }
-        for(int i=weekDay-1;i<dayNumOfMonth+weekDay-1;i++){
-            [calendarArray insertObject:[NSString stringWithFormat:@"%d",i-weekDay+2] atIndex:i];
+        for(NSInteger i=weekDay-1;i<dayNumOfMonth+weekDay-1;i++){
+            [calendarArray insertObject:[NSString stringWithFormat:@"%ld",i-weekDay+2] atIndex:i];
         }
-        for(int j=dayNumOfMonth+weekDay-1;j<49;j++){
-            [calendarArray insertObject:[NSString stringWithFormat:@"%d",j-weekDay-dayNumOfMonth+2] atIndex:j];
+        for(NSInteger j=dayNumOfMonth+weekDay-1;j<49;j++){
+            [calendarArray insertObject:[NSString stringWithFormat:@"%ld",j-weekDay-dayNumOfMonth+2] atIndex:j];
         }
         
     }
@@ -479,6 +479,7 @@
         }];
         titleLabel.text=@"没有日程";
         titleLabel.textAlignment=NSTextAlignmentCenter;
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }else{
         UIView *singleView=[[UIView alloc]init];//分割线
         [cell addSubview:singleView];
@@ -550,12 +551,14 @@
 }
 //点击修改
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(self.eventDetailDataArray.count!=0){
     NSDictionary *dic=[self.eventDetailDataArray objectAtIndex:indexPath.row];
     NSString *currentEventId=[dic objectForKey:@"id"];
     NewCalendarViewController *cnc=[[NewCalendarViewController alloc]init];
     cnc.eventId=currentEventId;
     cnc.delegete=self;
     [self.navigationController pushViewController:cnc animated:YES];
+    }
 }
 
 
