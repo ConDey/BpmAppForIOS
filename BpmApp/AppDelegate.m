@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [UMessage startWithAppkey:@"59e8537e07fe651ae30000d6" launchOptions:launchOptions];
+    [UMessage startWithAppkey:APP_PUSH_KEY launchOptions:launchOptions];
     [UMessage openDebugMode:YES];
     // 注册通知
     [UMessage registerForRemoteNotifications];
@@ -126,8 +126,9 @@
 
 + (void)initialize{
     [iVersion sharedInstance].applicationBundleID=[[NSBundle mainBundle]  bundleIdentifier];
-    [iVersion sharedInstance].remoteVersionsPlistURL=@"https://58.215.198.210:9997/bpmapp/version.plist";
-    [iVersion sharedInstance].updateURL=[NSURL URLWithString:@"itms-services://?action=download-manifest&url=https://58.215.198.210:9997/bpmapp/ios.plist"];
+   // NSLog(@"%@___%@",REMOTE_VERSION_PLIST_URL,VERSION_UPDATE_URL);
+    [iVersion sharedInstance].remoteVersionsPlistURL=REMOTE_VERSION_PLIST_URL;
+    [iVersion sharedInstance].updateURL=[NSURL URLWithString:VERSION_UPDATE_URL];
 }
 
 - (void)setAlias:(NSString *)alias {

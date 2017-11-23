@@ -12,7 +12,7 @@ NSString *const FMDBCommonParamsTableName = @"EWK_COMMON_PARAMS";
 NSString *const FMDBUserDetailsTableName = @"EWK_USER_DETAILS";
 NSString *const FMDBTopicTableName = @"EWK_TOPIC";
 NSString *const FMDBMessageTableName = @"EWK_MESSAGE";
-static NSString *const kDatabaseName = @"eazytec.ework.db"; // 数据库的名称
+static NSString *const kDatabaseName = KDATA_BASE_NAME; // 数据库的名称
 
 @interface FMDBHelper ()
 
@@ -46,6 +46,7 @@ static FMDBHelper *_instance;
             //[_database close];
         }
     }
+    //NSLog(@"%@",kDatabaseName);
     return _database;
 }
 

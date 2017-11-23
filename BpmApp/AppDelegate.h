@@ -10,7 +10,7 @@
 #import "UMessage.h"
 #import <UserNotifications/UserNotifications.h>
 #import "iVersion.h"
-
+#import "com_eazytec_bpm_lib_common/lib.common.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate, iVersionDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

@@ -15,6 +15,16 @@ static NSString * _Nonnull const REQUEST_SERVICE_URL         = @"http://58.215.1
 static NSString * _Nonnull const REQUEST_URL         = @"http://58.215.198.212:8080";
 //static NSString * _Nonnull const REQUEST_SERVICE_URL         = @"http://192.168.133.107:8080/external/";
 //static NSString * _Nonnull const REQUEST_URL         = @"http://192.168.133.107:8080";
+//数据库名称
+static NSString *_Nonnull const KDATA_BASE_NAME        =     @"eazytec.ework.db";
+//更新服务器地址
+static NSString *_Nonnull const VERSION_UPDATE_URL     =     @"itms-services://?action=download-manifest&url=https://58.215.198.210:9997/bpmapp/ios.plist";
+static NSString *_Nonnull const REMOTE_VERSION_PLIST_URL=   @"https://58.215.198.210:9997/bpmapp/version.plist";
+//友盟AppKey
+static NSString *_Nonnull const           APP_PUSH_KEY =@"59e8537e07fe651ae30000d6";
+
+
+//接口名称
 // 登录
 static NSString * _Nonnull const CommonLoginServiceUrl          = @"common/logon";
 // 消息
