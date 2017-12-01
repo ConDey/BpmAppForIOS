@@ -49,6 +49,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //标题背景颜色
+    //[self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:151/255.0 green:8/255.0 blue:8/255.0 alpha:1.0]];
+    
+    
     
     // 初始化数据
     self.apps = [[NSMutableArray alloc]init];
@@ -56,17 +60,15 @@
     self.badgeDict = [[NSDictionary alloc] init];
     
     
-  
+    
     [self initData];
     [self initView];
     self.tableview.backgroundColor=[UIColor whiteColor];
-   // [self.apps addObjectsFromArray:[self createAppsFromJson]];
+    // [self.apps addObjectsFromArray:[self createAppsFromJson]];
     [self.appsCollectionView reloadData];
     [self.allAppsCollectionView reloadData];
     [self.tableview reloadData];
-    [self.tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
-    row=1;
-    [self noticeJumpToNext];
+    
 }
 
 
@@ -75,6 +77,7 @@
     [timer setFireDate:[NSDate distantPast]];
     self.navDisplay = YES;
     [self setTitleOfNav:@"应用"];
+    // [self setNavBackgroundColor:FONT_RED_COLOR];
     
     // 重复刷新
     [self httpGetRequestWithUrl:HttpProtocolServiceAppMenuBadge params:nil progress:YES];
@@ -100,23 +103,23 @@
         make.left.top.right.mas_equalTo(self.scrollContainerView);
         make.height.mas_equalTo(110);
     }];
-
+    
     [self.scrollContainerView addSubview:self.dividerOne];
     [_dividerOne mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
         make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.headImageView.mas_bottom);
     }];
-   //滚动条
+    //滚动条
     [self.scrollContainerView addSubview:self.tableview];
     [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
-       make.top.mas_equalTo(self.dividerOne.mas_bottom);
-       make.height.mas_equalTo(50);
-       make.left.right.mas_equalTo(self.scrollContainerView);
+        make.top.mas_equalTo(self.dividerOne.mas_bottom);
+        make.height.mas_equalTo(50);
+        make.left.right.mas_equalTo(self.scrollContainerView);
     }];
     self.tableview.delegate=self;
     self.tableview.dataSource=self;
-   
+    
     [self.tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"notice"];
     
     [self.scrollContainerView addSubview:self.dividerSix];
@@ -134,21 +137,21 @@
         make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.dividerSix.mas_bottom);
     }];
-
+    
     [self.scrollContainerView addSubview:self.dividerTwo];
     [_dividerTwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
         make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.usualAppsLabel.mas_bottom);
     }];
-
+    
     [self.scrollContainerView addSubview:self.appsCollectionView];
     [_appsCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.dividerTwo.mas_bottom);
         //make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
     }];
-
+    
     [self.scrollContainerView addSubview:self.dividerThree];
     [_dividerThree mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
@@ -162,7 +165,7 @@
         make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.dividerThree.mas_bottom).offset(25);
     }];
-
+    
     // 全部应用
     [self.scrollContainerView addSubview:self.allAppsLabel];
     [_allAppsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -170,21 +173,21 @@
         make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.dividerSeven.mas_bottom);
     }];
-
+    
     [self.scrollContainerView addSubview:self.dividerFour];
     [_dividerFour mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
         make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.allAppsLabel.mas_bottom);
     }];
-
+    
     [self.scrollContainerView addSubview:self.allAppsCollectionView];
     [_allAppsCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.scrollContainerView);
         make.top.mas_equalTo(self.dividerFour.mas_bottom);
         //make.height.mas_equalTo([self appscountdisplay:self.allApps] / 4  *  (100 + ONE_PX));
     }];
-
+    
     [self.scrollContainerView addSubview:self.dividerFive];
     [_dividerFive mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(1);
@@ -192,7 +195,7 @@
         make.top.mas_equalTo(self.allAppsCollectionView.mas_bottom);
         make.bottom.mas_equalTo(self.scrollContainerView.mas_bottom);
     }];
-
+    
     [_scrollContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(self.scrollView);
         make.bottom.mas_equalTo(self.scrollView.mas_bottom).offset(-30);
@@ -210,14 +213,14 @@
     
     [self httpGetRequestWithUrl:HttpProtocolServiceCommonConfig params:dict progress:YES];
     
-  NSDictionary* appDict = @{
+    NSDictionary* appDict = @{
                               @"commonUse" : @YES,
                               };
     [self httpGetRequestWithUrl:HttpProtocolServiceAppMenuList params:appDict progress:YES];
     
     NSDictionary* appAllDict = @{
-                              @"commonUse" : @"",
-                              };
+                                 @"commonUse" : @"",
+                                 };
     [self httpGetRequestWithUrl:HttpProtocolServiceAppMenuAllList params:appAllDict progress:YES];
     
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
@@ -225,7 +228,7 @@
     [params setObject:@"1" forKey:@"pageNo"];
     [params setObject:[NSString stringWithFormat:@"5"] forKey:@"pageSize"];
     [self httpGetRequestWithUrl:HttpProtocolServiceNoticeList  params:params progress:YES];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -255,14 +258,14 @@
     }
     
     if (name == HttpProtocolServiceAppMenuList) {
-
+        
         AppListModel* appsModel = [AppListModel mj_objectWithKeyValues:result];
         if (appsModel.success) {
             _apps = [AppModelHelper createBpmAppByDatas:appsModel.apps];
         }
         // 更新高度
         [self.appsCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
-           make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
+            make.height.mas_equalTo([self appscountdisplay:self.apps] / 4  *  (100 + ONE_PX));
         }];
         [self.appsCollectionView reloadData];
     }
@@ -275,8 +278,8 @@
         }
         // 更新高度
         [self.allAppsCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
-           make.height.mas_equalTo([self appscountdisplay:self.allApps] / 4  *  (100 + ONE_PX));
-       }];
+            make.height.mas_equalTo([self appscountdisplay:self.allApps] / 4  *  (100 + ONE_PX));
+        }];
         [self.allAppsCollectionView reloadData];
     }
     
@@ -294,6 +297,10 @@
     
     if(name==HttpProtocolServiceNoticeList){
         self.fiveNotice=[result objectForKey:@"datas"];
+        [self.tableview reloadData];
+        [self.tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
+        row=1;
+        [self noticeJumpToNext];
     }
     
     
@@ -310,21 +317,21 @@
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     
     if (collectionView == _appsCollectionView) {
-
+        
         if (indexPath.row >= [self.apps count]) {
             [cell setBackgroundColor:[UIColor whiteColor]];
         }else {
             [cell setBackgroundColor:UI_BK_COLOR];
         }
     }else {
-    if (_allAppsCollectionView) {
-    
-        if (indexPath.row >= [self.allApps count]) {
-            [cell setBackgroundColor:[UIColor whiteColor]];
-        }else {
-            [cell setBackgroundColor:UI_BK_COLOR];
+        if (_allAppsCollectionView) {
+            
+            if (indexPath.row >= [self.allApps count]) {
+                [cell setBackgroundColor:[UIColor whiteColor]];
+            }else {
+                [cell setBackgroundColor:UI_BK_COLOR];
+            }
         }
-    }
     }
 }
 
@@ -344,13 +351,13 @@
         }
         app = [self.apps objectAtIndex:indexPath.row];
     }else {
-    if (collectionView == _allAppsCollectionView) {
-        // 空白的cell直接return掉
-        if (indexPath.row >= [self.allApps count]) {
-            return;
+        if (collectionView == _allAppsCollectionView) {
+            // 空白的cell直接return掉
+            if (indexPath.row >= [self.allApps count]) {
+                return;
+            }
+            app = [self.allApps objectAtIndex:indexPath.row];
         }
-        app = [self.allApps objectAtIndex:indexPath.row];
-    }
     }
     if (![app installed]) {
         [SVProgressHUD showErrorWithStatus:@"应用尚未安装"];
@@ -381,14 +388,14 @@
             return 0;
         }
         return [self appscountdisplay:self.apps];
-
+        
     }else {
-    if (collectionView == self.allAppsCollectionView) {
-        if(self.allApps == nil) {
-            return 0;
+        if (collectionView == self.allAppsCollectionView) {
+            if(self.allApps == nil) {
+                return 0;
+            }
+            return [self appscountdisplay:self.allApps];
         }
-        return [self appscountdisplay:self.allApps];
-    }
     }
     return 0;
 }
@@ -412,7 +419,7 @@
             if (app != nil) {
                 cell.titleLabel.text = app.displayName;
                 if (app.imageUrlType == ImageUrlTypeInner) {
-
+                    
                     cell.imageView.image = [UIImage imageNamed:app.imageUrl inBundle:self.bundle compatibleWithTraitCollection:nil];
                 }else {
                     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", REQUEST_URL, app.imageUrl]] placeholderImage:defaultMsgIcon];
@@ -431,7 +438,7 @@
             if (app != nil) {
                 cell.titleLabel.text = app.displayName;
                 if (app.imageUrlType == ImageUrlTypeInner) {
-
+                    
                     cell.imageView.image = [UIImage imageNamed:app.imageUrl inBundle:self.bundle compatibleWithTraitCollection:nil];
                 }else {
                     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", REQUEST_URL, app.imageUrl]] placeholderImage:defaultMsgIcon];
@@ -506,7 +513,7 @@
         _usualAppsLabel.font = [UIFont systemFontOfSize:15];
         _usualAppsLabel.textAlignment = UITextAlignmentLeft;
         _usualAppsLabel.backgroundColor = [UIColor whiteColor];
-
+        
     }
     return _usualAppsLabel;
 }
@@ -581,17 +588,17 @@
 
 - (UICollectionView*)appsCollectionView {
     if (_appsCollectionView == nil) {
-
+        
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.itemSize = CGSizeMake(100, 100);
         flowLayout.minimumInteritemSpacing = 1;
         flowLayout.minimumLineSpacing = 2;
-
+        
         _appsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _appsCollectionView.delegate = self;
         _appsCollectionView.dataSource = self;
         _appsCollectionView.backgroundColor = UI_GRAY_COLOR;
-
+        
         NSBundle *bundle = [NSBundle bundleForClass:[self class]];
         [self.appsCollectionView registerNib:[UINib nibWithNibName:@"UserHomeAppViewCell" bundle:bundle]forCellWithReuseIdentifier:@"UserHomeAppViewCell"];
     }
@@ -653,7 +660,13 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    NSInteger f=0;
+    if(self.fiveNotice.count<5&&self.fiveNotice.count!=0){
+        f= self.fiveNotice.count;
+    }else{
+        f= 5;
+    }
+    return f;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"notice"];
@@ -665,21 +678,21 @@
     }
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     cell.backgroundColor=[UIColor clearColor];
-        UILabel *titleLabel=[[UILabel alloc]init];
-        UIImageView *cellImageView=[[UIImageView alloc]init];
-        [cell addSubview:titleLabel];
-        [cell addSubview:cellImageView];
-        [cellImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(25, 25));
-            make.left.mas_equalTo(10);
-            make.centerY.mas_equalTo(cell.mas_centerY);
-        }];
-        cellImageView.image=[UIImage imageNamed:@"notice_show.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
-        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(250, 21));
-            make.left.mas_equalTo(cellImageView.mas_right).mas_equalTo(10);
-            make.centerY.mas_equalTo(cell.mas_centerY);
-        }];
+    UILabel *titleLabel=[[UILabel alloc]init];
+    UIImageView *cellImageView=[[UIImageView alloc]init];
+    [cell addSubview:titleLabel];
+    [cell addSubview:cellImageView];
+    [cellImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(25, 25));
+        make.left.mas_equalTo(10);
+        make.centerY.mas_equalTo(cell.mas_centerY);
+    }];
+    cellImageView.image=[UIImage imageNamed:@"notice_show.png" inBundle:self.bundle compatibleWithTraitCollection:nil];
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(250, 21));
+        make.left.mas_equalTo(cellImageView.mas_right).mas_equalTo(10);
+        make.centerY.mas_equalTo(cell.mas_centerY);
+    }];
     NSDictionary *dic=[self.fiveNotice objectAtIndex:indexPath.row];
     titleLabel.text=[dic objectForKey:@"title"];
     [titleLabel setTintColor:[UIColor whiteColor]];
@@ -692,9 +705,14 @@
 }
 //公告滚动
 -(void)noticeJumpToNext{
-    
+    NSInteger num=0;
+    if(self.fiveNotice.count>5||self.fiveNotice.count==0){
+        num=5;
+    }else{
+        num=self.fiveNotice.count;
+    }
     timer=[NSTimer scheduledTimerWithTimeInterval:2 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        if(row>=5){
+        if(row>=num){
             row=0;
             [self.tableview selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0] animated:NO scrollPosition:UITableViewScrollPositionTop];
         }else{
@@ -715,3 +733,4 @@
 
 
 @end
+
