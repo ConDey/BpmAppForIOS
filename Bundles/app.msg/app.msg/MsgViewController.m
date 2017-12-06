@@ -74,6 +74,7 @@ static const NSInteger PAGESIZE = 10;
                 [self loadFromNetwork];
             }
         }
+        [self.tableView reloadData];
     }
 }
 
